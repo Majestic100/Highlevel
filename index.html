@@ -230,6 +230,86 @@
     line-height: 1.65;
   }
 
+  /* Testimonials marquee */
+  .testi-mask {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+  }
+  .testi-col {
+    width: 320px;
+    flex-shrink: 0;
+  }
+  .testi-track {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation-name: testi-scroll;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    will-change: transform;
+  }
+  .testi-track:hover { animation-play-state: paused; }
+  @keyframes testi-scroll {
+    from { transform: translateY(0); }
+    to { transform: translateY(-50%); }
+  }
+  .testi-card {
+    background: linear-gradient(180deg, #1C1C1C, #141414);
+    border: 1px solid #2A2A2A;
+    border-radius: 16px;
+    padding: 24px 26px;
+    box-shadow: 0 10px 30px -15px rgba(0,0,0,0.5);
+    transition: border-color 250ms ease, transform 250ms ease;
+  }
+  .testi-card:hover {
+    border-color: rgba(185,28,28,0.4);
+    transform: translateY(-2px);
+  }
+  .testi-quote {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 19px;
+    line-height: 1.4;
+    color: #F5F1EB;
+    letter-spacing: -0.01em;
+  }
+  .testi-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid #2A2A2A;
+  }
+  .testi-avatar {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #B91C1C, #450A0A);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 13px;
+    color: #fff;
+    letter-spacing: 0.02em;
+  }
+  .testi-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #F5F1EB;
+    line-height: 1.2;
+  }
+  .testi-role {
+    font-size: 12px;
+    color: #A8A29E;
+    line-height: 1.3;
+    margin-top: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .testi-track { animation: none; }
+  }
+
   /* Smooth letter intro on big headlines */
   @keyframes hero-fade { from { opacity: 0; transform: translateY(12px); filter: blur(6px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
   .display-h1 { animation: hero-fade 900ms cubic-bezier(0.22, 1, 0.36, 1) 0ms both; }
@@ -435,6 +515,228 @@
         <div class="usp-sub">No competing studios</div>
       </div>
 
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- ===== TESTIMONIALS MARQUEE (under hero) ===== -->
+<!-- ============================================================ -->
+<section class="py-20 md:py-28 bg-bg-primary relative overflow-hidden border-t border-border-subtle">
+  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(185,28,28,0.10), transparent 60%);"></div>
+
+  <div class="relative max-w-3xl mx-auto px-6 text-center mb-14 reveal">
+    <span class="inline-block px-4 py-1.5 rounded-full border border-border-subtle bg-surface text-xs uppercase tracking-label text-text-secondary mb-5">Testimonials</span>
+    <h2 class="display-h2 font-serif text-text-primary">
+      What studios are <span class="italic text-accent">actually saying.</span>
+    </h2>
+    <p class="text-text-secondary mt-4 text-lg">Real shops. Real chairs. Real numbers.</p>
+  </div>
+
+  <!-- 3 columns, auto-scroll, fade-masked -->
+  <div class="testi-mask flex justify-center gap-5 md:gap-6 max-h-[560px] md:max-h-[640px] overflow-hidden px-6">
+
+    <!-- Column 1 -->
+    <div class="testi-col">
+      <div class="testi-track" style="animation-duration: 38s;">
+        <!-- PLACEHOLDER: replace text/name/city with real client testimonials -->
+        <div class="testi-card">
+          <p class="testi-quote">"32 new bookings in 30 days. We finally said no to a walk-in last Saturday."</p>
+          <div class="testi-meta">
+            <div class="testi-avatar">JR</div>
+            <div>
+              <div class="testi-name">Jesse R.</div>
+              <div class="testi-role">Black Ink Co. · Phoenix, AZ</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <p class="testi-quote">"I just film what they tell me. Walk into a packed shop. That's it."</p>
+          <div class="testi-meta">
+            <div class="testi-avatar">DM</div>
+            <div>
+              <div class="testi-name">Diego M.</div>
+              <div class="testi-role">Hollow Hand · Brooklyn, NY</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <p class="testi-quote">"Booked four weeks out. First time in 8 years of running this shop."</p>
+          <div class="testi-meta">
+            <div class="testi-avatar">MT</div>
+            <div>
+              <div class="testi-name">Marcus T.</div>
+              <div class="testi-role">Crowmark · Seattle, WA</div>
+            </div>
+          </div>
+        </div>
+        <!-- duplicate for seamless loop -->
+        <div class="testi-card">
+          <p class="testi-quote">"32 new bookings in 30 days. We finally said no to a walk-in last Saturday."</p>
+          <div class="testi-meta">
+            <div class="testi-avatar">JR</div>
+            <div>
+              <div class="testi-name">Jesse R.</div>
+              <div class="testi-role">Black Ink Co. · Phoenix, AZ</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <p class="testi-quote">"I just film what they tell me. Walk into a packed shop. That's it."</p>
+          <div class="testi-meta">
+            <div class="testi-avatar">DM</div>
+            <div>
+              <div class="testi-name">Diego M.</div>
+              <div class="testi-role">Hollow Hand · Brooklyn, NY</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <p class="testi-quote">"Booked four weeks out. First time in 8 years of running this shop."</p>
+          <div class="testi-meta">
+            <div class="testi-avatar">MT</div>
+            <div>
+              <div class="testi-name">Marcus T.</div>
+              <div class="testi-role">Crowmark · Seattle, WA</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Column 2 (hidden on mobile) -->
+    <div class="testi-col hidden md:block">
+      <div class="testi-track" style="animation-duration: 46s;">
+        <div class="testi-card">
+          <p class="testi-quote">"Tried two other agencies. Got nothing booked. Inkflow's deposits filter the time-wasters before they hit my chair."</p>
+          <div class="testi-meta">
+            <div class="testi-avatar">AK</div>
+            <div>
+              <div class="testi-name">Anna K.</div>
+              <div class="testi-role">Solo artist · Austin, TX</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <p class="testi-quote">"Hired a second artist within 90 days. The chair stays full."</p>
+          <div class="testi-meta">
+            <div class="testi-avatar">LO</div>
+            <div>
+              <div class="testi-name">Liam O.</div>
+              <div class="testi-role">Iron & Oak · Austin, TX</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <p class="testi-quote">"Stopped chasing DMs. Best decision I made all year."</p>
+          <div class="testi-meta">
+            <div class="testi-avatar">SR</div>
+            <div>
+              <div class="testi-name">Sofia R.</div>
+              <div class="testi-role">Saint Mara · Miami, FL</div>
+            </div>
+          </div>
+        </div>
+        <!-- duplicate -->
+        <div class="testi-card">
+          <p class="testi-quote">"Tried two other agencies. Got nothing booked. Inkflow's deposits filter the time-wasters before they hit my chair."</p>
+          <div class="testi-meta">
+            <div class="testi-avatar">AK</div>
+            <div>
+              <div class="testi-name">Anna K.</div>
+              <div class="testi-role">Solo artist · Austin, TX</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <p class="testi-quote">"Hired a second artist within 90 days. The chair stays full."</p>
+          <div class="testi-meta">
+            <div class="testi-avatar">LO</div>
+            <div>
+              <div class="testi-name">Liam O.</div>
+              <div class="testi-role">Iron & Oak · Austin, TX</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <p class="testi-quote">"Stopped chasing DMs. Best decision I made all year."</p>
+          <div class="testi-meta">
+            <div class="testi-avatar">SR</div>
+            <div>
+              <div class="testi-name">Sofia R.</div>
+              <div class="testi-role">Saint Mara · Miami, FL</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Column 3 (hidden on mobile + tablet) -->
+    <div class="testi-col hidden lg:block">
+      <div class="testi-track" style="animation-duration: 42s;">
+        <div class="testi-card">
+          <p class="testi-quote">"$24k revenue month one. We doubled it by month three."</p>
+          <div class="testi-meta">
+            <div class="testi-avatar">RH</div>
+            <div>
+              <div class="testi-name">Ricky H.</div>
+              <div class="testi-role">Wildhorn · Denver, CO</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <p class="testi-quote">"First booking landed in five days. Deposit hit before I'd even seen the ad live."</p>
+          <div class="testi-meta">
+            <div class="testi-avatar">ML</div>
+            <div>
+              <div class="testi-name">Mei L.</div>
+              <div class="testi-role">Guest artist · New York, NY</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <p class="testi-quote">"I'm a solo artist. Now I have a waitlist."</p>
+          <div class="testi-meta">
+            <div class="testi-avatar">JP</div>
+            <div>
+              <div class="testi-name">Jenna P.</div>
+              <div class="testi-role">Northside Ink · Chicago, IL</div>
+            </div>
+          </div>
+        </div>
+        <!-- duplicate -->
+        <div class="testi-card">
+          <p class="testi-quote">"$24k revenue month one. We doubled it by month three."</p>
+          <div class="testi-meta">
+            <div class="testi-avatar">RH</div>
+            <div>
+              <div class="testi-name">Ricky H.</div>
+              <div class="testi-role">Wildhorn · Denver, CO</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <p class="testi-quote">"First booking landed in five days. Deposit hit before I'd even seen the ad live."</p>
+          <div class="testi-meta">
+            <div class="testi-avatar">ML</div>
+            <div>
+              <div class="testi-name">Mei L.</div>
+              <div class="testi-role">Guest artist · New York, NY</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <p class="testi-quote">"I'm a solo artist. Now I have a waitlist."</p>
+          <div class="testi-meta">
+            <div class="testi-avatar">JP</div>
+            <div>
+              <div class="testi-name">Jenna P.</div>
+              <div class="testi-role">Northside Ink · Chicago, IL</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
   </div>
