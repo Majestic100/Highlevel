@@ -395,6 +395,62 @@
   }
   .tp-brand svg { width: 12px; height: 12px; }
 
+  /* Animated cycling word in hero H1 */
+  .cycle-word {
+    position: relative;
+    display: inline-block;
+    vertical-align: baseline;
+    color: #B91C1C;
+    font-style: italic;
+    transition: width 600ms cubic-bezier(0.5, 0, 0.1, 1);
+    line-height: 1;
+  }
+  .cycle-word::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 0.05em;
+    height: 0.08em;
+    background: linear-gradient(90deg, transparent, rgba(185,28,28,0.5), transparent);
+    border-radius: 2px;
+    pointer-events: none;
+  }
+  .cycle-measure {
+    position: absolute;
+    visibility: hidden;
+    pointer-events: none;
+    white-space: nowrap;
+    top: 0; left: 0;
+  }
+  .cycle-measure > span {
+    display: block;
+    white-space: nowrap;
+    font-style: italic;
+  }
+  .cycle-active {
+    display: inline-block;
+    white-space: nowrap;
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+    transition: opacity 320ms ease-out, transform 420ms cubic-bezier(0.22, 1, 0.36, 1), filter 320ms ease-out;
+  }
+  .cycle-active.out {
+    opacity: 0;
+    transform: translateY(0.35em);
+    filter: blur(8px);
+    transition-duration: 280ms;
+  }
+  .cycle-active.in {
+    opacity: 0;
+    transform: translateY(-0.35em);
+    filter: blur(8px);
+    transition: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cycle-active, .cycle-word { transition: none !important; }
+    .cycle-active.out, .cycle-active.in { display: none; }
+  }
+
   /* Smooth letter intro on big headlines */
   @keyframes hero-fade { from { opacity: 0; transform: translateY(12px); filter: blur(6px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
   .display-h1 { animation: hero-fade 900ms cubic-bezier(0.22, 1, 0.36, 1) 0ms both; }
@@ -513,7 +569,17 @@
       <div class="lg:col-span-7">
         <span class="label inline-block mb-6 reveal" data-d="0">Tattoo studio growth, done-for-you</span>
         <h1 class="display-h1 font-serif text-text-primary mb-6 reveal" data-d="80">
-          A chair that stays full.
+          A
+          <span class="cycle-word" id="cycle-word">
+            <span class="cycle-measure" aria-hidden="true">
+              <span>chair</span>
+              <span>calendar</span>
+              <span>shop</span>
+              <span>studio</span>
+            </span>
+            <span class="cycle-active">chair</span>
+          </span>
+          that stays full.
           <span class="block italic text-accent">Without you ever touching marketing.</span>
         </h1>
         <p class="text-lg md:text-2xl text-text-secondary max-w-2xl mb-10 leading-relaxed reveal" data-d="160">
@@ -1945,6 +2011,52 @@
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
   revealEls.forEach((el) => revealObs.observe(el));
+
+  // Animated word cycle in hero
+  (function () {
+    const wrap = document.getElementById('cycle-word');
+    if (!wrap) return;
+    const measure = wrap.querySelector('.cycle-measure');
+    const active = wrap.querySelector('.cycle-active');
+    if (!measure || !active) return;
+    const words = Array.from(measure.children).map((c) => c.textContent.trim());
+    let idx = 0;
+
+    function setWidth(i) {
+      const el = measure.children[i];
+      if (!el) return;
+      const w = el.getBoundingClientRect().width;
+      wrap.style.width = w + 'px';
+    }
+
+    // Initial sizing (after fonts have loaded)
+    const initialize = () => {
+      active.textContent = words[0];
+      setWidth(0);
+    };
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(initialize);
+    } else {
+      requestAnimationFrame(initialize);
+    }
+    window.addEventListener('resize', () => setWidth(idx));
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    setInterval(() => {
+      active.classList.add('out');
+      setTimeout(() => {
+        idx = (idx + 1) % words.length;
+        active.textContent = words[idx];
+        setWidth(idx);
+        active.classList.remove('out');
+        active.classList.add('in');
+        // Force reflow so the .in state takes hold before we drop it
+        void active.offsetHeight;
+        active.classList.remove('in');
+      }, 280);
+    }, 2800);
+  })();
 
   // Subtle parallax on hero glow
   const heroGlow = document.querySelector('.hero-glow');
