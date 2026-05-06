@@ -19,7 +19,7 @@
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,700;1,500;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
 
 <!-- Tailwind config -->
 <script>
@@ -39,8 +39,8 @@
           'accent-deep': '#450A0A',
         },
         fontFamily: {
-          sans: ['Inter', 'system-ui', 'sans-serif'],
-          serif: ['Fraunces', 'Georgia', 'serif'],
+          sans: ['Geist', 'system-ui', 'sans-serif'],
+          serif: ['"Instrument Serif"', 'Georgia', 'serif'],
         },
         letterSpacing: {
           'label': '0.15em',
@@ -55,10 +55,15 @@
   body {
     background-color: #0A0A0A;
     color: #F5F1EB;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Geist', system-ui, sans-serif;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
+    font-feature-settings: "ss01", "ss02";
   }
+  h1, h2, h3 { letter-spacing: -0.02em; }
+  /* Instrument Serif only ships 400; rely on size + leading for impact */
+  .font-serif, .font-serif * { font-weight: 400 !important; }
+  .font-serif.italic, .font-serif .italic { font-style: italic; }
 
   /* Subtle film grain overlay */
   .grain::before {
@@ -84,8 +89,29 @@
   }
 
   /* Reveal animation */
-  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 800ms cubic-bezier(0.22, 1, 0.36, 1), transform 800ms cubic-bezier(0.22, 1, 0.36, 1); }
   .reveal.in { opacity: 1; transform: translateY(0); }
+  .reveal[data-d] { transition-delay: var(--rd, 0ms); }
+
+  /* Subtle floating shimmer on accent dots */
+  @keyframes pulse-soft { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .animate-pulse { animation: pulse-soft 2.4s ease-in-out infinite; }
+
+  /* Buttons: subtle inner glow on hover */
+  .btn-primary { position: relative; overflow: hidden; }
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.18), transparent);
+    transform: translateX(-100%);
+    transition: transform 600ms ease;
+  }
+  .btn-primary:hover::after { transform: translateX(100%); }
+
+  /* Smooth letter intro on big headlines */
+  @keyframes hero-fade { from { opacity: 0; transform: translateY(12px); filter: blur(6px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+  .display-h1 { animation: hero-fade 900ms cubic-bezier(0.22, 1, 0.36, 1) 0ms both; }
 
   /* Card hover lift */
   .card-lift { transition: transform 250ms ease, border-color 250ms ease, background-color 250ms ease; }
@@ -172,7 +198,7 @@
   <div class="max-w-7xl mx-auto px-6 lg:px-12 h-16 md:h-20 flex items-center justify-between">
     <a href="#top" class="flex items-center gap-2 group">
       <!-- PLACEHOLDER: Logo file. Swap this SVG for the real Inkflow logo. -->
-      <span class="text-xl font-serif font-bold tracking-tight text-text-primary">
+      <span class="text-xl font-serif tracking-tight text-text-primary">
         ink<span class="text-accent">flow</span><span class="text-accent">.</span>
       </span>
     </a>
@@ -191,38 +217,75 @@
 <!-- ============================================================ -->
 <!-- ===== HERO ===== -->
 <!-- ============================================================ -->
-<section class="relative overflow-hidden pt-32 md:pt-40 pb-20 md:pb-32">
+<section class="relative overflow-hidden pt-28 md:pt-36 pb-20 md:pb-28">
   <div class="hero-glow"></div>
   <div class="relative max-w-7xl mx-auto px-6 lg:px-12">
 
-    <div class="max-w-4xl">
-      <span class="label inline-block mb-6">Tattoo studio growth, done-for-you</span>
-      <h1 class="display-h1 font-serif font-bold text-text-primary mb-6">
-        Your chair, fully booked.
-        <span class="block italic text-accent">Without you ever touching ad manager.</span>
-      </h1>
-      <p class="text-lg md:text-2xl text-text-secondary max-w-2xl mb-10 leading-relaxed">
-        We build the ads, content, and CRM system that fills your calendar with deposit-secured sessions. You tattoo. That's the deal.
-      </p>
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
 
-      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-8">
-        <a href="#book" class="btn-primary">
-          Book Your Strategy Call
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-        </a>
-        <a href="#results" class="text-text-secondary hover:text-text-primary transition text-sm underline underline-offset-4 decoration-border-subtle hover:decoration-accent">
-          See how studios use us →
-        </a>
+      <!-- Left: copy -->
+      <div class="lg:col-span-7">
+        <span class="label inline-block mb-6 reveal" data-d="0">Tattoo studio growth, done-for-you</span>
+        <h1 class="display-h1 font-serif text-text-primary mb-6 reveal" data-d="80">
+          Your chair, fully booked.
+          <span class="block italic text-accent">Without you ever touching ad manager.</span>
+        </h1>
+        <p class="text-lg md:text-2xl text-text-secondary max-w-2xl mb-10 leading-relaxed reveal" data-d="160">
+          We build the ads, content, and booking system that fills your calendar with deposit-secured sessions. You tattoo. That's the deal.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-8 reveal" data-d="240">
+          <a href="#book" class="btn-primary group">
+            Book Your Strategy Call
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="transition-transform group-hover:translate-x-1"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#results" class="text-text-secondary hover:text-text-primary transition text-sm underline underline-offset-4 decoration-border-subtle hover:decoration-accent">
+            See how studios use us →
+          </a>
+        </div>
+
+        <p class="text-sm text-text-muted reveal" data-d="320">
+          30 booked sessions in 30 days, guaranteed.
+          <a href="#why" class="text-accent hover:text-accent-hover">See why studios pick us →</a>
+        </p>
       </div>
 
-      <p class="text-sm text-text-muted">
-        30 booked sessions in 30 days, guaranteed.
-        <a href="#guarantee" class="text-accent hover:text-accent-hover">Read the terms →</a>
-      </p>
+      <!-- Right: 9:16 video -->
+      <div class="lg:col-span-5 reveal" data-d="200">
+        <div class="relative mx-auto max-w-sm lg:max-w-none">
+          <!-- Decorative red glow behind video -->
+          <div class="absolute -inset-4 rounded-2xl pointer-events-none" style="background: radial-gradient(ellipse at center, rgba(185,28,28,0.25), transparent 70%);"></div>
+
+          <div class="relative aspect-[9/16] bg-surface border border-border-subtle rounded-xl overflow-hidden shadow-2xl">
+            <!-- PLACEHOLDER: 9:16 hero video.
+                 Drop your file in /assets and replace src below, or paste a hosted URL.
+                 Example: <video src="assets/hero.mp4" autoplay muted loop playsinline class="w-full h-full object-cover"></video> -->
+            <video autoplay muted loop playsinline class="w-full h-full object-cover">
+              <source src="" type="video/mp4" />
+            </video>
+
+            <!-- Fallback frame visible until a video is added -->
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-gradient-to-br from-surface via-bg-secondary to-bg-primary">
+              <div class="w-14 h-14 rounded-full border border-accent/40 flex items-center justify-center mb-4">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" class="text-accent"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+              <p class="text-text-secondary text-sm">9:16 hero video</p>
+              <p class="text-text-muted text-xs mt-1">Replace placeholder in code</p>
+            </div>
+          </div>
+
+          <!-- Tag under video -->
+          <div class="hidden lg:flex items-center justify-between mt-4 text-xs text-text-muted">
+            <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>Live campaign</span>
+            <span>Studio Black Ink · Phoenix, AZ</span>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <!-- Stat strip -->
-    <div class="mt-16 md:mt-24 pt-8 border-t border-border-subtle">
+    <div class="mt-16 md:mt-20 pt-8 border-t border-border-subtle reveal" data-d="0">
       <div class="flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-text-secondary">
         <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-accent"></span>50+ studios trust us</span>
         <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-accent"></span>First booking within 7 days</span>
@@ -240,7 +303,7 @@
   <div class="max-w-7xl mx-auto px-6 lg:px-12">
     <div class="max-w-3xl mb-16 reveal">
       <span class="label">The problem</span>
-      <h2 class="display-h2 font-serif font-bold text-text-primary mt-4">
+      <h2 class="display-h2 font-serif text-text-primary mt-4">
         You're a tattoo artist.
         <span class="italic text-text-secondary">Not a marketer.</span>
       </h2>
@@ -282,7 +345,7 @@
   <div class="max-w-7xl mx-auto px-6 lg:px-12">
     <div class="max-w-3xl mb-16 reveal">
       <span class="label">What we do</span>
-      <h2 class="display-h2 font-serif font-bold text-text-primary mt-4">
+      <h2 class="display-h2 font-serif text-text-primary mt-4">
         Here's what happens when
         <span class="italic">we take over.</span>
       </h2>
@@ -292,37 +355,37 @@
       <!-- Meta Ads -->
       <div class="card-lift bg-surface border border-border-subtle p-8 rounded-md reveal">
         <svg class="w-7 h-7 text-accent mb-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
-        <h3 class="text-xl font-serif font-bold mb-2">Meta Ads</h3>
+        <h3 class="text-xl font-serif mb-2">Meta Ads</h3>
         <p class="text-text-secondary">Campaigns, creatives, optimization. We test. You see the bookings land.</p>
       </div>
       <!-- Content -->
       <div class="card-lift bg-surface border border-border-subtle p-8 rounded-md reveal">
         <svg class="w-7 h-7 text-accent mb-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3V9z" fill="currentColor"/></svg>
-        <h3 class="text-xl font-serif font-bold mb-2">Content & Scripts</h3>
+        <h3 class="text-xl font-serif mb-2">Content & Scripts</h3>
         <p class="text-text-secondary">We script your videos and tell you exactly what to film. You hit record.</p>
       </div>
       <!-- Landing pages -->
       <div class="card-lift bg-surface border border-border-subtle p-8 rounded-md reveal">
         <svg class="w-7 h-7 text-accent mb-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-        <h3 class="text-xl font-serif font-bold mb-2">Landing pages & funnels</h3>
+        <h3 class="text-xl font-serif mb-2">Landing pages & funnels</h3>
         <p class="text-text-secondary">Pages that turn cold visitors into deposit-paid bookings.</p>
       </div>
       <!-- CRM -->
       <div class="card-lift bg-surface border border-border-subtle p-8 rounded-md reveal">
         <svg class="w-7 h-7 text-accent mb-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16v6H4zM4 14h16v6H4z"/><circle cx="8" cy="7" r="1" fill="currentColor"/><circle cx="8" cy="17" r="1" fill="currentColor"/></svg>
-        <h3 class="text-xl font-serif font-bold mb-2">CRM system (GHL)</h3>
+        <h3 class="text-xl font-serif mb-2">Booking automation</h3>
         <p class="text-text-secondary">Automated follow-ups, reminders, the full lead-to-booking journey.</p>
       </div>
       <!-- Lead handling -->
       <div class="card-lift bg-surface border border-border-subtle p-8 rounded-md reveal">
         <svg class="w-7 h-7 text-accent mb-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a4 4 0 01-4 4H8l-5 3V5a4 4 0 014-4h10a4 4 0 014 4v10z"/></svg>
-        <h3 class="text-xl font-serif font-bold mb-2">Lead handling</h3>
+        <h3 class="text-xl font-serif mb-2">Lead handling</h3>
         <p class="text-text-secondary">We respond to your leads, qualify them, and book them in.</p>
       </div>
       <!-- TikTok -->
       <div class="card-lift bg-surface border border-border-subtle p-8 rounded-md reveal">
         <svg class="w-7 h-7 text-accent mb-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3v12.5a3.5 3.5 0 11-3.5-3.5M9 3h4a5 5 0 005 5"/></svg>
-        <h3 class="text-xl font-serif font-bold mb-2">TikTok Ads</h3>
+        <h3 class="text-xl font-serif mb-2">TikTok Ads</h3>
         <p class="text-text-secondary">For studios who want to reach the next generation before everyone else figures it out.</p>
       </div>
     </div>
@@ -339,7 +402,7 @@
     <div class="mb-20 md:mb-32">
       <div class="max-w-3xl mb-12 reveal">
         <span class="label">Receipts</span>
-        <h2 class="display-h2 font-serif font-bold text-text-primary mt-4">
+        <h2 class="display-h2 font-serif text-text-primary mt-4">
           The numbers do
           <span class="italic">the talking.</span>
         </h2>
@@ -348,19 +411,19 @@
       <!-- PLACEHOLDER: Sinan to fill in actual revenue and bookings numbers -->
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-border-subtle border border-border-subtle">
         <div class="bg-bg-secondary p-8 md:p-10 reveal">
-          <div class="font-serif font-bold text-5xl md:text-7xl text-text-primary mb-3 counter" data-target="50" data-suffix="+">0</div>
+          <div class="font-serif text-5xl md:text-7xl text-text-primary mb-3 counter" data-target="50" data-suffix="+">0</div>
           <div class="label">Studios trust Inkflow</div>
         </div>
         <div class="bg-bg-secondary p-8 md:p-10 reveal">
-          <div class="font-serif font-bold text-5xl md:text-7xl text-text-primary mb-3"><span class="text-accent">$</span><span class="counter" data-target="2400000" data-format="short">0</span></div>
+          <div class="font-serif text-5xl md:text-7xl text-text-primary mb-3"><span class="text-accent">$</span><span class="counter" data-target="2400000" data-format="short">0</span></div>
           <div class="label">Generated for clients (12 mo.)</div>
         </div>
         <div class="bg-bg-secondary p-8 md:p-10 reveal">
-          <div class="font-serif font-bold text-5xl md:text-7xl text-text-primary mb-3 counter" data-target="3200" data-format="comma">0</div>
+          <div class="font-serif text-5xl md:text-7xl text-text-primary mb-3 counter" data-target="3200" data-format="comma">0</div>
           <div class="label">Bookings booked (12 mo.)</div>
         </div>
         <div class="bg-bg-secondary p-8 md:p-10 reveal">
-          <div class="font-serif font-bold text-5xl md:text-7xl text-text-primary mb-3 counter" data-target="92" data-suffix="%">0</div>
+          <div class="font-serif text-5xl md:text-7xl text-text-primary mb-3 counter" data-target="92" data-suffix="%">0</div>
           <div class="label">Client retention after 6 months</div>
         </div>
       </div>
@@ -370,7 +433,7 @@
     <div class="mb-20 md:mb-32">
       <div class="max-w-3xl mb-12 reveal">
         <span class="label">The system, in action</span>
-        <h2 class="display-h2 font-serif font-bold text-text-primary mt-4">
+        <h2 class="display-h2 font-serif text-text-primary mt-4">
           What it actually
           <span class="italic">looks like.</span>
         </h2>
@@ -400,15 +463,15 @@
             <div class="grid grid-cols-3 gap-4 mb-6">
               <div>
                 <div class="text-xs text-text-muted">Cost per lead</div>
-                <div class="font-serif font-bold text-3xl text-text-primary">$4.20</div>
+                <div class="font-serif text-3xl text-text-primary">$4.20</div>
               </div>
               <div>
                 <div class="text-xs text-text-muted">ROAS</div>
-                <div class="font-serif font-bold text-3xl text-text-primary">6.8<span class="text-text-muted text-xl">x</span></div>
+                <div class="font-serif text-3xl text-text-primary">6.8<span class="text-text-muted text-xl">x</span></div>
               </div>
               <div>
                 <div class="text-xs text-text-muted">Bookings</div>
-                <div class="font-serif font-bold text-3xl text-accent">142</div>
+                <div class="font-serif text-3xl text-accent">142</div>
               </div>
             </div>
 
@@ -436,7 +499,7 @@
               <span class="w-3 h-3 rounded-full bg-[#3a3a3a]"></span>
               <span class="w-3 h-3 rounded-full bg-[#3a3a3a]"></span>
             </div>
-            <span class="ml-3 text-xs text-text-muted">GHL · Pipeline</span>
+            <span class="ml-3 text-xs text-text-muted">Booking pipeline</span>
           </div>
           <div class="p-4 md:p-6">
             <div class="grid grid-cols-4 gap-2 text-xs">
@@ -639,19 +702,108 @@
       </div>
     </div>
 
-    <!-- 5c. Logo wall -->
+    <!-- 5c. Studios we work with (rich cards) -->
     <div class="mb-20 md:mb-32">
-      <h3 class="label text-center mb-10 reveal">Studios we've worked with</h3>
-      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 items-center gap-8 reveal">
-        <!-- PLACEHOLDER: Replace with real client logo files (SVG preferred) -->
-        <div class="logo-grey font-serif italic text-xl text-text-secondary text-center">Black Ink Co.</div>
-        <div class="logo-grey font-serif italic text-xl text-text-secondary text-center">Iron & Oak</div>
-        <div class="logo-grey font-serif italic text-xl text-text-secondary text-center">Saint Mara</div>
-        <div class="logo-grey font-serif italic text-xl text-text-secondary text-center">Hollow Hand</div>
-        <div class="logo-grey font-serif italic text-xl text-text-secondary text-center">Wildhorn Tattoo</div>
-        <div class="logo-grey font-serif italic text-xl text-text-secondary text-center">Crowmark</div>
-        <div class="logo-grey font-serif italic text-xl text-text-secondary text-center">Steel & Stone</div>
-        <div class="logo-grey font-serif italic text-xl text-text-secondary text-center">Northside Ink</div>
+      <div class="flex items-end justify-between flex-wrap gap-4 mb-10 reveal">
+        <div>
+          <span class="label">The roster</span>
+          <h3 class="display-h2 font-serif text-text-primary mt-3">Studios we work with.</h3>
+        </div>
+        <p class="text-text-secondary max-w-md">A selection of shops we've helped fill. One per market, no overlap, no exceptions.</p>
+      </div>
+
+      <!-- PLACEHOLDER: Replace each card with real studio photo, name, city, and headline stat -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <article class="card-lift group bg-surface border border-border-subtle rounded-md overflow-hidden reveal">
+          <div class="aspect-[4/3] bg-bg-primary relative overflow-hidden">
+            <!-- PLACEHOLDER: Studio photo -->
+            <div class="absolute inset-0 flex items-center justify-center text-text-muted text-sm">[ Studio photo ]</div>
+            <div class="absolute inset-0 bg-gradient-to-t from-bg-primary via-transparent to-transparent"></div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-start justify-between gap-4 mb-2">
+              <h4 class="text-lg font-serif">Black Ink Co.</h4>
+              <span class="text-xs text-text-muted">Phoenix, AZ</span>
+            </div>
+            <p class="text-text-secondary text-sm">Black & grey realism · 2 chairs</p>
+            <div class="mt-4 pt-4 border-t border-border-subtle text-xs text-accent">+32 bookings / month</div>
+          </div>
+        </article>
+
+        <article class="card-lift group bg-surface border border-border-subtle rounded-md overflow-hidden reveal">
+          <div class="aspect-[4/3] bg-bg-primary relative overflow-hidden">
+            <div class="absolute inset-0 flex items-center justify-center text-text-muted text-sm">[ Studio photo ]</div>
+            <div class="absolute inset-0 bg-gradient-to-t from-bg-primary via-transparent to-transparent"></div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-start justify-between gap-4 mb-2">
+              <h4 class="text-lg font-serif">Iron & Oak Tattoo</h4>
+              <span class="text-xs text-text-muted">Austin, TX</span>
+            </div>
+            <p class="text-text-secondary text-sm">Traditional · Solo artist</p>
+            <div class="mt-4 pt-4 border-t border-border-subtle text-xs text-accent">87% show-up rate</div>
+          </div>
+        </article>
+
+        <article class="card-lift group bg-surface border border-border-subtle rounded-md overflow-hidden reveal">
+          <div class="aspect-[4/3] bg-bg-primary relative overflow-hidden">
+            <div class="absolute inset-0 flex items-center justify-center text-text-muted text-sm">[ Studio photo ]</div>
+            <div class="absolute inset-0 bg-gradient-to-t from-bg-primary via-transparent to-transparent"></div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-start justify-between gap-4 mb-2">
+              <h4 class="text-lg font-serif">Hollow Hand</h4>
+              <span class="text-xs text-text-muted">Brooklyn, NY</span>
+            </div>
+            <p class="text-text-secondary text-sm">Fine line · 4 chairs</p>
+            <div class="mt-4 pt-4 border-t border-border-subtle text-xs text-accent">47 deposits / month</div>
+          </div>
+        </article>
+
+        <article class="card-lift group bg-surface border border-border-subtle rounded-md overflow-hidden reveal">
+          <div class="aspect-[4/3] bg-bg-primary relative overflow-hidden">
+            <div class="absolute inset-0 flex items-center justify-center text-text-muted text-sm">[ Studio photo ]</div>
+            <div class="absolute inset-0 bg-gradient-to-t from-bg-primary via-transparent to-transparent"></div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-start justify-between gap-4 mb-2">
+              <h4 class="text-lg font-serif">Wildhorn Tattoo</h4>
+              <span class="text-xs text-text-muted">Denver, CO</span>
+            </div>
+            <p class="text-text-secondary text-sm">Black & grey · 2 chairs</p>
+            <div class="mt-4 pt-4 border-t border-border-subtle text-xs text-accent">12 → 47 in 90 days</div>
+          </div>
+        </article>
+
+        <article class="card-lift group bg-surface border border-border-subtle rounded-md overflow-hidden reveal">
+          <div class="aspect-[4/3] bg-bg-primary relative overflow-hidden">
+            <div class="absolute inset-0 flex items-center justify-center text-text-muted text-sm">[ Studio photo ]</div>
+            <div class="absolute inset-0 bg-gradient-to-t from-bg-primary via-transparent to-transparent"></div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-start justify-between gap-4 mb-2">
+              <h4 class="text-lg font-serif">Saint Mara</h4>
+              <span class="text-xs text-text-muted">Miami, FL</span>
+            </div>
+            <p class="text-text-secondary text-sm">Color realism · 3 chairs</p>
+            <div class="mt-4 pt-4 border-t border-border-subtle text-xs text-accent">$24k revenue / month</div>
+          </div>
+        </article>
+
+        <article class="card-lift group bg-surface border border-border-subtle rounded-md overflow-hidden reveal">
+          <div class="aspect-[4/3] bg-bg-primary relative overflow-hidden">
+            <div class="absolute inset-0 flex items-center justify-center text-text-muted text-sm">[ Studio photo ]</div>
+            <div class="absolute inset-0 bg-gradient-to-t from-bg-primary via-transparent to-transparent"></div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-start justify-between gap-4 mb-2">
+              <h4 class="text-lg font-serif">Crowmark Studio</h4>
+              <span class="text-xs text-text-muted">Seattle, WA</span>
+            </div>
+            <p class="text-text-secondary text-sm">Neo-traditional · 2 chairs</p>
+            <div class="mt-4 pt-4 border-t border-border-subtle text-xs text-accent">Booked 4 weeks out</div>
+          </div>
+        </article>
       </div>
     </div>
 
@@ -659,7 +811,7 @@
     <div class="mb-20 md:mb-32">
       <div class="max-w-3xl mb-12 reveal">
         <span class="label">In their words</span>
-        <h2 class="display-h2 font-serif font-bold text-text-primary mt-4">
+        <h2 class="display-h2 font-serif text-text-primary mt-4">
           Real shops.
           <span class="italic">Real numbers.</span>
         </h2>
@@ -723,7 +875,7 @@
         <div class="grid md:grid-cols-3 gap-10 items-center">
           <div class="md:col-span-2">
             <span class="label">Case study</span>
-            <h3 class="display-h2 font-serif font-bold text-text-primary mt-3 mb-5">Wildhorn Tattoo, Denver, CO</h3>
+            <h3 class="display-h2 font-serif text-text-primary mt-3 mb-5">Wildhorn Tattoo, Denver, CO</h3>
             <p class="text-text-secondary mb-5">Shop with two artists, doing maybe 12 bookings a month. Mostly Instagram referrals. Slow weeks, no follow-up, deposit-skip rate near 40%.</p>
             <p class="text-text-primary font-medium mb-3">What we did:</p>
             <ul class="text-text-secondary space-y-2">
@@ -735,7 +887,7 @@
             </ul>
           </div>
           <div class="md:border-l md:border-border-subtle md:pl-10">
-            <div class="font-serif font-bold text-5xl md:text-6xl text-accent leading-none mb-3">12 → 47</div>
+            <div class="font-serif text-5xl md:text-6xl text-accent leading-none mb-3">12 → 47</div>
             <p class="text-text-secondary">deposit-secured bookings per month, 90 days in.</p>
             <!-- PLACEHOLDER: Replace with verified case-study numbers -->
           </div>
@@ -752,36 +904,59 @@
 <section id="how" class="py-20 md:py-32">
   <div class="max-w-7xl mx-auto px-6 lg:px-12">
     <div class="max-w-3xl mb-16 reveal">
-      <span class="label">The process</span>
-      <h2 class="display-h2 font-serif font-bold text-text-primary mt-4">
-        Here's what working with us
-        <span class="italic">looks like.</span>
+      <span class="label">The journey</span>
+      <h2 class="display-h2 font-serif text-text-primary mt-4">
+        From first call
+        <span class="italic">to fully booked.</span>
       </h2>
+      <p class="text-text-secondary mt-5 text-lg">Four steps. No fluff. Live inside a week.</p>
     </div>
 
-    <div class="grid md:grid-cols-4 gap-6 md:gap-4 relative">
-      <!-- horizontal line on desktop -->
-      <div class="hidden md:block absolute top-8 left-0 right-0 h-px bg-border-subtle"></div>
+    <div class="relative">
+      <!-- vertical timeline line -->
+      <div class="absolute left-6 md:left-8 top-0 bottom-0 w-px bg-border-subtle"></div>
 
-      <div class="relative reveal">
-        <div class="w-16 h-16 rounded-full bg-bg-primary border border-accent flex items-center justify-center font-serif font-bold text-2xl text-accent mb-5 relative z-10">1</div>
-        <h3 class="text-xl font-serif font-bold mb-2">Free strategy call</h3>
-        <p class="text-text-secondary">20 minutes. We learn about your studio and what you actually need.</p>
-      </div>
-      <div class="relative reveal">
-        <div class="w-16 h-16 rounded-full bg-bg-primary border border-accent flex items-center justify-center font-serif font-bold text-2xl text-accent mb-5 relative z-10">2</div>
-        <h3 class="text-xl font-serif font-bold mb-2">We build the system</h3>
-        <p class="text-text-secondary">Ads, landing page, GHL, scripts. Live in 14 days.</p>
-      </div>
-      <div class="relative reveal">
-        <div class="w-16 h-16 rounded-full bg-bg-primary border border-accent flex items-center justify-center font-serif font-bold text-2xl text-accent mb-5 relative z-10">3</div>
-        <h3 class="text-xl font-serif font-bold mb-2">We run traffic and handle leads</h3>
-        <p class="text-text-secondary">Deposit-secured bookings start landing in your calendar.</p>
-      </div>
-      <div class="relative reveal">
-        <div class="w-16 h-16 rounded-full bg-bg-primary border border-accent flex items-center justify-center font-serif font-bold text-2xl text-accent mb-5 relative z-10">4</div>
-        <h3 class="text-xl font-serif font-bold mb-2">We optimize weekly</h3>
-        <p class="text-text-secondary">You get a weekly update. We adjust based on what the numbers say.</p>
+      <div class="space-y-10 md:space-y-14">
+
+        <div class="relative pl-20 md:pl-28 reveal">
+          <div class="absolute left-0 top-0 w-12 h-12 md:w-16 md:h-16 rounded-full bg-bg-primary border border-accent flex items-center justify-center font-serif text-xl md:text-2xl text-accent z-10">01</div>
+          <div class="absolute left-12 md:left-16 top-6 md:top-8 w-8 md:w-12 h-px bg-border-subtle"></div>
+          <span class="label text-accent">Day 0</span>
+          <h3 class="text-2xl md:text-3xl font-serif mt-2 mb-3">A 20-minute call. Free, no pitch deck.</h3>
+          <p class="text-text-secondary text-lg leading-relaxed max-w-2xl">You hop on a call with us. We ask about your shop, your style, your average ticket, what's been working and what hasn't. If you're a fit and your market is open, we move forward. If not, we'll tell you straight.</p>
+        </div>
+
+        <div class="relative pl-20 md:pl-28 reveal">
+          <div class="absolute left-0 top-0 w-12 h-12 md:w-16 md:h-16 rounded-full bg-bg-primary border border-accent flex items-center justify-center font-serif text-xl md:text-2xl text-accent z-10">02</div>
+          <div class="absolute left-12 md:left-16 top-6 md:top-8 w-8 md:w-12 h-px bg-border-subtle"></div>
+          <span class="label text-accent">Day 1 to 7</span>
+          <h3 class="text-2xl md:text-3xl font-serif mt-2 mb-3">We build everything.</h3>
+          <p class="text-text-secondary text-lg leading-relaxed max-w-2xl">Ads, creatives, content scripts, landing page, booking system, follow-up flows. The whole stack, built around your shop. You film a few videos from our scripts. We handle the rest.</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="text-xs px-3 py-1 rounded-full border border-border-subtle text-text-secondary">Meta ads</span>
+            <span class="text-xs px-3 py-1 rounded-full border border-border-subtle text-text-secondary">Content scripts</span>
+            <span class="text-xs px-3 py-1 rounded-full border border-border-subtle text-text-secondary">Landing page</span>
+            <span class="text-xs px-3 py-1 rounded-full border border-border-subtle text-text-secondary">Booking flow</span>
+            <span class="text-xs px-3 py-1 rounded-full border border-border-subtle text-text-secondary">SMS automations</span>
+          </div>
+        </div>
+
+        <div class="relative pl-20 md:pl-28 reveal">
+          <div class="absolute left-0 top-0 w-12 h-12 md:w-16 md:h-16 rounded-full bg-bg-primary border border-accent flex items-center justify-center font-serif text-xl md:text-2xl text-accent z-10">03</div>
+          <div class="absolute left-12 md:left-16 top-6 md:top-8 w-8 md:w-12 h-px bg-border-subtle"></div>
+          <span class="label text-accent">Day 7</span>
+          <h3 class="text-2xl md:text-3xl font-serif mt-2 mb-3">Live. Leads start landing.</h3>
+          <p class="text-text-secondary text-lg leading-relaxed max-w-2xl">Ads go live. The first inquiries start hitting within hours. We answer them, qualify them, and only the serious ones get pushed to your calendar. No tire-kickers. No DM ping-pong.</p>
+        </div>
+
+        <div class="relative pl-20 md:pl-28 reveal">
+          <div class="absolute left-0 top-0 w-12 h-12 md:w-16 md:h-16 rounded-full bg-bg-primary border border-accent flex items-center justify-center font-serif text-xl md:text-2xl text-accent z-10">04</div>
+          <div class="absolute left-12 md:left-16 top-6 md:top-8 w-8 md:w-12 h-px bg-border-subtle"></div>
+          <span class="label text-accent">Ongoing</span>
+          <h3 class="text-2xl md:text-3xl font-serif mt-2 mb-3">Deposits paid. Booked direct.</h3>
+          <p class="text-text-secondary text-lg leading-relaxed max-w-2xl">Every confirmed booking comes with a deposit secured up front. Straight into your calendar. You wake up, check the schedule, tattoo. We optimize the system every week so the cost per booking keeps dropping.</p>
+        </div>
+
       </div>
     </div>
   </div>
@@ -795,15 +970,21 @@
     <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
 
       <div class="order-2 md:order-1 reveal">
-        <!-- PLACEHOLDER: Photo of Sinan -->
-        <div class="aspect-[4/5] bg-surface border border-border-subtle rounded-md flex items-center justify-center text-text-muted">
-          [ Photo of Sinan ]
+        <div class="grid grid-cols-3 gap-3">
+          <!-- PLACEHOLDER: Main photo of Sinan (hero shot, 4:5 ratio) -->
+          <div class="col-span-3 aspect-[4/5] bg-surface border border-border-subtle rounded-md flex items-center justify-center text-text-muted">
+            [ Sinan, main shot ]
+          </div>
+          <!-- PLACEHOLDER: 2 supporting images (behind the scenes, working with a studio, etc.) -->
+          <div class="aspect-square bg-surface border border-border-subtle rounded-md flex items-center justify-center text-text-muted text-xs">[ Studio visit ]</div>
+          <div class="aspect-square bg-surface border border-border-subtle rounded-md flex items-center justify-center text-text-muted text-xs">[ Working shot ]</div>
+          <div class="aspect-square bg-surface border border-border-subtle rounded-md flex items-center justify-center text-text-muted text-xs">[ Aarhus HQ ]</div>
         </div>
       </div>
 
       <div class="order-1 md:order-2 reveal">
         <span class="label">Who runs this</span>
-        <h2 class="display-h2 font-serif font-bold text-text-primary mt-4 mb-6">
+        <h2 class="display-h2 font-serif text-text-primary mt-4 mb-6">
           Hi, I'm Sinan.
         </h2>
         <!-- PLACEHOLDER: Sinan's personal intro. 100-150 words. Where he's from, why he started Inkflow, why specifically the tattoo industry, what he cares about. Keep it short and authentic. Not pompous. -->
@@ -821,28 +1002,71 @@
 <!-- ============================================================ -->
 <!-- ===== GUARANTEE ===== -->
 <!-- ============================================================ -->
-<section id="guarantee" class="py-20 md:py-32 relative overflow-hidden">
-  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 50% at 50% 30%, rgba(185,28,28,0.18), transparent 60%);"></div>
-  <div class="relative max-w-5xl mx-auto px-6 lg:px-12">
-    <div class="border-2 border-accent rounded-md p-8 md:p-14 bg-bg-primary/60 backdrop-blur-sm reveal">
-      <span class="label text-accent">The guarantee</span>
-      <h2 class="display-h2 font-serif font-bold text-text-primary mt-4 mb-8">
-        Our 30-Day
-        <span class="italic">Booking Guarantee.</span>
+<section id="why" class="py-20 md:py-32 relative overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 70% 50% at 50% 20%, rgba(185,28,28,0.14), transparent 60%);"></div>
+  <div class="relative max-w-7xl mx-auto px-6 lg:px-12">
+
+    <div class="max-w-3xl mb-14 reveal">
+      <span class="label">Why studios pick us</span>
+      <h2 class="display-h2 font-serif text-text-primary mt-4">
+        Six reasons we're
+        <span class="italic">not the same agency you tried last year.</span>
       </h2>
-
-      <div class="space-y-6 text-lg md:text-xl leading-relaxed text-text-primary mb-8">
-        <p><strong class="text-accent">30 deposit-secured booked sessions in your first 30 days.</strong> If we miss it, we refund our fee AND cover your next month's ad spend.</p>
-        <p class="text-text-secondary">Most studios see their first deposit-secured booking within 7 days of launch. The 30-day guarantee just makes the rest official.</p>
-        <p class="text-text-secondary">We only work with <strong class="text-text-primary">one studio per market.</strong> Once you're in, your direct competitors can't get the same system from us.</p>
-      </div>
-
-      <ul class="grid sm:grid-cols-3 gap-4 text-sm text-text-secondary border-t border-border-subtle pt-6">
-        <li class="flex items-center gap-2"><span class="text-accent">✓</span> No long-term contracts</li>
-        <li class="flex items-center gap-2"><span class="text-accent">✓</span> Month-to-month</li>
-        <li class="flex items-center gap-2"><span class="text-accent">✓</span> Cancel anytime</li>
-      </ul>
     </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <!-- Centerpiece: Guarantee (spans 2 cols on lg) -->
+      <article class="lg:col-span-2 lg:row-span-2 card-lift bg-bg-primary border-2 border-accent rounded-md p-8 md:p-10 relative overflow-hidden reveal">
+        <div class="absolute -top-20 -right-20 w-72 h-72 rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(185,28,28,0.25), transparent 70%);"></div>
+        <span class="label text-accent relative">The guarantee</span>
+        <h3 class="font-serif text-3xl md:text-5xl text-text-primary mt-3 mb-5 leading-tight relative">30 deposit-secured bookings in your first 30 days.</h3>
+        <p class="text-text-secondary text-lg mb-6 max-w-xl relative">If we miss it, we refund our fee <em class="text-text-primary not-italic font-medium">and</em> cover your next month's ad spend. We don't take on a studio we don't think we can win for.</p>
+        <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-text-secondary pt-5 border-t border-border-subtle relative">
+          <span class="flex items-center gap-2"><span class="text-accent">✓</span> No long-term contracts</span>
+          <span class="flex items-center gap-2"><span class="text-accent">✓</span> Month-to-month</span>
+          <span class="flex items-center gap-2"><span class="text-accent">✓</span> Cancel anytime</span>
+        </div>
+      </article>
+
+      <article class="card-lift bg-surface border border-border-subtle rounded-md p-7 reveal">
+        <div class="font-serif text-5xl md:text-6xl text-accent leading-none mb-3">7</div>
+        <h3 class="text-xl font-serif mb-2">Live in 7 days</h3>
+        <p class="text-text-secondary">Most studios see their first deposit-secured booking within a week of launch.</p>
+      </article>
+
+      <article class="card-lift bg-surface border border-border-subtle rounded-md p-7 reveal">
+        <div class="font-serif text-5xl md:text-6xl text-accent leading-none mb-3">1</div>
+        <h3 class="text-xl font-serif mb-2">One studio per market</h3>
+        <p class="text-text-secondary">Once you're in, your direct competitors can't get the same system from us. Ever.</p>
+      </article>
+
+      <article class="card-lift bg-surface border border-border-subtle rounded-md p-7 reveal">
+        <div class="text-accent mb-4">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a4 4 0 01-4 4H8l-5 3V5a4 4 0 014-4h10a4 4 0 014 4v10z"/></svg>
+        </div>
+        <h3 class="text-xl font-serif mb-2">We answer the leads</h3>
+        <p class="text-text-secondary">You don't chase DMs. We qualify, follow up, and only push the serious ones to your calendar.</p>
+      </article>
+
+      <article class="card-lift bg-surface border border-border-subtle rounded-md p-7 reveal">
+        <div class="text-accent mb-4">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v20M2 12h20" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="text-xl font-serif mb-2">Tattoo studios only</h3>
+        <p class="text-text-secondary">We don't do dentists, gyms, or e-com. Just shops. Every script, every funnel is built for one industry.</p>
+      </article>
+
+      <article class="card-lift bg-surface border border-border-subtle rounded-md p-7 reveal">
+        <div class="text-accent mb-4">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <h3 class="text-xl font-serif mb-2">Bookings, not leads</h3>
+        <p class="text-text-secondary">We measure what shows up at your chair with a paid deposit. Lead form fills don't pay your rent.</p>
+      </article>
+
+    </div>
+
   </div>
 </section>
 
@@ -853,44 +1077,43 @@
   <div class="max-w-4xl mx-auto px-6 lg:px-12">
     <div class="mb-12 reveal">
       <span class="label">FAQ</span>
-      <h2 class="display-h2 font-serif font-bold text-text-primary mt-4">
+      <h2 class="display-h2 font-serif text-text-primary mt-4">
         Questions we get
         <span class="italic">all the time.</span>
       </h2>
     </div>
 
-    <!-- PLACEHOLDER: Sinan to refine final FAQ answers -->
     <div class="space-y-3">
       <details class="group bg-surface border border-border-subtle rounded-md p-6 hover:border-accent/40 transition reveal">
         <summary class="flex items-center justify-between gap-6">
-          <span class="text-lg font-medium">What does this cost?</span>
+          <span class="text-lg font-medium">What does this actually cost?</span>
           <span class="faq-icon text-accent text-2xl">+</span>
         </summary>
-        <p class="text-text-secondary mt-4 leading-relaxed">It depends on your market and the package. We talk pricing on the strategy call once we know what you actually need. No surprises.</p>
+        <p class="text-text-secondary mt-4 leading-relaxed">It depends on your market size, your goals, and how much ad spend makes sense for your shop. We don't have a public price sheet because every studio is different. On the strategy call we'll give you a straight number based on what you actually need. If it's not a fit on your end financially, we'll say so on the call.</p>
       </details>
 
       <details class="group bg-surface border border-border-subtle rounded-md p-6 hover:border-accent/40 transition reveal">
         <summary class="flex items-center justify-between gap-6">
-          <span class="text-lg font-medium">How fast will I see results?</span>
+          <span class="text-lg font-medium">How fast will I see real results?</span>
           <span class="faq-icon text-accent text-2xl">+</span>
         </summary>
-        <p class="text-text-secondary mt-4 leading-relaxed">Most studios get their first deposit-secured booking within 7 days of launch. Our guarantee covers you for 30 booked sessions in 30 days.</p>
+        <p class="text-text-secondary mt-4 leading-relaxed">Most studios get their first deposit-secured booking within 7 days of launch. Inside 30 days, you should be at 30 booked sessions or more. That's our guarantee, not a hope.</p>
       </details>
 
       <details class="group bg-surface border border-border-subtle rounded-md p-6 hover:border-accent/40 transition reveal">
         <summary class="flex items-center justify-between gap-6">
-          <span class="text-lg font-medium">What if ads don't work for my studio?</span>
+          <span class="text-lg font-medium">What if ads just don't work for my studio?</span>
           <span class="faq-icon text-accent text-2xl">+</span>
         </summary>
-        <p class="text-text-secondary mt-4 leading-relaxed">If we miss the 30-in-30 guarantee, we refund our fee and cover your next month's ad spend. We don't take on a studio we don't think we can win for.</p>
+        <p class="text-text-secondary mt-4 leading-relaxed">If we miss the 30-in-30 guarantee, we refund our fee and cover your next month's ad spend. The reason we can offer that is we vet every studio before we onboard. If we don't think we can hit the number for your shop, we won't take you on.</p>
       </details>
 
       <details class="group bg-surface border border-border-subtle rounded-md p-6 hover:border-accent/40 transition reveal">
         <summary class="flex items-center justify-between gap-6">
-          <span class="text-lg font-medium">How much do I have to do myself?</span>
+          <span class="text-lg font-medium">How much do I actually have to do?</span>
           <span class="faq-icon text-accent text-2xl">+</span>
         </summary>
-        <p class="text-text-secondary mt-4 leading-relaxed">Film a few short videos a week from scripts we write. That's it. We handle ads, landing page, CRM, and the lead replies.</p>
+        <p class="text-text-secondary mt-4 leading-relaxed">Film a handful of short videos a week from the scripts we send you. Show up to your appointments. That's it. We run the ads, build the landing page, set up the booking system, and reply to every lead. You stay at the chair.</p>
       </details>
 
       <details class="group bg-surface border border-border-subtle rounded-md p-6 hover:border-accent/40 transition reveal">
@@ -898,15 +1121,15 @@
           <span class="text-lg font-medium">Do I have to sign a long contract?</span>
           <span class="faq-icon text-accent text-2xl">+</span>
         </summary>
-        <p class="text-text-secondary mt-4 leading-relaxed">No. Month-to-month. Cancel anytime.</p>
+        <p class="text-text-secondary mt-4 leading-relaxed">No. Month-to-month. Cancel anytime, no fees, no fine print. We earn your business every month or you walk.</p>
       </details>
 
       <details class="group bg-surface border border-border-subtle rounded-md p-6 hover:border-accent/40 transition reveal">
         <summary class="flex items-center justify-between gap-6">
-          <span class="text-lg font-medium">What makes you different from other agencies?</span>
+          <span class="text-lg font-medium">What makes you different from the agency I tried last year?</span>
           <span class="faq-icon text-accent text-2xl">+</span>
         </summary>
-        <p class="text-text-secondary mt-4 leading-relaxed">We only work with tattoo studios. We measure deposit-secured bookings, not lead form fills. And we lock you in as the only studio in your market.</p>
+        <p class="text-text-secondary mt-4 leading-relaxed">Three things. One, we only work with tattoo studios, so the playbook is dialed in. Two, we measure deposit-secured bookings, not lead form fills, because lead counts don't pay your rent. Three, we lock you in as the only studio in your market, so we're not running the same ads against your competitor down the street.</p>
       </details>
 
       <details class="group bg-surface border border-border-subtle rounded-md p-6 hover:border-accent/40 transition reveal">
@@ -914,7 +1137,7 @@
           <span class="text-lg font-medium">Where are you based?</span>
           <span class="faq-icon text-accent text-2xl">+</span>
         </summary>
-        <p class="text-text-secondary mt-4 leading-relaxed">Aarhus, Denmark. We serve tattoo studios across the United States. The internet doesn't care where the office is, the bookings sure don't.</p>
+        <p class="text-text-secondary mt-4 leading-relaxed">Aarhus, Denmark. We serve tattoo studios across the United States. We work US business hours for our clients. Your bookings don't care where the office is, and neither do we.</p>
       </details>
 
       <details class="group bg-surface border border-border-subtle rounded-md p-6 hover:border-accent/40 transition reveal">
@@ -922,15 +1145,23 @@
           <span class="text-lg font-medium">Do you work with solo artists or just shops?</span>
           <span class="faq-icon text-accent text-2xl">+</span>
         </summary>
-        <p class="text-text-secondary mt-4 leading-relaxed">Both. As long as you've got a chair, a portfolio, and you can take deposits, we can fill your calendar.</p>
+        <p class="text-text-secondary mt-4 leading-relaxed">Both. If you've got a chair, a portfolio worth showing, and you can take deposits, we can fill your calendar. Some of our best results are with solo artists running everything alone.</p>
       </details>
 
       <details class="group bg-surface border border-border-subtle rounded-md p-6 hover:border-accent/40 transition reveal">
         <summary class="flex items-center justify-between gap-6">
-          <span class="text-lg font-medium">What if my market is already taken by another studio?</span>
+          <span class="text-lg font-medium">What if my market is already taken?</span>
           <span class="faq-icon text-accent text-2xl">+</span>
         </summary>
-        <p class="text-text-secondary mt-4 leading-relaxed">Then we won't take you on. One studio per market is a hard rule. Book a call anyway, we'll tell you straight.</p>
+        <p class="text-text-secondary mt-4 leading-relaxed">Then we won't take you on. One studio per market is a hard rule, no exceptions. Book a call anyway, we'll tell you the moment you mention your city. If your market is open, we'll move fast before someone else claims it.</p>
+      </details>
+
+      <details class="group bg-surface border border-border-subtle rounded-md p-6 hover:border-accent/40 transition reveal">
+        <summary class="flex items-center justify-between gap-6">
+          <span class="text-lg font-medium">What kind of ad spend do I need?</span>
+          <span class="faq-icon text-accent text-2xl">+</span>
+        </summary>
+        <p class="text-text-secondary mt-4 leading-relaxed">Most of our studios run between $1,500 and $5,000 a month in ad spend. The right number for you depends on your market and how aggressive you want to be. Ad spend goes directly to Meta, not to us.</p>
       </details>
     </div>
   </div>
@@ -939,37 +1170,76 @@
 <!-- ============================================================ -->
 <!-- ===== FINAL CTA ===== -->
 <!-- ============================================================ -->
-<section id="book" class="py-24 md:py-40 relative overflow-hidden">
-  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(185,28,28,0.22), transparent 60%);"></div>
-  <div class="relative max-w-4xl mx-auto px-6 lg:px-12 text-center">
-    <span class="label reveal">Last call</span>
-    <h2 class="display-h1 font-serif font-bold text-text-primary mt-4 mb-6 reveal">
-      Ready to fill
-      <span class="italic text-accent">your chair?</span>
-    </h2>
-    <p class="text-lg md:text-xl text-text-secondary max-w-2xl mx-auto mb-10 reveal">
-      Book 20 minutes. We'll talk about your studio. You'll walk away with a clear picture of what it takes to fill your calendar. No commitment.
-    </p>
+<section id="book" class="py-24 md:py-32 relative overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 70% 60% at 50% 30%, rgba(185,28,28,0.22), transparent 60%);"></div>
+  <div class="relative max-w-7xl mx-auto px-6 lg:px-12">
 
-    <div class="flex justify-center mb-6 reveal">
-      <a href="#" class="btn-primary text-base">
-        Book Your Strategy Call
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </a>
-    </div>
+    <div class="grid lg:grid-cols-12 gap-12 items-start">
 
-    <!-- PLACEHOLDER: Embed Cal.com, Calendly, or GHL booking widget here, or link the button above to external booking page -->
+      <!-- Left: pitch -->
+      <div class="lg:col-span-5 lg:sticky lg:top-28">
+        <span class="label reveal">Last call</span>
+        <h2 class="display-h1 font-serif text-text-primary mt-4 mb-6 reveal">
+          Ready to fill
+          <span class="italic text-accent">your chair?</span>
+        </h2>
+        <p class="text-lg md:text-xl text-text-secondary mb-8 reveal">
+          Book 20 minutes. We'll talk about your studio. You'll walk away with a clear picture of what it takes to fill your calendar. No commitment, no pitch deck.
+        </p>
 
-    <p class="text-sm text-text-muted reveal">
-      Or email us directly:
-      <a href="mailto:hello@inkflow.co" class="text-accent hover:text-accent-hover">hello@inkflow.co</a>
-      <!-- PLACEHOLDER: Real email address -->
-    </p>
+        <ul class="space-y-3 text-text-secondary mb-8 reveal">
+          <li class="flex items-start gap-3"><span class="text-accent mt-1">✓</span><span>20-minute call, your timezone</span></li>
+          <li class="flex items-start gap-3"><span class="text-accent mt-1">✓</span><span>We tell you straight if your market is open</span></li>
+          <li class="flex items-start gap-3"><span class="text-accent mt-1">✓</span><span>You leave with a real plan whether or not you sign</span></li>
+        </ul>
 
-    <div class="mt-12 pt-10 border-t border-border-subtle flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm text-text-secondary reveal">
-      <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-accent"></span>30 booked sessions in 30 days, guaranteed</span>
-      <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-accent"></span>First booking within 7 days</span>
-      <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-accent"></span>One studio per market</span>
+        <p class="text-sm text-text-muted reveal">
+          Prefer email?
+          <a href="mailto:hello@inkflow.co" class="text-accent hover:text-accent-hover">hello@inkflow.co</a>
+          <!-- PLACEHOLDER: Real email address -->
+        </p>
+      </div>
+
+      <!-- Right: booking embed -->
+      <div class="lg:col-span-7 reveal">
+        <div class="bg-surface border border-border-subtle rounded-xl p-2 md:p-3 shadow-2xl">
+          <!-- ============================================================ -->
+          <!-- PLACEHOLDER: BOOKING EMBED                                      -->
+          <!-- Paste the embed snippet from your booking tool below, between   -->
+          <!-- the markers. Strip any branding text from the snippet so the    -->
+          <!-- tool name doesn't appear on the page.                           -->
+          <!--                                                                 -->
+          <!-- Examples:                                                       -->
+          <!--   <iframe src="https://your.booking-link/embed" class="w-full"  -->
+          <!--           style="height: 720px; border: 0;"></iframe>           -->
+          <!--                                                                 -->
+          <!--   Or a script-based embed: paste the <div id="..."> + <script>  -->
+          <!--   tags inside the wrapper below.                                -->
+          <!-- ============================================================ -->
+          <div id="booking-embed" class="w-full rounded-lg overflow-hidden bg-bg-primary" style="min-height: 640px;">
+            <!-- BOOKING EMBED START -->
+
+            <!-- Fallback while no embed is present -->
+            <div class="flex flex-col items-center justify-center h-[640px] text-center p-10">
+              <div class="w-16 h-16 rounded-full border border-accent/40 flex items-center justify-center mb-5">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-accent"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+              </div>
+              <p class="font-serif text-2xl text-text-primary mb-2">Booking calendar will load here</p>
+              <p class="text-text-secondary text-sm max-w-sm mb-6">Paste your embed snippet inside the BOOKING EMBED markers in <code class="text-accent">index.html</code> to activate the calendar.</p>
+              <a href="mailto:hello@inkflow.co" class="btn-primary">Or book by email instead</a>
+            </div>
+
+            <!-- BOOKING EMBED END -->
+          </div>
+        </div>
+
+        <div class="mt-6 flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm text-text-secondary">
+          <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-accent"></span>30 in 30, guaranteed</span>
+          <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-accent"></span>First booking in 7 days</span>
+          <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-accent"></span>One studio per market</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -983,7 +1253,7 @@
   <div class="max-w-7xl mx-auto px-6 lg:px-12">
     <div class="grid md:grid-cols-3 gap-8 mb-10">
       <div>
-        <span class="text-xl font-serif font-bold tracking-tight text-text-primary">
+        <span class="text-xl font-serif tracking-tight text-text-primary">
           ink<span class="text-accent">flow</span><span class="text-accent">.</span>
         </span>
         <p class="text-text-secondary mt-3 text-sm">Tattoo studio growth, done-for-you.</p>
@@ -1026,8 +1296,21 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  // Reveal on scroll
+  // Reveal on scroll, with stagger inside grids
   const revealEls = document.querySelectorAll('.reveal');
+  // Auto-stagger siblings inside same parent if no explicit data-d
+  const groupCounters = new WeakMap();
+  revealEls.forEach((el) => {
+    if (el.dataset.d !== undefined) {
+      el.style.setProperty('--rd', el.dataset.d + 'ms');
+      return;
+    }
+    const parent = el.parentElement;
+    const i = groupCounters.get(parent) ?? 0;
+    groupCounters.set(parent, i + 1);
+    el.style.setProperty('--rd', Math.min(i * 70, 400) + 'ms');
+  });
+
   const revealObs = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
       if (e.isIntersecting) {
@@ -1035,8 +1318,17 @@
         revealObs.unobserve(e.target);
       }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
   revealEls.forEach((el) => revealObs.observe(el));
+
+  // Subtle parallax on hero glow
+  const heroGlow = document.querySelector('.hero-glow');
+  if (heroGlow && window.matchMedia('(min-width: 768px)').matches) {
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y < 800) heroGlow.style.transform = `translateY(${y * 0.18}px)`;
+    }, { passive: true });
+  }
 
   // Counter animation
   const formatNumber = (n, format) => {
