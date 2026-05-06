@@ -400,31 +400,27 @@
     position: relative;
     display: inline-block;
     vertical-align: baseline;
-    color: #B91C1C;
+    color: #DC2626;
     font-style: italic;
-    transition: width 600ms cubic-bezier(0.5, 0, 0.1, 1);
+    transition: width 520ms cubic-bezier(0.5, 0, 0.1, 1);
     line-height: 1;
-  }
-  .cycle-word::after {
-    content: '';
-    position: absolute;
-    left: 0; right: 0; bottom: 0.05em;
-    height: 0.08em;
-    background: linear-gradient(90deg, transparent, rgba(185,28,28,0.5), transparent);
-    border-radius: 2px;
-    pointer-events: none;
+    overflow: hidden;
   }
   .cycle-measure {
     position: absolute;
     visibility: hidden;
     pointer-events: none;
-    white-space: nowrap;
     top: 0; left: 0;
+    white-space: nowrap;
+    height: 0;
+    overflow: hidden;
   }
   .cycle-measure > span {
-    display: block;
+    display: inline-block;
+    width: max-content;
     white-space: nowrap;
     font-style: italic;
+    margin-right: 24px;
   }
   .cycle-active {
     display: inline-block;
@@ -2025,7 +2021,8 @@
     function setWidth(i) {
       const el = measure.children[i];
       if (!el) return;
-      const w = el.getBoundingClientRect().width;
+      // +6px buffer for italic glyph overhang
+      const w = Math.ceil(el.getBoundingClientRect().width) + 6;
       wrap.style.width = w + 'px';
     }
 
