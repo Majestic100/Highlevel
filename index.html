@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Inkflow — Fill your chair with deposit-secured bookings</title>
+<meta name="description" content="Inkflow builds the ads, content, landing pages, and CRM that fill your tattoo studio's calendar with deposit-secured sessions. 30 booked sessions in 30 days, guaranteed." />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Inkflow — Tattoo studio growth, done-for-you" />
+<meta property="og:description" content="30 deposit-secured booked sessions in your first 30 days. Or we refund our fee AND cover your next month's ad spend." />
+<meta property="og:image" content="" /> <!-- PLACEHOLDER: OG share image URL -->
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- Tailwind via CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,700;1,500;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<!-- Tailwind config -->
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          'bg-primary': '#0A0A0A',
+          'bg-secondary': '#141414',
+          'surface': '#1C1C1C',
+          'border-subtle': '#2A2A2A',
+          'text-primary': '#F5F1EB',
+          'text-secondary': '#A8A29E',
+          'text-muted': '#6B6663',
+          'accent': '#B91C1C',
+          'accent-hover': '#DC2626',
+          'accent-deep': '#450A0A',
+        },
+        fontFamily: {
+          sans: ['Inter', 'system-ui', 'sans-serif'],
+          serif: ['Fraunces', 'Georgia', 'serif'],
+        },
+        letterSpacing: {
+          'label': '0.15em',
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: #0A0A0A;
+    color: #F5F1EB;
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Subtle film grain overlay */
+  .grain::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  .display-h1 { font-size: clamp(48px, 8vw, 96px); letter-spacing: -0.02em; line-height: 1.02; }
+  .display-h2 { font-size: clamp(32px, 5vw, 56px); letter-spacing: -0.015em; line-height: 1.08; }
+
+  .label {
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 12px;
+    font-weight: 500;
+    color: #A8A29E;
+  }
+
+  /* Reveal animation */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  /* Card hover lift */
+  .card-lift { transition: transform 250ms ease, border-color 250ms ease, background-color 250ms ease; }
+  .card-lift:hover { transform: translateY(-6px); border-color: #B91C1C; }
+
+  /* Button */
+  .btn-primary {
+    background: #B91C1C;
+    color: #fff;
+    padding: 16px 28px;
+    font-weight: 500;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 200ms ease, transform 200ms ease;
+    min-height: 48px;
+  }
+  .btn-primary:hover { background: #DC2626; transform: translateY(-1px); }
+  .btn-ghost {
+    border: 1px solid #2A2A2A;
+    color: #F5F1EB;
+    padding: 16px 28px;
+    font-weight: 500;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: border-color 200ms ease, color 200ms ease;
+    min-height: 48px;
+  }
+  .btn-ghost:hover { border-color: #B91C1C; color: #fff; }
+
+  /* Hero red glow */
+  .hero-glow {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(185, 28, 28, 0.18), transparent 60%),
+      radial-gradient(ellipse 50% 40% at 10% 90%, rgba(69, 10, 10, 0.4), transparent 60%);
+    pointer-events: none;
+  }
+
+  /* Nav blur on scroll */
+  .nav-scrolled {
+    background-color: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #2A2A2A;
+  }
+
+  /* Logo wall greyscale */
+  .logo-grey { filter: grayscale(1) brightness(0.7); transition: filter 250ms ease, transform 250ms ease; opacity: 0.7; }
+  .logo-grey:hover { filter: grayscale(0) brightness(1); opacity: 1; transform: scale(1.05); }
+
+  /* FAQ details marker */
+  details summary { list-style: none; cursor: pointer; }
+  details summary::-webkit-details-marker { display: none; }
+  details[open] .faq-icon { transform: rotate(45deg); }
+  .faq-icon { transition: transform 200ms ease; }
+
+  /* Calendar mockup blocks */
+  .cal-block { background: linear-gradient(135deg, #B91C1C, #7f1d1d); }
+
+  /* Mockup window chrome */
+  .window-chrome { background: #0e0e0e; border-bottom: 1px solid #2A2A2A; }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: #0A0A0A; }
+  ::-webkit-scrollbar-thumb { background: #2A2A2A; border-radius: 5px; }
+  ::-webkit-scrollbar-thumb:hover { background: #B91C1C; }
+
+  @media (max-width: 768px) {
+    .horiz-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  }
+</style>
+</head>
+<body class="grain">
+
+<!-- ============================================================ -->
+<!-- ===== NAV ===== -->
+<!-- ============================================================ -->
+<header id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 h-16 md:h-20 flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-2 group">
+      <!-- PLACEHOLDER: Logo file. Swap this SVG for the real Inkflow logo. -->
+      <span class="text-xl font-serif font-bold tracking-tight text-text-primary">
+        ink<span class="text-accent">flow</span><span class="text-accent">.</span>
+      </span>
+    </a>
+    <nav class="hidden md:flex items-center gap-8 text-sm text-text-secondary">
+      <a href="#results" class="hover:text-text-primary transition">Results</a>
+      <a href="#how" class="hover:text-text-primary transition">How it works</a>
+      <a href="#about" class="hover:text-text-primary transition">About</a>
+      <a href="#faq" class="hover:text-text-primary transition">FAQ</a>
+    </nav>
+    <a href="#book" class="btn-primary !py-2.5 !px-5 text-sm">Book a Call</a>
+  </div>
+</header>
+
+<main id="top" class="relative z-10">
+
+<!-- ============================================================ -->
+<!-- ===== HERO ===== -->
+<!-- ============================================================ -->
+<section class="relative overflow-hidden pt-32 md:pt-40 pb-20 md:pb-32">
+  <div class="hero-glow"></div>
+  <div class="relative max-w-7xl mx-auto px-6 lg:px-12">
+
+    <div class="max-w-4xl">
+      <span class="label inline-block mb-6">Tattoo studio growth, done-for-you</span>
+      <h1 class="display-h1 font-serif font-bold text-text-primary mb-6">
+        Your chair, fully booked.
+        <span class="block italic text-accent">Without you ever touching ad manager.</span>
+      </h1>
+      <p class="text-lg md:text-2xl text-text-secondary max-w-2xl mb-10 leading-relaxed">
+        We build the ads, content, and CRM system that fills your calendar with deposit-secured sessions. You tattoo. That's the deal.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-8">
+        <a href="#book" class="btn-primary">
+          Book Your Strategy Call
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#results" class="text-text-secondary hover:text-text-primary transition text-sm underline underline-offset-4 decoration-border-subtle hover:decoration-accent">
+          See how studios use us →
+        </a>
+      </div>
+
+      <p class="text-sm text-text-muted">
+        30 booked sessions in 30 days, guaranteed.
+        <a href="#guarantee" class="text-accent hover:text-accent-hover">Read the terms →</a>
+      </p>
+    </div>
+
+    <!-- Stat strip -->
+    <div class="mt-16 md:mt-24 pt-8 border-t border-border-subtle">
+      <div class="flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-text-secondary">
+        <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-accent"></span>50+ studios trust us</span>
+        <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-accent"></span>First booking within 7 days</span>
+        <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-accent"></span>One studio per market</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- ===== PROBLEM / AGITATION ===== -->
+<!-- ============================================================ -->
+<section class="bg-bg-secondary py-20 md:py-32 border-y border-border-subtle">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="max-w-3xl mb-16 reveal">
+      <span class="label">The problem</span>
+      <h2 class="display-h2 font-serif font-bold text-text-primary mt-4">
+        You're a tattoo artist.
+        <span class="italic text-text-secondary">Not a marketer.</span>
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-px bg-border-subtle border border-border-subtle">
+      <div class="bg-bg-secondary p-8 md:p-10 reveal">
+        <div class="text-accent text-sm font-medium mb-3">01</div>
+        <p class="text-lg md:text-xl text-text-primary leading-relaxed">
+          You know Instagram alone isn't cutting it anymore, but you don't have time to figure out Meta Ads Manager.
+        </p>
+      </div>
+      <div class="bg-bg-secondary p-8 md:p-10 reveal">
+        <div class="text-accent text-sm font-medium mb-3">02</div>
+        <p class="text-lg md:text-xl text-text-primary leading-relaxed">
+          You get DMs from people who seem serious, then ghost the moment you send pricing.
+        </p>
+      </div>
+      <div class="bg-bg-secondary p-8 md:p-10 reveal">
+        <div class="text-accent text-sm font-medium mb-3">03</div>
+        <p class="text-lg md:text-xl text-text-primary leading-relaxed">
+          Your slow days stay slow because you have no follow-up system in place.
+        </p>
+      </div>
+      <div class="bg-bg-secondary p-8 md:p-10 reveal">
+        <div class="text-accent text-sm font-medium mb-3">04</div>
+        <p class="text-lg md:text-xl text-text-primary leading-relaxed">
+          You've worked with an agency before that delivered leads. Not bookings.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- ===== THE OFFER (services) ===== -->
+<!-- ============================================================ -->
+<section class="py-20 md:py-32">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="max-w-3xl mb-16 reveal">
+      <span class="label">What we do</span>
+      <h2 class="display-h2 font-serif font-bold text-text-primary mt-4">
+        Here's what happens when
+        <span class="italic">we take over.</span>
+      </h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <!-- Meta Ads -->
+      <div class="card-lift bg-surface border border-border-subtle p-8 rounded-md reveal">
+        <svg class="w-7 h-7 text-accent mb-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
+        <h3 class="text-xl font-serif font-bold mb-2">Meta Ads</h3>
+        <p class="text-text-secondary">Campaigns, creatives, optimization. We test. You see the bookings land.</p>
+      </div>
+      <!-- Content -->
+      <div class="card-lift bg-surface border border-border-subtle p-8 rounded-md reveal">
+        <svg class="w-7 h-7 text-accent mb-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3V9z" fill="currentColor"/></svg>
+        <h3 class="text-xl font-serif font-bold mb-2">Content & Scripts</h3>
+        <p class="text-text-secondary">We script your videos and tell you exactly what to film. You hit record.</p>
+      </div>
+      <!-- Landing pages -->
+      <div class="card-lift bg-surface border border-border-subtle p-8 rounded-md reveal">
+        <svg class="w-7 h-7 text-accent mb-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        <h3 class="text-xl font-serif font-bold mb-2">Landing pages & funnels</h3>
+        <p class="text-text-secondary">Pages that turn cold visitors into deposit-paid bookings.</p>
+      </div>
+      <!-- CRM -->
+      <div class="card-lift bg-surface border border-border-subtle p-8 rounded-md reveal">
+        <svg class="w-7 h-7 text-accent mb-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16v6H4zM4 14h16v6H4z"/><circle cx="8" cy="7" r="1" fill="currentColor"/><circle cx="8" cy="17" r="1" fill="currentColor"/></svg>
+        <h3 class="text-xl font-serif font-bold mb-2">CRM system (GHL)</h3>
+        <p class="text-text-secondary">Automated follow-ups, reminders, the full lead-to-booking journey.</p>
+      </div>
+      <!-- Lead handling -->
+      <div class="card-lift bg-surface border border-border-subtle p-8 rounded-md reveal">
+        <svg class="w-7 h-7 text-accent mb-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a4 4 0 01-4 4H8l-5 3V5a4 4 0 014-4h10a4 4 0 014 4v10z"/></svg>
+        <h3 class="text-xl font-serif font-bold mb-2">Lead handling</h3>
+        <p class="text-text-secondary">We respond to your leads, qualify them, and book them in.</p>
+      </div>
+      <!-- TikTok -->
+      <div class="card-lift bg-surface border border-border-subtle p-8 rounded-md reveal">
+        <svg class="w-7 h-7 text-accent mb-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3v12.5a3.5 3.5 0 11-3.5-3.5M9 3h4a5 5 0 005 5"/></svg>
+        <h3 class="text-xl font-serif font-bold mb-2">TikTok Ads</h3>
+        <p class="text-text-secondary">For studios who want to reach the next generation before everyone else figures it out.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- ===== RESULTS & SOCIAL PROOF ===== -->
+<!-- ============================================================ -->
+<section id="results" class="bg-bg-secondary py-20 md:py-32 border-y border-border-subtle">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+    <!-- 5a. Big numbers -->
+    <div class="mb-20 md:mb-32">
+      <div class="max-w-3xl mb-12 reveal">
+        <span class="label">Receipts</span>
+        <h2 class="display-h2 font-serif font-bold text-text-primary mt-4">
+          The numbers do
+          <span class="italic">the talking.</span>
+        </h2>
+      </div>
+
+      <!-- PLACEHOLDER: Sinan to fill in actual revenue and bookings numbers -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-border-subtle border border-border-subtle">
+        <div class="bg-bg-secondary p-8 md:p-10 reveal">
+          <div class="font-serif font-bold text-5xl md:text-7xl text-text-primary mb-3 counter" data-target="50" data-suffix="+">0</div>
+          <div class="label">Studios trust Inkflow</div>
+        </div>
+        <div class="bg-bg-secondary p-8 md:p-10 reveal">
+          <div class="font-serif font-bold text-5xl md:text-7xl text-text-primary mb-3"><span class="text-accent">$</span><span class="counter" data-target="2400000" data-format="short">0</span></div>
+          <div class="label">Generated for clients (12 mo.)</div>
+        </div>
+        <div class="bg-bg-secondary p-8 md:p-10 reveal">
+          <div class="font-serif font-bold text-5xl md:text-7xl text-text-primary mb-3 counter" data-target="3200" data-format="comma">0</div>
+          <div class="label">Bookings booked (12 mo.)</div>
+        </div>
+        <div class="bg-bg-secondary p-8 md:p-10 reveal">
+          <div class="font-serif font-bold text-5xl md:text-7xl text-text-primary mb-3 counter" data-target="92" data-suffix="%">0</div>
+          <div class="label">Client retention after 6 months</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5b. Screenshot showcase mockups -->
+    <div class="mb-20 md:mb-32">
+      <div class="max-w-3xl mb-12 reveal">
+        <span class="label">The system, in action</span>
+        <h2 class="display-h2 font-serif font-bold text-text-primary mt-4">
+          What it actually
+          <span class="italic">looks like.</span>
+        </h2>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-6">
+
+        <!-- i. Meta Ads Manager mockup -->
+        <div class="card-lift bg-surface border border-border-subtle rounded-md overflow-hidden reveal">
+          <div class="window-chrome px-4 py-3 flex items-center gap-2">
+            <div class="flex gap-1.5">
+              <span class="w-3 h-3 rounded-full bg-[#3a3a3a]"></span>
+              <span class="w-3 h-3 rounded-full bg-[#3a3a3a]"></span>
+              <span class="w-3 h-3 rounded-full bg-[#3a3a3a]"></span>
+            </div>
+            <span class="ml-3 text-xs text-text-muted">Meta Business Suite · Ads Manager</span>
+          </div>
+          <div class="p-6 md:p-8">
+            <div class="flex items-start justify-between mb-6">
+              <div>
+                <div class="text-xs text-text-muted mb-1">Campaign · Sleeve Special</div>
+                <div class="text-text-primary font-medium">Studio Black Ink — March 2026</div>
+              </div>
+              <span class="text-xs px-2 py-1 rounded bg-accent-deep text-accent border border-accent/30">ACTIVE</span>
+            </div>
+
+            <div class="grid grid-cols-3 gap-4 mb-6">
+              <div>
+                <div class="text-xs text-text-muted">Cost per lead</div>
+                <div class="font-serif font-bold text-3xl text-text-primary">$4.20</div>
+              </div>
+              <div>
+                <div class="text-xs text-text-muted">ROAS</div>
+                <div class="font-serif font-bold text-3xl text-text-primary">6.8<span class="text-text-muted text-xl">x</span></div>
+              </div>
+              <div>
+                <div class="text-xs text-text-muted">Bookings</div>
+                <div class="font-serif font-bold text-3xl text-accent">142</div>
+              </div>
+            </div>
+
+            <!-- mini line chart -->
+            <svg viewBox="0 0 300 80" class="w-full h-20">
+              <defs>
+                <linearGradient id="grad" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#B91C1C" stop-opacity="0.4"/>
+                  <stop offset="100%" stop-color="#B91C1C" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path d="M0,60 L40,55 L80,50 L120,45 L160,38 L200,30 L240,22 L280,14 L300,10 L300,80 L0,80 Z" fill="url(#grad)"/>
+              <path d="M0,60 L40,55 L80,50 L120,45 L160,38 L200,30 L240,22 L280,14 L300,10" fill="none" stroke="#B91C1C" stroke-width="2"/>
+            </svg>
+            <div class="text-xs text-text-muted mt-2">Cost per lead, trending down 31 days</div>
+            <!-- PLACEHOLDER: Replace numbers/names with real campaign data -->
+          </div>
+        </div>
+
+        <!-- ii. GHL pipeline mockup -->
+        <div class="card-lift bg-surface border border-border-subtle rounded-md overflow-hidden reveal">
+          <div class="window-chrome px-4 py-3 flex items-center gap-2">
+            <div class="flex gap-1.5">
+              <span class="w-3 h-3 rounded-full bg-[#3a3a3a]"></span>
+              <span class="w-3 h-3 rounded-full bg-[#3a3a3a]"></span>
+              <span class="w-3 h-3 rounded-full bg-[#3a3a3a]"></span>
+            </div>
+            <span class="ml-3 text-xs text-text-muted">GHL · Pipeline</span>
+          </div>
+          <div class="p-4 md:p-6">
+            <div class="grid grid-cols-4 gap-2 text-xs">
+              <!-- Column -->
+              <div>
+                <div class="flex items-center justify-between mb-2 px-2">
+                  <span class="font-medium text-text-primary">New Lead</span>
+                  <span class="text-text-muted">12</span>
+                </div>
+                <div class="space-y-2">
+                  <div class="bg-bg-primary border border-border-subtle p-2 rounded"><div class="font-medium text-text-primary truncate">Marcus T.</div><div class="text-text-muted">2m ago</div><span class="inline-block mt-1 px-1.5 py-0.5 bg-accent-deep text-accent text-[10px] rounded">Sleeve</span></div>
+                  <div class="bg-bg-primary border border-border-subtle p-2 rounded"><div class="font-medium text-text-primary truncate">Jenna R.</div><div class="text-text-muted">8m ago</div><span class="inline-block mt-1 px-1.5 py-0.5 bg-blue-900/40 text-blue-300 text-[10px] rounded">Small</span></div>
+                  <div class="bg-bg-primary border border-border-subtle p-2 rounded"><div class="font-medium text-text-primary truncate">Diego A.</div><div class="text-text-muted">14m ago</div></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex items-center justify-between mb-2 px-2">
+                  <span class="font-medium text-text-primary">Contacted</span>
+                  <span class="text-text-muted">8</span>
+                </div>
+                <div class="space-y-2">
+                  <div class="bg-bg-primary border border-border-subtle p-2 rounded"><div class="font-medium text-text-primary truncate">Kayla P.</div><div class="text-text-muted">1h ago</div><span class="inline-block mt-1 px-1.5 py-0.5 bg-yellow-900/40 text-yellow-300 text-[10px] rounded">Quote sent</span></div>
+                  <div class="bg-bg-primary border border-border-subtle p-2 rounded"><div class="font-medium text-text-primary truncate">Tony G.</div><div class="text-text-muted">2h ago</div></div>
+                  <div class="bg-bg-primary border border-border-subtle p-2 rounded"><div class="font-medium text-text-primary truncate">Sara M.</div><div class="text-text-muted">3h ago</div></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex items-center justify-between mb-2 px-2">
+                  <span class="font-medium text-text-primary">Booked</span>
+                  <span class="text-accent">19</span>
+                </div>
+                <div class="space-y-2">
+                  <div class="bg-bg-primary border border-accent/40 p-2 rounded"><div class="font-medium text-text-primary truncate">Ricky H.</div><div class="text-text-muted">Apr 14</div><span class="inline-block mt-1 px-1.5 py-0.5 bg-accent-deep text-accent text-[10px] rounded">$200 dep</span></div>
+                  <div class="bg-bg-primary border border-accent/40 p-2 rounded"><div class="font-medium text-text-primary truncate">Mei L.</div><div class="text-text-muted">Apr 16</div><span class="inline-block mt-1 px-1.5 py-0.5 bg-accent-deep text-accent text-[10px] rounded">$300 dep</span></div>
+                  <div class="bg-bg-primary border border-accent/40 p-2 rounded"><div class="font-medium text-text-primary truncate">Jake F.</div><div class="text-text-muted">Apr 18</div></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex items-center justify-between mb-2 px-2">
+                  <span class="font-medium text-text-primary">Showed up</span>
+                  <span class="text-green-400">14</span>
+                </div>
+                <div class="space-y-2">
+                  <div class="bg-bg-primary border border-green-900/60 p-2 rounded"><div class="font-medium text-text-primary truncate">Anna K.</div><div class="text-text-muted">Apr 02</div><span class="inline-block mt-1 px-1.5 py-0.5 bg-green-900/40 text-green-300 text-[10px] rounded">✓ Paid</span></div>
+                  <div class="bg-bg-primary border border-green-900/60 p-2 rounded"><div class="font-medium text-text-primary truncate">Will B.</div><div class="text-text-muted">Apr 05</div></div>
+                  <div class="bg-bg-primary border border-green-900/60 p-2 rounded"><div class="font-medium text-text-primary truncate">Lin Z.</div><div class="text-text-muted">Apr 08</div></div>
+                </div>
+              </div>
+            </div>
+            <!-- PLACEHOLDER: Replace pipeline names with anonymized real data -->
+          </div>
+        </div>
+
+        <!-- iii. SMS thread mockup -->
+        <div class="card-lift bg-surface border border-border-subtle rounded-md overflow-hidden reveal">
+          <div class="window-chrome px-4 py-3 flex items-center gap-2">
+            <div class="flex gap-1.5">
+              <span class="w-3 h-3 rounded-full bg-[#3a3a3a]"></span>
+              <span class="w-3 h-3 rounded-full bg-[#3a3a3a]"></span>
+              <span class="w-3 h-3 rounded-full bg-[#3a3a3a]"></span>
+            </div>
+            <span class="ml-3 text-xs text-text-muted">SMS · Auto-qualify</span>
+          </div>
+          <div class="p-6 space-y-3 text-sm max-w-md mx-auto">
+            <div class="flex justify-end">
+              <div class="bg-blue-600 text-white px-4 py-2 rounded-2xl rounded-br-sm max-w-[75%]">Hey, looking to get a sleeve done.</div>
+            </div>
+            <div class="flex justify-start">
+              <div class="bg-[#2a2a2a] text-text-primary px-4 py-2 rounded-2xl rounded-bl-sm max-w-[75%]">Hey! Stoked you reached out. Quick few Qs so we can get you on the books. What size are we looking at, half or full sleeve?</div>
+            </div>
+            <div class="flex justify-end">
+              <div class="bg-blue-600 text-white px-4 py-2 rounded-2xl rounded-br-sm max-w-[75%]">Full. Black and grey, realism.</div>
+            </div>
+            <div class="flex justify-start">
+              <div class="bg-[#2a2a2a] text-text-primary px-4 py-2 rounded-2xl rounded-bl-sm max-w-[75%]">Perfect, that's our wheelhouse. Budget range you're working with?</div>
+            </div>
+            <div class="flex justify-end">
+              <div class="bg-blue-600 text-white px-4 py-2 rounded-2xl rounded-br-sm max-w-[75%]">$2-3k</div>
+            </div>
+            <div class="flex justify-start">
+              <div class="bg-[#2a2a2a] text-text-primary px-4 py-2 rounded-2xl rounded-bl-sm max-w-[75%]">You're a fit. Pick a consult time and lock it with a $100 deposit:<br/><span class="text-accent underline">studio.link/book</span></div>
+            </div>
+            <div class="text-center text-xs text-text-muted pt-2">Booked · $100 deposit collected</div>
+          </div>
+        </div>
+
+        <!-- iv. Calendar density mockup -->
+        <div class="card-lift bg-surface border border-border-subtle rounded-md overflow-hidden reveal">
+          <div class="window-chrome px-4 py-3 flex items-center gap-2">
+            <div class="flex gap-1.5">
+              <span class="w-3 h-3 rounded-full bg-[#3a3a3a]"></span>
+              <span class="w-3 h-3 rounded-full bg-[#3a3a3a]"></span>
+              <span class="w-3 h-3 rounded-full bg-[#3a3a3a]"></span>
+            </div>
+            <span class="ml-3 text-xs text-text-muted">Calendar · April</span>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center justify-between mb-4 text-xs">
+              <div>
+                <div class="text-text-muted">Before</div>
+                <div class="font-medium">April 2025</div>
+              </div>
+              <div class="text-text-muted">→</div>
+              <div class="text-right">
+                <div class="text-text-muted">After</div>
+                <div class="font-medium text-accent">April 2026</div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <!-- Before -->
+              <div>
+                <div class="grid grid-cols-7 gap-1 text-[10px] text-text-muted mb-1">
+                  <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+                </div>
+                <div class="grid grid-cols-7 gap-1">
+                  <!-- 28 cells, sparse -->
+                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block opacity-60 rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block opacity-60 rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
+
+                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block opacity-60 rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block opacity-60 rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
+
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block opacity-60 rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block opacity-60 rounded-sm"></span></div>
+
+                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block opacity-60 rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
+                </div>
+                <div class="text-xs text-text-muted mt-2">7 sessions</div>
+              </div>
+
+              <!-- After -->
+              <div>
+                <div class="grid grid-cols-7 gap-1 text-[10px] text-text-muted mb-1">
+                  <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+                </div>
+                <div class="grid grid-cols-7 gap-1">
+                  <!-- 28 cells, packed -->
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
+
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
+                </div>
+                <div class="text-xs text-accent mt-2 font-medium">47 sessions</div>
+              </div>
+            </div>
+            <p class="text-xs text-text-muted mt-4">Studio Black Ink — same shop, 12 months apart.</p>
+            <!-- PLACEHOLDER: Replace numbers/studio name with real data -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 5c. Logo wall -->
+    <div class="mb-20 md:mb-32">
+      <h3 class="label text-center mb-10 reveal">Studios we've worked with</h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 items-center gap-8 reveal">
+        <!-- PLACEHOLDER: Replace with real client logo files (SVG preferred) -->
+        <div class="logo-grey font-serif italic text-xl text-text-secondary text-center">Black Ink Co.</div>
+        <div class="logo-grey font-serif italic text-xl text-text-secondary text-center">Iron & Oak</div>
+        <div class="logo-grey font-serif italic text-xl text-text-secondary text-center">Saint Mara</div>
+        <div class="logo-grey font-serif italic text-xl text-text-secondary text-center">Hollow Hand</div>
+        <div class="logo-grey font-serif italic text-xl text-text-secondary text-center">Wildhorn Tattoo</div>
+        <div class="logo-grey font-serif italic text-xl text-text-secondary text-center">Crowmark</div>
+        <div class="logo-grey font-serif italic text-xl text-text-secondary text-center">Steel & Stone</div>
+        <div class="logo-grey font-serif italic text-xl text-text-secondary text-center">Northside Ink</div>
+      </div>
+    </div>
+
+    <!-- 5d. Testimonials -->
+    <div class="mb-20 md:mb-32">
+      <div class="max-w-3xl mb-12 reveal">
+        <span class="label">In their words</span>
+        <h2 class="display-h2 font-serif font-bold text-text-primary mt-4">
+          Real shops.
+          <span class="italic">Real numbers.</span>
+        </h2>
+      </div>
+
+      <!-- PLACEHOLDER: Sinan to insert real testimonial copy from real clients -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <article class="card-lift bg-surface border border-border-subtle p-8 rounded-md reveal">
+          <p class="font-serif text-xl leading-snug text-text-primary mb-6">"Went from chasing leads in the DMs to a calendar booked three weeks out. We finally said no to a walk-in last Saturday."</p>
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-11 h-11 rounded-full bg-gradient-to-br from-accent to-accent-deep flex items-center justify-center font-bold">JR</div>
+            <div>
+              <div class="font-medium">Jesse Romero</div>
+              <div class="text-sm text-text-muted">Owner, Black Ink Co. · Phoenix, AZ</div>
+            </div>
+          </div>
+          <ul class="text-sm text-text-secondary space-y-1 border-t border-border-subtle pt-4">
+            <li>· 32 new bookings in 30 days</li>
+            <li>· ROAS 6.2</li>
+            <li>· Booked 3 weeks out</li>
+          </ul>
+        </article>
+
+        <article class="card-lift bg-surface border border-border-subtle p-8 rounded-md reveal">
+          <p class="font-serif text-xl leading-snug text-text-primary mb-6">"I tried two other agencies. Got leads. Zero showed up. Inkflow's deposits filter the time-wasters before they ever hit my chair."</p>
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-11 h-11 rounded-full bg-gradient-to-br from-accent to-accent-deep flex items-center justify-center font-bold">AK</div>
+            <div>
+              <div class="font-medium">Anna Kovac</div>
+              <div class="text-sm text-text-muted">Solo artist · Austin, TX</div>
+            </div>
+          </div>
+          <ul class="text-sm text-text-secondary space-y-1 border-t border-border-subtle pt-4">
+            <li>· $4.20 cost per lead</li>
+            <li>· 87% show-up rate</li>
+            <li>· $18k revenue in month one</li>
+          </ul>
+        </article>
+
+        <article class="card-lift bg-surface border border-border-subtle p-8 rounded-md reveal">
+          <p class="font-serif text-xl leading-snug text-text-primary mb-6">"I was burnt out doing my own marketing. Now I just film what they tell me to film, and walk into a packed shop."</p>
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-11 h-11 rounded-full bg-gradient-to-br from-accent to-accent-deep flex items-center justify-center font-bold">DM</div>
+            <div>
+              <div class="font-medium">Diego Marín</div>
+              <div class="text-sm text-text-muted">Owner, Hollow Hand · Brooklyn, NY</div>
+            </div>
+          </div>
+          <ul class="text-sm text-text-secondary space-y-1 border-t border-border-subtle pt-4">
+            <li>· 1.2M views on scripted reels</li>
+            <li>· 47 deposit-secured bookings/month</li>
+            <li>· Hired a second artist within 90 days</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+
+    <!-- 5e. Mini case study -->
+    <div>
+      <div class="bg-bg-primary border border-border-subtle rounded-md p-8 md:p-12 reveal">
+        <div class="grid md:grid-cols-3 gap-10 items-center">
+          <div class="md:col-span-2">
+            <span class="label">Case study</span>
+            <h3 class="display-h2 font-serif font-bold text-text-primary mt-3 mb-5">Wildhorn Tattoo, Denver, CO</h3>
+            <p class="text-text-secondary mb-5">Shop with two artists, doing maybe 12 bookings a month. Mostly Instagram referrals. Slow weeks, no follow-up, deposit-skip rate near 40%.</p>
+            <p class="text-text-primary font-medium mb-3">What we did:</p>
+            <ul class="text-text-secondary space-y-2">
+              <li>· Built a Meta Ads funnel around their black-and-grey realism style</li>
+              <li>· Wrote 12 short-form video scripts the artists filmed themselves</li>
+              <li>· Set up GHL pipeline with deposit-locked booking flow</li>
+              <li>· Took over lead replies inside 5 minutes of any inbound</li>
+              <li>· Weekly creative refresh based on cost-per-lead data</li>
+            </ul>
+          </div>
+          <div class="md:border-l md:border-border-subtle md:pl-10">
+            <div class="font-serif font-bold text-5xl md:text-6xl text-accent leading-none mb-3">12 → 47</div>
+            <p class="text-text-secondary">deposit-secured bookings per month, 90 days in.</p>
+            <!-- PLACEHOLDER: Replace with verified case-study numbers -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- ===== HOW IT WORKS ===== -->
+<!-- ============================================================ -->
+<section id="how" class="py-20 md:py-32">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="max-w-3xl mb-16 reveal">
+      <span class="label">The process</span>
+      <h2 class="display-h2 font-serif font-bold text-text-primary mt-4">
+        Here's what working with us
+        <span class="italic">looks like.</span>
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-4 gap-6 md:gap-4 relative">
+      <!-- horizontal line on desktop -->
+      <div class="hidden md:block absolute top-8 left-0 right-0 h-px bg-border-subtle"></div>
+
+      <div class="relative reveal">
+        <div class="w-16 h-16 rounded-full bg-bg-primary border border-accent flex items-center justify-center font-serif font-bold text-2xl text-accent mb-5 relative z-10">1</div>
+        <h3 class="text-xl font-serif font-bold mb-2">Free strategy call</h3>
+        <p class="text-text-secondary">20 minutes. We learn about your studio and what you actually need.</p>
+      </div>
+      <div class="relative reveal">
+        <div class="w-16 h-16 rounded-full bg-bg-primary border border-accent flex items-center justify-center font-serif font-bold text-2xl text-accent mb-5 relative z-10">2</div>
+        <h3 class="text-xl font-serif font-bold mb-2">We build the system</h3>
+        <p class="text-text-secondary">Ads, landing page, GHL, scripts. Live in 14 days.</p>
+      </div>
+      <div class="relative reveal">
+        <div class="w-16 h-16 rounded-full bg-bg-primary border border-accent flex items-center justify-center font-serif font-bold text-2xl text-accent mb-5 relative z-10">3</div>
+        <h3 class="text-xl font-serif font-bold mb-2">We run traffic and handle leads</h3>
+        <p class="text-text-secondary">Deposit-secured bookings start landing in your calendar.</p>
+      </div>
+      <div class="relative reveal">
+        <div class="w-16 h-16 rounded-full bg-bg-primary border border-accent flex items-center justify-center font-serif font-bold text-2xl text-accent mb-5 relative z-10">4</div>
+        <h3 class="text-xl font-serif font-bold mb-2">We optimize weekly</h3>
+        <p class="text-text-secondary">You get a weekly update. We adjust based on what the numbers say.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- ===== ABOUT SINAN ===== -->
+<!-- ============================================================ -->
+<section id="about" class="bg-bg-secondary py-20 md:py-32 border-y border-border-subtle">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+
+      <div class="order-2 md:order-1 reveal">
+        <!-- PLACEHOLDER: Photo of Sinan -->
+        <div class="aspect-[4/5] bg-surface border border-border-subtle rounded-md flex items-center justify-center text-text-muted">
+          [ Photo of Sinan ]
+        </div>
+      </div>
+
+      <div class="order-1 md:order-2 reveal">
+        <span class="label">Who runs this</span>
+        <h2 class="display-h2 font-serif font-bold text-text-primary mt-4 mb-6">
+          Hi, I'm Sinan.
+        </h2>
+        <!-- PLACEHOLDER: Sinan's personal intro. 100-150 words. Where he's from, why he started Inkflow, why specifically the tattoo industry, what he cares about. Keep it short and authentic. Not pompous. -->
+        <div class="space-y-4 text-text-secondary text-lg leading-relaxed">
+          <p>I run Inkflow out of Aarhus, Denmark, and we serve studios across the US.</p>
+          <p>I started this because I watched too many talented artists make less than they should, while their booking calendars sat half-empty. Not because they aren't great. Because nobody was running their marketing like a business.</p>
+          <p>I'm not a tattoo artist. I'm the guy who takes the marketing off your plate so you can stay at the chair. That's it. That's the job.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- ===== GUARANTEE ===== -->
+<!-- ============================================================ -->
+<section id="guarantee" class="py-20 md:py-32 relative overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 50% at 50% 30%, rgba(185,28,28,0.18), transparent 60%);"></div>
+  <div class="relative max-w-5xl mx-auto px-6 lg:px-12">
+    <div class="border-2 border-accent rounded-md p-8 md:p-14 bg-bg-primary/60 backdrop-blur-sm reveal">
+      <span class="label text-accent">The guarantee</span>
+      <h2 class="display-h2 font-serif font-bold text-text-primary mt-4 mb-8">
+        Our 30-Day
+        <span class="italic">Booking Guarantee.</span>
+      </h2>
+
+      <div class="space-y-6 text-lg md:text-xl leading-relaxed text-text-primary mb-8">
+        <p><strong class="text-accent">30 deposit-secured booked sessions in your first 30 days.</strong> If we miss it, we refund our fee AND cover your next month's ad spend.</p>
+        <p class="text-text-secondary">Most studios see their first deposit-secured booking within 7 days of launch. The 30-day guarantee just makes the rest official.</p>
+        <p class="text-text-secondary">We only work with <strong class="text-text-primary">one studio per market.</strong> Once you're in, your direct competitors can't get the same system from us.</p>
+      </div>
+
+      <ul class="grid sm:grid-cols-3 gap-4 text-sm text-text-secondary border-t border-border-subtle pt-6">
+        <li class="flex items-center gap-2"><span class="text-accent">✓</span> No long-term contracts</li>
+        <li class="flex items-center gap-2"><span class="text-accent">✓</span> Month-to-month</li>
+        <li class="flex items-center gap-2"><span class="text-accent">✓</span> Cancel anytime</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- ===== FAQ ===== -->
+<!-- ============================================================ -->
+<section id="faq" class="bg-bg-secondary py-20 md:py-32 border-y border-border-subtle">
+  <div class="max-w-4xl mx-auto px-6 lg:px-12">
+    <div class="mb-12 reveal">
+      <span class="label">FAQ</span>
+      <h2 class="display-h2 font-serif font-bold text-text-primary mt-4">
+        Questions we get
+        <span class="italic">all the time.</span>
+      </h2>
+    </div>
+
+    <!-- PLACEHOLDER: Sinan to refine final FAQ answers -->
+    <div class="space-y-3">
+      <details class="group bg-surface border border-border-subtle rounded-md p-6 hover:border-accent/40 transition reveal">
+        <summary class="flex items-center justify-between gap-6">
+          <span class="text-lg font-medium">What does this cost?</span>
+          <span class="faq-icon text-accent text-2xl">+</span>
+        </summary>
+        <p class="text-text-secondary mt-4 leading-relaxed">It depends on your market and the package. We talk pricing on the strategy call once we know what you actually need. No surprises.</p>
+      </details>
+
+      <details class="group bg-surface border border-border-subtle rounded-md p-6 hover:border-accent/40 transition reveal">
+        <summary class="flex items-center justify-between gap-6">
+          <span class="text-lg font-medium">How fast will I see results?</span>
+          <span class="faq-icon text-accent text-2xl">+</span>
+        </summary>
+        <p class="text-text-secondary mt-4 leading-relaxed">Most studios get their first deposit-secured booking within 7 days of launch. Our guarantee covers you for 30 booked sessions in 30 days.</p>
+      </details>
+
+      <details class="group bg-surface border border-border-subtle rounded-md p-6 hover:border-accent/40 transition reveal">
+        <summary class="flex items-center justify-between gap-6">
+          <span class="text-lg font-medium">What if ads don't work for my studio?</span>
+          <span class="faq-icon text-accent text-2xl">+</span>
+        </summary>
+        <p class="text-text-secondary mt-4 leading-relaxed">If we miss the 30-in-30 guarantee, we refund our fee and cover your next month's ad spend. We don't take on a studio we don't think we can win for.</p>
+      </details>
+
+      <details class="group bg-surface border border-border-subtle rounded-md p-6 hover:border-accent/40 transition reveal">
+        <summary class="flex items-center justify-between gap-6">
+          <span class="text-lg font-medium">How much do I have to do myself?</span>
+          <span class="faq-icon text-accent text-2xl">+</span>
+        </summary>
+        <p class="text-text-secondary mt-4 leading-relaxed">Film a few short videos a week from scripts we write. That's it. We handle ads, landing page, CRM, and the lead replies.</p>
+      </details>
+
+      <details class="group bg-surface border border-border-subtle rounded-md p-6 hover:border-accent/40 transition reveal">
+        <summary class="flex items-center justify-between gap-6">
+          <span class="text-lg font-medium">Do I have to sign a long contract?</span>
+          <span class="faq-icon text-accent text-2xl">+</span>
+        </summary>
+        <p class="text-text-secondary mt-4 leading-relaxed">No. Month-to-month. Cancel anytime.</p>
+      </details>
+
+      <details class="group bg-surface border border-border-subtle rounded-md p-6 hover:border-accent/40 transition reveal">
+        <summary class="flex items-center justify-between gap-6">
+          <span class="text-lg font-medium">What makes you different from other agencies?</span>
+          <span class="faq-icon text-accent text-2xl">+</span>
+        </summary>
+        <p class="text-text-secondary mt-4 leading-relaxed">We only work with tattoo studios. We measure deposit-secured bookings, not lead form fills. And we lock you in as the only studio in your market.</p>
+      </details>
+
+      <details class="group bg-surface border border-border-subtle rounded-md p-6 hover:border-accent/40 transition reveal">
+        <summary class="flex items-center justify-between gap-6">
+          <span class="text-lg font-medium">Where are you based?</span>
+          <span class="faq-icon text-accent text-2xl">+</span>
+        </summary>
+        <p class="text-text-secondary mt-4 leading-relaxed">Aarhus, Denmark. We serve tattoo studios across the United States. The internet doesn't care where the office is, the bookings sure don't.</p>
+      </details>
+
+      <details class="group bg-surface border border-border-subtle rounded-md p-6 hover:border-accent/40 transition reveal">
+        <summary class="flex items-center justify-between gap-6">
+          <span class="text-lg font-medium">Do you work with solo artists or just shops?</span>
+          <span class="faq-icon text-accent text-2xl">+</span>
+        </summary>
+        <p class="text-text-secondary mt-4 leading-relaxed">Both. As long as you've got a chair, a portfolio, and you can take deposits, we can fill your calendar.</p>
+      </details>
+
+      <details class="group bg-surface border border-border-subtle rounded-md p-6 hover:border-accent/40 transition reveal">
+        <summary class="flex items-center justify-between gap-6">
+          <span class="text-lg font-medium">What if my market is already taken by another studio?</span>
+          <span class="faq-icon text-accent text-2xl">+</span>
+        </summary>
+        <p class="text-text-secondary mt-4 leading-relaxed">Then we won't take you on. One studio per market is a hard rule. Book a call anyway, we'll tell you straight.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- ===== FINAL CTA ===== -->
+<!-- ============================================================ -->
+<section id="book" class="py-24 md:py-40 relative overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(185,28,28,0.22), transparent 60%);"></div>
+  <div class="relative max-w-4xl mx-auto px-6 lg:px-12 text-center">
+    <span class="label reveal">Last call</span>
+    <h2 class="display-h1 font-serif font-bold text-text-primary mt-4 mb-6 reveal">
+      Ready to fill
+      <span class="italic text-accent">your chair?</span>
+    </h2>
+    <p class="text-lg md:text-xl text-text-secondary max-w-2xl mx-auto mb-10 reveal">
+      Book 20 minutes. We'll talk about your studio. You'll walk away with a clear picture of what it takes to fill your calendar. No commitment.
+    </p>
+
+    <div class="flex justify-center mb-6 reveal">
+      <a href="#" class="btn-primary text-base">
+        Book Your Strategy Call
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <!-- PLACEHOLDER: Embed Cal.com, Calendly, or GHL booking widget here, or link the button above to external booking page -->
+
+    <p class="text-sm text-text-muted reveal">
+      Or email us directly:
+      <a href="mailto:hello@inkflow.co" class="text-accent hover:text-accent-hover">hello@inkflow.co</a>
+      <!-- PLACEHOLDER: Real email address -->
+    </p>
+
+    <div class="mt-12 pt-10 border-t border-border-subtle flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm text-text-secondary reveal">
+      <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-accent"></span>30 booked sessions in 30 days, guaranteed</span>
+      <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-accent"></span>First booking within 7 days</span>
+      <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-accent"></span>One studio per market</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================ -->
+<!-- ===== FOOTER ===== -->
+<!-- ============================================================ -->
+<footer class="bg-bg-secondary border-t border-border-subtle py-12 relative z-10">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="grid md:grid-cols-3 gap-8 mb-10">
+      <div>
+        <span class="text-xl font-serif font-bold tracking-tight text-text-primary">
+          ink<span class="text-accent">flow</span><span class="text-accent">.</span>
+        </span>
+        <p class="text-text-secondary mt-3 text-sm">Tattoo studio growth, done-for-you.</p>
+      </div>
+      <div class="text-sm text-text-secondary">
+        <p class="text-text-primary font-medium mb-2">Contact</p>
+        <p><a href="mailto:hello@inkflow.co" class="hover:text-accent">hello@inkflow.co</a></p>
+        <p>Aarhus, Denmark · Serving the US</p>
+        <!-- PLACEHOLDER: Final email + any phone number -->
+      </div>
+      <div class="text-sm text-text-secondary">
+        <p class="text-text-primary font-medium mb-2">Follow</p>
+        <div class="flex gap-4">
+          <a href="#" class="hover:text-accent">Instagram</a>
+          <a href="#" class="hover:text-accent">LinkedIn</a>
+          <!-- PLACEHOLDER: Real social URLs -->
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4 pt-6 border-t border-border-subtle text-xs text-text-muted">
+      <span>© <span id="year"></span> Inkflow. All rights reserved.</span>
+      <span>One studio per market.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================ -->
+<!-- ===== JS ===== -->
+<!-- ============================================================ -->
+<script>
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Sticky nav background on scroll
+  const nav = document.getElementById('nav');
+  const onScroll = () => {
+    if (window.scrollY > 80) nav.classList.add('nav-scrolled');
+    else nav.classList.remove('nav-scrolled');
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        revealObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach((el) => revealObs.observe(el));
+
+  // Counter animation
+  const formatNumber = (n, format) => {
+    if (format === 'short') {
+      if (n >= 1_000_000) return (n / 1_000_000).toFixed(n % 1_000_000 === 0 ? 0 : 1) + 'M';
+      if (n >= 1_000) return (n / 1_000).toFixed(0) + 'K';
+      return String(n);
+    }
+    if (format === 'comma') return n.toLocaleString('en-US');
+    return String(n);
+  };
+
+  const animateCounter = (el) => {
+    const target = parseInt(el.dataset.target, 10);
+    const suffix = el.dataset.suffix || '';
+    const format = el.dataset.format || '';
+    const duration = 1600;
+    const start = performance.now();
+    const tick = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const value = Math.floor(eased * target);
+      el.textContent = formatNumber(value, format) + suffix;
+      if (t < 1) requestAnimationFrame(tick);
+      else el.textContent = formatNumber(target, format) + suffix;
+    };
+    requestAnimationFrame(tick);
+  };
+
+  const counters = document.querySelectorAll('.counter');
+  const counterObs = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        animateCounter(e.target);
+        counterObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  counters.forEach((c) => counterObs.observe(c));
+</script>
+
+</body>
+</html>
