@@ -1145,57 +1145,45 @@
 <!-- ============================================================ -->
 <section id="about" class="bg-bg-secondary py-20 md:py-32 border-y border-border-subtle">
   <div class="max-w-7xl mx-auto px-6 lg:px-12">
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+    <div class="reveal mb-10 lg:mb-14">
+      <span class="label">Who runs this</span>
+      <h2 class="display-h2 font-serif text-text-primary mt-4">Hi, I'm Sinan.</h2>
+    </div>
 
-      <div class="order-2 lg:order-1 lg:col-span-5 reveal flex justify-center lg:justify-end">
-        <div class="relative w-full max-w-[340px] lg:max-w-[380px] py-12 lg:py-16">
+    <div class="grid lg:grid-cols-12 gap-8 lg:gap-12">
 
-          <!-- Decorative back layer: vertical accent line + dot pattern -->
-          <div class="absolute inset-y-0 left-1/2 -ml-px w-px bg-gradient-to-b from-transparent via-accent/30 to-transparent pointer-events-none"></div>
-          <div class="absolute -inset-2 rounded-md pointer-events-none" style="background: radial-gradient(ellipse at 30% 40%, rgba(220,38,38,0.06), transparent 60%);"></div>
-
-          <!-- Main portrait -->
-          <div class="relative aspect-[4/5] bg-surface border border-border-subtle rounded-md overflow-hidden flex items-center justify-center text-text-muted shadow-2xl">
-            [ Sinan, main shot ]
-          </div>
-
-          <!-- Secondary photo, overlapping bottom-left, slight tilt -->
-          <div class="absolute -left-6 -bottom-2 w-[44%] aspect-[4/3] bg-surface border-2 border-border-subtle rounded-md overflow-hidden flex items-center justify-center text-text-muted text-[10px] shadow-xl" style="transform: rotate(-4deg);">
-            [ Behind the scenes ]
-          </div>
-
-          <!-- Circular stamp/badge, top-right, tilt -->
-          <div class="absolute -top-2 -right-4 w-24 h-24 lg:w-28 lg:h-28 pointer-events-none" style="transform: rotate(8deg);">
-            <svg viewBox="0 0 100 100" class="w-full h-full">
-              <defs>
-                <path id="badge-circle" d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0" />
-              </defs>
-              <circle cx="50" cy="50" r="46" fill="rgba(6,6,6,0.85)" stroke="#DC2626" stroke-width="1.5"/>
-              <circle cx="50" cy="50" r="38" fill="none" stroke="#DC2626" stroke-width="0.5" opacity="0.4"/>
-              <text fill="#DC2626" font-family="Inter, sans-serif" font-size="7.5" font-weight="600" letter-spacing="2">
-                <textPath href="#badge-circle" startOffset="0">FOUNDER · INKFLOW · EST 2024 · </textPath>
-              </text>
-              <g transform="translate(50, 50)">
-                <circle r="2" fill="#DC2626"/>
-                <line x1="-12" y1="0" x2="-4" y2="0" stroke="#DC2626" stroke-width="1"/>
-                <line x1="4" y1="0" x2="12" y2="0" stroke="#DC2626" stroke-width="1"/>
-              </g>
-            </svg>
-          </div>
-
+      <!-- Photo column -->
+      <div class="lg:col-span-4 reveal">
+        <!-- PLACEHOLDER: Main photo of Sinan (4:5 portrait) -->
+        <div class="aspect-[4/5] bg-surface border border-border-subtle rounded-md overflow-hidden flex items-center justify-center text-text-muted">
+          [ Sinan, main shot ]
+        </div>
+        <div class="mt-3 flex items-center justify-between text-[11px] uppercase tracking-label">
+          <span class="text-text-primary">Sinan</span>
+          <span class="text-text-muted">Founder · Inkflow</span>
         </div>
       </div>
 
-      <div class="order-1 lg:order-2 lg:col-span-7 reveal">
-        <span class="label">Who runs this</span>
-        <h2 class="display-h2 font-serif text-text-primary mt-4 mb-6">
-          Hi, I'm Sinan.
-        </h2>
-        <!-- PLACEHOLDER: Sinan's personal intro. 100-150 words. Where he's from, why he started Inkflow, why specifically the tattoo industry, what he cares about. Keep it short and authentic. Not pompous. -->
-        <div class="space-y-4 text-text-secondary text-lg leading-relaxed">
-          <p>I run Inkflow out of Aarhus, Denmark, and we serve studios across the US.</p>
-          <p>I started this because I watched too many talented artists make less than they should, while their booking calendars sat half-empty. Not because they aren't great. Because nobody was running their marketing like a business.</p>
-          <p>I'm not a tattoo artist. I'm the guy who takes the marketing off your plate so you can stay at the chair. That's it. That's the job.</p>
+      <!-- Pull quote (centerpiece) -->
+      <div class="lg:col-span-8 reveal flex flex-col justify-center">
+        <div class="relative">
+          <!-- Big italic pull quote -->
+          <p class="font-serif italic text-text-primary leading-[1.05] tracking-[-0.02em]" style="font-size: clamp(32px, 4.4vw, 56px); font-weight: 600;">
+            <span class="text-accent text-5xl lg:text-6xl font-normal mr-1 align-top leading-none">"</span>I'm not a tattoo artist. I'm the guy who <span class="not-italic font-bold text-accent">takes the marketing off your plate</span> so you can stay at the chair. That's it. That's the job.<span class="text-accent text-3xl ml-1 align-baseline">"</span>
+          </p>
+        </div>
+
+        <!-- Body paragraphs, smaller, in two columns on large screens -->
+        <div class="mt-10 lg:mt-12 grid sm:grid-cols-2 gap-6 lg:gap-10 text-text-secondary leading-relaxed">
+          <p>I started Inkflow because I watched too many talented artists make less than they should while their booking calendars sat half-empty. Not because they weren't great. Because nobody was running their marketing like a business.</p>
+          <p>So I built the whole machine for them. Ads, content scripts, booking system, every DM answered. The artists tattoo. The shop fills. That's the deal.</p>
+        </div>
+
+        <!-- Signature line -->
+        <div class="mt-8 lg:mt-10 flex items-center gap-4">
+          <span class="block w-10 h-px bg-accent"></span>
+          <span class="font-serif italic text-2xl text-text-primary">Sinan</span>
+          <span class="text-xs uppercase tracking-label text-text-muted ml-auto">2024 — present</span>
         </div>
       </div>
 
