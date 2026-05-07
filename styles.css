@@ -343,6 +343,12 @@
     flex-shrink: 0;
   }
   .tp-star svg { width: 13px; height: 13px; }
+  .trustpilot-stars-img {
+    height: 22px;
+    width: auto;
+    flex-shrink: 0;
+    display: block;
+  }
   .trustpilot-text {
     font-size: 13px;
     color: #A8A29E;
