@@ -605,7 +605,7 @@
     transition: background 200ms ease, transform 200ms ease;
     min-height: 48px;
   }
-  .btn-primary:hover { background: #DC2626; transform: translateY(-1px); }
+  .btn-primary:hover { background: #DC2626; }
   /* Larger primary on desktop (used in hero) */
   @media (min-width: 768px) {
     .btn-primary-lg {
