@@ -1,14 +1,10 @@
 <!-- ==========================================================================
      Inkflow landing — Embed block (HTML + JS), self-contained
-     Pair with styles.css. Paste this entire block into your builder's
-     "Custom HTML" / "Embed code" field.
-     No Tailwind CDN required: all classes are pre-compiled into styles.css.
+     Pair with styles.css. No Tailwind CDN required.
      ========================================================================== -->
 
-<!-- 1. Stylesheet (or inline the contents of styles.css inside <style>...</style>) -->
 <link rel="stylesheet" href="styles.css" />
 
-<!-- 2. Page markup (content + final JS at the bottom) -->
 
 <!-- ============================================================ -->
 <!-- ===== NAV ===== -->
@@ -54,7 +50,7 @@
         </p>
 
         <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6 reveal" data-d="240">
-          <a href="#book" class="btn-primary btn-primary-lg group">
+          <a href="#book" class="btn-primary btn-primary-lg group" data-magnetic>
             Book Your Strategy Call
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="transition-transform group-hover:translate-x-1"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
           </a>
@@ -497,9 +493,9 @@
                 <stop offset="100%" stop-color="#B91C1C" stop-opacity="0"/>
               </linearGradient>
             </defs>
-            <path d="M0,60 Q40,55 60,42 T110,22 T180,8 L200,4 L200,80 L0,80 Z" fill="url(#chart-grad)"/>
-            <path d="M0,60 Q40,55 60,42 T110,22 T180,8 L200,4" fill="none" stroke="#DC2626" stroke-width="1.5"/>
-            <circle cx="200" cy="4" r="3" fill="#DC2626"/>
+            <path class="draw-fill" d="M0,60 Q40,55 60,42 T110,22 T180,8 L200,4 L200,80 L0,80 Z" fill="url(#chart-grad)"/>
+            <path class="draw-path" d="M0,60 Q40,55 60,42 T110,22 T180,8 L200,4" fill="none" stroke="#DC2626" stroke-width="1.5" stroke-linecap="round"/>
+            <circle class="draw-fill" cx="200" cy="4" r="3" fill="#DC2626"/>
           </svg>
         </div>
         <div class="bento-num">01</div>
@@ -1192,7 +1188,7 @@
     </div>
 
     <!-- Featured guarantee card (full width) -->
-    <article class="mb-5 card-lift bg-bg-primary border-2 border-accent rounded-md p-8 md:p-12 relative overflow-hidden reveal">
+    <article class="mb-5 card-lift guarantee-pulse bg-bg-primary border-2 border-accent rounded-md p-8 md:p-12 relative overflow-hidden reveal">
       <div class="absolute -top-20 -right-20 w-96 h-96 rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(185,28,28,0.22), transparent 70%);"></div>
       <div class="grid md:grid-cols-12 gap-8 items-start relative">
         <div class="md:col-span-5">
@@ -1539,6 +1535,81 @@
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
   revealEls.forEach((el) => revealObs.observe(el));
+
+  // Scroll progress bar at the top
+  (function () {
+    const bar = document.createElement('div');
+    bar.className = 'scroll-progress';
+    document.body.appendChild(bar);
+    let raf = 0;
+    const update = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = max > 0 ? Math.min(100, (window.scrollY / max) * 100) : 0;
+      bar.style.width = pct + '%';
+      raf = 0;
+    };
+    window.addEventListener('scroll', () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    }, { passive: true });
+    update();
+  })();
+
+  // Magnetic effect on data-magnetic buttons (desktop)
+  (function () {
+    if (!window.matchMedia('(min-width: 768px)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    document.querySelectorAll('[data-magnetic]').forEach((btn) => {
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        btn.style.transform = `translate(${x * 0.18}px, ${y * 0.22}px)`;
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = '';
+      });
+    });
+  })();
+
+  // 3D tilt on bento cards (desktop)
+  (function () {
+    if (!window.matchMedia('(min-width: 1024px)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    document.querySelectorAll('.bento-card').forEach((card) => {
+      let raf = 0, mx = 0, my = 0;
+      const apply = () => {
+        const rect = card.getBoundingClientRect();
+        const x = (mx - rect.left) / rect.width;
+        const y = (my - rect.top) / rect.height;
+        const rotY = (x - 0.5) * 5;
+        const rotX = (0.5 - y) * 5;
+        card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-3px)`;
+        raf = 0;
+      };
+      card.addEventListener('mousemove', (e) => {
+        mx = e.clientX; my = e.clientY;
+        if (!raf) raf = requestAnimationFrame(apply);
+        card.classList.add('tilting');
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+        card.classList.remove('tilting');
+      });
+    });
+  })();
+
+  // Add .in-view to bento cards when scrolled into view (drives SVG path draw)
+  (function () {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.25 });
+    document.querySelectorAll('.bento-card').forEach((c) => obs.observe(c));
+  })();
 
   // Cursor-tracking spotlight on hero
   (function () {
