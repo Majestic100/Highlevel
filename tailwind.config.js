@@ -4,20 +4,21 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'bg-primary': '#0A0A0A',
-        'bg-secondary': '#141414',
-        'surface': '#1C1C1C',
-        'border-subtle': '#2A2A2A',
+        'bg-primary': '#060606',
+        'bg-secondary': '#0F0D0B',
+        'surface': '#161412',
+        'border-subtle': '#2A2420',
         'text-primary': '#F5F1EB',
         'text-secondary': '#A8A29E',
         'text-muted': '#6B6663',
-        'accent': '#B91C1C',
-        'accent-hover': '#DC2626',
+        'accent': '#DC2626',
+        'accent-hover': '#EF4444',
         'accent-deep': '#450A0A',
+          'ember': '#D97706',
       },
       fontFamily: {
-        sans: ['Geist', 'system-ui', 'sans-serif'],
-        serif: ['"Instrument Serif"', 'Georgia', 'serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        serif: ['"Bricolage Grotesque"', 'system-ui', 'sans-serif'],
       },
       letterSpacing: {
         'label': '0.15em',
