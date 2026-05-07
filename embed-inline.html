@@ -766,7 +766,27 @@
   .faq-icon { transition: transform 200ms ease; }
 
   /* Calendar mockup blocks */
-  .cal-block { background: linear-gradient(135deg, #B91C1C, #7f1d1d); }
+  /* Calendar mockup blocks — varied for realism */
+  .cal-block {
+    position: relative;
+    background: linear-gradient(135deg, #B91C1C, #7f1d1d);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.12),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.18);
+  }
+  .cal-block::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.28);
+    border-radius: 2px 0 0 2px;
+  }
+  .cal-block.b2 { background: linear-gradient(135deg, #DC2626, #991b1b); }
+  .cal-block.b3 { background: linear-gradient(135deg, #7f1d1d, #450a0a); }
+  .cal-block.b4 { background: linear-gradient(135deg, #c2410c, #7c2d12); }
+  .cal-block.b4::before { background: rgba(254, 215, 170, 0.35); }
+  .cal-block.b5 { background: linear-gradient(135deg, #991b1b, #7f1d1d); }
 
   /* Mockup window chrome */
   .window-chrome { background: #0e0e0e; border-bottom: 1px solid #2A2A2A; }
@@ -1602,34 +1622,34 @@
                 <div class="grid grid-cols-7 gap-1">
                   <!-- 28 cells, packed -->
                   <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b2 rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b3 rounded-sm"></span></div>
                   <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b2 rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b4 rounded-sm"></span></div>
                   <div class="aspect-square bg-bg-primary rounded-sm"></div>
 
                   <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b3 rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b2 rounded-sm"></span></div>
                   <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b5 rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b2 rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b3 rounded-sm"></span></div>
 
                   <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b4 rounded-sm"></span></div>
                   <div class="aspect-square bg-bg-primary rounded-sm"></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b2 rounded-sm"></span></div>
                   <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b5 rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b3 rounded-sm"></span></div>
 
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b2 rounded-sm"></span></div>
                   <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b4 rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b2 rounded-sm"></span></div>
+                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b5 rounded-sm"></span></div>
                   <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
                   <div class="aspect-square bg-bg-primary rounded-sm"></div>
                 </div>
