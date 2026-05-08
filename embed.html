@@ -1185,76 +1185,116 @@
       </p>
     </div>
 
-    <!-- Featured guarantee card (full width) -->
-    <article class="mb-5 card-lift guarantee-pulse bg-bg-primary border-2 border-accent rounded-md p-8 md:p-12 relative overflow-hidden reveal">
+    <!-- Featured guarantee card (tighter) -->
+    <article class="mb-10 md:mb-12 card-lift guarantee-pulse bg-bg-primary border-2 border-accent rounded-md p-8 md:p-12 relative overflow-hidden reveal">
       <div class="absolute -top-20 -right-20 w-96 h-96 rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(220,38,38,0.22), transparent 70%);"></div>
-      <div class="grid md:grid-cols-12 gap-8 items-start relative">
-        <div class="md:col-span-5">
-          <h3 class="font-serif text-3xl md:text-5xl text-text-primary mt-3 leading-tight">30 deposit-secured bookings in your first 30 days. Or it's on us.</h3>
-        </div>
+      <div class="grid md:grid-cols-12 gap-8 items-center relative">
         <div class="md:col-span-7">
-          <p class="text-text-secondary text-lg leading-relaxed mb-5">If we miss the number, we refund our entire fee and pay for your next month's ad spend out of our pocket. No fine print, no excuses.</p>
-          <p class="text-text-secondary text-lg leading-relaxed mb-6">We can offer this because we vet every shop before we sign them. If we don't think we can hit the number for your studio, we won't take you on. Simple as that.</p>
-          <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-text-secondary pt-5 border-t border-border-subtle">
-            <span class="flex items-center gap-2"><span class="text-accent">✓</span> No long-term contracts</span>
-            <span class="flex items-center gap-2"><span class="text-accent">✓</span> Month-to-month</span>
-            <span class="flex items-center gap-2"><span class="text-accent">✓</span> Cancel anytime</span>
-          </div>
+          <h3 class="font-serif text-3xl md:text-5xl text-text-primary leading-tight">30 bookings in 30 days. Or it's on us.</h3>
+          <p class="text-text-secondary text-lg leading-relaxed mt-4">Miss the number? We refund the fee and cover your next month of ad spend.</p>
+        </div>
+        <div class="md:col-span-5 md:border-l md:border-border-subtle md:pl-8">
+          <ul class="space-y-3 text-text-secondary">
+            <li class="flex items-center gap-3"><span class="text-accent text-lg">✓</span> No long-term contracts</li>
+            <li class="flex items-center gap-3"><span class="text-accent text-lg">✓</span> Month-to-month</li>
+            <li class="flex items-center gap-3"><span class="text-accent text-lg">✓</span> Cancel anytime</li>
+          </ul>
         </div>
       </div>
     </article>
 
-    <!-- 5 supporting reasons -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+    <!-- Comparison: Other agencies vs Inkflow -->
+    <div class="reveal">
+      <div class="grid md:grid-cols-2 rounded-md overflow-hidden border border-border-subtle">
 
-      <article class="card-lift bg-surface border border-border-subtle rounded-md p-7 reveal">
-        <div class="text-accent mb-5">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2" stroke-linecap="round"/></svg>
+        <!-- Left: Other agencies -->
+        <div class="bg-bg-primary p-7 md:p-10">
+          <div class="text-xs uppercase tracking-label text-text-muted mb-6">Other agencies</div>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3 text-text-secondary">
+              <span class="text-text-muted mt-0.5 flex-shrink-0">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round"/></svg>
+              </span>
+              <span>Three weeks of "researching your brand"</span>
+            </li>
+            <li class="flex items-start gap-3 text-text-secondary">
+              <span class="text-text-muted mt-0.5 flex-shrink-0">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round"/></svg>
+              </span>
+              <span>Lists of "interested people" who never show up</span>
+            </li>
+            <li class="flex items-start gap-3 text-text-secondary">
+              <span class="text-text-muted mt-0.5 flex-shrink-0">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round"/></svg>
+              </span>
+              <span>You answer your own DMs at midnight</span>
+            </li>
+            <li class="flex items-start gap-3 text-text-secondary">
+              <span class="text-text-muted mt-0.5 flex-shrink-0">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round"/></svg>
+              </span>
+              <span>Same playbook running for your competitor</span>
+            </li>
+            <li class="flex items-start gap-3 text-text-secondary">
+              <span class="text-text-muted mt-0.5 flex-shrink-0">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round"/></svg>
+              </span>
+              <span>Sells to anyone with a credit card</span>
+            </li>
+            <li class="flex items-start gap-3 text-text-secondary">
+              <span class="text-text-muted mt-0.5 flex-shrink-0">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round"/></svg>
+              </span>
+              <span>Hands you a course and wishes you luck</span>
+            </li>
+          </ul>
         </div>
-        <h3 class="text-xl font-serif mb-3">You see bookings in days, not months</h3>
-        <p class="text-text-secondary leading-relaxed">Most agencies spend three weeks "researching your brand" before they run a single ad. We've worked with 50+ shops, the playbook is dialed in. We build everything inside your first week so the calendar starts filling before the next bill is due.</p>
-      </article>
 
-      <article class="card-lift bg-surface border border-border-subtle rounded-md p-7 reveal">
-        <div class="text-accent mb-5">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l9 4-9 4-9-4 9-4zM3 10l9 4 9-4M3 14l9 4 9-4"/></svg>
+        <!-- Right: Inkflow -->
+        <div class="bg-surface p-7 md:p-10 relative md:border-l border-t md:border-t-0 border-border-subtle">
+          <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent"></div>
+          <div class="text-xs uppercase tracking-label text-accent mb-6">Inkflow</div>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3 text-text-primary font-medium">
+              <span class="text-accent mt-0.5 flex-shrink-0">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span>Live in 7 days. First booking inside the first week.</span>
+            </li>
+            <li class="flex items-start gap-3 text-text-primary font-medium">
+              <span class="text-accent mt-0.5 flex-shrink-0">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span>Real bookings, deposit paid before they walk in.</span>
+            </li>
+            <li class="flex items-start gap-3 text-text-primary font-medium">
+              <span class="text-accent mt-0.5 flex-shrink-0">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span>We answer every DM, day and night.</span>
+            </li>
+            <li class="flex items-start gap-3 text-text-primary font-medium">
+              <span class="text-accent mt-0.5 flex-shrink-0">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span>One studio per market. Your competitors locked out.</span>
+            </li>
+            <li class="flex items-start gap-3 text-text-primary font-medium">
+              <span class="text-accent mt-0.5 flex-shrink-0">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span>Tattoo shops only. That's the whole list.</span>
+            </li>
+            <li class="flex items-start gap-3 text-text-primary font-medium">
+              <span class="text-accent mt-0.5 flex-shrink-0">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span>We run the entire system. You stay at the chair.</span>
+            </li>
+          </ul>
         </div>
-        <h3 class="text-xl font-serif mb-3">Your market locked, competitors locked out</h3>
-        <p class="text-text-secondary leading-relaxed">The moment you sign, we shut the door on every other shop in your city. Same market, same area, same style? We turn them away, no matter what they offer. The system, the angles, the scripts that fill your chair stay yours alone.</p>
-      </article>
 
-      <article class="card-lift bg-surface border border-border-subtle rounded-md p-7 reveal">
-        <div class="text-accent mb-5">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a4 4 0 01-4 4H8l-5 3V7a4 4 0 014-4h10a4 4 0 014 4v8z"/></svg>
-        </div>
-        <h3 class="text-xl font-serif mb-3">You stop chasing. We start replying.</h3>
-        <p class="text-text-secondary leading-relaxed">Every inquiry gets answered fast, the way you'd answer it yourself. We pre-qualify, talk size, talk style, talk budget, and only push the serious ones to your calendar with a deposit attached. You stop opening your phone to a wall of unread DMs.</p>
-      </article>
-
-      <article class="card-lift bg-surface border border-border-subtle rounded-md p-7 reveal">
-        <div class="text-accent mb-5">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
-        </div>
-        <h3 class="text-xl font-serif mb-3">Tattoo shops only. That's the whole list.</h3>
-        <p class="text-text-secondary leading-relaxed">Most agencies will sell to anyone with a credit card. Dentists, gyms, e-commerce, you name it. We won't. Every script we write, every ad angle, every follow-up message is built around how a tattoo client actually buys. The playbook only works in one industry, and it's yours.</p>
-      </article>
-
-      <article class="card-lift bg-surface border border-border-subtle rounded-md p-7 reveal">
-        <div class="text-accent mb-5">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 13l4 4L19 7"/></svg>
-        </div>
-        <h3 class="text-xl font-serif mb-3">We measure what fills your chair</h3>
-        <p class="text-text-secondary leading-relaxed">Other agencies hand you a list of "interested people" and call it a win. We don't. Our weekly report shows one number that matters: deposit-paid bookings on your calendar. If the chair isn't filling, we haven't done our job and we'll say so first.</p>
-      </article>
-
-      <article class="card-lift bg-surface border border-border-subtle rounded-md p-7 reveal">
-        <div class="text-accent mb-5">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h.01M15 9h.01M9 13h.01M15 13h.01M9 17h.01M15 17h.01"/></svg>
-        </div>
-        <h3 class="text-xl font-serif mb-3">Done with you, not "coaching" you</h3>
-        <p class="text-text-secondary leading-relaxed">We don't sell you a course and wish you luck. We run the ads, build the funnel, write the scripts, reply to every message. You film a few videos a week and stay at the chair. The work is on us. The booked sessions are yours.</p>
-      </article>
-
+      </div>
     </div>
 
   </div>
