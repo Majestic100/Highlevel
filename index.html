@@ -2361,61 +2361,94 @@
   <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 70% 60% at 50% 30%, rgba(220,38,38,0.22), transparent 60%);"></div>
   <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 50% 40% at 50% 80%, rgba(220,38,38,0.10), transparent 60%);"></div>
 
-  <div class="relative max-w-3xl mx-auto px-6 lg:px-8">
+  <div class="relative max-w-7xl mx-auto px-6 lg:px-12">
 
-    <!-- Centered pitch -->
-    <div class="text-center mb-10 md:mb-14 reveal">
-      <h2 class="display-h1 font-serif text-text-primary mb-5">
-        Ready to fill
-        <span class="italic text-accent">your chair?</span>
-      </h2>
-      <p class="text-lg text-text-secondary max-w-xl mx-auto">
-        Pick a 30-minute slot below. We'll talk about your studio, your style, and what's stopping the calendar from filling.
-      </p>
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
 
-      <!-- Quick info row (replaces the bullets) -->
-      <div class="mt-6 flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-sm text-text-muted">
-        <span class="flex items-center gap-1.5"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2" stroke-linecap="round"/></svg>30 min</span>
-        <span class="flex items-center gap-1.5"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg>Your timezone</span>
-        <span class="flex items-center gap-1.5"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>For studios ready to grow</span>
-      </div>
-    </div>
+      <!-- Left: pitch + bullets -->
+      <div class="lg:col-span-7 reveal">
+        <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl text-text-primary leading-[1.1] mb-7">
+          Apply for a free
+          <span class="italic text-accent">growth review</span>
+          by
+          <span class="inline-flex items-center gap-2 align-middle">
+            <img src="assets/about/sinan.jpg" alt="" class="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover border border-border-subtle inline-block" />
+            <span>Sinan</span>
+          </span>
+        </h2>
 
-    <!-- Booking widget, centered, with halo and frame -->
-    <div class="relative reveal max-w-[560px] mx-auto">
-      <!-- Strong red halo behind -->
-      <div class="absolute -inset-6 rounded-3xl pointer-events-none" style="background: radial-gradient(ellipse at center, rgba(220,38,38,0.28), transparent 70%); filter: blur(20px);"></div>
+        <p class="text-text-secondary text-lg leading-relaxed mb-8 max-w-2xl">
+          Pick a slot on the right and we'll dig into your shop's current setup. We'll show you exactly where your <strong class="text-text-primary">bookings are leaking</strong> and walk you through what it would take to <strong class="text-text-primary">fill your chair with deposit-paid clients</strong>. No template advice, no fluff.
+        </p>
 
-      <div class="relative bg-surface border border-border-subtle rounded-2xl p-2 md:p-3 shadow-2xl overflow-hidden">
-        <!-- Top accent line -->
-        <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent pointer-events-none z-10"></div>
+        <ul class="space-y-4 mb-8 max-w-2xl">
+          <li class="flex items-start gap-3 text-text-secondary">
+            <span class="text-accent mt-0.5 flex-shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span>Live audit of how your shop is bringing in clients today.</span>
+          </li>
+          <li class="flex items-start gap-3 text-text-secondary">
+            <span class="text-accent mt-0.5 flex-shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span>Specific plan to fill your chair with deposit-paid bookings.</span>
+          </li>
+          <li class="flex items-start gap-3 text-text-secondary">
+            <span class="text-accent mt-0.5 flex-shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span>Review of your ads, your content, and how your DMs are handled right now.</span>
+          </li>
+          <li class="flex items-start gap-3 text-text-secondary">
+            <span class="text-accent mt-0.5 flex-shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span>Walkthrough of how we'd grow <em class="text-text-primary not-italic font-medium">your</em> shop specifically. Not a template.</span>
+          </li>
+          <li class="flex items-start gap-3 text-text-secondary">
+            <span class="text-accent mt-0.5 flex-shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span><strong class="text-text-primary">Bonus:</strong> quick scan of what other shops in your area are running for ads, so you see what you're up against.</span>
+          </li>
+        </ul>
 
-        <div id="booking-embed" class="w-full rounded-xl overflow-hidden bg-bg-primary" style="min-height: 620px;">
-          <!-- BOOKING EMBED START -->
-          <iframe
-            src="https://api.leadconnectorhq.com/widget/booking/76PH7OblZ2v5KWBuYtnR"
-            style="width: 100%; min-height: 620px; border: 0; overflow: hidden; display: block;"
-            scrolling="no"
-            id="76PH7OblZ2v5KWBuYtnR_1778159600529"
-          ></iframe>
-          <!-- BOOKING EMBED END -->
+        <!-- Highlighted requirement callout -->
+        <div class="rounded-lg px-5 py-4 mb-8 max-w-2xl" style="background: rgba(220,38,38,0.08); border: 1px solid rgba(220,38,38,0.30);">
+          <p class="text-text-primary text-sm leading-relaxed">
+            We require you to <strong>own or work at a real tattoo shop</strong>, with at least one chair and a portfolio worth showing. This isn't for hobbyists or weekend artists.
+          </p>
+        </div>
+
+        <p class="text-text-secondary leading-relaxed mb-8 max-w-2xl">
+          Pick a time on the right and we'll take it from there. If it's clearly not a fit after a quick look at your shop, we'll cancel before the call so neither of us wastes time.
+        </p>
+
+        <!-- WhatsApp fallback -->
+        <div class="flex flex-wrap items-center gap-4">
+          <span class="text-text-muted text-sm">Can't find a suitable time?</span>
+          <a href="https://wa.me/4524341144" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-white text-sm font-medium hover:opacity-90 transition shadow-lg" style="background: #25D366;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A7.85 7.85 0 0012.05 4a7.94 7.94 0 00-6.88 11.93L4 20l4.18-1.1a7.93 7.93 0 003.79.97h.01a7.94 7.94 0 005.62-13.55zm-5.55 12.21h-.01a6.6 6.6 0 01-3.36-.92l-.24-.14-2.48.65.66-2.42-.16-.25a6.6 6.6 0 011.05-8.32 6.55 6.55 0 014.66-1.93 6.55 6.55 0 014.65 11.18 6.55 6.55 0 01-4.65 1.93zm3.62-4.94c-.2-.1-1.18-.58-1.36-.65-.18-.07-.31-.1-.45.1s-.51.65-.63.78c-.12.14-.23.16-.43.05a5.46 5.46 0 01-1.6-1c-.59-.52-.99-1.18-1.1-1.37-.12-.2-.01-.3.09-.4.09-.09.2-.23.3-.35.1-.11.13-.2.2-.33.07-.13.04-.25-.02-.35-.05-.1-.45-1.08-.61-1.48-.16-.39-.32-.34-.45-.34l-.38-.01c-.13 0-.34.05-.52.25-.18.2-.69.67-.69 1.65 0 .97.7 1.91.8 2.04.1.13 1.4 2.13 3.38 2.99.47.2.84.32 1.13.42.48.15.91.13 1.25.08.38-.06 1.18-.48 1.34-.94.16-.47.16-.86.12-.95-.05-.08-.18-.13-.38-.23z"/></svg>
+            +45 24 34 11 44
+          </a>
         </div>
       </div>
-    </div>
 
-    <!-- Contact alternatives below the widget -->
-    <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-sm text-text-muted reveal">
-      <a href="mailto:hello@inkflow.co" class="flex items-center gap-2 hover:text-accent transition group">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="group-hover:scale-110 transition-transform"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6" stroke-linecap="round"/></svg>
-        <span>hello@inkflow.co</span>
-      </a>
-      <span class="hidden sm:inline w-1 h-1 rounded-full bg-text-muted/40"></span>
-      <a href="https://wa.me/4524341144" target="_blank" rel="noopener" class="flex items-center gap-2 hover:text-accent transition group">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="group-hover:scale-110 transition-transform"><path d="M17.6 6.32A7.85 7.85 0 0012.05 4a7.94 7.94 0 00-6.88 11.93L4 20l4.18-1.1a7.93 7.93 0 003.79.97h.01a7.94 7.94 0 005.62-13.55zm-5.55 12.21h-.01a6.6 6.6 0 01-3.36-.92l-.24-.14-2.48.65.66-2.42-.16-.25a6.6 6.6 0 011.05-8.32 6.55 6.55 0 014.66-1.93 6.55 6.55 0 014.65 11.18 6.55 6.55 0 01-4.65 1.93zm3.62-4.94c-.2-.1-1.18-.58-1.36-.65-.18-.07-.31-.1-.45.1s-.51.65-.63.78c-.12.14-.23.16-.43.05a5.46 5.46 0 01-1.6-1c-.59-.52-.99-1.18-1.1-1.37-.12-.2-.01-.3.09-.4.09-.09.2-.23.3-.35.1-.11.13-.2.2-.33.07-.13.04-.25-.02-.35-.05-.1-.45-1.08-.61-1.48-.16-.39-.32-.34-.45-.34l-.38-.01c-.13 0-.34.05-.52.25-.18.2-.69.67-.69 1.65 0 .97.7 1.91.8 2.04.1.13 1.4 2.13 3.38 2.99.47.2.84.32 1.13.42.48.15.91.13 1.25.08.38-.06 1.18-.48 1.34-.94.16-.47.16-.86.12-.95-.05-.08-.18-.13-.38-.23z"/></svg>
-        <span>WhatsApp +45 24 34 11 44</span>
-      </a>
-    </div>
+      <!-- Right: booking calendar -->
+      <div class="lg:col-span-5 reveal">
+        <div class="relative max-w-[480px] mx-auto lg:max-w-none">
+          <!-- Red halo glow behind -->
+          <div class="absolute -inset-5 rounded-3xl pointer-events-none" style="background: radial-gradient(ellipse at center, rgba(220,38,38,0.28), transparent 70%); filter: blur(20px);"></div>
 
+          <div class="relative bg-surface border border-border-subtle rounded-2xl p-2 md:p-3 shadow-2xl overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent pointer-events-none z-10"></div>
+
+            <div id="booking-embed" class="w-full rounded-xl overflow-hidden bg-bg-primary" style="min-height: 620px;">
+              <!-- BOOKING EMBED START -->
+              <iframe
+                src="https://api.leadconnectorhq.com/widget/booking/76PH7OblZ2v5KWBuYtnR"
+                style="width: 100%; min-height: 620px; border: 0; overflow: hidden; display: block;"
+                scrolling="no"
+                id="76PH7OblZ2v5KWBuYtnR_1778159600529"
+              ></iframe>
+              <!-- BOOKING EMBED END -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
