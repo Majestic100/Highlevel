@@ -587,6 +587,67 @@
     .faq-row summary { gap: 12px; }
   }
 
+  /* Light-themed mockup cards (Ads / Pipeline / SMS / Calendar) */
+  .mock-light {
+    background: #FAFAF7 !important;
+    border-color: #E8E2D6 !important;
+    color: #1A1612;
+    box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.6);
+  }
+  .mock-light .window-chrome {
+    background: #F0EBE0 !important;
+    border-bottom: 1px solid #E0DACA !important;
+  }
+  .mock-light .window-chrome .text-text-muted { color: #5C544D !important; }
+  .mock-light .window-chrome span.bg-\[\#3a3a3a\] { background: #C4BDB0 !important; }
+
+  .mock-light .text-text-primary { color: #1A1612 !important; }
+  .mock-light .text-text-secondary { color: #5C544D !important; }
+  .mock-light .text-text-muted { color: #8A827A !important; }
+  .mock-light .border-border-subtle { border-color: #E8E2D6 !important; }
+  .mock-light .bg-bg-primary { background: #FFFFFF !important; }
+
+  .mock-light .bg-\[\#2A2420\],
+  .mock-light .bg-\[\#2a2a2a\] {
+    background: #ECE7DC !important;
+    color: #1A1612 !important;
+  }
+
+  .mock-light .bg-accent-deep { background: rgba(220, 38, 38, 0.10) !important; }
+  .mock-light .bg-blue-900\/40 { background: rgba(37, 99, 235, 0.10) !important; }
+  .mock-light .bg-yellow-900\/40 { background: rgba(202, 138, 4, 0.14) !important; }
+  .mock-light .bg-green-900\/40 { background: rgba(22, 163, 74, 0.14) !important; }
+  .mock-light .text-yellow-300 { color: #B45309 !important; }
+  .mock-light .text-green-300 { color: #15803D !important; }
+  .mock-light .text-blue-300 { color: #1D4ED8 !important; }
+  .mock-light .text-green-400 { color: #16A34A !important; }
+  .mock-light .border-accent\/40 { border-color: rgba(220, 38, 38, 0.5) !important; }
+  .mock-light .border-green-900\/60 { border-color: rgba(22, 163, 74, 0.45) !important; }
+
+  /* Green ACTIVE badge */
+  .mock-active-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: rgba(34, 197, 94, 0.14);
+    border: 1px solid rgba(34, 197, 94, 0.4);
+    color: #15803D;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  .mock-active-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #22C55E;
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+    animation: pulse-soft 2s ease-in-out infinite;
+  }
+
   /* Liquid-glass credibility pills (hero) */
   .liquid-pill {
     position: relative;
@@ -1566,7 +1627,7 @@
       <div class="grid lg:grid-cols-2 gap-6">
 
         <!-- i. Ads dashboard mockup -->
-        <div class="card-lift bg-surface border border-border-subtle rounded-md overflow-hidden reveal">
+        <div class="card-lift mock-light border rounded-md overflow-hidden reveal">
           <div class="window-chrome px-4 py-3 flex items-center gap-2">
             <div class="flex gap-1.5">
               <span class="w-3 h-3 rounded-full bg-[#3a3a3a]"></span>
@@ -1581,7 +1642,7 @@
                 <div class="text-xs text-text-muted mb-1">Campaign · Sleeve Special</div>
                 <div class="text-text-primary font-medium">Studio Black Ink — March 2026</div>
               </div>
-              <span class="text-xs px-2 py-1 rounded bg-accent-deep text-accent border border-accent/30">ACTIVE</span>
+              <span class="mock-active-badge"><span class="mock-active-dot"></span>ACTIVE</span>
             </div>
 
             <div class="grid grid-cols-3 gap-4 mb-6">
@@ -1616,7 +1677,7 @@
         </div>
 
         <!-- ii. Booking pipeline mockup -->
-        <div class="card-lift bg-surface border border-border-subtle rounded-md overflow-hidden reveal">
+        <div class="card-lift mock-light border rounded-md overflow-hidden reveal">
           <div class="window-chrome px-4 py-3 flex items-center gap-2">
             <div class="flex gap-1.5">
               <span class="w-3 h-3 rounded-full bg-[#3a3a3a]"></span>
@@ -1678,7 +1739,7 @@
         </div>
 
         <!-- iii. SMS thread mockup -->
-        <div class="card-lift bg-surface border border-border-subtle rounded-md overflow-hidden reveal">
+        <div class="card-lift mock-light border rounded-md overflow-hidden reveal">
           <div class="window-chrome px-4 py-3 flex items-center gap-2">
             <div class="flex gap-1.5">
               <span class="w-3 h-3 rounded-full bg-[#3a3a3a]"></span>
@@ -1711,7 +1772,7 @@
         </div>
 
         <!-- iv. Calendar density mockup -->
-        <div class="card-lift bg-surface border border-border-subtle rounded-md overflow-hidden reveal">
+        <div class="card-lift mock-light border rounded-md overflow-hidden reveal">
           <div class="window-chrome px-4 py-3 flex items-center gap-2">
             <div class="flex gap-1.5">
               <span class="w-3 h-3 rounded-full bg-[#3a3a3a]"></span>
