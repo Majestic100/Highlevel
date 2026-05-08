@@ -461,6 +461,38 @@
     transform: translate(-2px, 2px);
   }
 
+  /* Brand-logo badges in upper-right of bento cards */
+  .brand-badges {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 2;
+  }
+  .brand-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    transition: transform 240ms ease, background 240ms ease;
+  }
+  .brand-badge svg {
+    width: 16px;
+    height: 16px;
+  }
+  .bento-card:hover .brand-badge {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-1px);
+  }
+
   /* FAQ rows (centered, numbered) */
   .faq-row {
     border-bottom: 1px solid #2A2420;

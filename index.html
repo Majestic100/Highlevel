@@ -510,6 +510,38 @@
     transform: translate(-2px, 2px);
   }
 
+  /* Brand-logo badges in upper-right of bento cards */
+  .brand-badges {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 2;
+  }
+  .brand-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    transition: transform 240ms ease, background 240ms ease;
+  }
+  .brand-badge svg {
+    width: 16px;
+    height: 16px;
+  }
+  .bento-card:hover .brand-badge {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-1px);
+  }
+
   /* FAQ rows (centered, numbered) */
   .faq-row {
     border-bottom: 1px solid #2A2420;
@@ -1512,6 +1544,43 @@
             <circle class="draw-fill" cx="200" cy="4" r="3" fill="#EF4444"/>
           </svg>
         </div>
+        <!-- Brand badges -->
+        <div class="brand-badges">
+          <span class="brand-badge" aria-label="Meta">
+            <svg viewBox="0 0 287 191" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="meta-grad-1" x1="13.87%" y1="55.45%" x2="89.78%" y2="44.34%">
+                  <stop offset="0%" stop-color="#0867DF"/>
+                  <stop offset="45%" stop-color="#0668E1"/>
+                  <stop offset="86%" stop-color="#0064E0"/>
+                </linearGradient>
+                <linearGradient id="meta-grad-2" x1="54.32%" y1="82.7%" x2="54.32%" y2="39.91%">
+                  <stop offset="0%" stop-color="#0064DF"/>
+                  <stop offset="100%" stop-color="#0064E0"/>
+                </linearGradient>
+              </defs>
+              <path d="M31.06 126c0 11 2.41 19.41 5.56 24.51A19 19 0 0 0 53.19 160c8.1 0 15.51-2 29.79-21.76 11.44-15.83 24.92-38 34-51.93l15.36-23.6c10.67-16.39 23-34.61 37.18-47C181.07 5.6 193.54 0 206.09 0c21.07 0 41.14 12.21 56.5 35.11C279.41 60.18 287.56 91.77 287.56 124.36c0 19.38-3.82 33.62-10.32 44.87C271 180.13 258.72 191 238.13 191v-31c17.63 0 22.03-16.2 22.03-34.74 0-26.42-6.16-55.74-19.73-76.69-9.63-14.86-22.11-23.94-35.84-23.94-14.85 0-26.8 11.2-40.23 31.17-7.14 10.61-14.47 23.54-22.7 38.13l-9.06 16.05c-18.2 32.27-22.81 39.62-31.91 51.75C84.74 183 71.12 191 53.19 191c-21.27 0-34.72-9.21-43.05-23.09C3.34 156.6 0 141.85 0 125.04l31.06.96Z" fill="#0081FB"/>
+              <path d="M24.49 37.3C38.73 15.35 59.28 0 82.85 0c13.65 0 27.22 4.04 41.39 15.61 15.5 12.65 32.02 33.48 52.63 67.81l7.39 12.32c17.84 29.72 27.99 45.01 33.93 52.22 7.64 9.26 12.99 12.04 19.94 12.04 17.63 0 22.03-16.2 22.03-34.74l27.4-.86c0 19.38-3.82 33.62-10.32 44.87C271 180.13 258.72 191 238.13 191c-12.8 0-24.14-2.78-36.68-14.61-9.64-9.08-20.91-25.21-29.58-39.71L146.08 93.6c-12.94-21.62-24.81-37.74-31.68-45.04-7.39-7.85-16.89-17.33-32.05-17.33-12.27 0-22.69 8.61-31.41 21.78L24.49 37.3Z" fill="url(#meta-grad-1)"/>
+              <path d="M82.35 31.23c-12.27 0-22.69 8.61-31.41 21.78C38.61 71.62 31.06 99.34 31.06 126c0 11 2.41 19.41 5.56 24.51l-26.48 17.39C3.34 156.6 0 141.85 0 125.04 0 94.25 8.46 62.16 24.49 37.3 38.73 15.35 59.28 0 82.85 0L82.35 31.23Z" fill="url(#meta-grad-2)"/>
+            </svg>
+          </span>
+          <span class="brand-badge" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="ig-grad" cx="30%" cy="107%" r="150%">
+                  <stop offset="0%" stop-color="#FDF497"/>
+                  <stop offset="5%" stop-color="#FDF497"/>
+                  <stop offset="45%" stop-color="#FD5949"/>
+                  <stop offset="60%" stop-color="#D6249F"/>
+                  <stop offset="90%" stop-color="#285AEB"/>
+                </radialGradient>
+              </defs>
+              <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#ig-grad)"/>
+              <circle cx="12" cy="12" r="4" fill="none" stroke="#fff" stroke-width="1.6"/>
+              <circle cx="17.5" cy="6.5" r="1.1" fill="#fff"/>
+            </svg>
+          </span>
+        </div>
         <div class="bento-num">01</div>
         <h3 class="bento-title">Facebook & Instagram Ads</h3>
         <p class="bento-body">We run the ads that bring real clients in, on the platforms they already scroll. We test, tweak, and double down on what works. You just see the bookings land.</p>
@@ -1568,6 +1637,15 @@
 
       <!-- 06 TikTok Ads (small) -->
       <article class="bento-card reveal">
+        <div class="brand-badges">
+          <span class="brand-badge" aria-label="TikTok">
+            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+              <path d="M22.96 6.36a4.55 4.55 0 0 1-2.93-1.74V3.05h-3.4v15.42a2.42 2.42 0 1 1-2.42-2.42c.27 0 .53.04.78.12V12.7a5.83 5.83 0 1 0 5.04 5.77V11.4a8.05 8.05 0 0 0 4.7 1.51V9.5a4.5 4.5 0 0 1-1.77-3.14z" fill="#25F4EE" transform="translate(-1.5, 1.5)"/>
+              <path d="M22.96 6.36a4.55 4.55 0 0 1-2.93-1.74V3.05h-3.4v15.42a2.42 2.42 0 1 1-2.42-2.42c.27 0 .53.04.78.12V12.7a5.83 5.83 0 1 0 5.04 5.77V11.4a8.05 8.05 0 0 0 4.7 1.51V9.5a4.5 4.5 0 0 1-1.77-3.14z" fill="#FE2C55" transform="translate(1.5, -1.5)"/>
+              <path d="M22.96 6.36a4.55 4.55 0 0 1-2.93-1.74V3.05h-3.4v15.42a2.42 2.42 0 1 1-2.42-2.42c.27 0 .53.04.78.12V12.7a5.83 5.83 0 1 0 5.04 5.77V11.4a8.05 8.05 0 0 0 4.7 1.51V9.5a4.5 4.5 0 0 1-1.77-3.14z" fill="#fff"/>
+            </svg>
+          </span>
+        </div>
         <div class="bento-num">06</div>
         <h3 class="bento-title">TikTok Ads</h3>
         <p class="bento-body">For shops that want the next generation of clients before everyone else figures it out.</p>
