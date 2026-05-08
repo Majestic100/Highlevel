@@ -587,6 +587,29 @@
     .faq-row summary { gap: 12px; }
   }
 
+  /* Timeline step circles — fill in as you scroll past them */
+  .step-num {
+    background: #060606;
+    border: 1px solid rgba(220, 38, 38, 0.45);
+    color: rgba(220, 38, 38, 0.75);
+    transition:
+      background 700ms cubic-bezier(0.22, 1, 0.36, 1),
+      color 500ms ease,
+      border-color 600ms ease,
+      box-shadow 700ms ease;
+  }
+  .step-num.active {
+    background: #DC2626;
+    color: #fff;
+    border-color: #EF4444;
+    box-shadow:
+      0 0 0 4px rgba(220, 38, 38, 0.12),
+      0 0 30px -4px rgba(220, 38, 38, 0.5);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .step-num { transition: none; }
+  }
+
   /* Scroll progress bar */
   .scroll-progress {
     position: fixed;
@@ -1956,7 +1979,7 @@
       <div class="space-y-10 md:space-y-14">
 
         <div class="relative pl-20 md:pl-28 reveal">
-          <div class="absolute left-0 top-0 w-12 h-12 md:w-16 md:h-16 rounded-full bg-bg-primary border border-accent flex items-center justify-center font-serif text-xl md:text-2xl text-accent z-10">01</div>
+          <div class="step-num absolute left-0 top-0 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center font-serif text-xl md:text-2xl z-10">01</div>
           <div class="absolute left-12 md:left-16 top-6 md:top-8 w-8 md:w-12 h-px bg-border-subtle"></div>
           <span class="label text-accent">Day 0</span>
           <h3 class="text-2xl md:text-3xl font-serif mt-2 mb-3">A 30-minute call. For studios ready to grow.</h3>
@@ -1964,7 +1987,7 @@
         </div>
 
         <div class="relative pl-20 md:pl-28 reveal">
-          <div class="absolute left-0 top-0 w-12 h-12 md:w-16 md:h-16 rounded-full bg-bg-primary border border-accent flex items-center justify-center font-serif text-xl md:text-2xl text-accent z-10">02</div>
+          <div class="step-num absolute left-0 top-0 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center font-serif text-xl md:text-2xl z-10">02</div>
           <div class="absolute left-12 md:left-16 top-6 md:top-8 w-8 md:w-12 h-px bg-border-subtle"></div>
           <span class="label text-accent">Day 1 to 7</span>
           <h3 class="text-2xl md:text-3xl font-serif mt-2 mb-3">We build everything.</h3>
@@ -1979,7 +2002,7 @@
         </div>
 
         <div class="relative pl-20 md:pl-28 reveal">
-          <div class="absolute left-0 top-0 w-12 h-12 md:w-16 md:h-16 rounded-full bg-bg-primary border border-accent flex items-center justify-center font-serif text-xl md:text-2xl text-accent z-10">03</div>
+          <div class="step-num absolute left-0 top-0 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center font-serif text-xl md:text-2xl z-10">03</div>
           <div class="absolute left-12 md:left-16 top-6 md:top-8 w-8 md:w-12 h-px bg-border-subtle"></div>
           <span class="label text-accent">Day 7</span>
           <h3 class="text-2xl md:text-3xl font-serif mt-2 mb-3">Live. Leads start landing.</h3>
@@ -1987,7 +2010,7 @@
         </div>
 
         <div class="relative pl-20 md:pl-28 reveal">
-          <div class="absolute left-0 top-0 w-12 h-12 md:w-16 md:h-16 rounded-full bg-bg-primary border border-accent flex items-center justify-center font-serif text-xl md:text-2xl text-accent z-10">04</div>
+          <div class="step-num absolute left-0 top-0 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center font-serif text-xl md:text-2xl z-10">04</div>
           <div class="absolute left-12 md:left-16 top-6 md:top-8 w-8 md:w-12 h-px bg-border-subtle"></div>
           <span class="label text-accent">Ongoing</span>
           <h3 class="text-2xl md:text-3xl font-serif mt-2 mb-3">Deposits paid. Booked direct.</h3>
@@ -2401,6 +2424,21 @@
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
   revealEls.forEach((el) => revealObs.observe(el));
+
+  // Timeline step circles fill with red when they scroll into view
+  (function () {
+    const stepNums = document.querySelectorAll('.step-num');
+    if (!stepNums.length) return;
+    const stepObs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('active');
+          stepObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.6, rootMargin: '0px 0px -15% 0px' });
+    stepNums.forEach((s) => stepObs.observe(s));
+  })();
 
   // Scroll progress bar at the top
   (function () {
