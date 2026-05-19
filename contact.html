@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Contact — Inkflow</title>
-<meta name="description" content="Talk to Inkflow. WhatsApp, email, or send a message about filling your studio's chair." />
+<title>Contact — Inkflow by Hero</title>
+<meta name="description" content="Talk to Inkflow by Hero. WhatsApp, email, or send a message about filling your studio's chair." />
 <meta name="robots" content="index,follow" />
 
 <link rel="stylesheet" href="styles.css" />
@@ -102,6 +102,53 @@
   }
   .whatsapp-cta:hover { background: #1ebe5a; transform: translateY(-1px); }
   .whatsapp-cta svg { width: 20px; height: 20px; }
+
+  /* Consent checkboxes (A2P SMS opt-in) */
+  .consent-group { display: flex; flex-direction: column; gap: 12px; margin: 0 0 24px 0; }
+  .consent-row {
+    display: flex; gap: 12px; align-items: flex-start;
+    background: #0F0D0B;
+    border: 1px solid #2A2420;
+    border-radius: 8px;
+    padding: 14px 16px;
+    transition: border-color 200ms ease;
+  }
+  .consent-row:hover { border-color: #3a322c; }
+  .consent-row input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px; height: 18px;
+    border: 1px solid #4a4038;
+    background: #161412;
+    border-radius: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-top: 2px;
+    position: relative;
+    transition: background 150ms ease, border-color 150ms ease;
+  }
+  .consent-row input[type="checkbox"]:checked {
+    background: #DC2626;
+    border-color: #DC2626;
+  }
+  .consent-row input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 5px; top: 1px;
+    width: 5px; height: 10px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  .consent-row label {
+    color: #A8A29E;
+    font-size: 13px;
+    line-height: 1.55;
+    cursor: pointer;
+  }
+  .consent-row label strong { color: #F5F1EB; font-weight: 600; }
+  .consent-row label a { color: #DC2626; }
+  .consent-row label a:hover { color: #EF4444; }
 </style>
 </head>
 <body class="grain">
@@ -125,7 +172,7 @@
 </header>
 
 <main class="relative z-10 pt-28 md:pt-32 pb-20 md:pb-32">
-  <div class="max-w-5xl mx-auto px-6 lg:px-12">
+  <div class="max-w-3xl mx-auto px-6 lg:px-12">
 
     <a href="index.html" class="back-link mb-8">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -158,7 +205,7 @@
           <h3>Email</h3>
           <p>Best for longer notes, briefs, or sharing assets.</p>
         </div>
-        <a href="mailto:hello@inkflow.co" class="value">hello@inkflow.co</a>
+        <a href="mailto:hello@inkflowbyhero.com" class="value">hello@inkflowbyhero.com</a>
       </div>
 
       <div class="contact-card">
@@ -201,7 +248,7 @@
                 <input class="form-input" type="email" id="email" name="email" placeholder="alex@blackiron.co" required />
               </div>
               <div>
-                <label class="form-label" for="phone">Phone (optional)</label>
+                <label class="form-label" for="phone">Mobile phone (optional)</label>
                 <input class="form-input" type="tel" id="phone" name="phone" placeholder="+1 555 123 4567" />
               </div>
             </div>
@@ -220,6 +267,25 @@
             <div class="mb-6">
               <label class="form-label" for="message">Message</label>
               <textarea class="form-textarea" id="message" name="message" placeholder="Tell us about your studio, your city, and what you'd like to fix." required></textarea>
+            </div>
+
+            <p class="form-label" style="margin-bottom: 10px;">SMS consent (only if you added a phone number)</p>
+            <div class="consent-group">
+
+              <div class="consent-row">
+                <input type="checkbox" id="sms-care" name="sms-care" />
+                <label for="sms-care">
+                  <strong>Customer care SMS.</strong> By checking this box, I agree to receive text messages from Inkflow by Hero related to my inquiry, including appointment coordination, booking confirmations, and follow-up replies. Message frequency varies, approx. 2 to 6 messages per month. Msg & data rates may apply. Reply STOP to unsubscribe, HELP for help. See our <a href="privacy.html">privacy policy</a>.
+                </label>
+              </div>
+
+              <div class="consent-row">
+                <input type="checkbox" id="sms-marketing" name="sms-marketing" />
+                <label for="sms-marketing">
+                  <strong>Promotional SMS.</strong> By checking this box, I separately agree to receive promotional text messages from Inkflow by Hero, including service announcements and limited-time offers. Message frequency varies, approx. 2 to 6 messages per month. Msg & data rates may apply. Reply STOP to unsubscribe, HELP for help. My phone number and consent will never be shared with third parties for marketing purposes. See our <a href="privacy.html">privacy policy</a>.
+                </label>
+              </div>
+
             </div>
 
             <div class="submit-row">
@@ -273,7 +339,10 @@
       </div>
       <div class="text-sm text-text-secondary">
         <p class="text-text-primary font-medium mb-2">Contact</p>
-        <p><a href="mailto:hello@inkflow.co" class="hover:text-accent">hello@inkflow.co</a></p>
+        <p>Inkflow by Hero</p>
+        <p>Grønnegade 111, 9. th</p>
+        <p>8000 Aarhus C, Denmark</p>
+        <p><a href="mailto:hello@inkflowbyhero.com" class="hover:text-accent">hello@inkflowbyhero.com</a></p>
         <p><a href="https://wa.me/4524341144" class="hover:text-accent">WhatsApp +45 24 34 11 44</a></p>
       </div>
       <div class="text-sm text-text-secondary">
@@ -311,6 +380,13 @@
     e.preventDefault();
     if (!form.checkValidity()) {
       form.reportValidity();
+      return;
+    }
+    const phone = form.phone.value.trim();
+    const careOk = form['sms-care'].checked;
+    const mktOk = form['sms-marketing'].checked;
+    if (phone && !careOk && !mktOk) {
+      alert('You added a phone number. Please tick at least one SMS consent box so we know how to contact you, or remove the phone number to send by email only.');
       return;
     }
     status.classList.add('visible');
