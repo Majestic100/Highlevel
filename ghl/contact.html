@@ -15,7 +15,7 @@
   html { scroll-behavior: smooth; }
   body { margin: 0; }
   .inkflow-root {
-    background-color: #060606; color: #F5F1EB;
+    background-color: #060606 !important; color: #F5F1EB !important;
     font-family: 'Inter', system-ui, sans-serif; font-weight: 400; line-height: 1.65;
     -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
     min-height: 100vh; position: relative; overflow-x: hidden;
@@ -125,7 +125,8 @@
 </style>
 </head>
 <body>
-<div class="inkflow-root">
+<div class="inkflow-root" style="background:#060606 !important; color:#F5F1EB !important; font-family:'Inter',system-ui,sans-serif; min-height:100vh; position:relative; overflow-x:hidden; width:100%;">
+<div aria-hidden="true" style="position:fixed; inset:0; background:#060606; z-index:0; pointer-events:none;"></div>
 
 <header id="nav" class="nav">
   <div class="nav-inner">
