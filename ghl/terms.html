@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Terms & Conditions — Inkflow by Hero</title>
+<meta name="description" content="The terms that govern how Inkflow by Hero works with tattoo studios. Plain language, no fine-print games." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  *,*::before,*::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background-color: #060606;
+    color: #F5F1EB;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3, h4, p, ul { margin: 0; }
+  ul { padding-left: 0; list-style: none; }
+
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+  @media (min-width: 1024px) { .container { padding: 0 48px; } }
+
+  .grain::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none;
+    z-index: 1; opacity: 0.06; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  /* NAV */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    transition: background-color 300ms ease, backdrop-filter 300ms ease;
+  }
+  .nav-inner {
+    max-width: 1280px; margin: 0 auto; padding: 0 24px;
+    height: 64px; display: flex; align-items: center; justify-content: space-between;
+  }
+  @media (min-width: 768px) { .nav-inner { height: 80px; padding: 0 48px; } }
+  .logo {
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+    font-weight: 800; font-size: 20px; letter-spacing: -0.025em; color: #F5F1EB;
+  }
+  .logo .red { color: #DC2626; }
+  .nav-links { display: none; gap: 32px; font-size: 14px; color: #A8A29E; }
+  .nav-links a:hover { color: #F5F1EB; }
+  @media (min-width: 768px) { .nav-links { display: flex; align-items: center; } }
+  .nav-scrolled {
+    background-color: rgba(10,10,10,0.85);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #2A2420;
+  }
+
+  /* BUTTONS */
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #DC2626; color: #fff; font-weight: 500;
+    padding: 10px 20px; border-radius: 6px; font-size: 14px;
+    transition: background 200ms ease;
+  }
+  .btn-primary:hover { background: #EF4444; }
+
+  /* MAIN */
+  main { position: relative; z-index: 10; padding: 112px 0 80px; }
+  @media (min-width: 768px) { main { padding: 128px 0 128px; } }
+  .narrow { max-width: 768px; margin: 0 auto; padding: 0 24px; }
+  @media (min-width: 1024px) { .narrow { padding: 0 48px; } }
+
+  .back-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: #A8A29E; font-size: 14px;
+    transition: color 200ms ease; margin-bottom: 32px;
+  }
+  .back-link:hover { color: #F5F1EB; }
+
+  .label {
+    text-transform: uppercase; letter-spacing: 0.15em;
+    font-size: 12px; font-weight: 500; color: #A8A29E;
+    margin-bottom: 12px; margin-top: 24px;
+  }
+
+  .display-h1 {
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+    font-weight: 800; letter-spacing: -0.02em; line-height: 1.04;
+    font-size: clamp(40px, 6.5vw, 76px); color: #F5F1EB;
+    margin-bottom: 16px;
+  }
+  .display-h1 .italic-accent { font-style: italic; color: #DC2626; }
+
+  .lead {
+    color: #A8A29E; font-size: 18px; line-height: 1.65;
+    margin-bottom: 48px;
+  }
+
+  /* LEGAL PROSE */
+  .legal-prose { color: #A8A29E; line-height: 1.75; font-size: 16px; }
+  .legal-prose h2 {
+    color: #F5F1EB; font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+    font-weight: 700; font-size: 28px; letter-spacing: -0.02em;
+    margin-top: 56px; margin-bottom: 16px;
+  }
+  .legal-prose > h2:first-child { margin-top: 0; }
+  .legal-prose h3 {
+    color: #F5F1EB; font-weight: 600; font-size: 18px;
+    margin-top: 28px; margin-bottom: 10px;
+  }
+  .legal-prose p { margin-bottom: 18px; }
+  .legal-prose ul { margin: 0 0 18px 0; padding-left: 22px; list-style: disc; }
+  .legal-prose ul li { margin-bottom: 8px; }
+  .legal-prose strong { color: #F5F1EB; font-weight: 600; }
+  .legal-prose a { color: #DC2626; }
+  .legal-prose a:hover { color: #EF4444; }
+
+  /* FOOTER */
+  footer {
+    background: #0F0D0B; border-top: 1px solid #2A2420;
+    padding: 48px 0; position: relative; z-index: 10;
+  }
+  .footer-grid {
+    display: grid; gap: 32px; margin-bottom: 40px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 768px) { .footer-grid { grid-template-columns: repeat(3, 1fr); } }
+  .footer-col { color: #A8A29E; font-size: 14px; }
+  .footer-col h4 { color: #F5F1EB; font-weight: 500; margin-bottom: 8px; }
+  .footer-col p { margin-bottom: 4px; }
+  .footer-col a:hover { color: #DC2626; }
+  .footer-links { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 20px; font-size: 12px; color: #6B6663; }
+  .footer-links a:hover { color: #DC2626; }
+  .footer-social { display: flex; gap: 16px; margin-bottom: 20px; }
+  .footer-badge { display: flex; align-items: center; gap: 12px; }
+  .footer-badge img { height: 48px; width: auto; flex-shrink: 0; }
+  .footer-badge span {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em;
+    color: #6B6663; line-height: 1.375;
+  }
+  .footer-bottom {
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: space-between; gap: 16px; padding-top: 24px;
+    border-top: 1px solid #2A2420; font-size: 12px; color: #6B6663;
+  }
+  @media (min-width: 768px) { .footer-bottom { flex-direction: row; } }
+</style>
+</head>
+<body class="grain">
+
+<header id="nav" class="nav">
+  <div class="nav-inner">
+    <a href="/" class="logo">ink<span class="red">flow</span><span class="red">.</span></a>
+    <nav class="nav-links">
+      <a href="/#results">Results</a>
+      <a href="/#how">How it works</a>
+      <a href="/#about">About</a>
+      <a href="/#faq">FAQ</a>
+    </nav>
+    <a href="/#book" class="btn-primary">Book a Call</a>
+  </div>
+</header>
+
+<main>
+  <div class="narrow">
+
+    <a href="/" class="back-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to home
+    </a>
+
+    <p class="label">Legal</p>
+    <h1 class="display-h1">Terms <span class="italic-accent">& Conditions</span></h1>
+    <p class="lead">Last updated: May 2026. Plain language, no fine-print games.</p>
+
+    <div class="legal-prose">
+
+      <h2>1. Who we are</h2>
+      <p>Inkflow by Hero is a marketing service for tattoo studios. We run paid ads on Facebook and Instagram, build landing pages, handle inbound leads, and book consultations into your calendar. In these terms, "we", "us" and "Inkflow by Hero" mean the company providing the service. "You" means the studio, owner, or artist signing up.</p>
+
+      <h2>2. The service</h2>
+      <p>When you sign on, we deliver some or all of the following, depending on your plan:</p>
+      <ul>
+        <li>Facebook & Instagram Ads management, including creative, copy and targeting</li>
+        <li>Landing pages and booking flows hosted on our infrastructure</li>
+        <li>Lead handling and appointment booking through our team or automation</li>
+        <li>Reporting on bookings, ad spend, and pipeline</li>
+      </ul>
+      <p>The exact deliverables, timeline, and fees are set out in your service agreement. If anything in your agreement contradicts these terms, your agreement wins.</p>
+
+      <h2>3. What we need from you</h2>
+      <p>For the service to work, we need access to your assets and a few hours of your time at the start. Specifically:</p>
+      <ul>
+        <li>Admin or advertiser access to your Facebook and Instagram accounts</li>
+        <li>Reference photos, portfolio shots, and any brand assets you want us to use</li>
+        <li>A working calendar and the willingness to actually show up to consults</li>
+        <li>Honest answers about your prices, availability, and the type of work you want to attract</li>
+      </ul>
+      <p>If we're missing access or content, the timeline shifts. That's the only honest answer.</p>
+
+      <h2>4. Fees and payment</h2>
+      <p>You pay a monthly retainer for our work and, separately, your own ad spend directly to Facebook. Ad spend is never paid to us. Your retainer is billed in advance, due on the date stated in your agreement, and non-refundable except where our guarantee applies (see below).</p>
+      <p>Late payments may pause the service. We'll always reach out before pausing anything.</p>
+
+      <h2>5. The 30-bookings guarantee</h2>
+      <p>If we promised 30 deposit-secured booked sessions in your first 30 days and we don't deliver, we refund our fee for that month and cover your next month's ad spend up to the cap stated in your agreement. The guarantee assumes you give us the access we need on time, respond to leads we hand off, show up to consultations, and follow the pricing and availability we agreed on. If those things don't happen, the guarantee doesn't apply.</p>
+
+      <h2>6. Exclusivity</h2>
+      <p>We work with one studio per market. While you're a client, we won't take on a competing studio in your defined service area. If you cancel, that exclusivity ends.</p>
+
+      <h2>7. Cancellation</h2>
+      <p>You can cancel any time after the initial term in your agreement, with the notice period stated there (typically 30 days). On cancellation, we hand back access to ad accounts, export your lead data, and stop running campaigns at the end of the paid period. We don't hold your accounts hostage.</p>
+
+      <h2>8. Ownership</h2>
+      <p>You own your customer data, your brand, your photography, and the leads we generate for you. We own our templates, our internal systems, our processes, and any tooling we built before working with you. Anything we create specifically for your studio (ad creative, landing page copy, custom assets) is licensed to you for use in your business.</p>
+
+      <h2>9. Results disclaimer</h2>
+      <p>Marketing isn't physics. Results vary based on your market, your pricing, the quality of your portfolio, and how well you handle the leads we send. The case studies and numbers on our website reflect real client results. They are not a promise that your studio will hit the same numbers.</p>
+
+      <h2>10. Liability</h2>
+      <p>We do our work in good faith and to a professional standard. To the extent allowed by law, our total liability to you for anything that goes wrong is capped at the fees you paid us in the three months before the issue. We're not liable for indirect or consequential losses, like lost profit or reputational harm.</p>
+
+      <h2>11. Confidentiality</h2>
+      <p>Anything you share with us about your business, your finances, or your clients stays confidential. Same goes the other way. We may show your studio's results in case studies and on our site only if you've agreed to it.</p>
+
+      <h2>12. Changes to these terms</h2>
+      <p>We can update these terms when our service changes. If we make a meaningful change that affects you, we'll let you know by email. Continued use of the service after that means you accept the updated version.</p>
+
+      <h2>13. Governing law</h2>
+      <p>These terms are governed by the laws of Denmark. Any dispute we can't sort out in a conversation goes to the competent courts in Aarhus, Denmark.</p>
+
+      <h2>14. Contact</h2>
+      <p>Questions about these terms? Reach us at <a href="mailto:hello@inkflowbyhero.com">hello@inkflowbyhero.com</a> or through the <a href="/contact">contact page</a>.</p>
+
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <span class="logo">ink<span class="red">flow</span><span class="red">.</span></span>
+        <p style="margin-top: 12px;">Tattoo studio growth, done-for-you.</p>
+        <div class="footer-links">
+          <a href="/terms">Terms</a>
+          <a href="/privacy">Privacy</a>
+          <a href="/contact">Contact</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>Inkflow by Hero</p>
+        <p>Grønnegade 111, 9. th</p>
+        <p>8000 Aarhus C, Denmark</p>
+        <p><a href="mailto:hello@inkflowbyhero.com">hello@inkflowbyhero.com</a></p>
+        <p><a href="https://wa.me/4524341144">WhatsApp +45 24 34 11 44</a></p>
+      </div>
+      <div class="footer-col">
+        <h4>Follow</h4>
+        <div class="footer-social">
+          <a href="#">Instagram</a>
+          <a href="#">LinkedIn</a>
+        </div>
+        <div class="footer-badge">
+          <img src="https://majestic100.github.io/Highlevel/assets/badges/meta-business-partner.webp" alt="Certified Meta Business Partner" />
+          <span>Certified Meta<br/>Business Partner</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Inkflow by Hero. All rights reserved.</span>
+      <span>One studio per market.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  var nav = document.getElementById('nav');
+  function onScroll() {
+    if (window.scrollY > 80) nav.classList.add('nav-scrolled');
+    else nav.classList.remove('nav-scrolled');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+</script>
+
+</body>
+</html>
