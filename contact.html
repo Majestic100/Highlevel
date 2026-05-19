@@ -49,6 +49,22 @@
   }
   @media (min-width: 768px) { .form-card { padding: 40px; } }
 
+  .info-panel {
+    background: #161412;
+    border: 1px solid #2A2420;
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 24px;
+  }
+  @media (min-width: 768px) { .info-panel { padding: 36px; } }
+  .info-panel h2 {
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+    font-weight: 700; font-size: 26px; color: #F5F1EB;
+    margin-bottom: 12px; letter-spacing: -0.02em;
+  }
+  .info-panel p { color: #A8A29E; font-size: 15px; margin-bottom: 8px; }
+  .info-panel p strong { color: #F5F1EB; }
+
   .form-label {
     display: block;
     font-size: 12px;
@@ -172,7 +188,7 @@
 </header>
 
 <main class="relative z-10 pt-28 md:pt-32 pb-20 md:pb-32">
-  <div class="max-w-4xl mx-auto px-6 lg:px-12">
+  <div class="max-w-3xl mx-auto px-6 lg:px-12">
 
     <a href="index.html" class="back-link mb-8">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -221,102 +237,22 @@
 
     </div>
 
-    <!-- Form + WhatsApp banner -->
-    <div class="grid lg:grid-cols-3 gap-8">
+    <!-- Info panels -->
+    <div class="info-panel">
+      <h2>Prefer messaging?</h2>
+      <p>Skip the inbox. Send a voice note, photos of your studio, or just type a quick question. We reply in business hours, usually within an hour.</p>
+      <a href="https://wa.me/4524341144" class="whatsapp-cta">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0 0 20.464 3.488"/></svg>
+        +45 24 34 11 44
+      </a>
+      <p class="text-xs text-text-muted mt-5 leading-relaxed">Hours: Mon to Fri, 9am to 6pm CET. Outside hours we reply the next morning.</p>
+    </div>
 
-      <div class="lg:col-span-2">
-        <div class="form-card">
-          <h2 class="font-serif text-2xl md:text-3xl text-text-primary mb-2">Send a message</h2>
-          <p class="text-text-secondary text-sm mb-7">Tell us a bit about your studio. The more context, the better we can answer.</p>
-
-          <form id="contact-form" novalidate>
-
-            <div class="grid sm:grid-cols-2 gap-5 mb-5">
-              <div>
-                <label class="form-label" for="name">Your name</label>
-                <input class="form-input" type="text" id="name" name="name" placeholder="Alex Rivera" required />
-              </div>
-              <div>
-                <label class="form-label" for="studio">Studio name</label>
-                <input class="form-input" type="text" id="studio" name="studio" placeholder="Black Iron Tattoo" />
-              </div>
-            </div>
-
-            <div class="grid sm:grid-cols-2 gap-5 mb-5">
-              <div>
-                <label class="form-label" for="email">Email</label>
-                <input class="form-input" type="email" id="email" name="email" placeholder="alex@blackiron.co" required />
-              </div>
-              <div>
-                <label class="form-label" for="phone">Mobile phone (optional)</label>
-                <input class="form-input" type="tel" id="phone" name="phone" placeholder="+1 555 123 4567" />
-              </div>
-            </div>
-
-            <div class="mb-5">
-              <label class="form-label" for="topic">What's this about?</label>
-              <select class="form-select" id="topic" name="topic">
-                <option>Becoming a client</option>
-                <option>Question about how we work</option>
-                <option>Pricing & guarantee</option>
-                <option>Press or partnership</option>
-                <option>Something else</option>
-              </select>
-            </div>
-
-            <div class="mb-6">
-              <label class="form-label" for="message">Message</label>
-              <textarea class="form-textarea" id="message" name="message" placeholder="Tell us about your studio, your city, and what you'd like to fix." required></textarea>
-            </div>
-
-            <p class="form-label" style="margin-bottom: 10px;">SMS consent (only if you added a phone number)</p>
-            <div class="consent-group">
-
-              <div class="consent-row">
-                <input type="checkbox" id="sms-care" name="sms-care" />
-                <label for="sms-care">
-                  <strong>Customer care SMS.</strong> By checking this box, I agree to receive text messages from Inkflow by Hero related to my inquiry, including appointment coordination, booking confirmations, and follow-up replies. Message frequency varies, approx. 2 to 6 messages per month. Msg & data rates may apply. Reply STOP to unsubscribe, HELP for help. See our <a href="privacy.html">privacy policy</a>.
-                </label>
-              </div>
-
-              <div class="consent-row">
-                <input type="checkbox" id="sms-marketing" name="sms-marketing" />
-                <label for="sms-marketing">
-                  <strong>Promotional SMS.</strong> By checking this box, I separately agree to receive promotional text messages from Inkflow by Hero, including service announcements and limited-time offers. Message frequency varies, approx. 2 to 6 messages per month. Msg & data rates may apply. Reply STOP to unsubscribe, HELP for help. My phone number and consent will never be shared with third parties for marketing purposes. See our <a href="privacy.html">privacy policy</a>.
-                </label>
-              </div>
-
-            </div>
-
-            <div class="submit-row">
-              <button type="submit" class="btn-primary">
-                Send message
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </button>
-              <span class="text-xs text-text-muted">By sending, you agree to our <a href="privacy.html" class="text-accent hover:text-accent-hover">privacy policy</a>.</span>
-            </div>
-
-            <div class="form-status" id="form-status">
-              Got it. We'll be back to you on the email above, usually within a few hours during business days.
-            </div>
-
-          </form>
-        </div>
-      </div>
-
-      <aside class="lg:col-span-1">
-        <div class="form-card" style="height: 100%;">
-          <p class="label mb-3">Prefer messaging?</p>
-          <h3 class="font-serif text-xl text-text-primary mb-3">WhatsApp is faster</h3>
-          <p class="text-text-secondary text-sm mb-6">Skip the inbox. Send a voice note, photos of your studio, or just type a quick question. We answer in business hours.</p>
-          <a href="https://wa.me/4524341144" class="whatsapp-cta">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0 0 20.464 3.488"/></svg>
-            +45 24 34 11 44
-          </a>
-          <p class="text-xs text-text-muted mt-5 leading-relaxed">Hours: Mon to Fri, 9am to 6pm CET. Outside hours we'll reply the next morning.</p>
-        </div>
-      </aside>
-
+    <div class="info-panel">
+      <h2>Where to find us</h2>
+      <p><strong>Inkflow by Hero</strong></p>
+      <p>Grønnegade 111, 9. th</p>
+      <p>8000 Aarhus C, Denmark</p>
     </div>
 
   </div>
