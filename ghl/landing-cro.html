@@ -65,9 +65,10 @@
   .h1 .italic-accent { font-style: italic; color: #DC2626; }
   .sub { color: #A8A29E; font-size: 18px; line-height: 1.6; margin: 0 auto 28px; max-width: 600px; }
 
-  .benefits { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 24px; margin-bottom: 28px; }
-  .benefit { display: flex; align-items: center; gap: 10px; color: #F5F1EB; font-size: 15px; }
-  .benefit svg { width: 20px; height: 20px; color: #22C55E; flex-shrink: 0; }
+  .benefits { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; width: fit-content; margin: 0 auto 28px; text-align: left; }
+  .benefit { display: flex; align-items: flex-start; gap: 10px; color: #F5F1EB; font-size: 15px; line-height: 1.4; }
+  .benefit svg { width: 20px; height: 20px; color: #22C55E; flex-shrink: 0; margin-top: 1px; }
+  @media (min-width: 768px) { .benefits { flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px 24px; width: auto; } .benefit { align-items: center; } }
 
   /* TRUST ROW (avatars + trustpilot) */
   .trust-row { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 14px 20px; }
