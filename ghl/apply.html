@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Apply for a free growth review — Inkflow Studios</title>
+<meta name="description" content="Pick a slot. We'll show you exactly where your bookings are leaking and walk you through what it would take to fill your chair with deposit-paid clients." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  *,*::before,*::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; }
+  .inkflow-root {
+    background-color: #060606 !important; color: #F5F1EB !important;
+    font-family: 'Inter', system-ui, sans-serif; font-weight: 400; line-height: 1.65;
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh; position: relative; overflow-x: hidden; width: 100%;
+  }
+  .inkflow-root *, .inkflow-root *::before, .inkflow-root *::after { box-sizing: border-box; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3, h4, p, ul { margin: 0; }
+  ul { padding-left: 0; list-style: none; }
+  img { max-width: 100%; display: block; }
+
+  .grain-bg::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    z-index: 1; opacity: 0.06; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  /* NAV */
+  .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; transition: background-color 300ms ease, backdrop-filter 300ms ease; }
+  .nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+  @media (min-width: 768px) { .nav-inner { height: 80px; padding: 0 48px; } }
+  .logo { font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 20px; letter-spacing: -0.025em; color: #F5F1EB; }
+  .logo .red { color: #DC2626; }
+  .nav-links { display: none; gap: 32px; font-size: 14px; color: #A8A29E; }
+  .nav-links a:hover { color: #F5F1EB; }
+  @media (min-width: 768px) { .nav-links { display: flex; align-items: center; } }
+  .nav-scrolled { background-color: rgba(10,10,10,0.85); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid #2A2420; }
+
+  .btn-primary { display: inline-flex; align-items: center; gap: 10px; background: #DC2626; color: #fff; font-weight: 600; padding: 12px 22px; border-radius: 8px; font-size: 14px; transition: background 200ms ease, transform 200ms ease; }
+  .btn-primary:hover { background: #EF4444; transform: translateY(-1px); }
+
+  /* MAIN */
+  main { position: relative; z-index: 10; padding: 96px 0 80px; }
+  @media (min-width: 768px) { main { padding: 120px 0 96px; } }
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+  @media (min-width: 1024px) { .container { padding: 0 48px; } }
+
+  /* Split layout */
+  .apply-grid { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: start; }
+  @media (min-width: 1024px) {
+    .apply-grid { grid-template-columns: 38fr 62fr; gap: 48px; }
+  }
+
+  /* LEFT: copy */
+  .apply-left { position: relative; }
+
+  .display-h1 {
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+    font-weight: 800; letter-spacing: -0.02em; line-height: 1.04;
+    font-size: clamp(38px, 5.5vw, 64px); color: #F5F1EB; margin-bottom: 24px;
+  }
+  .display-h1 .italic-accent { font-style: italic; color: #DC2626; }
+  .display-h1 .by { display: inline-flex; align-items: center; gap: 12px; vertical-align: middle; }
+  .display-h1 .by .avatar { width: 54px; height: 54px; border-radius: 50%; object-fit: cover; border: 2px solid #2A2420; }
+  @media (min-width: 768px) { .display-h1 .by .avatar { width: 64px; height: 64px; } }
+
+  .lead { color: #A8A29E; font-size: 17px; line-height: 1.65; margin-bottom: 32px; max-width: 56ch; }
+  .lead strong { color: #F5F1EB; font-weight: 600; }
+
+  .checklist { display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
+  .check-row { display: flex; align-items: flex-start; gap: 12px; color: #D6D0C8; font-size: 16px; line-height: 1.55; }
+  .check-row svg { width: 20px; height: 20px; color: #DC2626; flex-shrink: 0; margin-top: 3px; }
+  .check-row strong { color: #F5F1EB; font-weight: 600; }
+  .check-row em { font-style: italic; color: #F5F1EB; font-weight: 600; }
+
+  .qualifier {
+    border-left: 3px solid #DC2626;
+    background: rgba(220,38,38,0.06);
+    padding: 18px 20px; border-radius: 0 10px 10px 0;
+    color: #A8A29E; font-size: 15px; line-height: 1.6;
+  }
+  .qualifier strong { color: #F5F1EB; font-weight: 600; }
+
+  .below-fold { color: #A8A29E; font-size: 16px; line-height: 1.65; margin-top: 32px; max-width: 56ch; }
+
+  /* RIGHT: booking card */
+  .booking-card {
+    background: #FAFAF7;
+    color: #161412;
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.55);
+    position: sticky; top: 100px;
+  }
+  @media (min-width: 1024px) { .booking-card { padding: 22px; } }
+
+  .calendar-slot { background: transparent; }
+  .calendar-slot iframe { width: 100%; min-height: 760px; border: 0; display: block; border-radius: 12px; }
+  @media (min-width: 1024px) { .calendar-slot iframe { min-height: 720px; } }
+
+  /* FOOTER */
+  footer { background: #0F0D0B; border-top: 1px solid #2A2420; padding: 48px 0; position: relative; z-index: 10; }
+  .footer-grid { display: grid; gap: 32px; margin-bottom: 40px; grid-template-columns: 1fr; }
+  @media (min-width: 768px) { .footer-grid { grid-template-columns: repeat(3, 1fr); } }
+  .footer-col { color: #A8A29E; font-size: 14px; }
+  .footer-col h4 { color: #F5F1EB; font-weight: 500; margin-bottom: 8px; }
+  .footer-col p { margin-bottom: 4px; }
+  .footer-col a:hover { color: #DC2626; }
+  .footer-links { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 20px; font-size: 12px; color: #6B6663; }
+  .footer-links a:hover { color: #DC2626; }
+  .footer-social { display: flex; gap: 16px; margin-bottom: 20px; }
+  .footer-badge { display: flex; align-items: center; gap: 12px; }
+  .footer-badge img { height: 48px; width: auto; flex-shrink: 0; }
+  .footer-badge span { font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: #6B6663; line-height: 1.375; }
+  .footer-bottom { display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 16px; padding-top: 24px; border-top: 1px solid #2A2420; font-size: 12px; color: #6B6663; }
+  @media (min-width: 768px) { .footer-bottom { flex-direction: row; } }
+
+  /* Reveal animations */
+  .anim-ready .reveal { opacity: 0; transform: translateY(22px); transition: opacity 700ms cubic-bezier(.22,1,.36,1), transform 700ms cubic-bezier(.22,1,.36,1); transition-delay: var(--d, 0ms); }
+  .anim-ready .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .anim-ready .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="inkflow-root grain-bg">
+<div aria-hidden="true" style="position:fixed; inset:0; background:#060606; z-index:0; pointer-events:none;"></div>
+
+<header id="nav" class="nav">
+  <div class="nav-inner">
+    <a href="/" class="logo">ink<span class="red">flow</span><span class="red">.</span></a>
+    <nav class="nav-links">
+      <a href="/#results">Results</a>
+      <a href="/#how">How it works</a>
+      <a href="/#about">About</a>
+      <a href="/#faq">FAQ</a>
+    </nav>
+    <a href="#book" class="btn-primary">Book a Call</a>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <div class="apply-grid">
+
+      <!-- LEFT: copy -->
+      <div class="apply-left">
+        <h1 class="display-h1 reveal" data-d="0">
+          Apply for a free <span class="italic-accent">growth review</span> <span class="by">by <img class="avatar" src="https://majestic100.github.io/Highlevel/assets/about/sinan.jpg" alt="Sinan" loading="lazy" /> Sinan</span>
+        </h1>
+
+        <p class="lead reveal" data-d="80">
+          Pick a slot on the right and we'll dig into your shop's current setup. We'll show you exactly where your <strong>bookings are leaking</strong> and walk you through what it would take to <strong>fill your chair with deposit-paid clients</strong>. No template advice, no fluff.
+        </p>
+
+        <ul class="checklist reveal" data-d="160">
+          <li class="check-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Live audit of how your shop is bringing in clients today.</span>
+          </li>
+          <li class="check-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Specific plan to fill your chair with deposit-paid bookings.</span>
+          </li>
+          <li class="check-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Review of your ads, your content, and how your DMs are handled right now.</span>
+          </li>
+          <li class="check-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Walkthrough of how we'd grow <em>your</em> shop specifically. Not a template.</span>
+          </li>
+          <li class="check-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span><strong>Bonus:</strong> quick scan of what other shops in your area are running for ads, so you see what you're up against.</span>
+          </li>
+        </ul>
+
+        <div class="qualifier reveal" data-d="240">
+          We require you to <strong>own or work at a real tattoo shop</strong>, with at least one chair and a portfolio worth showing. This isn't for hobbyists or weekend artists.
+        </div>
+
+        <p class="below-fold reveal" data-d="320">
+          Pick a time on the right and we'll take it from there. If it's clearly not a fit after a quick look at your numbers, we'll tell you straight on the call. Either way you walk away with a clearer view of how your shop could grow.
+        </p>
+      </div>
+
+      <!-- RIGHT: booking -->
+      <div id="book">
+        <div class="booking-card reveal" data-d="200">
+          <div class="calendar-slot">
+            <iframe src="https://api.leadconnectorhq.com/widget/booking/76PH7OblZ2v5KWBuYtnR" scrolling="no" id="apply-cal" title="Book your growth review"></iframe>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <span class="logo">ink<span class="red">flow</span><span class="red">.</span></span>
+        <p style="margin-top: 12px;">Tattoo studio growth, done-for-you.</p>
+        <div class="footer-links">
+          <a href="/terms">Terms</a>
+          <a href="/privacy">Privacy</a>
+          <a href="/contact">Contact</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p><a href="mailto:sinan@heromedia.dk">sinan@heromedia.dk</a></p>
+        <p><a href="https://wa.me/4524341144">WhatsApp +45 24 34 11 44</a></p>
+      </div>
+      <div class="footer-col">
+        <h4>Follow us</h4>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/marketingbysinan/" target="_blank" rel="noopener" aria-label="Instagram" style="display:inline-flex;align-items:center;">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+        </div>
+        <div class="footer-badge">
+          <img src="https://majestic100.github.io/Highlevel/assets/badges/meta-business-partner.webp" alt="Certified Meta Business Partner" />
+          <span>Certified Meta<br/>Business Partner</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Inkflow by Hero. All rights reserved.</span>
+      <span>One studio per market.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  var nav = document.getElementById('nav');
+  function onScroll() {
+    if (window.scrollY > 80) nav.classList.add('nav-scrolled');
+    else nav.classList.remove('nav-scrolled');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Reveal animations
+  (function () {
+    var root = document.querySelector('.inkflow-root');
+    if (!root || !('IntersectionObserver' in window)) return;
+    root.classList.add('anim-ready');
+    var els = root.querySelectorAll('.reveal');
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(function (el) { obs.observe(el); });
+  })();
+</script>
+<script src="https://link.msgsndr.com/js/form_embed.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>
