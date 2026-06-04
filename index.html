@@ -104,6 +104,9 @@
   @keyframes pulse-soft { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
   .animate-pulse { animation: pulse-soft 2.4s ease-in-out infinite; }
 
+  @keyframes scrolldot { 0% { transform: translateY(0); opacity: 0; } 30% { opacity: 1; } 100% { transform: translateY(16px); opacity: 0; } }
+  .scroll-dot { animation: scrolldot 1.8s ease-in-out infinite; }
+
   /* Buttons: subtle inner glow on hover */
   .btn-primary { position: relative; overflow: hidden; }
   .btn-primary::after {
@@ -543,6 +546,85 @@
     background: rgba(255, 255, 255, 0.08);
     transform: translateY(-1px);
   }
+
+  /* ===== Client journey (process walkthrough) ===== */
+  .journey { position: relative; display: flex; flex-direction: column; gap: 18px; }
+  @media (min-width: 768px) { .journey { gap: 24px; } }
+
+  .journey-step {
+    position: relative;
+    background: linear-gradient(180deg, #161412, #121110);
+    border: 1px solid #2A2420;
+    border-radius: 18px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr;
+    transition: border-color 300ms ease, transform 300ms ease;
+  }
+  .journey-step:hover { border-color: rgba(220,38,38,0.40); transform: translateY(-2px); }
+  @media (min-width: 900px) {
+    .journey-step { grid-template-columns: 1.15fr 0.85fr; align-items: stretch; }
+    .journey-step.flip .journey-content { order: 2; }
+    .journey-step.flip .journey-visual { order: 1; }
+  }
+
+  .journey-content { position: relative; padding: 30px; z-index: 1; }
+  @media (min-width: 768px) { .journey-content { padding: 44px; } }
+
+  .journey-eyebrow { display: inline-flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .journey-step-num {
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+    font-weight: 800; font-size: 13px; letter-spacing: 0.08em;
+    color: #fff; background: #DC2626;
+    width: 30px; height: 30px; border-radius: 8px;
+    display: inline-flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .journey-stage { text-transform: uppercase; letter-spacing: 0.15em; font-size: 11px; font-weight: 600; color: #6B6663; }
+  .journey-stage b { color: #EF4444; font-weight: 600; }
+  .journey-title {
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+    font-weight: 700; letter-spacing: -0.02em; line-height: 1.1;
+    font-size: clamp(24px, 3vw, 34px); color: #F5F1EB; margin-bottom: 14px;
+  }
+  .journey-body { color: #A8A29E; font-size: 16px; line-height: 1.65; max-width: 46ch; }
+
+  .journey-watermark {
+    position: absolute; right: 22px; bottom: 8px;
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+    font-weight: 800; font-size: 120px; line-height: 1;
+    color: #fff; opacity: 0.03; pointer-events: none; z-index: 0;
+  }
+
+  .journey-visual {
+    position: relative; min-height: 220px;
+    background: #0F0D0B; border-top: 1px solid #2A2420;
+    display: flex; align-items: center; justify-content: center;
+    padding: 32px; overflow: hidden;
+  }
+  @media (min-width: 900px) {
+    .journey-visual { border-top: none; border-left: 1px solid #2A2420; min-height: 360px; padding: 36px; }
+    .journey-step.flip .journey-visual { border-left: none; border-right: 1px solid #2A2420; }
+  }
+  .journey-visual svg { width: 100%; max-width: 320px; height: auto; }
+  .journey-badges { position: absolute; top: 16px; right: 16px; display: inline-flex; gap: 6px; }
+  .journey-badges .brand-badge { position: static; }
+
+  /* Connector chevron between steps */
+  .journey-connector { display: flex; justify-content: center; margin: -6px 0; color: #2A2420; }
+  .journey-connector svg { width: 22px; height: 22px; }
+
+  /* Closing result band */
+  .journey-result {
+    margin-top: 22px; text-align: center;
+    border: 1px solid rgba(220,38,38,0.30);
+    background: linear-gradient(180deg, rgba(69,10,10,0.35), rgba(22,20,18,0.5));
+    border-radius: 18px; padding: 32px 24px;
+  }
+  @media (min-width: 768px) { .journey-result { padding: 40px; } }
+  .journey-result .jr-eyebrow { text-transform: uppercase; letter-spacing: 0.15em; font-size: 11px; color: #EF4444; font-weight: 600; margin-bottom: 12px; }
+  .journey-result .jr-title { font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: clamp(24px, 3.4vw, 36px); color: #F5F1EB; letter-spacing: -0.02em; }
+  .journey-result .jr-title .accent { font-style: italic; color: #DC2626; }
 
   /* FAQ rows (centered, numbered) */
   .faq-row {
@@ -1086,516 +1168,404 @@
 <!-- ============================================================ -->
 <!-- ===== HERO ===== -->
 <!-- ============================================================ -->
-<section class="relative overflow-hidden pt-28 md:pt-32 pb-16 md:pb-20 spotlight" id="hero">
+<section class="relative overflow-hidden pt-32 md:pt-40 pb-16 md:pb-24 spotlight" id="hero">
   <div class="hero-glow"><span class="aurora-blob"></span></div>
   <div class="relative max-w-7xl mx-auto px-6 lg:px-12">
 
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+    <div class="text-center mx-auto max-w-5xl">
 
-      <!-- Left: copy -->
-      <div class="lg:col-span-7">
-        <div class="flex flex-wrap items-center gap-2 mb-6 reveal" data-d="0">
-          <div class="liquid-pill">
-            <span class="liquid-pill-icon">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.95 6.95L22 10l-5.5 4.8L18.18 22 12 18.27 5.82 22l1.68-7.2L2 10l7.05-1.05L12 2z"/></svg>
-            </span>
-            <span class="liquid-pill-text">The preferred marketing partner for US Tattoo Studios</span>
-            <span class="liquid-pill-flag" aria-label="United States">🇺🇸</span>
-          </div>
-          <div class="liquid-pill liquid-pill-accent">
-            <span class="liquid-pill-flag" aria-label="trophy">🏆</span>
-            <span class="liquid-pill-text">Best agency 2026</span>
-          </div>
-        </div>
-        <h1 class="display-h1 font-serif text-text-primary mb-6 reveal" data-d="80">
-          A chair that stays full.
-          <span class="block italic text-accent">Without you ever touching marketing.</span>
-        </h1>
-        <p class="text-lg md:text-2xl text-text-secondary max-w-2xl mb-10 leading-relaxed reveal" data-d="160">
-          We bring the clients in, answer their messages, and book them with a deposit paid up front. You stay at the chair.
-        </p>
+      <!-- Big editorial headline -->
+      <h1 class="font-serif font-bold text-text-primary mb-10 reveal" style="font-size: clamp(40px, 7vw, 84px); line-height: 1.05; letter-spacing: -0.025em;" data-d="0">
+        We build, run, and fill your studio's chair
+        <span class="block italic text-accent">week after week.</span>
+      </h1>
 
-        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 mb-6 reveal" data-d="240">
-          <a href="#book" class="btn-primary btn-primary-lg group">
-            Book Your Strategy Call
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="transition-transform group-hover:translate-x-1"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-          </a>
-          <a href="https://wa.me/4524341144?text=Hi%20Sinan!%20I%27d%20like%20to%20hear%20more%20about%20Inkflow." target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-md text-white font-medium hover:opacity-90 transition shadow-lg" style="background: #25D366;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A7.85 7.85 0 0012.05 4a7.94 7.94 0 00-6.88 11.93L4 20l4.18-1.1a7.93 7.93 0 003.79.97h.01a7.94 7.94 0 005.62-13.55zm-5.55 12.21h-.01a6.6 6.6 0 01-3.36-.92l-.24-.14-2.48.65.66-2.42-.16-.25a6.6 6.6 0 011.05-8.32 6.55 6.55 0 014.66-1.93 6.55 6.55 0 014.65 11.18 6.55 6.55 0 01-4.65 1.93zm3.62-4.94c-.2-.1-1.18-.58-1.36-.65-.18-.07-.31-.1-.45.1s-.51.65-.63.78c-.12.14-.23.16-.43.05a5.46 5.46 0 01-1.6-1c-.59-.52-.99-1.18-1.1-1.37-.12-.2-.01-.3.09-.4.09-.09.2-.23.3-.35.1-.11.13-.2.2-.33.07-.13.04-.25-.02-.35-.05-.1-.45-1.08-.61-1.48-.16-.39-.32-.34-.45-.34l-.38-.01c-.13 0-.34.05-.52.25-.18.2-.69.67-.69 1.65 0 .97.7 1.91.8 2.04.1.13 1.4 2.13 3.38 2.99.47.2.84.32 1.13.42.48.15.91.13 1.25.08.38-.06 1.18-.48 1.34-.94.16-.47.16-.86.12-.95-.05-.08-.18-.13-.38-.23z"/></svg>
-            Chat on WhatsApp
-          </a>
-        </div>
+      <!-- Service tagline -->
+      <p class="text-lg md:text-xl text-text-secondary max-w-3xl mx-auto mb-3 reveal" data-d="120">
+        From the first ad to the deposit in your calendar: targeting, creatives, landing pages, DM replies, bookings, and follow-ups — all handled by us, every week.
+      </p>
 
-        <!-- Social proof under CTA: avatar pill + Trustpilot card -->
-        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 mb-6 reveal" data-d="280">
+      <!-- One-liner sub -->
+      <p class="text-base md:text-lg text-text-muted max-w-2xl mx-auto mb-12 reveal" data-d="200">
+        The only marketing team your tattoo studio will ever need.
+      </p>
 
-          <!-- Avatar pill -->
-          <div class="trust-pill">
-            <div class="trust-avatars">
-              <span class="trust-avatar"><img src="assets/avatars/01.jpg" alt="" loading="lazy" /></span>
-              <span class="trust-avatar"><img src="assets/avatars/02.jpg" alt="" loading="lazy" /></span>
-              <span class="trust-avatar"><img src="assets/avatars/03.jpg" alt="" loading="lazy" /></span>
-              <span class="trust-avatar"><img src="assets/avatars/04.jpg" alt="" loading="lazy" /></span>
-            </div>
-            <p class="trust-text">
-              Trusted by <strong>56 studios and artists</strong> across the US
-            </p>
-          </div>
-
-          <!-- Trustpilot rating card -->
-          <!-- PLACEHOLDER: link to real Trustpilot profile and reflect actual rating -->
-          <div class="trustpilot-card">
-            <img src="assets/avatars/stars-5.svg" alt="4.8 out of 5 stars on Trustpilot" class="trustpilot-stars-img" />
-            <p class="trustpilot-text">
-              <strong>4.8</strong> from <strong>56</strong> studios on
-              <span class="tp-brand"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.95 6.95L22 10l-5.5 4.8L18.18 22 12 18.27 5.82 22l1.68-7.2L2 10l7.05-1.05L12 2z"/></svg>Trustpilot</span>
-            </p>
-          </div>
-
-        </div>
-
-        <p class="text-sm text-text-muted reveal" data-d="320">
-          30 booked sessions in 30 days, guaranteed.
-          <a href="#why" class="text-accent hover:text-accent-hover">See why studios pick us →</a>
-        </p>
+      <!-- Pill CTA -->
+      <div class="flex justify-center reveal" data-d="280">
+        <a href="#book" class="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-accent text-white font-semibold text-base md:text-lg hover:bg-accent-hover transition-all hover:scale-[1.02] shadow-lg shadow-accent/20 group">
+          Schedule Your Free Strategy Call
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="transition-transform group-hover:translate-x-1"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
       </div>
 
-      <!-- Right: 9:16 video -->
-      <div class="lg:col-span-5 reveal flex justify-center lg:justify-end" data-d="200">
-        <div class="relative mx-auto lg:mx-0 w-full max-w-[300px] lg:max-w-[340px]">
-          <!-- Decorative red glow behind video -->
-          <div class="absolute -inset-4 rounded-2xl pointer-events-none" style="background: radial-gradient(ellipse at center, rgba(220,38,38,0.25), transparent 70%);"></div>
-
-          <div class="relative aspect-[9/16] bg-surface border border-border-subtle rounded-xl overflow-hidden shadow-2xl">
-            <!-- PLACEHOLDER: 9:16 hero video.
-                 Drop your file in /assets and replace src below, or paste a hosted URL.
-                 Example: <video src="assets/hero.mp4" autoplay muted loop playsinline class="w-full h-full object-cover"></video> -->
-            <video autoplay muted loop playsinline class="w-full h-full object-cover">
-              <source src="" type="video/mp4" />
-            </video>
-
-            <!-- Fallback frame visible until a video is added -->
-            <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-gradient-to-br from-surface via-bg-secondary to-bg-primary">
-              <div class="w-14 h-14 rounded-full border border-accent/40 flex items-center justify-center mb-4">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" class="text-accent"><path d="M8 5v14l11-7z"/></svg>
-              </div>
-              <p class="text-text-secondary text-sm">9:16 hero video</p>
-              <p class="text-text-muted text-xs mt-1">Replace placeholder in code</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- Scroll indicator -->
+      <a href="#offer" class="inline-flex flex-col items-center gap-2 text-text-muted hover:text-text-secondary transition mt-16 reveal" data-d="360" aria-label="Scroll to see more">
+        <span class="text-xs uppercase tracking-label">Scroll for the full breakdown</span>
+        <span class="w-6 h-10 rounded-full border border-border-subtle flex items-start justify-center pt-2 overflow-hidden">
+          <span class="block w-1 h-2 rounded-full bg-text-muted scroll-dot"></span>
+        </span>
+      </a>
 
     </div>
 
   </div>
 </section>
 
-<!-- ============================================================ -->
-<!-- ===== TESTIMONIALS MARQUEE (under hero) ===== -->
-<!-- ============================================================ -->
-<section class="py-16 md:py-24 bg-bg-primary relative overflow-hidden">
-  <div class="glow-divider absolute top-0 left-0 right-0"></div>
-  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(220,38,38,0.12), transparent 60%);"></div>
-
-  <div class="relative max-w-3xl mx-auto px-6 text-center mb-14 reveal">
-    <h2 class="display-h2 font-serif text-text-primary">
-      What studios are <span class="italic text-accent">actually saying.</span>
-    </h2>
-    <p class="text-text-secondary mt-4 text-lg">Real shops, real chairs, real numbers.</p>
-  </div>
-
-  <!-- 3 columns, auto-scroll, fade-masked -->
-  <div class="testi-mask flex justify-center gap-5 md:gap-6 max-h-[560px] md:max-h-[640px] overflow-hidden px-6">
-
-    <!-- Column 1 -->
-    <div class="testi-col">
-      <div class="testi-track" style="animation-duration: 38s;">
-        <!-- PLACEHOLDER: replace text/name/city with real client testimonials -->
-        <div class="testi-card">
-          <p class="testi-quote">"32 bookings landed in the first month and I haven't opened my DMs since. Said no to a walk-in last Saturday for the first time in years."</p>
-          <div class="testi-meta">
-            <div class="testi-avatar"><img src="assets/testimonials/male-01.jpg" alt="" loading="lazy" /></div>
-            <div>
-              <div class="testi-name">Jesse R.</div>
-              <div class="testi-role">Black Ink Co. · Phoenix, AZ</div>
-            </div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <p class="testi-quote">"I just film whatever script they send and show up to a packed chair. That's about as much marketing as I do these days."</p>
-          <div class="testi-meta">
-            <div class="testi-avatar"><img src="assets/testimonials/male-02.jpg" alt="" loading="lazy" /></div>
-            <div>
-              <div class="testi-name">Diego M.</div>
-              <div class="testi-role">Hollow Hand · Brooklyn, NY</div>
-            </div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <p class="testi-quote">"Eight years running this shop and I've never been booked four weeks out. We are now, and I haven't answered a single DM to make it happen."</p>
-          <div class="testi-meta">
-            <div class="testi-avatar"><img src="assets/testimonials/male-03.jpg" alt="" loading="lazy" /></div>
-            <div>
-              <div class="testi-name">Marcus T.</div>
-              <div class="testi-role">Crowmark · Seattle, WA</div>
-            </div>
-          </div>
-        </div>
-        <!-- duplicate for seamless loop -->
-        <div class="testi-card">
-          <p class="testi-quote">"32 bookings landed in the first month and I haven't opened my DMs since. Said no to a walk-in last Saturday for the first time in years."</p>
-          <div class="testi-meta">
-            <div class="testi-avatar"><img src="assets/testimonials/male-01.jpg" alt="" loading="lazy" /></div>
-            <div>
-              <div class="testi-name">Jesse R.</div>
-              <div class="testi-role">Black Ink Co. · Phoenix, AZ</div>
-            </div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <p class="testi-quote">"I just film whatever script they send and show up to a packed chair. That's about as much marketing as I do these days."</p>
-          <div class="testi-meta">
-            <div class="testi-avatar"><img src="assets/testimonials/male-02.jpg" alt="" loading="lazy" /></div>
-            <div>
-              <div class="testi-name">Diego M.</div>
-              <div class="testi-role">Hollow Hand · Brooklyn, NY</div>
-            </div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <p class="testi-quote">"Eight years running this shop and I've never been booked four weeks out. We are now, and I haven't answered a single DM to make it happen."</p>
-          <div class="testi-meta">
-            <div class="testi-avatar"><img src="assets/testimonials/male-03.jpg" alt="" loading="lazy" /></div>
-            <div>
-              <div class="testi-name">Marcus T.</div>
-              <div class="testi-role">Crowmark · Seattle, WA</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Column 2 (hidden on mobile) -->
-    <div class="testi-col hidden md:block">
-      <div class="testi-track" style="animation-duration: 46s;">
-        <div class="testi-card">
-          <p class="testi-quote">"Burned through two agencies before this. They handed me lists of leads who never showed. With Inkflow the deposits actually filter the people who weren't going to come anyway."</p>
-          <div class="testi-meta">
-            <div class="testi-avatar"><img src="assets/testimonials/female-01.jpg" alt="" loading="lazy" /></div>
-            <div>
-              <div class="testi-name">Anna K.</div>
-              <div class="testi-role">Solo artist · Austin, TX</div>
-            </div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <p class="testi-quote">"Three months in and we already had to hire a second artist just to keep up with the calendar. Wasn't expecting that."</p>
-          <div class="testi-meta">
-            <div class="testi-avatar"><img src="assets/testimonials/male-04.jpg" alt="" loading="lazy" /></div>
-            <div>
-              <div class="testi-name">Liam O.</div>
-              <div class="testi-role">Iron & Oak · Austin, TX</div>
-            </div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <p class="testi-quote">"I haven't opened my IG inbox in over a month and my chair has never been more full. Easily the best decision I made this year."</p>
-          <div class="testi-meta">
-            <div class="testi-avatar"><img src="assets/testimonials/female-02.jpg" alt="" loading="lazy" /></div>
-            <div>
-              <div class="testi-name">Sofia R.</div>
-              <div class="testi-role">Saint Mara · Miami, FL</div>
-            </div>
-          </div>
-        </div>
-        <!-- duplicate -->
-        <div class="testi-card">
-          <p class="testi-quote">"Burned through two agencies before this. They handed me lists of leads who never showed. With Inkflow the deposits actually filter the people who weren't going to come anyway."</p>
-          <div class="testi-meta">
-            <div class="testi-avatar"><img src="assets/testimonials/female-01.jpg" alt="" loading="lazy" /></div>
-            <div>
-              <div class="testi-name">Anna K.</div>
-              <div class="testi-role">Solo artist · Austin, TX</div>
-            </div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <p class="testi-quote">"Three months in and we already had to hire a second artist just to keep up with the calendar. Wasn't expecting that."</p>
-          <div class="testi-meta">
-            <div class="testi-avatar"><img src="assets/testimonials/male-04.jpg" alt="" loading="lazy" /></div>
-            <div>
-              <div class="testi-name">Liam O.</div>
-              <div class="testi-role">Iron & Oak · Austin, TX</div>
-            </div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <p class="testi-quote">"I haven't opened my IG inbox in over a month and my chair has never been more full. Easily the best decision I made this year."</p>
-          <div class="testi-meta">
-            <div class="testi-avatar"><img src="assets/testimonials/female-02.jpg" alt="" loading="lazy" /></div>
-            <div>
-              <div class="testi-name">Sofia R.</div>
-              <div class="testi-role">Saint Mara · Miami, FL</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Column 3 (hidden on mobile + tablet) -->
-    <div class="testi-col hidden lg:block">
-      <div class="testi-track" style="animation-duration: 42s;">
-        <div class="testi-card">
-          <p class="testi-quote">"Did $24k the first month, doubled it by month three. Honestly I'm still kind of in shock about how fast it flipped."</p>
-          <div class="testi-meta">
-            <div class="testi-avatar"><img src="assets/testimonials/male-05.jpg" alt="" loading="lazy" /></div>
-            <div>
-              <div class="testi-name">Ricky H.</div>
-              <div class="testi-role">Wildhorn · Denver, CO</div>
-            </div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <p class="testi-quote">"Got my first booking five days after we went live, and the deposit hit before I'd even seen the ad running. Felt unreal."</p>
-          <div class="testi-meta">
-            <div class="testi-avatar"><img src="assets/testimonials/female-03.jpg" alt="" loading="lazy" /></div>
-            <div>
-              <div class="testi-name">Mei L.</div>
-              <div class="testi-role">Guest artist · New York, NY</div>
-            </div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <p class="testi-quote">"I'm a solo artist with a waitlist now, and somebody else replies to my DMs. Never thought I'd write that sentence."</p>
-          <div class="testi-meta">
-            <div class="testi-avatar"><img src="assets/testimonials/female-04.jpg" alt="" loading="lazy" /></div>
-            <div>
-              <div class="testi-name">Jenna P.</div>
-              <div class="testi-role">Northside Ink · Chicago, IL</div>
-            </div>
-          </div>
-        </div>
-        <!-- duplicate -->
-        <div class="testi-card">
-          <p class="testi-quote">"Did $24k the first month, doubled it by month three. Honestly I'm still kind of in shock about how fast it flipped."</p>
-          <div class="testi-meta">
-            <div class="testi-avatar"><img src="assets/testimonials/male-05.jpg" alt="" loading="lazy" /></div>
-            <div>
-              <div class="testi-name">Ricky H.</div>
-              <div class="testi-role">Wildhorn · Denver, CO</div>
-            </div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <p class="testi-quote">"Got my first booking five days after we went live, and the deposit hit before I'd even seen the ad running. Felt unreal."</p>
-          <div class="testi-meta">
-            <div class="testi-avatar"><img src="assets/testimonials/female-03.jpg" alt="" loading="lazy" /></div>
-            <div>
-              <div class="testi-name">Mei L.</div>
-              <div class="testi-role">Guest artist · New York, NY</div>
-            </div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <p class="testi-quote">"I'm a solo artist with a waitlist now, and somebody else replies to my DMs. Never thought I'd write that sentence."</p>
-          <div class="testi-meta">
-            <div class="testi-avatar"><img src="assets/testimonials/female-04.jpg" alt="" loading="lazy" /></div>
-            <div>
-              <div class="testi-name">Jenna P.</div>
-              <div class="testi-role">Northside Ink · Chicago, IL</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- ===== PAIN IDENTIFIER ===== -->
-<!-- ============================================================ -->
-<section class="bg-bg-primary py-12 md:py-16 relative">
-  <div class="max-w-3xl mx-auto px-6 lg:px-12 text-center reveal">
-    <p class="text-2xl md:text-4xl font-serif text-text-primary leading-snug">
-      Booked solid, <span class="text-text-muted">no DM chaos,</span> <span class="italic text-accent">just deposit-paid clients.</span>
-    </p>
-    <p class="text-text-secondary mt-4 text-base md:text-lg">If your shop is missing any of that, this is for you.</p>
-  </div>
-</section>
 
 <!-- ============================================================ -->
 <!-- ===== THE OFFER (services) ===== -->
 <!-- ============================================================ -->
-<section class="py-16 md:py-24 relative overflow-hidden dot-grid">
+<section id="offer" class="py-20 md:py-32 relative overflow-hidden dot-grid">
   <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 50% 30% at 80% 100%, rgba(220,38,38,0.08), transparent 60%);"></div>
   <div class="relative max-w-7xl mx-auto px-6 lg:px-12">
 
-    <div class="flex flex-wrap items-end justify-between gap-6 mb-12 md:mb-16 reveal">
-      <div class="max-w-2xl">
-        <h2 class="display-h2 font-serif text-text-primary mt-4">
-          Here's what happens when
-          <span class="italic text-accent">we take over.</span>
-        </h2>
-      </div>
-      <p class="text-text-secondary max-w-sm">Six moving parts that we build, run, and tune every week, so you can stay at the chair.</p>
+    <div class="max-w-3xl mb-12 md:mb-16 reveal">
+      <h2 class="display-h2 font-serif text-text-primary mt-4">
+        From scroll
+        <span class="italic text-accent">to your chair.</span>
+      </h2>
+      <p class="text-text-secondary mt-5 text-lg max-w-2xl">The exact path we build and run to turn a stranger scrolling on their phone into a client sitting in your chair, deposit already paid. Five moving parts. We handle all of them.</p>
     </div>
 
-    <!-- Bento grid -->
-    <div class="grid lg:grid-cols-3 gap-4 md:gap-5">
+    <!-- Client journey -->
+    <div class="journey">
 
-      <!-- 01 Facebook & Instagram Ads (large) -->
-      <article class="bento-card bento-lg lg:col-span-2 reveal">
-        <div class="bento-deco">
-          <svg viewBox="0 0 200 80" preserveAspectRatio="none" class="w-full h-full">
+      <!-- 01 — They see you -->
+      <article class="journey-step reveal">
+        <div class="journey-content">
+          <div class="journey-eyebrow">
+            <span class="journey-step-num">01</span>
+            <span class="journey-stage">They see you · <b>Facebook &amp; Instagram Ads</b></span>
+          </div>
+          <h3 class="journey-title">We put your shop in front of the right people.</h3>
+          <p class="journey-body">We run ads to people already looking for ink in your city, on the apps they scroll every day. New angles, hooks and creatives every week. We double down on whatever fills the calendar, and kill whatever doesn't.</p>
+          <span class="journey-watermark">01</span>
+        </div>
+        <div class="journey-visual">
+          <div class="journey-badges">
+            <span class="brand-badge" aria-label="Facebook"><img src="assets/brands/facebook.png" alt="Facebook" loading="lazy" /></span>
+            <span class="brand-badge" aria-label="Instagram"><img src="assets/brands/instagram.png" alt="Instagram" loading="lazy" /></span>
+          </div>
+          <svg viewBox="0 0 320 240" aria-hidden="true">
             <defs>
-              <linearGradient id="chart-grad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#DC2626" stop-opacity="0.35"/>
-                <stop offset="100%" stop-color="#DC2626" stop-opacity="0"/>
+              <linearGradient id="brandG" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#DC2626"/><stop offset="100%" stop-color="#450A0A"/>
               </linearGradient>
             </defs>
-            <path class="draw-fill" d="M0,60 Q40,55 60,42 T110,22 T180,8 L200,4 L200,80 L0,80 Z" fill="url(#chart-grad)"/>
-            <path class="draw-path" d="M0,60 Q40,55 60,42 T110,22 T180,8 L200,4" fill="none" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round"/>
-            <circle class="draw-fill" cx="200" cy="4" r="3" fill="#EF4444"/>
+            <!-- Ad card -->
+            <rect x="14" y="14" width="292" height="212" rx="16" fill="#161412" stroke="#2A2420" stroke-width="1.4"/>
+            <!-- Profile row -->
+            <circle cx="34" cy="38" r="11" fill="url(#brandG)"/>
+            <text x="52" y="36" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" fill="#F5F1EB">Black Iron Tattoo</text>
+            <text x="52" y="48" font-family="Inter, system-ui, sans-serif" font-size="8" fill="#6B6663">Sponsored · Phoenix, AZ</text>
+            <!-- Image area -->
+            <rect x="14" y="62" width="292" height="118" fill="#0F0D0B"/>
+            <g opacity="0.55" stroke="#3A3A3A" fill="none" stroke-width="1.4">
+              <path d="M40 140 C 70 90, 130 90, 160 140 S 250 190, 280 140"/>
+              <path d="M60 120 Q 110 80, 160 120 T 260 120"/>
+              <circle cx="80" cy="110" r="4"/>
+              <circle cx="160" cy="125" r="3"/>
+              <circle cx="240" cy="115" r="4"/>
+            </g>
+            <!-- Bottom row: copy + CTA -->
+            <rect x="24" y="194" width="180" height="6" rx="3" fill="#3A3A3A"/>
+            <rect x="24" y="206" width="130" height="5" rx="2.5" fill="#2A2420"/>
+            <rect x="232" y="190" width="62" height="26" rx="7" fill="#DC2626"/>
+            <text x="263" y="207" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="700" fill="#fff" text-anchor="middle">BOOK NOW</text>
+            <!-- Floating metric callout -->
+            <g>
+              <rect x="194" y="74" width="104" height="26" rx="9" fill="#0F0D0B" stroke="#22C55E" stroke-width="1.2"/>
+              <circle cx="208" cy="87" r="4" fill="#22C55E"/>
+              <text x="218" y="91" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" fill="#22C55E">$2.84 / lead</text>
+            </g>
           </svg>
         </div>
-        <!-- Brand badges -->
-        <div class="brand-badges">
-          <span class="brand-badge" aria-label="Facebook">
-            <img src="assets/brands/facebook.png" alt="Facebook" loading="lazy" />
-          </span>
-          <span class="brand-badge" aria-label="Instagram">
-            <img src="assets/brands/instagram.png" alt="Instagram" loading="lazy" />
-          </span>
+      </article>
+
+      <div class="journey-connector"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+      <!-- 02 — They trust you -->
+      <article class="journey-step flip reveal">
+        <div class="journey-content">
+          <div class="journey-eyebrow">
+            <span class="journey-step-num">02</span>
+            <span class="journey-stage">They trust you · <b>Content &amp; Scripts</b></span>
+          </div>
+          <h3 class="journey-title">We make sure your work does the selling.</h3>
+          <p class="journey-body">We hand you simple scripts and tell you exactly what to film. A few clips a week is all it takes. Real artist, real work, scroll-stopping. So by the time someone reaches out, they already want you.</p>
+          <span class="journey-watermark">02</span>
         </div>
-        <div class="bento-num">01</div>
-        <h3 class="bento-title">Facebook & Instagram Ads</h3>
-        <p class="bento-body">We run the ads that bring real clients in, on the platforms they already scroll. We test, tweak, and double down on what works. You just see the bookings land.</p>
-      </article>
-
-      <!-- 02 Content & Scripts (small) -->
-      <article class="bento-card reveal">
-        <div class="bento-num">02</div>
-        <h3 class="bento-title">Content & Scripts</h3>
-        <p class="bento-body">We script the videos and tell you exactly what to film. You hit record.</p>
-      </article>
-
-      <!-- 03 Booking automation (small) -->
-      <article class="bento-card reveal">
-        <div class="bento-num">03</div>
-        <h3 class="bento-title">Booking automation</h3>
-        <p class="bento-body">Reminders, follow-ups, and deposit collection, set up once and running forever in the background.</p>
-      </article>
-
-      <!-- 04 Landing pages (large) -->
-      <article class="bento-card bento-lg lg:col-span-2 reveal">
-        <div class="bento-deco bento-deco-tr">
-          <svg viewBox="0 0 120 80" class="w-full h-full">
-            <rect x="2" y="2" width="116" height="76" rx="6" fill="none" stroke="#2A2420" stroke-width="1.2"/>
-            <rect x="2" y="2" width="116" height="10" rx="6" fill="#161412"/>
-            <circle cx="9" cy="7" r="1.4" fill="#2A2420"/>
-            <circle cx="14" cy="7" r="1.4" fill="#2A2420"/>
-            <circle cx="19" cy="7" r="1.4" fill="#2A2420"/>
-            <rect x="10" y="22" width="60" height="3" rx="1" fill="#3A3A3A"/>
-            <rect x="10" y="30" width="46" height="2" rx="1" fill="#2A2420"/>
-            <rect x="10" y="36" width="40" height="2" rx="1" fill="#2A2420"/>
-            <rect x="10" y="48" width="30" height="8" rx="2" fill="#DC2626"/>
-            <rect x="78" y="22" width="32" height="40" rx="3" fill="#2A2420"/>
+        <div class="journey-visual">
+          <svg viewBox="0 0 320 240" aria-hidden="true">
+            <defs>
+              <linearGradient id="vidG" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#1f1c1a"/><stop offset="100%" stop-color="#0a0908"/>
+              </linearGradient>
+            </defs>
+            <!-- Ambient text hints -->
+            <g opacity="0.4">
+              <rect x="14" y="42" width="68" height="6" rx="3" fill="#2A2420"/>
+              <rect x="14" y="54" width="52" height="4" rx="2" fill="#1A1815"/>
+              <rect x="240" y="178" width="64" height="6" rx="3" fill="#2A2420"/>
+              <rect x="240" y="190" width="50" height="4" rx="2" fill="#1A1815"/>
+            </g>
+            <!-- Phone frame -->
+            <rect x="100" y="14" width="120" height="212" rx="18" fill="#0a0908" stroke="#2A2420" stroke-width="1.5"/>
+            <rect x="106" y="20" width="108" height="200" rx="12" fill="#161412"/>
+            <rect x="146" y="24" width="28" height="6" rx="3" fill="#0a0908"/>
+            <!-- Profile -->
+            <circle cx="120" cy="48" r="6" fill="#DC2626"/>
+            <rect x="132" y="44" width="46" height="3" rx="1.5" fill="#F5F1EB"/>
+            <rect x="132" y="50" width="30" height="2.5" rx="1" fill="#6B6663"/>
+            <!-- Video thumbnail -->
+            <rect x="106" y="60" width="108" height="132" fill="url(#vidG)"/>
+            <!-- Play button -->
+            <circle cx="160" cy="126" r="22" fill="rgba(220,38,38,0.16)" stroke="#DC2626" stroke-width="1.6"/>
+            <path d="M154 116 L176 126 L154 136 Z" fill="#EF4444"/>
+            <!-- Engagement row -->
+            <g>
+              <path d="M118 202 a4.5 4.5 0 0 1 9 0 a4.5 4.5 0 0 1 -4.5 5.5 a4.5 4.5 0 0 1 -4.5 -5.5z" fill="#DC2626"/>
+              <text x="132" y="208" font-family="Inter, system-ui, sans-serif" font-size="8" font-weight="600" fill="#F5F1EB">12.4K</text>
+              <rect x="154" y="201" width="7" height="6" rx="1.5" fill="#2A2420"/>
+              <text x="166" y="208" font-family="Inter, system-ui, sans-serif" font-size="8" fill="#A8A29E">328</text>
+              <path d="M188 201 l4 3 l-4 3z" fill="#2A2420"/>
+            </g>
           </svg>
         </div>
-        <div class="bento-num">04</div>
-        <h3 class="bento-title">Landing pages & funnels</h3>
-        <p class="bento-body">Pages that turn cold visitors into deposit-paid bookings. Mobile-first, optimized weekly, built around the way tattoo clients actually buy.</p>
       </article>
 
-      <!-- 05 Lead handling (large) -->
-      <article class="bento-card bento-lg lg:col-span-2 reveal">
-        <div class="bento-deco bento-deco-tr">
-          <svg viewBox="0 0 120 80" class="w-full h-full">
-            <rect x="6" y="14" width="60" height="14" rx="7" fill="#2563EB"/>
-            <rect x="46" y="34" width="68" height="14" rx="7" fill="#2A2420"/>
-            <rect x="6" y="54" width="44" height="12" rx="6" fill="#2563EB" opacity="0.6"/>
+      <div class="journey-connector"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+      <!-- 03 — They click -->
+      <article class="journey-step reveal">
+        <div class="journey-content">
+          <div class="journey-eyebrow">
+            <span class="journey-step-num">03</span>
+            <span class="journey-stage">They click · <b>Landing pages &amp; funnels</b></span>
+          </div>
+          <h3 class="journey-title">Every click hits a page built to convert.</h3>
+          <p class="journey-body">No generic template. Mobile-first, fast, and designed around the way tattoo clients actually decide. It does the talking, shows your work, and pushes them toward one thing: booking a session.</p>
+          <span class="journey-watermark">03</span>
+        </div>
+        <div class="journey-visual">
+          <svg viewBox="0 0 320 240" aria-hidden="true">
+            <!-- Browser frame -->
+            <rect x="12" y="14" width="296" height="212" rx="14" fill="#161412" stroke="#2A2420" stroke-width="1.4"/>
+            <rect x="12" y="14" width="296" height="22" fill="#0F0D0B"/>
+            <circle cx="26" cy="25" r="2.5" fill="#2A2420"/>
+            <circle cx="36" cy="25" r="2.5" fill="#2A2420"/>
+            <circle cx="46" cy="25" r="2.5" fill="#2A2420"/>
+            <rect x="60" y="20" width="180" height="10" rx="5" fill="#1A1815"/>
+            <!-- Hero copy -->
+            <rect x="28" y="58" width="44" height="6" rx="2" fill="#DC2626" opacity="0.85"/>
+            <rect x="28" y="74" width="178" height="12" rx="3" fill="#F5F1EB"/>
+            <rect x="28" y="92" width="148" height="12" rx="3" fill="#F5F1EB"/>
+            <rect x="28" y="110" width="100" height="12" rx="3" fill="#F5F1EB"/>
+            <rect x="28" y="134" width="180" height="5" rx="2" fill="#3A3A3A"/>
+            <rect x="28" y="146" width="160" height="5" rx="2" fill="#2A2420"/>
+            <rect x="28" y="158" width="130" height="5" rx="2" fill="#2A2420"/>
+            <!-- CTA -->
+            <rect x="28" y="184" width="92" height="26" rx="7" fill="#DC2626"/>
+            <text x="74" y="201" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="700" fill="#fff" text-anchor="middle">BOOK NOW</text>
+            <!-- Side calendar mini -->
+            <rect x="226" y="56" width="72" height="156" rx="8" fill="#0F0D0B" stroke="#2A2420" stroke-width="1.2"/>
+            <rect x="226" y="56" width="72" height="18" rx="8" fill="#161412"/>
+            <text x="234" y="70" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="600" fill="#F5F1EB">May</text>
+            <g>
+              <rect x="234" y="84" width="9" height="9" rx="1.5" fill="#2A2420"/>
+              <rect x="248" y="84" width="9" height="9" rx="1.5" fill="#2A2420"/>
+              <rect x="262" y="84" width="9" height="9" rx="1.5" fill="#DC2626"/>
+              <rect x="276" y="84" width="9" height="9" rx="1.5" fill="#2A2420"/>
+              <rect x="234" y="98" width="9" height="9" rx="1.5" fill="#2A2420"/>
+              <rect x="248" y="98" width="9" height="9" rx="1.5" fill="#DC2626"/>
+              <rect x="262" y="98" width="9" height="9" rx="1.5" fill="#2A2420"/>
+              <rect x="276" y="98" width="9" height="9" rx="1.5" fill="#DC2626"/>
+              <rect x="234" y="112" width="9" height="9" rx="1.5" fill="#DC2626"/>
+              <rect x="248" y="112" width="9" height="9" rx="1.5" fill="#2A2420"/>
+              <rect x="262" y="112" width="9" height="9" rx="1.5" fill="#2A2420"/>
+              <rect x="276" y="112" width="9" height="9" rx="1.5" fill="#2A2420"/>
+              <rect x="234" y="126" width="9" height="9" rx="1.5" fill="#2A2420"/>
+              <rect x="248" y="126" width="9" height="9" rx="1.5" fill="#DC2626"/>
+              <rect x="262" y="126" width="9" height="9" rx="1.5" fill="#DC2626"/>
+              <rect x="276" y="126" width="9" height="9" rx="1.5" fill="#2A2420"/>
+            </g>
+            <rect x="234" y="174" width="56" height="22" rx="5" fill="#DC2626"/>
+            <text x="262" y="189" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="700" fill="#fff" text-anchor="middle">PICK A TIME</text>
           </svg>
         </div>
-        <div class="bento-num">05</div>
-        <h3 class="bento-title">Lead handling + sales team</h3>
-        <p class="bento-body">Our team answers every inquiry within minutes, and our dedicated sales team picks up the phone to qualify each lead in person. The tire-kickers, the price-hagglers, the ghosters, the ones who waste an artist's evening writing back and forth, we filter all of them out before they ever reach you. Only deposit-ready clients land on your calendar.</p>
       </article>
 
-      <!-- 06 TikTok Ads (small) -->
-      <article class="bento-card reveal">
-        <div class="brand-badges">
-          <span class="brand-badge" aria-label="TikTok">
-            <img src="assets/brands/tiktok.webp" alt="TikTok" loading="lazy" />
-          </span>
+      <div class="journey-connector"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+      <!-- 04 — They message -->
+      <article class="journey-step flip reveal">
+        <div class="journey-content">
+          <div class="journey-eyebrow">
+            <span class="journey-step-num">04</span>
+            <span class="journey-stage">They message · <b>Lead handling</b></span>
+          </div>
+          <h3 class="journey-title">We reply, qualify, and filter — you never touch a DM.</h3>
+          <p class="journey-body">Every inquiry gets answered within minutes. We qualify them on size, style and budget, and weed out the tire-kickers. Only the serious, deposit-ready ones make it through to you.</p>
+          <span class="journey-watermark">04</span>
         </div>
-        <div class="bento-num">06</div>
-        <h3 class="bento-title">TikTok Ads</h3>
-        <p class="bento-body">For shops that want the next generation of clients before everyone else figures it out.</p>
+        <div class="journey-visual">
+          <svg viewBox="0 0 320 240" aria-hidden="true">
+            <!-- Chat container -->
+            <rect x="14" y="14" width="292" height="212" rx="14" fill="#161412" stroke="#2A2420" stroke-width="1.4"/>
+            <!-- Header -->
+            <rect x="14" y="14" width="292" height="44" rx="14" fill="#0F0D0B"/>
+            <rect x="14" y="44" width="292" height="14" fill="#0F0D0B"/>
+            <circle cx="40" cy="36" r="12" fill="#DC2626"/>
+            <text x="40" y="40" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="700" fill="#fff" text-anchor="middle">S</text>
+            <text x="60" y="34" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" fill="#F5F1EB">Sarah M.</text>
+            <circle cx="63" cy="46" r="2.5" fill="#22C55E"/>
+            <text x="71" y="49" font-family="Inter, system-ui, sans-serif" font-size="8" fill="#A8A29E">Online · replies in 2 min</text>
+            <!-- Received -->
+            <rect x="28" y="70" width="180" height="22" rx="11" fill="#2A2420"/>
+            <text x="38" y="84" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#F5F1EB">Hi! Saw your ad — half sleeve?</text>
+            <!-- Sent (us) -->
+            <rect x="92" y="100" width="200" height="34" rx="11" fill="#DC2626"/>
+            <text x="102" y="114" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#fff">Hey Sarah! Half sleeves start at $850.</text>
+            <text x="102" y="128" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#fff">Want a consult slot this week?</text>
+            <!-- Received -->
+            <rect x="28" y="142" width="140" height="22" rx="11" fill="#2A2420"/>
+            <text x="38" y="156" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#F5F1EB">Yes! Friday afternoon?</text>
+            <!-- Sent: booking link card -->
+            <rect x="80" y="172" width="212" height="34" rx="11" fill="#DC2626"/>
+            <text x="90" y="186" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#fff">Sent. Deposit secures your slot 👇</text>
+            <rect x="90" y="190" width="120" height="10" rx="5" fill="rgba(255,255,255,0.85)"/>
+            <!-- Typing indicator -->
+            <rect x="28" y="210" width="46" height="14" rx="7" fill="#2A2420"/>
+            <circle cx="40" cy="217" r="2" fill="#6B6663"/>
+            <circle cx="51" cy="217" r="2" fill="#6B6663"/>
+            <circle cx="62" cy="217" r="2" fill="#6B6663"/>
+          </svg>
+        </div>
+      </article>
+
+      <div class="journey-connector"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+      <!-- 05 — They book -->
+      <article class="journey-step reveal">
+        <div class="journey-content">
+          <div class="journey-eyebrow">
+            <span class="journey-step-num">05</span>
+            <span class="journey-stage">They book · <b>Booking &amp; deposits</b></span>
+          </div>
+          <h3 class="journey-title">They land in your calendar, deposit paid up front.</h3>
+          <p class="journey-body">Serious clients book straight into your calendar with a deposit secured before they arrive. Reminders and follow-ups run on autopilot, so no-shows basically disappear and your chair stays full.</p>
+          <span class="journey-watermark">05</span>
+        </div>
+        <div class="journey-visual">
+          <svg viewBox="0 0 320 240" aria-hidden="true">
+            <!-- Calendar container -->
+            <rect x="14" y="14" width="292" height="212" rx="14" fill="#161412" stroke="#2A2420" stroke-width="1.4"/>
+            <!-- Header -->
+            <rect x="14" y="14" width="292" height="36" rx="14" fill="#0F0D0B"/>
+            <rect x="14" y="36" width="292" height="14" fill="#0F0D0B"/>
+            <text x="32" y="36" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#F5F1EB">May 2026</text>
+            <path d="M266 26 l-6 6 l6 6" fill="none" stroke="#6B6663" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M286 26 l6 6 l-6 6" fill="none" stroke="#6B6663" stroke-width="1.5" stroke-linecap="round"/>
+            <!-- Days of week -->
+            <g font-family="Inter, system-ui, sans-serif" font-size="8" fill="#6B6663" text-anchor="middle">
+              <text x="42" y="68">MON</text>
+              <text x="78" y="68">TUE</text>
+              <text x="114" y="68">WED</text>
+              <text x="150" y="68">THU</text>
+              <text x="186" y="68">FRI</text>
+              <text x="222" y="68">SAT</text>
+              <text x="258" y="68">SUN</text>
+            </g>
+            <!-- Row 1 -->
+            <g font-family="Inter, system-ui, sans-serif" font-size="9" text-anchor="middle">
+              <rect x="30" y="78" width="24" height="24" rx="5" fill="#DC2626"/>
+              <text x="42" y="93" font-weight="600" fill="#fff">4</text>
+              <path d="M48 97 l1.5 1.5 l3 -3" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/>
+
+              <rect x="66" y="78" width="24" height="24" rx="5" fill="#2A2420"/>
+              <text x="78" y="94" fill="#A8A29E">5</text>
+
+              <rect x="102" y="78" width="24" height="24" rx="5" fill="#DC2626"/>
+              <text x="114" y="93" font-weight="600" fill="#fff">6</text>
+              <path d="M120 97 l1.5 1.5 l3 -3" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/>
+
+              <rect x="138" y="78" width="24" height="24" rx="5" fill="#2A2420"/>
+              <text x="150" y="94" fill="#A8A29E">7</text>
+
+              <rect x="174" y="78" width="24" height="24" rx="5" fill="#DC2626"/>
+              <text x="186" y="93" font-weight="600" fill="#fff">8</text>
+              <path d="M192 97 l1.5 1.5 l3 -3" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/>
+
+              <rect x="210" y="78" width="24" height="24" rx="5" fill="#2A2420"/>
+              <text x="222" y="94" fill="#A8A29E">9</text>
+
+              <rect x="246" y="78" width="24" height="24" rx="5" fill="#2A2420"/>
+              <text x="258" y="94" fill="#A8A29E">10</text>
+            </g>
+            <!-- Row 2 -->
+            <g font-family="Inter, system-ui, sans-serif" font-size="9" text-anchor="middle">
+              <rect x="30" y="108" width="24" height="24" rx="5" fill="#DC2626"/>
+              <text x="42" y="123" font-weight="600" fill="#fff">11</text>
+              <path d="M48 127 l1.5 1.5 l3 -3" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/>
+
+              <rect x="66" y="108" width="24" height="24" rx="5" fill="#DC2626"/>
+              <text x="78" y="123" font-weight="600" fill="#fff">12</text>
+              <path d="M84 127 l1.5 1.5 l3 -3" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/>
+
+              <rect x="102" y="108" width="24" height="24" rx="5" fill="#2A2420"/>
+              <text x="114" y="124" fill="#A8A29E">13</text>
+
+              <rect x="138" y="108" width="24" height="24" rx="5" fill="#DC2626"/>
+              <text x="150" y="123" font-weight="600" fill="#fff">14</text>
+              <path d="M156 127 l1.5 1.5 l3 -3" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/>
+
+              <rect x="174" y="108" width="24" height="24" rx="5" fill="#2A2420"/>
+              <text x="186" y="124" fill="#A8A29E">15</text>
+
+              <rect x="210" y="108" width="24" height="24" rx="5" fill="#2A2420"/>
+              <text x="222" y="124" fill="#A8A29E">16</text>
+
+              <rect x="246" y="108" width="24" height="24" rx="5" fill="#2A2420"/>
+              <text x="258" y="124" fill="#A8A29E">17</text>
+            </g>
+            <!-- Booking summary -->
+            <rect x="30" y="152" width="260" height="60" rx="8" fill="#0F0D0B" stroke="#2A2420" stroke-width="1.2"/>
+            <circle cx="50" cy="182" r="11" fill="rgba(34,197,94,0.16)" stroke="#22C55E" stroke-width="1.2"/>
+            <path d="M45 182 l3 3 l6 -6" fill="none" stroke="#22C55E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="72" y="178" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" fill="#F5F1EB">Tue, May 12 · 2:00 PM</text>
+            <text x="72" y="192" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#A8A29E">Half sleeve · $200 deposit paid</text>
+            <text x="282" y="184" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="700" fill="#22C55E" text-anchor="end">✓ PAID</text>
+          </svg>
+        </div>
       </article>
 
     </div>
+
+    <!-- Closing result band -->
+    <div class="journey-result reveal">
+      <p class="jr-eyebrow">The result</p>
+      <p class="jr-title">You wake up, check your calendar, and <span class="accent">tattoo.</span></p>
+    </div>
+
   </div>
 </section>
 
 <!-- ============================================================ -->
-<!-- ===== GUARANTEE ===== -->
+<!-- ===== COMPARISON ===== -->
 <!-- ============================================================ -->
-<section id="why" class="py-16 md:py-24 relative overflow-hidden dot-grid">
-  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 70% 50% at 50% 20%, rgba(220,38,38,0.14), transparent 60%);"></div>
+<section class="py-20 md:py-32 relative overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 70% 50% at 50% 20%, rgba(220,38,38,0.10), transparent 60%);"></div>
   <div class="relative max-w-7xl mx-auto px-6 lg:px-12">
 
-    <div class="max-w-3xl mb-14 md:mb-20 reveal">
-      <h2 class="display-h2 font-serif text-text-primary mt-4">
-        Why <span class="italic text-accent">choose us?</span>
+    <div class="max-w-3xl mb-14 md:mb-16 reveal">
+      <h2 class="display-h2 font-serif text-text-primary">
+        Other agencies <span class="italic text-accent">vs Inkflow.</span>
       </h2>
       <p class="text-lg text-text-secondary mt-6 max-w-2xl">
-        Most agencies pitch you leads and then go quiet the second nothing books. We do it the opposite way, and here's what that actually looks like for your shop.
+        Same money. Very different outcomes. Here's what changes when you work with a team that only does tattoo studios.
       </p>
     </div>
 
-    <!-- Featured guarantee card (tighter) -->
-    <article class="mb-10 md:mb-12 card-lift guarantee-pulse bg-bg-primary border-2 border-accent rounded-md p-8 md:p-12 relative overflow-hidden reveal">
-      <div class="absolute -top-20 -right-20 w-96 h-96 rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(220,38,38,0.22), transparent 70%);"></div>
-      <div class="grid md:grid-cols-12 gap-8 items-center relative">
-        <div class="md:col-span-7">
-          <h3 class="font-serif text-3xl md:text-5xl text-text-primary leading-tight">30 bookings in 30 days. Or it's on us.</h3>
-          <p class="text-text-secondary text-lg leading-relaxed mt-4">Miss the number? We refund the fee and cover your next month of ad spend.</p>
-        </div>
-        <div class="md:col-span-5 md:border-l md:border-border-subtle md:pl-8">
-          <ul class="space-y-3 text-text-secondary">
-            <li class="flex items-center gap-3"><span class="text-[#22C55E] text-lg">✓</span> No long-term contracts</li>
-            <li class="flex items-center gap-3"><span class="text-[#22C55E] text-lg">✓</span> Month-to-month</li>
-            <li class="flex items-center gap-3"><span class="text-[#22C55E] text-lg">✓</span> Cancel anytime</li>
-          </ul>
-        </div>
-      </div>
-    </article>
-
-    <!-- Loyalty trust badge -->
-    <article class="mb-10 md:mb-12 card-lift bg-bg-primary border border-border-subtle rounded-md p-8 md:p-10 relative overflow-hidden reveal">
-      <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 35% 70% at 10% 50%, rgba(220,38,38,0.12), transparent 60%);"></div>
-      <div class="flex flex-col md:flex-row items-start gap-8 relative">
-        <div class="flex-shrink-0 relative">
-          <div class="absolute inset-0 rounded-full pointer-events-none" style="background: radial-gradient(circle, rgba(220,38,38,0.30), transparent 70%); filter: blur(16px);"></div>
-          <svg width="72" height="86" viewBox="0 0 40 48" fill="none" class="text-accent relative">
-            <path d="M6 4 L34 4 L34 38 L20 30 L6 38 Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" fill="rgba(220,38,38,0.08)"/>
-            <path d="M14 18 L18 22 L26 14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="grow">
-          <h3 class="font-serif text-2xl md:text-3xl text-text-primary leading-tight mb-3">
-            Loyalty earned, <span class="italic text-accent">not contracted.</span>
-          </h3>
-          <p class="text-text-secondary leading-relaxed max-w-2xl">
-            There's no binding contract on any of our partnerships, yet most of the studios we sign on stay with us for years. That speaks louder than any guarantee we could write, and honestly, it's the part of this business I'm most proud of, both about our team and the way we treat every shop we work with.
-          </p>
-        </div>
-      </div>
-    </article>
-
-    <!-- Comparison: Other agencies vs Inkflow -->
     <div class="reveal">
       <div class="grid md:grid-cols-2 rounded-md overflow-hidden border border-border-subtle">
 
@@ -1692,470 +1662,6 @@
   </div>
 </section>
 
-<!-- ============================================================ -->
-<!-- ===== RESULTS & SOCIAL PROOF ===== -->
-<!-- ============================================================ -->
-<section id="results" class="bg-bg-secondary py-16 md:py-24 border-y border-border-subtle">
-  <div class="max-w-7xl mx-auto px-6 lg:px-12">
-
-    <!-- 5a. Big numbers -->
-    <div class="mb-14 md:mb-20">
-      <div class="max-w-3xl mb-12 reveal">
-        <h2 class="display-h2 font-serif text-text-primary mt-4">
-          The numbers do
-          <span class="italic">the talking.</span>
-        </h2>
-      </div>
-
-      <!-- PLACEHOLDER: Sinan to fill in actual revenue and bookings numbers -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-border-subtle border border-border-subtle">
-        <div class="bg-bg-secondary p-8 md:p-10 reveal">
-          <div class="font-serif text-5xl md:text-7xl text-text-primary mb-3 counter" data-target="56">0</div>
-          <div class="label">Studios trust Inkflow</div>
-        </div>
-        <div class="bg-bg-secondary p-8 md:p-10 reveal">
-          <div class="font-serif text-5xl md:text-7xl text-text-primary mb-3"><span class="text-accent">$</span><span class="counter" data-target="2400000" data-format="short">0</span></div>
-          <div class="label">Generated for clients (12 mo.)</div>
-        </div>
-        <div class="bg-bg-secondary p-8 md:p-10 reveal">
-          <div class="font-serif text-5xl md:text-7xl text-text-primary mb-3 counter" data-target="3200" data-format="comma">0</div>
-          <div class="label">Bookings booked (12 mo.)</div>
-        </div>
-        <div class="bg-bg-secondary p-8 md:p-10 reveal">
-          <div class="font-serif text-5xl md:text-7xl text-text-primary mb-3 counter" data-target="92" data-suffix="%">0</div>
-          <div class="label">Client retention after 6 months</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 5b. Screenshot showcase mockups -->
-    <div class="mb-14 md:mb-20">
-      <div class="max-w-3xl mb-12 reveal">
-        <h2 class="display-h2 font-serif text-text-primary mt-4">
-          What it actually
-          <span class="italic">looks like.</span>
-        </h2>
-      </div>
-
-      <div class="grid lg:grid-cols-2 gap-6">
-
-        <!-- i. Ads dashboard mockup -->
-        <div class="card-lift mock-light border rounded-md overflow-hidden reveal">
-          <div class="window-chrome px-4 py-3 flex items-center gap-2">
-            <div class="flex gap-1.5">
-              <span class="w-3 h-3 rounded-full bg-[#3a3a3a]"></span>
-              <span class="w-3 h-3 rounded-full bg-[#3a3a3a]"></span>
-              <span class="w-3 h-3 rounded-full bg-[#3a3a3a]"></span>
-            </div>
-            <span class="ml-3 text-xs text-text-muted">Ads dashboard · Live campaign</span>
-          </div>
-          <div class="p-6 md:p-8">
-            <div class="flex items-start justify-between mb-6">
-              <div>
-                <div class="text-xs text-text-muted mb-1">Campaign · Sleeve Special</div>
-                <div class="text-text-primary font-medium">Studio Black Ink · March 2026</div>
-              </div>
-              <span class="mock-active-badge"><span class="mock-active-dot"></span>ACTIVE</span>
-            </div>
-
-            <div class="grid grid-cols-3 gap-4 mb-6">
-              <div>
-                <div class="text-xs text-text-muted">Cost per lead</div>
-                <div class="font-serif text-3xl text-text-primary">$4.20</div>
-              </div>
-              <div>
-                <div class="text-xs text-text-muted">ROAS</div>
-                <div class="font-serif text-3xl text-text-primary">6.8<span class="text-text-muted text-xl">x</span></div>
-              </div>
-              <div>
-                <div class="text-xs text-text-muted">Bookings</div>
-                <div class="font-serif text-3xl text-accent">142</div>
-              </div>
-            </div>
-
-            <!-- mini line chart -->
-            <svg viewBox="0 0 300 80" class="w-full h-20">
-              <defs>
-                <linearGradient id="grad" x1="0" x2="0" y1="0" y2="1">
-                  <stop offset="0%" stop-color="#DC2626" stop-opacity="0.4"/>
-                  <stop offset="100%" stop-color="#DC2626" stop-opacity="0"/>
-                </linearGradient>
-              </defs>
-              <path d="M0,60 L40,55 L80,50 L120,45 L160,38 L200,30 L240,22 L280,14 L300,10 L300,80 L0,80 Z" fill="url(#grad)"/>
-              <path d="M0,60 L40,55 L80,50 L120,45 L160,38 L200,30 L240,22 L280,14 L300,10" fill="none" stroke="#DC2626" stroke-width="2"/>
-            </svg>
-            <div class="text-xs text-text-muted mt-2">Cost per lead, trending down 31 days</div>
-            <!-- PLACEHOLDER: Replace numbers/names with real campaign data -->
-          </div>
-        </div>
-
-        <!-- ii. Booking pipeline mockup -->
-        <div class="card-lift mock-light border rounded-md overflow-hidden reveal">
-          <div class="window-chrome px-4 py-3 flex items-center gap-2">
-            <div class="flex gap-1.5">
-              <span class="w-3 h-3 rounded-full bg-[#3a3a3a]"></span>
-              <span class="w-3 h-3 rounded-full bg-[#3a3a3a]"></span>
-              <span class="w-3 h-3 rounded-full bg-[#3a3a3a]"></span>
-            </div>
-            <span class="ml-3 text-xs text-text-muted">Booking pipeline</span>
-          </div>
-          <div class="p-4 md:p-6">
-            <div class="grid grid-cols-4 gap-2 text-xs">
-              <!-- Column -->
-              <div>
-                <div class="flex items-center justify-between mb-2 px-2">
-                  <span class="font-medium text-text-primary">New Lead</span>
-                  <span class="text-text-muted">12</span>
-                </div>
-                <div class="space-y-2">
-                  <div class="bg-bg-primary border border-border-subtle p-2 rounded"><div class="font-medium text-text-primary truncate">Marcus T.</div><div class="text-text-muted">2m ago · 4 sessions</div><span class="inline-block mt-1 px-1.5 py-0.5 bg-accent-deep text-accent text-[10px] rounded">Sleeve</span></div>
-                  <div class="bg-bg-primary border border-border-subtle p-2 rounded"><div class="font-medium text-text-primary truncate">Jenna R.</div><div class="text-text-muted">8m ago · 1 session</div><span class="inline-block mt-1 px-1.5 py-0.5 bg-blue-900/40 text-blue-300 text-[10px] rounded">Small</span></div>
-                  <div class="bg-bg-primary border border-border-subtle p-2 rounded"><div class="font-medium text-text-primary truncate">Diego A.</div><div class="text-text-muted">14m ago · 2 sessions</div></div>
-                </div>
-              </div>
-              <div>
-                <div class="flex items-center justify-between mb-2 px-2">
-                  <span class="font-medium text-text-primary">Contacted</span>
-                  <span class="text-text-muted">8</span>
-                </div>
-                <div class="space-y-2">
-                  <div class="bg-bg-primary border border-border-subtle p-2 rounded"><div class="font-medium text-text-primary truncate">Kayla P.</div><div class="text-text-muted">1h ago · 3 sessions</div><span class="inline-block mt-1 px-1.5 py-0.5 bg-yellow-900/40 text-yellow-300 text-[10px] rounded">Quote sent</span></div>
-                  <div class="bg-bg-primary border border-border-subtle p-2 rounded"><div class="font-medium text-text-primary truncate">Tony G.</div><div class="text-text-muted">2h ago · 1 session</div></div>
-                  <div class="bg-bg-primary border border-border-subtle p-2 rounded"><div class="font-medium text-text-primary truncate">Sara M.</div><div class="text-text-muted">3h ago · 5 sessions</div></div>
-                </div>
-              </div>
-              <div>
-                <div class="flex items-center justify-between mb-2 px-2">
-                  <span class="font-medium text-text-primary">Booked</span>
-                  <span class="text-accent">19</span>
-                </div>
-                <div class="space-y-2">
-                  <div class="bg-bg-primary border border-accent/40 p-2 rounded"><div class="font-medium text-text-primary truncate">Ricky H.</div><div class="text-text-muted">Apr 14 · 4 sessions</div><span class="inline-block mt-1 px-1.5 py-0.5 bg-accent-deep text-accent text-[10px] rounded">$200 dep</span></div>
-                  <div class="bg-bg-primary border border-accent/40 p-2 rounded"><div class="font-medium text-text-primary truncate">Mei L.</div><div class="text-text-muted">Apr 16 · 2 sessions</div><span class="inline-block mt-1 px-1.5 py-0.5 bg-accent-deep text-accent text-[10px] rounded">$300 dep</span></div>
-                  <div class="bg-bg-primary border border-accent/40 p-2 rounded"><div class="font-medium text-text-primary truncate">Jake F.</div><div class="text-text-muted">Apr 18 · 1 session</div></div>
-                </div>
-              </div>
-              <div>
-                <div class="flex items-center justify-between mb-2 px-2">
-                  <span class="font-medium text-text-primary">Showed up</span>
-                  <span class="text-green-400">14</span>
-                </div>
-                <div class="space-y-2">
-                  <div class="bg-bg-primary border border-green-900/60 p-2 rounded"><div class="font-medium text-text-primary truncate">Anna K.</div><div class="text-text-muted">Apr 02 · 3 sessions</div><span class="inline-block mt-1 px-1.5 py-0.5 bg-green-900/40 text-green-300 text-[10px] rounded">✓ Paid</span></div>
-                  <div class="bg-bg-primary border border-green-900/60 p-2 rounded"><div class="font-medium text-text-primary truncate">Will B.</div><div class="text-text-muted">Apr 05 · 1 session</div></div>
-                  <div class="bg-bg-primary border border-green-900/60 p-2 rounded"><div class="font-medium text-text-primary truncate">Lin Z.</div><div class="text-text-muted">Apr 08 · 2 sessions</div></div>
-                </div>
-              </div>
-            </div>
-            <!-- PLACEHOLDER: Replace pipeline names with anonymized real data -->
-          </div>
-        </div>
-
-        <!-- iii. SMS thread mockup -->
-        <div class="card-lift mock-light border rounded-md overflow-hidden reveal">
-          <div class="window-chrome px-4 py-3 flex items-center gap-2">
-            <div class="flex gap-1.5">
-              <span class="w-3 h-3 rounded-full bg-[#3a3a3a]"></span>
-              <span class="w-3 h-3 rounded-full bg-[#3a3a3a]"></span>
-              <span class="w-3 h-3 rounded-full bg-[#3a3a3a]"></span>
-            </div>
-            <span class="ml-3 text-xs text-text-muted">SMS · Auto-qualify</span>
-          </div>
-          <div class="p-6 space-y-3 text-sm max-w-md mx-auto">
-            <div class="flex justify-end">
-              <div class="bg-blue-600 text-white px-4 py-2 rounded-2xl rounded-br-sm max-w-[75%]">Hey, looking to get a sleeve done.</div>
-            </div>
-            <div class="flex justify-start">
-              <div class="bg-[#2A2420] text-text-primary px-4 py-2 rounded-2xl rounded-bl-sm max-w-[75%]">Hey! Stoked you reached out. Quick few Qs so we can get you on the books. What size are we looking at, half or full sleeve?</div>
-            </div>
-            <div class="flex justify-end">
-              <div class="bg-blue-600 text-white px-4 py-2 rounded-2xl rounded-br-sm max-w-[75%]">Full. Black and grey, realism.</div>
-            </div>
-            <div class="flex justify-start">
-              <div class="bg-[#2A2420] text-text-primary px-4 py-2 rounded-2xl rounded-bl-sm max-w-[75%]">Perfect, that's our wheelhouse. Budget range you're working with?</div>
-            </div>
-            <div class="flex justify-end">
-              <div class="bg-blue-600 text-white px-4 py-2 rounded-2xl rounded-br-sm max-w-[75%]">$2-3k</div>
-            </div>
-            <div class="flex justify-start">
-              <div class="bg-[#2A2420] text-text-primary px-4 py-2 rounded-2xl rounded-bl-sm max-w-[75%]">You're a fit. Pick a consult time and lock it with a $100 deposit:<br/><span class="text-accent underline">studio.link/book</span></div>
-            </div>
-            <div class="text-center text-xs text-text-muted pt-2">Booked · $100 deposit collected</div>
-          </div>
-        </div>
-
-        <!-- iv. Calendar density mockup -->
-        <div class="card-lift mock-light border rounded-md overflow-hidden reveal">
-          <div class="window-chrome px-4 py-3 flex items-center gap-2">
-            <div class="flex gap-1.5">
-              <span class="w-3 h-3 rounded-full bg-[#3a3a3a]"></span>
-              <span class="w-3 h-3 rounded-full bg-[#3a3a3a]"></span>
-              <span class="w-3 h-3 rounded-full bg-[#3a3a3a]"></span>
-            </div>
-            <span class="ml-3 text-xs text-text-muted">Calendar · April</span>
-          </div>
-          <div class="p-6">
-            <div class="flex items-center justify-between mb-4 text-xs">
-              <div>
-                <div class="text-text-muted">Before</div>
-                <div class="font-medium">April 2025</div>
-              </div>
-              <div class="text-text-muted">→</div>
-              <div class="text-right">
-                <div class="text-text-muted">After</div>
-                <div class="font-medium text-accent">April 2026</div>
-              </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-4">
-              <!-- Before -->
-              <div>
-                <div class="grid grid-cols-7 gap-1 text-[10px] text-text-muted mb-1">
-                  <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
-                </div>
-                <div class="grid grid-cols-7 gap-1">
-                  <!-- 28 cells, sparse -->
-                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block opacity-60 rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block opacity-60 rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
-
-                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block opacity-60 rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block opacity-60 rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
-
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block opacity-60 rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block opacity-60 rounded-sm"></span></div>
-
-                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block opacity-60 rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
-                </div>
-                <div class="text-xs text-text-muted mt-2">7 sessions</div>
-              </div>
-
-              <!-- After -->
-              <div>
-                <div class="grid grid-cols-7 gap-1 text-[10px] text-text-muted mb-1">
-                  <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
-                </div>
-                <div class="grid grid-cols-7 gap-1">
-                  <!-- 28 cells, packed -->
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b2 rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b3 rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b2 rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b4 rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
-
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b3 rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b2 rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b5 rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b2 rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b3 rounded-sm"></span></div>
-
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b4 rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b2 rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b5 rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b3 rounded-sm"></span></div>
-
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b2 rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b4 rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b2 rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block b5 rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm relative"><span class="absolute inset-1 cal-block rounded-sm"></span></div>
-                  <div class="aspect-square bg-bg-primary rounded-sm"></div>
-                </div>
-                <div class="text-xs text-accent mt-2 font-medium">47 sessions</div>
-              </div>
-            </div>
-            <p class="text-xs text-text-muted mt-4">Studio Black Ink, same shop, 12 months apart.</p>
-            <!-- PLACEHOLDER: Replace numbers/studio name with real data -->
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- 5c. Studios we work with (rich cards) -->
-    <div class="mb-14 md:mb-20">
-      <div class="flex items-end justify-between flex-wrap gap-4 mb-10 reveal">
-        <div>
-          <h3 class="display-h2 font-serif text-text-primary mt-3">Studios we work with.</h3>
-        </div>
-        <p class="text-text-secondary max-w-md">A selection of shops we've helped fill. One per market, no overlap, no exceptions.</p>
-      </div>
-
-      <!-- PLACEHOLDER: Replace each card with real studio photo, name, city, and headline stat -->
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        <article class="card-lift group bg-surface border border-border-subtle rounded-md overflow-hidden reveal">
-          <div class="aspect-[4/3] bg-bg-primary relative overflow-hidden">
-            <img src="assets/studios/inkenstein.webp" alt="Inkenstein Tattoo Company storefront" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-            <div class="absolute inset-0 bg-gradient-to-t from-bg-primary via-transparent to-transparent"></div>
-          </div>
-          <div class="p-6">
-            <div class="flex items-start justify-between gap-4 mb-2">
-              <h4 class="text-lg font-serif">Inkenstein Tattoo Company</h4>
-              <span class="text-xs text-text-muted">Glendale, AZ</span>
-            </div>
-            <p class="text-text-secondary text-sm">Tattoo shop · 4.9 ★ on Google</p>
-            <div class="mt-4 pt-4 border-t border-border-subtle">
-              <div class="text-[10px] uppercase tracking-label text-text-muted mb-1">Bookings</div>
-              <div class="font-serif italic text-3xl text-accent leading-none">18 <span class="text-text-secondary not-italic">→</span> 47<span class="text-sm text-text-secondary not-italic ml-1">/ month</span></div>
-              <div class="text-xs text-text-muted mt-3">We took over their inbox and ran their Facebook + Instagram ads</div>
-            </div>
-          </div>
-        </article>
-
-        <article class="card-lift group bg-surface border border-border-subtle rounded-md overflow-hidden reveal">
-          <div class="aspect-[4/3] bg-bg-primary relative overflow-hidden">
-            <img src="assets/studios/copperhead.jpg" alt="Copperhead Tattoo & Piercing" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-            <div class="absolute inset-0 bg-gradient-to-t from-bg-primary via-transparent to-transparent"></div>
-          </div>
-          <div class="p-6">
-            <div class="flex items-start justify-between gap-4 mb-2">
-              <h4 class="text-lg font-serif">Copperhead Tattoo & Piercing</h4>
-              <span class="text-xs text-text-muted">Austin, TX</span>
-            </div>
-            <p class="text-text-secondary text-sm">Tattoo & piercing studio</p>
-            <div class="mt-4 pt-4 border-t border-border-subtle">
-              <div class="text-[10px] uppercase tracking-label text-text-muted mb-1">Bookings</div>
-              <div class="font-serif italic text-3xl text-accent leading-none">16 <span class="text-text-secondary not-italic">→</span> 54<span class="text-sm text-text-secondary not-italic ml-1">/ month</span></div>
-              <div class="text-xs text-text-muted mt-3">Built the funnel, replied to every DM, locked deposits up front</div>
-            </div>
-          </div>
-        </article>
-
-        <article class="card-lift group bg-surface border border-border-subtle rounded-md overflow-hidden reveal">
-          <div class="aspect-[4/3] bg-bg-primary relative overflow-hidden">
-            <img src="assets/studios/andrew-slater.jpg" alt="Andrew Slater, tattoo artist at Lakeside Tattoo Co" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-            <div class="absolute inset-0 bg-gradient-to-t from-bg-primary via-transparent to-transparent"></div>
-          </div>
-          <div class="p-6">
-            <div class="flex items-start justify-between gap-4 mb-2">
-              <h4 class="text-lg font-serif">Andrew Slater</h4>
-              <span class="text-xs text-text-muted">Richmond, VA</span>
-            </div>
-            <p class="text-text-secondary text-sm">Tattoo artist · Lakeside Tattoo Co</p>
-            <div class="mt-4 pt-4 border-t border-border-subtle">
-              <div class="text-[10px] uppercase tracking-label text-text-muted mb-1">Revenue</div>
-              <div class="font-serif italic text-3xl text-accent leading-none">$4.5k <span class="text-text-secondary not-italic">→</span> $9.8k<span class="text-sm text-text-secondary not-italic ml-1">/ month</span></div>
-              <div class="text-xs text-text-muted mt-3">Scripted his content, ran the ads, answered every inquiry</div>
-            </div>
-          </div>
-        </article>
-
-        <article class="card-lift group bg-surface border border-border-subtle rounded-md overflow-hidden reveal">
-          <div class="aspect-[4/3] bg-bg-primary relative overflow-hidden">
-            <img src="assets/studios/juliette-watier.png" alt="Juliette Watier, tattoo artist in South Florida" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" style="object-position: center 15%;" />
-            <div class="absolute inset-0 bg-gradient-to-t from-bg-primary via-transparent to-transparent"></div>
-          </div>
-          <div class="p-6">
-            <div class="flex items-start justify-between gap-4 mb-2">
-              <h4 class="text-lg font-serif">Juliette Watier</h4>
-              <span class="text-xs text-text-muted">South Florida</span>
-            </div>
-            <p class="text-text-secondary text-sm">Tattoo artist</p>
-            <div class="mt-4 pt-4 border-t border-border-subtle">
-              <div class="text-[10px] uppercase tracking-label text-text-muted mb-1">Bookings</div>
-              <div class="font-serif italic text-3xl text-accent leading-none">9 <span class="text-text-secondary not-italic">→</span> 32<span class="text-sm text-text-secondary not-italic ml-1">/ month</span></div>
-              <div class="text-xs text-text-muted mt-3">Built her booking flow and handled every message that came in</div>
-            </div>
-          </div>
-        </article>
-
-        <article class="card-lift group bg-surface border border-border-subtle rounded-md overflow-hidden reveal">
-          <div class="aspect-[4/3] bg-bg-primary relative overflow-hidden">
-            <img src="assets/studios/if-tattoo.jpg" alt="IF Tattoo Studio" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-            <div class="absolute inset-0 bg-gradient-to-t from-bg-primary via-transparent to-transparent"></div>
-          </div>
-          <div class="p-6">
-            <div class="flex items-start justify-between gap-4 mb-2">
-              <h4 class="text-lg font-serif">IF Tattoo Studio</h4>
-              <!-- PLACEHOLDER: confirm city/state -->
-              <span class="text-xs text-text-muted">Chicago, IL</span>
-            </div>
-            <p class="text-text-secondary text-sm">Black & grey tattoo studio</p>
-            <div class="mt-4 pt-4 border-t border-border-subtle">
-              <div class="text-[10px] uppercase tracking-label text-text-muted mb-1">Bookings</div>
-              <div class="font-serif italic text-3xl text-accent leading-none">16 <span class="text-text-secondary not-italic">→</span> 36<span class="text-sm text-text-secondary not-italic ml-1">/ month</span></div>
-              <div class="text-xs text-text-muted mt-3">Took the marketing off their plate so they could stay at the chair</div>
-            </div>
-          </div>
-        </article>
-
-        <article class="card-lift group bg-surface border border-border-subtle rounded-md overflow-hidden reveal">
-          <div class="aspect-[4/3] bg-bg-primary relative overflow-hidden">
-            <img src="assets/studios/gerardo-cortes.jpg" alt="Gerardo Cortes, tattoo artist in Stockton, CA" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-            <div class="absolute inset-0 bg-gradient-to-t from-bg-primary via-transparent to-transparent"></div>
-          </div>
-          <div class="p-6">
-            <div class="flex items-start justify-between gap-4 mb-2">
-              <h4 class="text-lg font-serif">Gerardo Cortes</h4>
-              <span class="text-xs text-text-muted">Stockton, CA</span>
-            </div>
-            <p class="text-text-secondary text-sm">Tattoo artist</p>
-            <div class="mt-4 pt-4 border-t border-border-subtle">
-              <div class="text-[10px] uppercase tracking-label text-text-muted mb-1">Revenue</div>
-              <div class="font-serif italic text-3xl text-accent leading-none">$3.8k <span class="text-text-secondary not-italic">→</span> $11.2k<span class="text-sm text-text-secondary not-italic ml-1">/ month</span></div>
-              <div class="text-xs text-text-muted mt-3">Ran his ads, scripted his reels, replied to every inquiry day and night</div>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
-
-    <!-- 5e. Mini case study -->
-    <div>
-      <div class="bg-bg-primary border border-border-subtle rounded-md p-8 md:p-12 reveal">
-        <div class="grid md:grid-cols-3 gap-10 items-center">
-          <div class="md:col-span-2">
-            <h3 class="display-h2 font-serif text-text-primary mt-3 mb-5">Wildhorn Tattoo, Denver, CO</h3>
-            <p class="text-text-muted text-sm uppercase tracking-label mb-2">Before</p>
-            <p class="text-text-secondary mb-5">Two artists, around 12 bookings a month. Most inquiries came through Instagram DMs that nobody had time to answer. The ones who did get a reply ghosted on pricing, and walk-ins skipped their deposits 40% of the time.</p>
-            <p class="text-text-muted text-sm uppercase tracking-label mb-2 mt-6">What we did</p>
-            <ul class="text-text-secondary space-y-2">
-              <li>· Built a Facebook and Instagram ads funnel around their black-and-grey realism style</li>
-              <li>· Wrote 12 short-form video scripts the artists filmed themselves</li>
-              <li>· Set up the booking system with deposits locked in up front</li>
-              <li>· Took over every DM and inquiry, replying within minutes day or night</li>
-              <li>· Refreshed the creative every week based on what was converting</li>
-            </ul>
-          </div>
-          <div class="md:border-l md:border-border-subtle md:pl-10">
-            <p class="text-text-muted text-sm uppercase tracking-label mb-2">After 90 days</p>
-            <div class="font-serif text-5xl md:text-6xl text-accent leading-none mb-3">12 → 47</div>
-            <p class="text-text-secondary">deposit-paid bookings per month. 92% of them showed up.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
 
 <!-- ============================================================ -->
 <!-- ===== HOW IT WORKS ===== -->
@@ -2269,75 +1775,6 @@
   </div>
 </section>
 
-<!-- ============================================================ -->
-<!-- ===== BIG TESTIMONIALS ===== -->
-<!-- ============================================================ -->
-<section class="bg-bg-secondary py-16 md:py-24 border-y border-border-subtle">
-  <div class="max-w-7xl mx-auto px-6 lg:px-12">
-
-    <!-- 5d. Testimonials -->
-    <div class="mb-14 md:mb-20">
-      <div class="max-w-3xl mb-12 reveal">
-        <h2 class="display-h2 font-serif text-text-primary mt-4">
-          Real shops,
-          <span class="italic">real numbers.</span>
-        </h2>
-      </div>
-
-      <!-- PLACEHOLDER: Sinan to insert real testimonial copy from real clients -->
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-        <article class="card-lift bg-surface border border-border-subtle p-8 rounded-md reveal">
-          <p class="font-serif text-xl leading-snug text-text-primary mb-6">"I used to answer DMs until midnight, and half of them ghosted the moment I sent pricing. Inkflow took the whole inbox off my plate. Now the bookings just show up in my calendar with the deposit already paid."</p>
-          <div class="flex items-center gap-3 mb-5">
-            <div class="w-11 h-11 rounded-full bg-gradient-to-br from-accent to-accent-deep overflow-hidden flex-shrink-0"><img src="assets/testimonials/big-jesse.jpg" alt="" loading="lazy" class="w-full h-full object-cover" /></div>
-            <div>
-              <div class="font-medium">Jesse Romero</div>
-              <div class="text-sm text-text-muted">Owner, Black Ink Co. · Phoenix, AZ</div>
-            </div>
-          </div>
-          <ul class="text-sm text-text-secondary space-y-1 border-t border-border-subtle pt-4">
-            <li>· <span class="text-text-muted">Bookings:</span> 14 <span class="text-accent">→</span> 41 / month</li>
-            <li>· 90% show-up rate (deposits paid)</li>
-            <li>· Calendar booked 3 weeks out</li>
-          </ul>
-        </article>
-
-        <article class="card-lift bg-surface border border-border-subtle p-8 rounded-md reveal">
-          <p class="font-serif text-xl leading-snug text-text-primary mb-6">"Two agencies before this just handed me lists of 'interested' people who never showed. I was drowning in IG DMs every night. With Inkflow my inbox is quiet, my chair is full, and every booking is paid for before they walk in."</p>
-          <div class="flex items-center gap-3 mb-5">
-            <div class="w-11 h-11 rounded-full bg-gradient-to-br from-accent to-accent-deep overflow-hidden flex-shrink-0"><img src="assets/testimonials/big-anna.jpg" alt="" loading="lazy" class="w-full h-full object-cover" /></div>
-            <div>
-              <div class="font-medium">Anna Kovac</div>
-              <div class="text-sm text-text-muted">Solo artist · Austin, TX</div>
-            </div>
-          </div>
-          <ul class="text-sm text-text-secondary space-y-1 border-t border-border-subtle pt-4">
-            <li>· <span class="text-text-muted">Revenue:</span> $4,200 <span class="text-accent">→</span> $13,800 / month</li>
-            <li>· 88% show-up rate</li>
-            <li>· First fully booked month in 2 years</li>
-          </ul>
-        </article>
-
-        <article class="card-lift bg-surface border border-border-subtle p-8 rounded-md reveal">
-          <p class="font-serif text-xl leading-snug text-text-primary mb-6">"Before this I was burnt out trying to be my own marketer, social media manager, and receptionist all at once. Now I film what their team scripts, walk in, and the chair is full. They reply to every message before I even see it."</p>
-          <div class="flex items-center gap-3 mb-5">
-            <div class="w-11 h-11 rounded-full bg-gradient-to-br from-accent to-accent-deep overflow-hidden flex-shrink-0"><img src="assets/testimonials/big-diego.jpg" alt="" loading="lazy" class="w-full h-full object-cover" /></div>
-            <div>
-              <div class="font-medium">Diego Marín</div>
-              <div class="text-sm text-text-muted">Owner, Hollow Hand · Brooklyn, NY</div>
-            </div>
-          </div>
-          <ul class="text-sm text-text-secondary space-y-1 border-t border-border-subtle pt-4">
-            <li>· <span class="text-text-muted">Bookings:</span> 11 <span class="text-accent">→</span> 38 / month</li>
-            <li>· Hired a second artist within 90 days</li>
-            <li>· 1.2M views on the videos we scripted</li>
-          </ul>
-        </article>
-      </div>
-    </div>
-
-  </div>
-</section>
 
 <!-- ============================================================ -->
 <!-- ===== FINAL CTA ===== -->
@@ -2568,18 +2005,13 @@
       </div>
       <div class="text-sm text-text-secondary">
         <p class="text-text-primary font-medium mb-2">Contact</p>
-        <p>Inkflow by Hero</p>
-        <p>Operated by SA Agency</p>
-        <p>Grønnegade 111, 9. th</p>
-        <p>8000 Aarhus C, Denmark</p>
         <p><a href="mailto:sinan@heromedia.dk" class="hover:text-accent">sinan@heromedia.dk</a></p>
         <p><a href="https://wa.me/4524341144" class="hover:text-accent">WhatsApp +45 24 34 11 44</a></p>
       </div>
       <div class="text-sm text-text-secondary">
-        <p class="text-text-primary font-medium mb-2">Follow</p>
+        <p class="text-text-primary font-medium mb-2">Follow us</p>
         <div class="flex gap-4 mb-5">
-          <a href="#" class="hover:text-accent">Instagram</a>
-          <a href="#" class="hover:text-accent">LinkedIn</a>
+          <a href="https://www.instagram.com/marketingbysinan/" target="_blank" rel="noopener" class="hover:text-accent" aria-label="Instagram" style="display:inline-flex;align-items:center;"><svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
           <!-- PLACEHOLDER: Real social URLs -->
         </div>
         <!-- Meta Business Partner certification -->
