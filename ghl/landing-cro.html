@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Inkflow by Hero — Book your strategy call</title>
+<title>Inkflow by Hero | Book your strategy call</title>
 <meta name="description" content="Fill your tattoo studio's chair with deposit-secured bookings. Book your free strategy call. 30 booked sessions in 30 days, guaranteed." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -79,7 +79,9 @@
   .avatars img:first-child { margin-left: 0; }
   .trust-text { font-size: 13px; color: #A8A29E; line-height: 1.4; text-align: left; }
   .trust-text strong { color: #F5F1EB; }
-  .tp-card { display: flex; align-items: center; gap: 10px; padding: 8px 14px; border: 1px solid #2A2420; border-radius: 10px; background: rgba(22,20,18,0.6); }
+  .tp-row { display: flex; justify-content: center; margin-bottom: 22px; }
+  .tp-card { display: inline-flex; align-items: center; gap: 10px; padding: 8px 14px; border: 1px solid #2A2420; border-radius: 10px; background: rgba(22,20,18,0.6); text-decoration: none; transition: border-color 200ms ease, transform 200ms ease; }
+  .tp-card:hover { border-color: rgba(0,182,122,0.45); transform: translateY(-1px); }
   .tp-stars { height: 18px; width: auto; }
   .tp-meta { font-size: 12px; color: #A8A29E; line-height: 1.3; text-align: left; }
   .tp-meta strong { color: #F5F1EB; }
@@ -102,8 +104,8 @@
   .bk-foot svg { width: 15px; height: 15px; color: #22C55E; flex-shrink: 0; }
 
   /* SECTIONS */
-  .section { position: relative; z-index: 10; padding: 60px 0; }
-  @media (min-width: 768px) { .section { padding: 84px 0; } }
+  .section { position: relative; z-index: 10; padding: 56px 0; }
+  @media (min-width: 768px) { .section { padding: 72px 0; } }
   .section-alt { background: #0F0D0B; border-top: 1px solid #2A2420; border-bottom: 1px solid #2A2420; }
   .eyebrow { text-transform: uppercase; letter-spacing: 0.15em; font-size: 12px; font-weight: 600; color: #A8A29E; margin-bottom: 14px; text-align: center; }
   .h2 { font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; font-size: clamp(30px, 4vw, 46px); color: #F5F1EB; text-align: center; margin-bottom: 16px; }
@@ -293,12 +295,22 @@
         <span class="italic-accent">We handle the rest.</span>
       </h1>
 
-      <p class="sub">We run the Facebook & Instagram ads, answer every lead, and book deposit-paid sessions straight into your calendar. You just show up and tattoo.</p>
+      <p class="sub">From the first ad to the deposit in your calendar: targeting, creatives, landing pages, DM replies, sales calls, bookings, and follow-ups, all handled by us every single week.</p>
+
+      <!-- Trust signals -->
+      <div class="tp-row">
+        <a class="tp-card" href="https://dk.trustpilot.com/review/heromedia.dk" target="_blank" rel="noopener">
+          <img class="tp-stars" src="https://majestic100.github.io/Highlevel/assets/avatars/stars-5.svg" alt="4.7 out of 5 stars" />
+          <span class="tp-meta"><strong>4.7</strong> from 30+ reviews on
+            <span class="tp-brand"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.95 6.95L22 10l-5.5 4.8L18.18 22 12 18.27 5.82 22l1.68-7.2L2 10l7.05-1.05L12 2z"/></svg>Trustpilot</span>
+          </span>
+        </a>
+      </div>
 
       <div class="benefits">
         <div class="benefit">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span>30 sessions in 30 days, or we refund our fee</span>
+          <span>20 new clients in 30 days, or we refund our fee</span>
         </div>
         <div class="benefit">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -343,7 +355,7 @@
   <div class="container">
     <p class="eyebrow">How it works</p>
     <h2 class="h2">From booked call to <span class="italic-accent">full chair</span></h2>
-    <p class="section-sub">You book the call. We build the machine. You tattoo. That's the whole thing.</p>
+    <p class="section-sub">You book the call, we build the machine, and you stay at the chair tattooing while it runs.</p>
     <div class="steps">
       <div class="step">
         <span class="step-num">1</span>
