@@ -72,45 +72,47 @@
   .ink-nav-scrolled { background-color: rgba(10,10,10,0.85); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid #2A2420; }
 
   /* MAIN */
-  .inkflow-root main { position: relative; z-index: 10; padding: 120px 0 80px; }
-  @media (min-width: 768px) { .inkflow-root main { padding: 150px 0 96px; } }
+  .inkflow-root main { position: relative; z-index: 10; padding: 92px 0 72px; }
+  @media (min-width: 768px) { .inkflow-root main { padding: 112px 0 88px; } }
   .ink-container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
   @media (min-width: 1024px) { .ink-container { padding: 0 48px; } }
   .ink-narrow { max-width: 760px; margin: 0 auto; text-align: center; }
 
-  .ink-block { margin-bottom: 72px; }
-  @media (min-width: 768px) { .ink-block { margin-bottom: 96px; } }
+  .ink-block { margin-bottom: 56px; }
+  @media (min-width: 768px) { .ink-block { margin-bottom: 76px; } }
+  .ink-block.tight { margin-bottom: 30px; }
+  @media (min-width: 768px) { .ink-block.tight { margin-bottom: 42px; } }
   .ink-block:last-child { margin-bottom: 0; }
 
   /* Labels + headings */
-  .ink-label { display: inline-block; text-transform: uppercase; letter-spacing: 0.15em; font-size: 12px; font-weight: 500; color: #A8A29E; margin-bottom: 16px; }
+  .ink-label { display: inline-block; text-transform: uppercase; letter-spacing: 0.15em; font-size: 12px; font-weight: 500; color: #A8A29E; margin-bottom: 13px; }
   .ink-label.accent { color: #DC2626; }
   .display-h1 {
     font-family: 'Bricolage Grotesque', system-ui, sans-serif;
-    font-weight: 800; letter-spacing: -0.02em; line-height: 1.04;
-    font-size: clamp(40px, 6vw, 68px); color: #F5F1EB; margin-bottom: 22px;
+    font-weight: 800; letter-spacing: -0.02em; line-height: 1.04; text-wrap: balance;
+    font-size: clamp(40px, 6vw, 68px); color: #F5F1EB; margin-bottom: 14px;
   }
   .display-h1 .italic-accent { font-style: italic; color: #DC2626; }
   .sec-h2 {
     font-family: 'Bricolage Grotesque', system-ui, sans-serif;
-    font-weight: 800; letter-spacing: -0.02em; line-height: 1.1;
+    font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; text-wrap: balance;
     font-size: clamp(28px, 3.6vw, 42px); color: #F5F1EB; margin-bottom: 14px;
   }
-  .lead { color: #A8A29E; font-size: 18px; line-height: 1.65; max-width: 56ch; margin: 0 auto; }
+  .lead { color: #A8A29E; font-size: 18px; line-height: 1.65; max-width: 60ch; margin: 0 auto; text-wrap: balance; }
   .lead strong { color: #F5F1EB; font-weight: 600; }
-  .sec-lead { color: #A8A29E; font-size: 17px; line-height: 1.65; max-width: 54ch; margin: 0 auto 36px; }
+  .sec-lead { color: #A8A29E; font-size: 17px; line-height: 1.65; max-width: 56ch; margin: 0 auto 26px; text-wrap: balance; }
   .sec-lead strong { color: #F5F1EB; font-weight: 600; }
 
   /* Confirmation badge */
   .confirm-badge {
-    width: 88px; height: 88px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 28px;
+    width: 72px; height: 72px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 18px;
     background: radial-gradient(circle at 50% 38%, rgba(34,197,94,0.20), rgba(34,197,94,0.04));
     border: 1px solid rgba(34,197,94,0.45);
     box-shadow: 0 0 0 8px rgba(34,197,94,0.05), 0 0 48px rgba(34,197,94,0.18);
     animation: ink-pop 640ms cubic-bezier(.22,1,.36,1) both;
   }
-  .confirm-badge svg { width: 42px; height: 42px; color: #22C55E; }
+  .confirm-badge svg { width: 34px; height: 34px; color: #22C55E; }
   @keyframes ink-pop { 0% { transform: scale(0.55); opacity: 0; } 60% { transform: scale(1.06); } 100% { transform: scale(1); opacity: 1; } }
 
   /* Video */
@@ -162,7 +164,7 @@
   .cal-fallback svg { width: 18px; height: 18px; color: #EF4444; vertical-align: -3px; margin-right: 8px; }
 
   /* Steps */
-  .steps { display: grid; gap: 16px; grid-template-columns: 1fr; text-align: left; }
+  .steps { display: grid; gap: 24px; grid-template-columns: 1fr; text-align: left; }
   @media (min-width: 768px) { .steps { grid-template-columns: repeat(3, 1fr); } }
   .step {
     position: relative; padding: 28px 24px; border-radius: 12px; border: 1px solid #2A2420;
@@ -209,7 +211,11 @@
 </head>
 <body>
 <div class="inkflow-root grain-bg">
-<div aria-hidden="true" style="position:fixed; inset:0; background:#060606; z-index:0; pointer-events:none;"></div>
+<div aria-hidden="true" style="position:fixed; inset:0; z-index:0; pointer-events:none; background:
+  radial-gradient(1000px 620px at 50% -2%, rgba(220,38,38,0.15), rgba(220,38,38,0) 55%),
+  radial-gradient(640px 460px at 82% 24%, rgba(220,38,38,0.08), rgba(220,38,38,0) 60%),
+  radial-gradient(720px 520px at 10% 82%, rgba(220,38,38,0.08), rgba(220,38,38,0) 60%),
+  #060606;"></div>
 
 <header id="ink-nav" class="ink-nav">
   <div class="ink-nav-inner">
@@ -227,7 +233,7 @@
   <div class="ink-container">
 
     <!-- ░░ CONFIRMATION ░░ -->
-    <div class="ink-block ink-narrow">
+    <div class="ink-block ink-narrow tight">
       <div class="confirm-badge reveal" data-d="0">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
