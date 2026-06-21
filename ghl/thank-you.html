@@ -83,7 +83,7 @@
   .display-h1 {
     font-family: 'Bricolage Grotesque', system-ui, sans-serif;
     font-weight: 800; letter-spacing: -0.02em; line-height: 1.03;
-    font-size: clamp(40px, 5vw, 62px); color: #F5F1EB; margin-bottom: 18px;
+    font-size: clamp(32px, 8vw, 60px); color: #F5F1EB; margin-bottom: 18px;
   }
   .display-h1 .italic-accent { font-style: italic; color: #DC2626; }
   .sec-h2 {
@@ -140,11 +140,11 @@
 
   /* Add-to-calendar (left-aligned) */
   .cal-when {
-    display: inline-flex; align-items: center; gap: 10px;
+    display: inline-flex; align-items: flex-start; gap: 10px;
     background: rgba(220,38,38,0.07); border: 1px solid rgba(220,38,38,0.22);
-    color: #F5F1EB; padding: 10px 18px; border-radius: 999px; font-size: 15px; font-weight: 500; margin: 0 0 16px;
+    color: #F5F1EB; padding: 11px 18px; border-radius: 12px; font-size: 15px; font-weight: 500; line-height: 1.45; margin: 0 0 16px;
   }
-  .cal-when svg { width: 17px; height: 17px; color: #EF4444; flex-shrink: 0; }
+  .cal-when svg { width: 17px; height: 17px; color: #EF4444; flex-shrink: 0; margin-top: 2px; }
   .cal-wrap { position: relative; display: block; }
   .btn-cal {
     display: inline-flex; align-items: center; gap: 12px; background: #DC2626; color: #fff;
@@ -169,6 +169,12 @@
   .cal-menu svg { width: 18px; height: 18px; color: #A8A29E; flex-shrink: 0; }
   .cal-fallback { color: #A8A29E; font-size: 15px; line-height: 1.6; max-width: 42ch; margin: 0; }
   .cal-fallback svg { width: 18px; height: 18px; color: #EF4444; vertical-align: -3px; margin-right: 8px; }
+
+  /* Mobile: full-width calendar CTA */
+  @media (max-width: 699px) {
+    .cal-when { width: 100%; }
+    .btn-cal { width: 100%; justify-content: center; }
+  }
 
   /* What happens next */
   .next-head { margin-bottom: 28px; }
