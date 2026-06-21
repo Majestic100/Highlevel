@@ -5,32 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="noindex" />
 <title>You're booked in — Inkflow Studios</title>
-<meta name="description" content="Your free growth review is confirmed. Watch the short pre-call video and add the call to your calendar so you don't miss it." />
+<meta name="description" content="Your free growth review is confirmed. Watch the short pre-call video, add the call to your calendar, and see exactly what we'll cover." />
 
 <!--
   ════════════════════════════════════════════════════════════════════════
-  INKFLOW — BOOKING THANK-YOU PAGE  (drop into GoHighLevel)
+  INKFLOW — BOOKING THANK-YOU / PRE-SELL PAGE  (drop into GoHighLevel)
   ════════════════════════════════════════════════════════════════════════
-
-  HOW TO DEPLOY IN GHL (recommended — makes the calendar time dynamic):
-  1. Create a new Funnel/Website step (a blank page) for this thank-you page.
-  2. Add a "Custom Code / HTML" element (full width) and paste this whole file,
-     OR import this file as the page's HTML.
-  3. On your Calendar element/widget, set the on-submit action to
-     "Go to next step"  →  point it at this thank-you step.
-     (This is what lets {{appointment.start_time}} below fill in the real
-      booked time. A plain external "Redirect to URL" will NOT populate it.)
-
-  TWO THINGS TO REPLACE BEFORE GOING LIVE:
-  • WISTIA_MEDIA_ID  — see the <iframe> in the VIDEO section below.
-  • Nothing else is required. The calendar time fills in automatically via
-    the GHL merge fields in the CONFIG block (bottom <script>).
-
-  IF YOU REDIRECT TO AN EXTERNAL URL INSTEAD (merge fields won't work there):
-  • Either pass the time as URL params:  ?start=2026-06-26T14:00:00+02:00&end=2026-06-26T14:30:00+02:00
-  • Or set CONFIG.fallbackStart / fallbackEnd in the script.
-  • If no time is found, the page gracefully hides the buttons and tells the
-    visitor to use the calendar invite in their email.
+  DEPLOY: paste into a Custom Code/HTML element on a funnel step, and set the
+  calendar's on-submit action to "Go to next step" → this thank-you step
+  (that's what fills {{appointment.start_time}} with the real booked time).
+  REPLACE: WISTIA_MEDIA_ID in the <iframe> when your video is ready.
   ════════════════════════════════════════════════════════════════════════
 -->
 
@@ -76,8 +60,10 @@
   @media (min-width: 768px) { .inkflow-root main { padding: 124px 0 96px; } }
   .ink-container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
   @media (min-width: 1024px) { .ink-container { padding: 0 48px; } }
+  .block { margin-bottom: 60px; }
+  @media (min-width: 768px) { .block { margin-bottom: 88px; } }
 
-  /* Labels + headings (left-aligned, matching the main site) */
+  /* Labels + headings (left-aligned) */
   .ink-label { display: inline-block; text-transform: uppercase; letter-spacing: 0.15em; font-size: 12px; font-weight: 500; color: #A8A29E; margin-bottom: 14px; }
   .ink-label.accent { color: #DC2626; }
   .display-h1 {
@@ -91,12 +77,13 @@
     font-weight: 800; letter-spacing: -0.02em; line-height: 1.1;
     font-size: clamp(28px, 3.4vw, 40px); color: #F5F1EB; margin-bottom: 12px;
   }
+  .sec-h2 .italic-accent { font-style: italic; color: #DC2626; }
   .lead { color: #A8A29E; font-size: 18px; line-height: 1.6; max-width: 50ch; }
   .lead strong { color: #F5F1EB; font-weight: 600; }
+  .sec-lead { color: #A8A29E; font-size: 17px; line-height: 1.6; max-width: 62ch; margin-bottom: 28px; }
+  .sec-lead strong { color: #F5F1EB; font-weight: 600; }
 
   /* HERO split layout: copy left, video right (stacks on mobile, video high) */
-  .hero { margin-bottom: 64px; }
-  @media (min-width: 768px) { .hero { margin-bottom: 96px; } }
   .hero-grid { display: block; }
   .hero-video { margin-top: 30px; }
   .hero-cal   { margin-top: 30px; }
@@ -167,14 +154,85 @@
   .cal-menu a { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 8px; color: #F5F1EB; font-size: 14px; transition: background 150ms ease; }
   .cal-menu a:hover { background: rgba(255,255,255,0.05); }
   .cal-menu svg { width: 18px; height: 18px; color: #A8A29E; flex-shrink: 0; }
-  .cal-fallback { color: #A8A29E; font-size: 15px; line-height: 1.6; max-width: 42ch; margin: 0; }
+  .cal-fallback { color: #A8A29E; font-size: 15px; line-height: 1.6; max-width: 42ch; margin: 12px 0 0; }
   .cal-fallback svg { width: 18px; height: 18px; color: #EF4444; vertical-align: -3px; margin-right: 8px; }
-
-  /* Mobile: full-width calendar CTA */
   @media (max-width: 699px) {
     .cal-when { width: 100%; }
     .btn-cal { width: 100%; justify-content: center; }
   }
+
+  /* Call agenda checklist */
+  .check-list { display: grid; gap: 15px; max-width: 680px; }
+  .check-row { display: flex; align-items: flex-start; gap: 13px; color: #D6D0C8; font-size: 16px; line-height: 1.55; }
+  .check-row svg { width: 21px; height: 21px; color: #DC2626; flex-shrink: 0; margin-top: 2px; }
+  .check-row strong { color: #F5F1EB; font-weight: 600; }
+  .agenda-note {
+    margin-top: 24px; max-width: 680px; border-left: 3px solid #DC2626;
+    background: rgba(220,38,38,0.06); padding: 16px 20px; border-radius: 0 10px 10px 0;
+    color: #A8A29E; font-size: 15px; line-height: 1.6;
+  }
+  .agenda-note strong { color: #F5F1EB; font-weight: 600; }
+
+  /* Guarantee centerpiece */
+  .guarantee {
+    position: relative; border-radius: 16px; border: 1px solid rgba(220,38,38,0.38);
+    background: linear-gradient(180deg, rgba(220,38,38,0.12), rgba(220,38,38,0.02));
+    padding: 36px 28px; text-align: center; overflow: hidden;
+  }
+  @media (min-width: 768px) { .guarantee { padding: 44px 40px; } }
+  .guarantee .ink-label { color: #EF4444; }
+  .guarantee h3 {
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800;
+    font-size: clamp(23px, 3vw, 34px); color: #F5F1EB; line-height: 1.18; letter-spacing: -0.02em;
+    max-width: 22ch; margin: 0 auto; text-wrap: balance;
+  }
+  .guarantee h3 .accent { color: #EF4444; font-style: italic; }
+  .guarantee p { color: #A8A29E; margin: 14px auto 0; font-size: 15px; max-width: 56ch; line-height: 1.6; }
+
+  /* Differentiators */
+  .diffs { display: grid; gap: 18px; grid-template-columns: 1fr; margin-top: 26px; }
+  @media (min-width: 768px) { .diffs { grid-template-columns: repeat(3, 1fr); } }
+  .diff {
+    padding: 26px 24px; border-radius: 12px; border: 1px solid #2A2420;
+    background: linear-gradient(180deg, rgba(28,28,28,0.6), rgba(20,20,20,0.6));
+  }
+  .diff-ic {
+    width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    background: rgba(220,38,38,0.10); border: 1px solid rgba(220,38,38,0.25); color: #EF4444; margin-bottom: 16px;
+  }
+  .diff-ic svg { width: 20px; height: 20px; }
+  .diff h3 { font-size: 17px; color: #F5F1EB; margin-bottom: 8px; font-weight: 600; }
+  .diff p { font-size: 14.5px; color: #A8A29E; line-height: 1.6; }
+
+  /* Meet Sinan */
+  .about {
+    display: grid; gap: 26px; grid-template-columns: 1fr; align-items: center;
+    border: 1px solid #2A2420; border-radius: 16px; padding: 28px;
+    background: linear-gradient(180deg, rgba(28,28,28,0.5), rgba(20,20,20,0.5));
+  }
+  @media (min-width: 768px) { .about { grid-template-columns: 210px 1fr; gap: 36px; padding: 36px; } }
+  .about-photo { aspect-ratio: 4/5; border-radius: 14px; overflow: hidden; border: 1px solid #2A2420; max-width: 260px; }
+  .about-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .about-quote {
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-style: italic; font-weight: 700;
+    font-size: clamp(20px, 2.3vw, 27px); color: #F5F1EB; line-height: 1.32; letter-spacing: -0.01em;
+  }
+  .about-quote .accent { color: #DC2626; font-style: italic; }
+  .about-body { color: #A8A29E; font-size: 15px; line-height: 1.65; margin-top: 16px; max-width: 58ch; }
+  .about-sig { margin-top: 18px; display: flex; align-items: center; gap: 12px; }
+  .about-sig .line { width: 28px; height: 1px; background: #DC2626; }
+  .about-sig .name { font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-style: italic; font-weight: 700; font-size: 19px; color: #F5F1EB; }
+  .about-sig .role { font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: #6B6663; margin-left: auto; }
+
+  /* FAQ */
+  .faq { display: grid; gap: 12px; max-width: 780px; }
+  .faq details { border: 1px solid #2A2420; border-radius: 12px; background: rgba(255,255,255,0.015); overflow: hidden; }
+  .faq summary { cursor: pointer; list-style: none; padding: 18px 20px; font-weight: 600; color: #F5F1EB; font-size: 16px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary .ic { width: 20px; height: 20px; color: #DC2626; flex-shrink: 0; transition: transform 220ms ease; }
+  .faq details[open] summary .ic { transform: rotate(45deg); }
+  .faq .faq-a { padding: 0 20px 18px; color: #A8A29E; font-size: 15px; line-height: 1.65; }
+  .faq .faq-a strong { color: #F5F1EB; font-weight: 600; }
 
   /* What happens next */
   .next-head { margin-bottom: 28px; }
@@ -193,7 +251,16 @@
   }
   .step h3 { font-size: 17px; color: #F5F1EB; margin-bottom: 8px; font-weight: 600; }
   .step p { font-size: 14.5px; color: #A8A29E; line-height: 1.6; }
-  .ink-note { margin-top: 26px; color: #6B6663; font-size: 14px; }
+
+  /* Urgency note */
+  .urgency {
+    margin-top: 28px; display: flex; align-items: flex-start; gap: 12px;
+    border: 1px solid rgba(220,38,38,0.25); background: rgba(220,38,38,0.06);
+    border-radius: 12px; padding: 16px 20px; max-width: 760px; color: #A8A29E; font-size: 15px; line-height: 1.6;
+  }
+  .urgency svg { width: 20px; height: 20px; color: #EF4444; flex-shrink: 0; margin-top: 2px; }
+  .urgency strong { color: #F5F1EB; font-weight: 600; }
+  .ink-note { margin-top: 22px; color: #6B6663; font-size: 14px; }
   .ink-note a { color: #A8A29E; text-decoration: underline; }
   .ink-note a:hover { color: #DC2626; }
 
@@ -227,7 +294,7 @@
 <div class="inkflow-root grain-bg">
 <div aria-hidden="true" style="position:fixed; inset:0; z-index:0; pointer-events:none; background:
   radial-gradient(1100px 720px at 22% -10%, rgba(220,38,38,0.20), rgba(220,38,38,0) 58%),
-  radial-gradient(900px 700px at 100% 110%, rgba(220,38,38,0.12), rgba(220,38,38,0) 60%),
+  radial-gradient(900px 700px at 100% 8%, rgba(220,38,38,0.10), rgba(220,38,38,0) 60%),
   #060606;"></div>
 
 <header id="ink-nav" class="ink-nav">
@@ -246,9 +313,8 @@
   <div class="ink-container">
 
     <!-- ░░ HERO: copy left, video right ░░ -->
-    <section class="hero hero-grid">
+    <section class="block hero-grid">
 
-      <!-- LEFT: confirmation + copy -->
       <div class="hero-copy">
         <span class="confirm-pill reveal" data-d="0">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -256,11 +322,10 @@
         </span>
         <h1 class="display-h1 reveal" data-d="80">You're <span class="italic-accent">booked in</span>.</h1>
         <p class="lead reveal" data-d="160">
-          Your spot is <strong>locked in</strong> — your confirmation and video-call link are on the way to your inbox. Two quick things before we talk.
+          Smart move. Your spot is <strong>locked in</strong> and your call link is on the way to your inbox. Watch the short video, then add the call to your calendar so you're ready when we talk.
         </p>
       </div>
 
-      <!-- RIGHT: pre-call video -->
       <div class="hero-video reveal" data-d="240">
         <span class="ink-label accent video-label">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
@@ -275,7 +340,6 @@
         </div>
       </div>
 
-      <!-- LEFT (below copy): add to calendar -->
       <div class="hero-cal reveal" data-d="200">
         <span class="ink-label">Add the call to your calendar</span>
         <div id="cal-when" class="cal-when" style="display:none;">
@@ -283,7 +347,7 @@
           <span id="cal-when-text">&nbsp;</span>
         </div>
 
-        <div id="cal-wrap" class="cal-wrap" style="display:none;">
+        <div id="cal-wrap" class="cal-wrap">
           <button type="button" id="cal-btn" class="btn-cal" aria-haspopup="true" aria-expanded="false">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v4M10 16h4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             <span>Add to Calendar</span>
@@ -321,17 +385,104 @@
 
     </section>
 
+    <!-- ░░ WHAT WE'LL COVER ░░ -->
+    <section class="block">
+      <span class="ink-label reveal" data-d="0">Your free growth review</span>
+      <h2 class="sec-h2 reveal" data-d="60">What we'll cover on the call</h2>
+      <p class="sec-lead reveal" data-d="120">This isn't a sales pitch. It's a working session — we dig into your shop and you walk away with a clear plan, whether we end up a fit or not.</p>
+      <div class="check-list">
+        <div class="check-row reveal" data-d="160"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>A <strong>live audit</strong> of how your shop is bringing in clients today.</span></div>
+        <div class="check-row reveal" data-d="200"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>A <strong>specific plan</strong> to fill your chair with deposit-paid bookings.</span></div>
+        <div class="check-row reveal" data-d="240"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>A review of your <strong>ads, content, and how your DMs are handled</strong> right now.</span></div>
+        <div class="check-row reveal" data-d="280"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>A walkthrough of how we'd grow <strong>your</strong> shop specifically — not a template.</span></div>
+        <div class="check-row reveal" data-d="320"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Bonus:</strong> a quick scan of what other shops in your area are running for ads.</span></div>
+      </div>
+      <div class="agenda-note reveal" data-d="360">
+        Come ready with your numbers — average ticket, roughly how many bookings a month, and what's been working and what hasn't. The more honest the inputs, the sharper the plan you leave with.
+      </div>
+    </section>
+
+    <!-- ░░ GUARANTEE + WHY US ░░ -->
+    <section class="block">
+      <div class="guarantee reveal" data-d="0">
+        <span class="ink-label">The guarantee</span>
+        <h3><span class="accent">30 booked sessions</span> in your first 30 days — or we refund our fee and cover your next month's ad spend.</h3>
+        <p>We can promise that because we vet every studio before we onboard. If we don't believe we can hit the number for your shop, we won't take you on.</p>
+      </div>
+      <div class="diffs">
+        <div class="diff reveal" data-d="80">
+          <div class="diff-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.5" fill="currentColor"/></svg></div>
+          <h3>Only tattoo studios</h3>
+          <p>We work with tattoo shops and nothing else, so the playbook is already dialed in for your market.</p>
+        </div>
+        <div class="diff reveal" data-d="160">
+          <div class="diff-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>Real bookings, real deposits</h3>
+          <p>We measure booked sessions with paid deposits — not lists of curious people who never show.</p>
+        </div>
+        <div class="diff reveal" data-d="240">
+          <div class="diff-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3" stroke-linecap="round"/></svg></div>
+          <h3>One studio per market</h3>
+          <p>We lock you in as the only shop we grow in your area. We never run your ads against the studio down the street.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ░░ MEET SINAN ░░ -->
+    <section class="block">
+      <span class="ink-label reveal" data-d="0">Who you'll be talking to</span>
+      <h2 class="sec-h2 reveal" data-d="60">Meet Sinan</h2>
+      <div class="about reveal" data-d="120">
+        <div class="about-photo">
+          <img src="https://majestic100.github.io/Highlevel/assets/about/sinan.jpg" alt="Sinan, founder of Inkflow" loading="lazy" />
+        </div>
+        <div>
+          <p class="about-quote">"I'm not a tattoo artist. I'm the guy who <span class="accent">takes the marketing off your plate</span> so you can stay at the chair."</p>
+          <p class="about-body">I started Inkflow because I watched too many talented artists earn less than they should while their calendars sat half-empty — not because they weren't great, but because nobody ran their marketing like a business. So I built the whole machine: ads, content scripts, booking system, every DM answered. You tattoo. The shop fills.</p>
+          <div class="about-sig">
+            <span class="line"></span>
+            <span class="name">Sinan</span>
+            <span class="role">Founder · Inkflow</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ░░ FAQ ░░ -->
+    <section class="block">
+      <span class="ink-label reveal" data-d="0">Before we talk</span>
+      <h2 class="sec-h2 reveal" data-d="60">Questions studios ask us</h2>
+      <div class="faq" style="margin-top:24px;">
+        <details class="reveal" data-d="120">
+          <summary>How fast will I see real results?<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></summary>
+          <div class="faq-a">Most studios get their first deposit-secured booking within 7 days of launch, and inside 30 days you should be sitting at 30 booked sessions or more. <strong>That's our guarantee, not a hope.</strong></div>
+        </details>
+        <details class="reveal" data-d="170">
+          <summary>What if ads just don't work for my studio?<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></summary>
+          <div class="faq-a">If we miss the 30-in-30 guarantee, we <strong>refund our fee and cover your next month's ad spend.</strong> We can offer that because we vet every studio first — if we don't think we can hit the number, we won't take you on.</div>
+        </details>
+        <details class="reveal" data-d="220">
+          <summary>What kind of ad spend do I need?<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></summary>
+          <div class="faq-a">Most studios run between <strong>$1,500 and $5,000 a month</strong> in ad spend. The right number depends on your market and how aggressive you want to be. Ad spend goes directly to the platform, not to us.</div>
+        </details>
+        <details class="reveal" data-d="270">
+          <summary>What if my market is already taken?<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></summary>
+          <div class="faq-a">One studio per market is a hard rule. We'll tell you the moment you mention your city — if it's open, <strong>we move fast before someone else claims it.</strong></div>
+        </details>
+      </div>
+    </section>
+
     <!-- ░░ WHAT HAPPENS NEXT ░░ -->
-    <section class="next">
+    <section class="block">
       <div class="next-head">
         <span class="ink-label reveal" data-d="0">What happens next</span>
-        <h2 class="sec-h2 reveal" data-d="60">Here's what to do now</h2>
+        <h2 class="sec-h2 reveal" data-d="60">Get the most out of our call</h2>
       </div>
       <div class="steps">
         <div class="step reveal" data-d="120">
           <div class="step-num">1</div>
           <h3>Check your inbox</h3>
-          <p>We've sent your confirmation and the video-call link. Don't see it? Check spam or the promotions tab and whitelist us.</p>
+          <p>Your confirmation and the video-call link are on the way. Don't see it? Check spam or the promotions tab and whitelist us.</p>
         </div>
         <div class="step reveal" data-d="200">
           <div class="step-num">2</div>
@@ -341,10 +492,14 @@
         <div class="step reveal" data-d="280">
           <div class="step-num">3</div>
           <h3>Show up ready</h3>
-          <p>Bring your current numbers and questions. We'll audit your setup live and map out your next 30 days, chair-by-chair.</p>
+          <p>Bring your average ticket, your rough monthly bookings, and your questions. We'll map out your next 30 days, chair-by-chair.</p>
         </div>
       </div>
-      <p class="ink-note reveal" data-d="320">
+      <div class="urgency reveal" data-d="320">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>We only take <strong>one studio per market</strong>, so your time is being held for you. If anything changes, give us a heads-up so we can free it for the next shop.</span>
+      </div>
+      <p class="ink-note reveal" data-d="360">
         Need to reschedule? Use the link in your confirmation email — just give us a heads-up.
       </p>
     </section>
@@ -404,8 +559,7 @@
     /* If the end time is unknown, the call length defaults to this many minutes. */
     durationMinutes: 30,
 
-    /* Optional hardcoded fallback (ISO 8601), used only if nothing else is found.
-       Example: "2026-06-26T14:00:00+02:00"  */
+    /* Optional hardcoded fallback (ISO 8601), used only if nothing else is found. */
     fallbackStart: "2026-06-26T14:00:00+02:00",
     fallbackEnd: "2026-06-26T14:30:00+02:00"
   };
@@ -414,7 +568,6 @@
   (function () {
     document.getElementById('ink-year').textContent = new Date().getFullYear();
 
-    /* Sticky nav background */
     var nav = document.getElementById('ink-nav');
     function onScroll() {
       if (window.scrollY > 60) nav.classList.add('ink-nav-scrolled');
@@ -423,7 +576,6 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 
-    /* Reveal animations */
     var root = document.querySelector('.inkflow-root');
     if (root && 'IntersectionObserver' in window) {
       root.classList.add('anim-ready');
@@ -439,13 +591,12 @@
       root.querySelectorAll('.reveal').forEach(function (el) { obs.observe(el); });
     }
 
-    /* ───────────── Add-to-Calendar ───────────── */
+    /* Add-to-Calendar */
     var enc = encodeURIComponent;
-
     function clean(v) {
       if (v === null || v === undefined) return '';
       v = ('' + v).trim();
-      if (v === '' || v.indexOf('{{') !== -1) return ''; /* unresolved merge field */
+      if (v === '' || v.indexOf('{{') !== -1) return '';
       return v;
     }
     function parseDate(v) {
@@ -464,7 +615,6 @@
     }
     function icsEsc(s) { return ('' + s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n'); }
 
-    /* Resolve event values: URL params > GHL merge fields > hardcoded fallback */
     var qs = new URLSearchParams(window.location.search);
     var title = clean(qs.get('title'))    || CONFIG.title;
     var loc   = clean(qs.get('location')) || CONFIG.location;
@@ -477,14 +627,22 @@
     var wrap = document.getElementById('cal-wrap');
     var whenEl = document.getElementById('cal-when');
     var fallback = document.getElementById('cal-fallback');
+    var btn = document.getElementById('cal-btn');
 
     if (!start) {
-      /* No usable time — degrade gracefully */
-      if (fallback) fallback.style.display = 'block';
+      /* No booked time available (e.g. testing without GHL data): keep the
+         button visible, but point people to the invite in their email. */
+      var menuEl = document.getElementById('cal-menu');
+      if (menuEl) menuEl.style.display = 'none';
+      var chevEl = btn.querySelector('.chev');
+      if (chevEl) chevEl.style.display = 'none';
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (fallback) fallback.style.display = 'block';
+      });
       return;
     }
 
-    /* Show the human-readable date/time in the visitor's local timezone */
     try {
       var fmt = new Intl.DateTimeFormat(navigator.language || 'en-US', {
         weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
@@ -492,9 +650,8 @@
       });
       document.getElementById('cal-when-text').textContent = fmt.format(start);
       whenEl.style.display = 'inline-flex';
-    } catch (e) { /* Intl unsupported — skip the pill */ }
+    } catch (e) {}
 
-    /* Build provider links */
     var gp = '&details=' + enc(details) + '&location=' + enc(loc);
     document.getElementById('cal-google').href =
       'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + enc(title) +
@@ -524,18 +681,15 @@
 
     wrap.style.display = 'block';
 
-    /* Dropdown toggle */
-    var btn = document.getElementById('cal-btn');
-    function close() { wrap.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); }
-    function toggle(e) {
+    var close2 = function () { wrap.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); };
+    btn.addEventListener('click', function (e) {
       e.stopPropagation();
       var isOpen = wrap.classList.toggle('open');
       btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    }
-    btn.addEventListener('click', toggle);
-    document.addEventListener('click', function (e) { if (!wrap.contains(e.target)) close(); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
-    document.getElementById('cal-menu').addEventListener('click', function () { setTimeout(close, 80); });
+    });
+    document.addEventListener('click', function (e) { if (!wrap.contains(e.target)) close2(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close2(); });
+    document.getElementById('cal-menu').addEventListener('click', function () { setTimeout(close2, 80); });
   })();
 </script>
 <!-- Wistia helper (responsive + analytics). Safe to keep even before you add your video ID. -->
