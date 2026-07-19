@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<title>You're booked in — Inkflow Studios</title>
+<meta name="description" content="Your free growth review is confirmed. Watch the short pre-call video, add the call to your calendar, and see exactly what we'll cover." />
+
+<!--
+  ════════════════════════════════════════════════════════════════════════
+  INKFLOW — BOOKING THANK-YOU / PRE-SELL PAGE  (drop into GoHighLevel)
+  ════════════════════════════════════════════════════════════════════════
+  DEPLOY: paste into a Custom Code/HTML element on a funnel step, and set the
+  calendar's on-submit action to "Go to next step" → this thank-you step
+  (that's what fills {{appointment.start_time}} with the real booked time).
+  REPLACE: WISTIA_MEDIA_ID in the <iframe> when your video is ready.
+  ════════════════════════════════════════════════════════════════════════
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  *,*::before,*::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; }
+  .inkflow-root {
+    background-color: #060606 !important; color: #F5F1EB !important;
+    font-family: 'Inter', system-ui, sans-serif; font-weight: 400; line-height: 1.65;
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh; position: relative; overflow-x: hidden; width: 100%;
+  }
+  .inkflow-root *, .inkflow-root *::before, .inkflow-root *::after { box-sizing: border-box; }
+  .inkflow-root a { color: inherit; text-decoration: none; }
+  .inkflow-root h1, .inkflow-root h2, .inkflow-root h3, .inkflow-root h4, .inkflow-root p, .inkflow-root ul { margin: 0; }
+  .inkflow-root ul { padding-left: 0; list-style: none; }
+  .inkflow-root img { max-width: 100%; display: block; }
+
+  .grain-bg::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    z-index: 1; opacity: 0.06; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  /* NAV */
+  .ink-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; transition: background-color 300ms ease, backdrop-filter 300ms ease; }
+  .ink-nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+  @media (min-width: 768px) { .ink-nav-inner { height: 80px; padding: 0 48px; } }
+  .ink-logo { font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 20px; letter-spacing: -0.025em; color: #F5F1EB; }
+  .ink-logo .red { color: #DC2626; }
+  .ink-nav-links { display: none; gap: 32px; font-size: 14px; color: #A8A29E; }
+  .ink-nav-links a:hover { color: #F5F1EB; }
+  @media (min-width: 768px) { .ink-nav-links { display: flex; align-items: center; } }
+  .ink-nav-scrolled { background-color: rgba(10,10,10,0.85); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid #2A2420; }
+
+  /* MAIN */
+  .inkflow-root main { position: relative; z-index: 10; padding: 104px 0 72px; }
+  @media (min-width: 768px) { .inkflow-root main { padding: 124px 0 96px; } }
+  .ink-container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+  @media (min-width: 1024px) { .ink-container { padding: 0 48px; } }
+  .block { margin-bottom: 60px; }
+  @media (min-width: 768px) { .block { margin-bottom: 88px; } }
+
+  /* Labels + headings (left-aligned) */
+  .ink-label { display: inline-block; text-transform: uppercase; letter-spacing: 0.15em; font-size: 12px; font-weight: 500; color: #A8A29E; margin-bottom: 14px; }
+  .ink-label.accent { color: #DC2626; }
+  .display-h1 {
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+    font-weight: 800; letter-spacing: -0.02em; line-height: 1.03;
+    font-size: clamp(32px, 8vw, 60px); color: #F5F1EB; margin-bottom: 18px;
+  }
+  .display-h1 .italic-accent { font-style: italic; color: #DC2626; }
+  .sec-h2 {
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+    font-weight: 800; letter-spacing: -0.02em; line-height: 1.1;
+    font-size: clamp(28px, 3.4vw, 40px); color: #F5F1EB; margin-bottom: 12px;
+  }
+  .sec-h2 .italic-accent { font-style: italic; color: #DC2626; }
+  .lead { color: #A8A29E; font-size: 18px; line-height: 1.6; max-width: 50ch; }
+  .lead strong { color: #F5F1EB; font-weight: 600; }
+  .sec-lead { color: #A8A29E; font-size: 17px; line-height: 1.6; max-width: 62ch; margin-bottom: 28px; }
+  .sec-lead strong { color: #F5F1EB; font-weight: 600; }
+
+  /* HERO: text on top, video below (stacked, left-aligned, full content width) */
+  .hero-copy  { max-width: 640px; }
+  .hero-video { margin-top: 36px; }
+  .hero-cal   { margin-top: 30px; }
+
+  /* Confirmation pill */
+  .confirm-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 7px 15px 7px 11px; border-radius: 999px;
+    background: rgba(34,197,94,0.09); border: 1px solid rgba(34,197,94,0.35);
+    color: #86EFAC; font-size: 13px; font-weight: 600; letter-spacing: 0.02em; margin-bottom: 22px;
+  }
+  .confirm-pill svg { width: 16px; height: 16px; color: #22C55E; }
+
+  /* Video */
+  .video-label { display: flex; align-items: center; gap: 8px; }
+  .video-label svg { width: 14px; height: 14px; color: #DC2626; }
+  .video-card {
+    position: relative; border-radius: 16px; overflow: hidden;
+    border: 1px solid #2A2420; background: #0F0D0B;
+    box-shadow: 0 30px 60px -20px rgba(0,0,0,0.7);
+  }
+  .video-card::before {
+    content: ''; position: absolute; inset: -1px; border-radius: 16px; padding: 1px; pointer-events: none; z-index: 2;
+    background: linear-gradient(160deg, rgba(220,38,38,0.5), rgba(220,38,38,0) 45%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+  }
+  .video-wrap { position: relative; width: 100%; padding-top: 56.25%; background: #060606; }
+  .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+  /* Add-to-calendar (left-aligned) */
+  .cal-when {
+    display: inline-flex; align-items: flex-start; gap: 10px;
+    background: rgba(220,38,38,0.07); border: 1px solid rgba(220,38,38,0.22);
+    color: #F5F1EB; padding: 11px 18px; border-radius: 12px; font-size: 15px; font-weight: 500; line-height: 1.45; margin: 0 0 16px;
+  }
+  .cal-when svg { width: 17px; height: 17px; color: #EF4444; flex-shrink: 0; margin-top: 2px; }
+  .cal-wrap { position: relative; display: block; }
+  .btn-cal {
+    display: inline-flex; align-items: center; gap: 12px; background: #DC2626; color: #fff;
+    font-weight: 600; font-size: 16px; padding: 15px 26px; border-radius: 10px; border: 0; cursor: pointer;
+    transition: background 200ms ease, transform 200ms ease;
+    box-shadow: 0 14px 34px -10px rgba(220,38,38,0.55); font-family: inherit;
+  }
+  .btn-cal:hover { background: #EF4444; transform: translateY(-1px); }
+  .btn-cal svg { width: 19px; height: 19px; }
+  .btn-cal .chev { transition: transform 220ms ease; }
+  .cal-wrap.open .btn-cal .chev { transform: rotate(180deg); }
+  .cal-menu {
+    position: absolute; top: calc(100% + 10px); left: 0;
+    transform: translateY(-8px);
+    min-width: 256px; background: #161412; border: 1px solid #2A2420; border-radius: 12px; padding: 6px;
+    box-shadow: 0 24px 48px -14px rgba(0,0,0,0.7); z-index: 40; text-align: left;
+    opacity: 0; visibility: hidden; transition: opacity 180ms ease, transform 180ms ease;
+  }
+  .cal-wrap.open .cal-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+  .cal-menu a { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 8px; color: #F5F1EB; font-size: 14px; transition: background 150ms ease; }
+  .cal-menu a:hover { background: rgba(255,255,255,0.05); }
+  .cal-menu svg { width: 18px; height: 18px; color: #A8A29E; flex-shrink: 0; }
+  .cal-fallback { color: #A8A29E; font-size: 15px; line-height: 1.6; max-width: 42ch; margin: 12px 0 0; }
+  .cal-fallback svg { width: 18px; height: 18px; color: #EF4444; vertical-align: -3px; margin-right: 8px; }
+  @media (max-width: 699px) {
+    .cal-when { width: 100%; }
+    .btn-cal { width: 100%; justify-content: center; }
+  }
+
+  /* Call agenda checklist */
+  .check-list { display: grid; gap: 15px; max-width: 680px; }
+  .check-row { display: flex; align-items: flex-start; gap: 13px; color: #D6D0C8; font-size: 16px; line-height: 1.55; }
+  .check-row svg { width: 21px; height: 21px; color: #DC2626; flex-shrink: 0; margin-top: 2px; }
+  .check-row strong { color: #F5F1EB; font-weight: 600; }
+  .agenda-note {
+    margin-top: 24px; max-width: 680px; border-left: 3px solid #DC2626;
+    background: rgba(220,38,38,0.06); padding: 16px 20px; border-radius: 0 10px 10px 0;
+    color: #A8A29E; font-size: 15px; line-height: 1.6;
+  }
+  .agenda-note strong { color: #F5F1EB; font-weight: 600; }
+
+  /* Guarantee centerpiece */
+  .guarantee {
+    position: relative; border-radius: 16px; border: 1px solid rgba(220,38,38,0.38);
+    background: linear-gradient(180deg, rgba(220,38,38,0.12), rgba(220,38,38,0.02));
+    padding: 36px 28px; text-align: center; overflow: hidden;
+  }
+  @media (min-width: 768px) { .guarantee { padding: 44px 40px; } }
+  .guarantee .ink-label { color: #EF4444; }
+  .guarantee h3 {
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800;
+    font-size: clamp(23px, 3vw, 34px); color: #F5F1EB; line-height: 1.18; letter-spacing: -0.02em;
+    max-width: 22ch; margin: 0 auto; text-wrap: balance;
+  }
+  .guarantee h3 .accent { color: #EF4444; font-style: italic; }
+  .guarantee p { color: #A8A29E; margin: 14px auto 0; font-size: 15px; max-width: 56ch; line-height: 1.6; }
+
+  /* Differentiators */
+  .diffs { display: grid; gap: 18px; grid-template-columns: 1fr; margin-top: 26px; }
+  @media (min-width: 768px) { .diffs { grid-template-columns: repeat(3, 1fr); } }
+  .diff {
+    padding: 26px 24px; border-radius: 12px; border: 1px solid #2A2420;
+    background: linear-gradient(180deg, rgba(28,28,28,0.6), rgba(20,20,20,0.6));
+  }
+  .diff-ic {
+    width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    background: rgba(220,38,38,0.10); border: 1px solid rgba(220,38,38,0.25); color: #EF4444; margin-bottom: 16px;
+  }
+  .diff-ic svg { width: 20px; height: 20px; }
+  .diff h3 { font-size: 17px; color: #F5F1EB; margin-bottom: 8px; font-weight: 600; }
+  .diff p { font-size: 14.5px; color: #A8A29E; line-height: 1.6; }
+
+  /* Meet Sinan */
+  .about {
+    display: grid; gap: 26px; grid-template-columns: 1fr; align-items: center;
+    border: 1px solid #2A2420; border-radius: 16px; padding: 28px;
+    background: linear-gradient(180deg, rgba(28,28,28,0.5), rgba(20,20,20,0.5));
+  }
+  @media (min-width: 768px) { .about { grid-template-columns: 210px 1fr; gap: 36px; padding: 36px; } }
+  .about-photo { aspect-ratio: 4/5; border-radius: 14px; overflow: hidden; border: 1px solid #2A2420; max-width: 260px; }
+  .about-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .about-quote {
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-style: italic; font-weight: 700;
+    font-size: clamp(20px, 2.3vw, 27px); color: #F5F1EB; line-height: 1.32; letter-spacing: -0.01em;
+  }
+  .about-quote .accent { color: #DC2626; font-style: italic; }
+  .about-body { color: #A8A29E; font-size: 15px; line-height: 1.65; margin-top: 16px; max-width: 58ch; }
+  .about-sig { margin-top: 18px; display: flex; align-items: center; gap: 12px; }
+  .about-sig .line { width: 28px; height: 1px; background: #DC2626; }
+  .about-sig .name { font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-style: italic; font-weight: 700; font-size: 19px; color: #F5F1EB; }
+  .about-sig .role { font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: #6B6663; margin-left: auto; }
+
+  /* FAQ */
+  .faq { display: grid; gap: 12px; max-width: 780px; }
+  .faq details { border: 1px solid #2A2420; border-radius: 12px; background: rgba(255,255,255,0.015); overflow: hidden; }
+  .faq summary { cursor: pointer; list-style: none; padding: 18px 20px; font-weight: 600; color: #F5F1EB; font-size: 16px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary .ic { width: 20px; height: 20px; color: #DC2626; flex-shrink: 0; transition: transform 220ms ease; }
+  .faq details[open] summary .ic { transform: rotate(45deg); }
+  .faq .faq-a { padding: 0 20px 18px; color: #A8A29E; font-size: 15px; line-height: 1.65; }
+  .faq .faq-a strong { color: #F5F1EB; font-weight: 600; }
+
+  /* What happens next */
+  .next-head { margin-bottom: 28px; }
+  .steps { display: grid; gap: 24px; grid-template-columns: 1fr; }
+  @media (min-width: 700px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+  .step {
+    position: relative; padding: 28px 26px; border-radius: 12px; border: 1px solid #2A2420;
+    background: linear-gradient(180deg, rgba(28,28,28,0.6), rgba(20,20,20,0.6));
+    transition: transform 260ms ease, border-color 260ms ease;
+  }
+  .step:hover { transform: translateY(-2px); border-color: rgba(220,38,38,0.4); }
+  .step-num {
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: 15px;
+    width: 36px; height: 36px; border-radius: 9px; background: rgba(220,38,38,0.10); border: 1px solid rgba(220,38,38,0.25);
+    color: #EF4444; display: flex; align-items: center; justify-content: center; margin-bottom: 18px;
+  }
+  .step h3 { font-size: 17px; color: #F5F1EB; margin-bottom: 8px; font-weight: 600; }
+  .step p { font-size: 14.5px; color: #A8A29E; line-height: 1.6; }
+
+  /* Urgency note */
+  .urgency {
+    margin-top: 28px; display: flex; align-items: flex-start; gap: 12px;
+    border: 1px solid rgba(220,38,38,0.25); background: rgba(220,38,38,0.06);
+    border-radius: 12px; padding: 16px 20px; max-width: 760px; color: #A8A29E; font-size: 15px; line-height: 1.6;
+  }
+  .urgency svg { width: 20px; height: 20px; color: #EF4444; flex-shrink: 0; margin-top: 2px; }
+  .urgency strong { color: #F5F1EB; font-weight: 600; }
+  .ink-note { margin-top: 22px; color: #6B6663; font-size: 14px; }
+  .ink-note a { color: #A8A29E; text-decoration: underline; }
+  .ink-note a:hover { color: #DC2626; }
+
+  /* FOOTER */
+  .inkflow-root footer { background: #0F0D0B; border-top: 1px solid #2A2420; padding: 48px 0; position: relative; z-index: 10; }
+  .footer-grid { display: grid; gap: 32px; margin-bottom: 40px; grid-template-columns: 1fr; }
+  @media (min-width: 768px) { .footer-grid { grid-template-columns: repeat(3, 1fr); } }
+  .footer-col { color: #A8A29E; font-size: 14px; }
+  .footer-col h4 { color: #F5F1EB; font-weight: 500; margin-bottom: 8px; }
+  .footer-col p { margin-bottom: 4px; }
+  .footer-col a:hover { color: #DC2626; }
+  .footer-links { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 20px; font-size: 12px; color: #6B6663; }
+  .footer-links a:hover { color: #DC2626; }
+  .footer-social { display: flex; gap: 16px; margin-bottom: 20px; }
+  .footer-badge { display: flex; align-items: center; gap: 12px; }
+  .footer-badge img { height: 48px; width: auto; flex-shrink: 0; }
+  .footer-badge span { font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: #6B6663; line-height: 1.375; }
+  .footer-bottom { display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 16px; padding-top: 24px; border-top: 1px solid #2A2420; font-size: 12px; color: #6B6663; }
+  @media (min-width: 768px) { .footer-bottom { flex-direction: row; } }
+
+  /* Reveal animations */
+  .anim-ready .reveal { opacity: 0; transform: translateY(22px); transition: opacity 700ms cubic-bezier(.22,1,.36,1), transform 700ms cubic-bezier(.22,1,.36,1); transition-delay: var(--d, 0ms); }
+  .anim-ready .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .anim-ready .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="inkflow-root grain-bg">
+<div aria-hidden="true" style="position:fixed; inset:0; z-index:0; pointer-events:none; background:
+  radial-gradient(1100px 720px at 22% -10%, rgba(220,38,38,0.20), rgba(220,38,38,0) 58%),
+  radial-gradient(900px 700px at 100% 8%, rgba(220,38,38,0.10), rgba(220,38,38,0) 60%),
+  #060606;"></div>
+
+<header id="ink-nav" class="ink-nav">
+  <div class="ink-nav-inner">
+    <a href="https://inkflowstudios.com/" class="ink-logo">ink<span class="red">flow</span><span class="red">.</span></a>
+    <nav class="ink-nav-links">
+      <a href="https://inkflowstudios.com/#results">Results</a>
+      <a href="https://inkflowstudios.com/#how">How it works</a>
+      <a href="https://inkflowstudios.com/#about">About</a>
+      <a href="https://inkflowstudios.com/#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="ink-container">
+
+    <!-- ░░ HERO: copy left, video right ░░ -->
+    <section class="block hero-grid">
+
+      <div class="hero-copy">
+        <span class="confirm-pill reveal" data-d="0">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Booking confirmed
+        </span>
+        <h1 class="display-h1 reveal" data-d="80">You're <span class="italic-accent">booked in</span>.</h1>
+        <p class="lead reveal" data-d="160">
+          Smart move. Your spot is <strong>locked in</strong> and your call link is on the way to your inbox. Watch the short video, then add the call to your calendar so you're ready when we talk.
+        </p>
+      </div>
+
+      <div class="hero-video reveal" data-d="240">
+        <span class="ink-label accent video-label">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          Watch this before we talk
+        </span>
+        <div class="video-card">
+          <div class="video-wrap">
+            <!-- ▼▼▼ REPLACE  WISTIA_MEDIA_ID  WITH YOUR WISTIA VIDEO ID ▼▼▼ -->
+            <iframe src="https://fast.wistia.net/embed/iframe/WISTIA_MEDIA_ID?seo=true&videoFoam=true"
+                    title="Pre-call video" allow="autoplay; fullscreen" allowtransparency="true"
+                    frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" msallowfullscreen></iframe>
+            <!-- ▲▲▲ REPLACE  WISTIA_MEDIA_ID  ABOVE ▲▲▲ -->
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-cal reveal" data-d="200">
+        <span class="ink-label">Add the call to your calendar</span>
+        <div id="cal-when" class="cal-when" style="display:none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke-linecap="round"/></svg>
+          <span id="cal-when-text">&nbsp;</span>
+        </div>
+
+        <div id="cal-wrap" class="cal-wrap">
+          <button type="button" id="cal-btn" class="btn-cal" aria-haspopup="true" aria-expanded="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v4M10 16h4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Add to Calendar</span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="cal-menu" id="cal-menu" role="menu">
+            <a id="cal-google" href="#" target="_blank" rel="noopener" role="menuitem">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke-linecap="round"/></svg>
+              Google Calendar
+            </a>
+            <a id="cal-apple" href="#" download="inkflow-call.ics" role="menuitem">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.365 1.43c0 1.14-.493 2.27-1.177 3.08-.744.9-1.99 1.57-2.987 1.57-.12 0-.23-.02-.3-.03-.01-.06-.04-.22-.04-.39 0-1.15.572-2.27 1.206-2.98.804-.94 2.142-1.64 3.248-1.68.03.13.05.28.05.43zm4.565 15.71c-.03.07-.463 1.58-1.518 3.12-.945 1.34-1.94 2.71-3.43 2.71-1.517 0-1.9-.88-3.63-.88-1.698 0-2.302.91-3.67.91-1.377 0-2.332-1.26-3.428-2.8-1.287-1.82-2.323-4.63-2.323-7.28 0-4.28 2.797-6.55 5.552-6.55 1.448 0 2.675.95 3.6.95.865 0 2.222-1.01 3.902-1.01.613 0 2.886.06 4.374 2.19-.13.09-2.383 1.37-2.383 4.19 0 3.26 2.854 4.42 2.955 4.45z"/></svg>
+              Apple Calendar
+            </a>
+            <a id="cal-outlook" href="#" target="_blank" rel="noopener" role="menuitem">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke-linecap="round"/></svg>
+              Outlook.com
+            </a>
+            <a id="cal-office" href="#" target="_blank" rel="noopener" role="menuitem">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke-linecap="round"/></svg>
+              Office 365
+            </a>
+            <a id="cal-yahoo" href="#" target="_blank" rel="noopener" role="menuitem">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke-linecap="round"/></svg>
+              Yahoo Calendar
+            </a>
+          </div>
+        </div>
+
+        <p id="cal-fallback" class="cal-fallback" style="display:none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="display:inline-block;"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          We've emailed you a calendar invite — check your inbox to add it in one tap.
+        </p>
+      </div>
+
+    </section>
+
+    <!-- ░░ WHAT WE'LL COVER ░░ -->
+    <section class="block">
+      <span class="ink-label reveal" data-d="0">Your free growth review</span>
+      <h2 class="sec-h2 reveal" data-d="60">What we'll cover on the call</h2>
+      <p class="sec-lead reveal" data-d="120">This isn't a sales pitch. It's a working session — we dig into your shop and you walk away with a clear plan, whether we end up a fit or not.</p>
+      <div class="check-list">
+        <div class="check-row reveal" data-d="160"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>A <strong>live audit</strong> of how your shop is bringing in clients today.</span></div>
+        <div class="check-row reveal" data-d="200"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>A <strong>specific plan</strong> to fill your chair with deposit-paid bookings.</span></div>
+        <div class="check-row reveal" data-d="240"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>A review of your <strong>ads, content, and how your DMs are handled</strong> right now.</span></div>
+        <div class="check-row reveal" data-d="280"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>A walkthrough of how we'd grow <strong>your</strong> shop specifically — not a template.</span></div>
+        <div class="check-row reveal" data-d="320"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Bonus:</strong> a quick scan of what other shops in your area are running for ads.</span></div>
+      </div>
+      <div class="agenda-note reveal" data-d="360">
+        Come ready with your numbers — average ticket, roughly how many bookings a month, and what's been working and what hasn't. The more honest the inputs, the sharper the plan you leave with.
+      </div>
+    </section>
+
+    <!-- ░░ WHY US ░░ -->
+    <section class="block">
+      <span class="ink-label reveal" data-d="0">Why studios pick Inkflow</span>
+      <h2 class="sec-h2 reveal" data-d="60">What makes us different</h2>
+      <p class="sec-lead reveal" data-d="120">Three reasons tattoo studios trust us to fill their chair.</p>
+      <div class="diffs">
+        <div class="diff reveal" data-d="80">
+          <div class="diff-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.5" fill="currentColor"/></svg></div>
+          <h3>Only tattoo studios</h3>
+          <p>We work with tattoo shops and nothing else, so the playbook is already dialed in for your market.</p>
+        </div>
+        <div class="diff reveal" data-d="160">
+          <div class="diff-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>Real bookings, real deposits</h3>
+          <p>We measure booked sessions with paid deposits — not lists of curious people who never show.</p>
+        </div>
+        <div class="diff reveal" data-d="240">
+          <div class="diff-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3" stroke-linecap="round"/></svg></div>
+          <h3>One studio per market</h3>
+          <p>We lock you in as the only shop we grow in your area. We never run your ads against the studio down the street.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ░░ MEET SINAN ░░ -->
+    <section class="block">
+      <span class="ink-label reveal" data-d="0">Who you'll be talking to</span>
+      <h2 class="sec-h2 reveal" data-d="60">Meet Sinan</h2>
+      <div class="about reveal" data-d="120">
+        <div class="about-photo">
+          <img src="https://majestic100.github.io/Highlevel/assets/about/sinan.jpg" alt="Sinan, founder of Inkflow" loading="lazy" />
+        </div>
+        <div>
+          <p class="about-quote">"I'm not a tattoo artist. I'm the guy who <span class="accent">takes the marketing off your plate</span> so you can stay at the chair."</p>
+          <p class="about-body">I started Inkflow because I watched too many talented artists earn less than they should while their calendars sat half-empty — not because they weren't great, but because nobody ran their marketing like a business. So I built the whole machine: ads, content scripts, booking system, every DM answered. You tattoo. The shop fills.</p>
+          <div class="about-sig">
+            <span class="line"></span>
+            <span class="name">Sinan</span>
+            <span class="role">Founder · Inkflow</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ░░ FAQ ░░ -->
+    <section class="block">
+      <span class="ink-label reveal" data-d="0">Before we talk</span>
+      <h2 class="sec-h2 reveal" data-d="60">Questions studios ask us</h2>
+      <div class="faq" style="margin-top:24px;">
+        <details class="reveal" data-d="120">
+          <summary>How fast will I see real results?<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></summary>
+          <div class="faq-a">Most studios get their first deposit-secured booking within 7 days of launch, and many are at <strong>30+ booked sessions inside the first 30 days.</strong></div>
+        </details>
+        <details class="reveal" data-d="170">
+          <summary>What if ads just don't work for my studio?<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></summary>
+          <div class="faq-a">We vet every studio before we onboard. If we don't believe we can fill your chair, we won't take you on — we only start when we're <strong>confident we can get you results.</strong></div>
+        </details>
+        <details class="reveal" data-d="220">
+          <summary>What kind of ad spend do I need?<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></summary>
+          <div class="faq-a">Most studios run between <strong>$1,500 and $5,000 a month</strong> in ad spend. The right number depends on your market and how aggressive you want to be. Ad spend goes directly to the platform, not to us.</div>
+        </details>
+        <details class="reveal" data-d="270">
+          <summary>What if my market is already taken?<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></summary>
+          <div class="faq-a">One studio per market is a hard rule. We'll tell you the moment you mention your city — if it's open, <strong>we move fast before someone else claims it.</strong></div>
+        </details>
+      </div>
+    </section>
+
+    <!-- ░░ WHAT HAPPENS NEXT ░░ -->
+    <section class="block">
+      <div class="next-head">
+        <span class="ink-label reveal" data-d="0">What happens next</span>
+        <h2 class="sec-h2 reveal" data-d="60">Get the most out of our call</h2>
+      </div>
+      <div class="steps">
+        <div class="step reveal" data-d="120">
+          <div class="step-num">1</div>
+          <h3>Check your inbox</h3>
+          <p>Your confirmation and the video-call link are on the way. Don't see it? Check spam or the promotions tab and whitelist us.</p>
+        </div>
+        <div class="step reveal" data-d="200">
+          <div class="step-num">2</div>
+          <h3>Watch the video</h3>
+          <p>It's short — and it means we skip the basics on the call and spend our time on what actually moves your bookings.</p>
+        </div>
+        <div class="step reveal" data-d="280">
+          <div class="step-num">3</div>
+          <h3>Show up ready</h3>
+          <p>Bring your average ticket, your rough monthly bookings, and your questions. We'll map out your next 30 days, chair-by-chair.</p>
+        </div>
+      </div>
+      <div class="urgency reveal" data-d="320">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>We only take <strong>one studio per market</strong>, so your time is being held for you. If anything changes, give us a heads-up so we can free it for the next shop.</span>
+      </div>
+      <p class="ink-note reveal" data-d="360">
+        Need to reschedule? Use the link in your confirmation email — just give us a heads-up.
+      </p>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="ink-container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <span class="ink-logo">ink<span class="red">flow</span><span class="red">.</span></span>
+        <p style="margin-top: 12px;">Tattoo studio growth, done-for-you.</p>
+        <div class="footer-links">
+          <a href="https://inkflowstudios.com/terms">Terms</a>
+          <a href="https://inkflowstudios.com/privacy">Privacy</a>
+          <a href="https://inkflowstudios.com/contact">Contact</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p><a href="mailto:sinan@heromedia.dk">sinan@heromedia.dk</a></p>
+        <p><a href="https://wa.me/4524341144">WhatsApp +45 24 34 11 44</a></p>
+      </div>
+      <div class="footer-col">
+        <h4>Follow us</h4>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/marketingbysinan/" target="_blank" rel="noopener" aria-label="Instagram" style="display:inline-flex;align-items:center;">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+        </div>
+        <div class="footer-badge">
+          <img src="https://majestic100.github.io/Highlevel/assets/badges/meta-business-partner.webp" alt="Certified Meta Business Partner" />
+          <span>Certified Meta<br/>Business Partner</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="ink-year"></span> Inkflow by Hero. All rights reserved.</span>
+      <span>One studio per market.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ───────────── CONFIG: edit the event details here ───────────── */
+  var CONFIG = {
+    title:    "Growth review call with Inkflow",
+    location: "Online video call (link in your confirmation email)",
+    details:  "Your free growth review with Inkflow. We'll audit how your shop gets clients today and map out how to fill your chair with deposit-paid bookings.\n\nNeed to reschedule? Use the link in your confirmation email.",
+
+    /* GHL merge fields — fill in automatically when this page is reached
+       via the calendar's "Go to next step" action (see notes at top). */
+    ghlStart: "{{appointment.start_time}}",
+    ghlEnd:   "{{appointment.end_time}}",
+
+    /* If the end time is unknown, the call length defaults to this many minutes. */
+    durationMinutes: 30,
+
+    /* Optional hardcoded fallback (ISO 8601), used only if nothing else is found. */
+    fallbackStart: "",
+    fallbackEnd: ""
+  };
+  /* ─────────────────────────────────────────────────────────────── */
+
+  (function () {
+    document.getElementById('ink-year').textContent = new Date().getFullYear();
+
+    var nav = document.getElementById('ink-nav');
+    function onScroll() {
+      if (window.scrollY > 60) nav.classList.add('ink-nav-scrolled');
+      else nav.classList.remove('ink-nav-scrolled');
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    var root = document.querySelector('.inkflow-root');
+    if (root && 'IntersectionObserver' in window) {
+      root.classList.add('anim-ready');
+      root.querySelectorAll('.reveal').forEach(function (el) {
+        var d = el.getAttribute('data-d');
+        if (d) el.style.setProperty('--d', d + 'ms');
+      });
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      root.querySelectorAll('.reveal').forEach(function (el) { obs.observe(el); });
+    }
+
+    /* Add-to-Calendar */
+    var enc = encodeURIComponent;
+    function clean(v) {
+      if (v === null || v === undefined) return '';
+      v = ('' + v).trim();
+      if (v === '' || v.indexOf('{{') !== -1) return '';
+      return v;
+    }
+    function parseDate(v) {
+      v = clean(v);
+      if (!v) return null;
+      var d = new Date(v);
+      if (!isNaN(d.getTime())) return d;
+      d = new Date(v.replace(' ', 'T'));
+      if (!isNaN(d.getTime())) return d;
+      return null;
+    }
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+    function toUTC(d) {
+      return d.getUTCFullYear() + pad(d.getUTCMonth() + 1) + pad(d.getUTCDate()) + 'T' +
+             pad(d.getUTCHours()) + pad(d.getUTCMinutes()) + pad(d.getUTCSeconds()) + 'Z';
+    }
+    function icsEsc(s) { return ('' + s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n'); }
+
+    var qs = new URLSearchParams(window.location.search);
+    var title = clean(qs.get('title'))    || CONFIG.title;
+    var loc   = clean(qs.get('location')) || CONFIG.location;
+    var details = CONFIG.details;
+
+    var start = parseDate(qs.get('start')) || parseDate(CONFIG.ghlStart) || parseDate(CONFIG.fallbackStart);
+    var end   = parseDate(qs.get('end'))   || parseDate(CONFIG.ghlEnd)   || parseDate(CONFIG.fallbackEnd);
+    if (start && !end) end = new Date(start.getTime() + CONFIG.durationMinutes * 60000);
+
+    var wrap = document.getElementById('cal-wrap');
+    var whenEl = document.getElementById('cal-when');
+    var fallback = document.getElementById('cal-fallback');
+    var btn = document.getElementById('cal-btn');
+
+    if (!start) {
+      /* No booked time available (e.g. testing without GHL data): keep the
+         button visible, but point people to the invite in their email. */
+      var menuEl = document.getElementById('cal-menu');
+      if (menuEl) menuEl.style.display = 'none';
+      var chevEl = btn.querySelector('.chev');
+      if (chevEl) chevEl.style.display = 'none';
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (fallback) fallback.style.display = 'block';
+      });
+      return;
+    }
+
+    try {
+      var fmt = new Intl.DateTimeFormat(navigator.language || 'en-US', {
+        weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
+        hour: '2-digit', minute: '2-digit', timeZoneName: 'short'
+      });
+      document.getElementById('cal-when-text').textContent = fmt.format(start);
+      whenEl.style.display = 'inline-flex';
+    } catch (e) {}
+
+    var gp = '&details=' + enc(details) + '&location=' + enc(loc);
+    document.getElementById('cal-google').href =
+      'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + enc(title) +
+      '&dates=' + toUTC(start) + '/' + toUTC(end) + gp;
+
+    document.getElementById('cal-yahoo').href =
+      'https://calendar.yahoo.com/?v=60&title=' + enc(title) +
+      '&st=' + toUTC(start) + '&et=' + toUTC(end) +
+      '&desc=' + enc(details) + '&in_loc=' + enc(loc);
+
+    function outlookHref(host) {
+      return 'https://' + host + '/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent' +
+        '&subject=' + enc(title) + '&body=' + enc(details) + '&location=' + enc(loc) +
+        '&startdt=' + start.toISOString() + '&enddt=' + end.toISOString();
+    }
+    document.getElementById('cal-outlook').href = outlookHref('outlook.live.com');
+    document.getElementById('cal-office').href = outlookHref('outlook.office.com');
+
+    var ics = [
+      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Inkflow//Booking//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
+      'BEGIN:VEVENT', 'UID:' + Date.now() + '@inkflowstudios.com', 'DTSTAMP:' + toUTC(new Date()),
+      'DTSTART:' + toUTC(start), 'DTEND:' + toUTC(end),
+      'SUMMARY:' + icsEsc(title), 'DESCRIPTION:' + icsEsc(details), 'LOCATION:' + icsEsc(loc),
+      'END:VEVENT', 'END:VCALENDAR'
+    ].join('\r\n');
+    document.getElementById('cal-apple').href = 'data:text/calendar;charset=utf8,' + encodeURIComponent(ics);
+
+    wrap.style.display = 'block';
+
+    var close2 = function () { wrap.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); };
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var isOpen = wrap.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    document.addEventListener('click', function (e) { if (!wrap.contains(e.target)) close2(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close2(); });
+    document.getElementById('cal-menu').addEventListener('click', function () { setTimeout(close2, 80); });
+  })();
+</script>
+<!-- Wistia helper (responsive + analytics). Safe to keep even before you add your video ID. -->
+<script src="https://fast.wistia.net/assets/external/E-v1.js" async></script>
+
+</div>
+</body>
+</html>
