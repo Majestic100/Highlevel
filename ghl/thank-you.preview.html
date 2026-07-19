@@ -83,21 +83,10 @@
   .sec-lead { color: #A8A29E; font-size: 17px; line-height: 1.6; max-width: 62ch; margin-bottom: 28px; }
   .sec-lead strong { color: #F5F1EB; font-weight: 600; }
 
-  /* HERO split layout: copy left, video right (stacks on mobile, video high) */
-  .hero-grid { display: block; }
-  .hero-video { margin-top: 30px; }
+  /* HERO: text on top, video below (stacked, left-aligned) */
+  .hero-copy  { max-width: 640px; }
+  .hero-video { margin-top: 36px; max-width: 940px; }
   .hero-cal   { margin-top: 30px; }
-  @media (min-width: 1024px) {
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
-      column-gap: 60px;
-      align-items: start;
-    }
-    .hero-copy  { grid-column: 1; grid-row: 1; }
-    .hero-cal   { grid-column: 1; grid-row: 2; margin-top: 34px; }
-    .hero-video { grid-column: 2; grid-row: 1 / span 2; align-self: center; margin-top: 0; }
-  }
 
   /* Confirmation pill */
   .confirm-pill {
