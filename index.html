@@ -610,7 +610,7 @@
   .journey-visual svg { width: 100%; max-width: 320px; height: auto; }
   .journey-visual--photo { padding: 16px; }
   @media (min-width: 900px) { .journey-visual--photo { padding: 24px; } }
-  .journey-visual--photo img { width: 100%; height: auto; border-radius: 12px; border: 1px solid #2A2420; display: block; }
+  .journey-visual--photo img, .journey-visual--photo video { width: 100%; height: auto; border-radius: 12px; border: 1px solid #2A2420; display: block; background: #0F0D0B; }
   .journey-badges { position: absolute; top: 16px; right: 16px; display: inline-flex; gap: 6px; }
   .journey-badges .brand-badge { position: static; }
 
@@ -1255,42 +1255,11 @@
           <p class="journey-body">We edit your content so it looks better than anyone else's in your city, and people trust you before they reach out.</p>
           <span class="journey-watermark">02</span>
         </div>
-        <div class="journey-visual">
-          <svg viewBox="0 0 320 240" aria-hidden="true">
-            <defs>
-              <linearGradient id="vidG" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#1f1c1a"/><stop offset="100%" stop-color="#0a0908"/>
-              </linearGradient>
-            </defs>
-            <!-- Ambient text hints -->
-            <g opacity="0.4">
-              <rect x="14" y="42" width="68" height="6" rx="3" fill="#2A2420"/>
-              <rect x="14" y="54" width="52" height="4" rx="2" fill="#1A1815"/>
-              <rect x="240" y="178" width="64" height="6" rx="3" fill="#2A2420"/>
-              <rect x="240" y="190" width="50" height="4" rx="2" fill="#1A1815"/>
-            </g>
-            <!-- Phone frame -->
-            <rect x="100" y="14" width="120" height="212" rx="18" fill="#0a0908" stroke="#2A2420" stroke-width="1.5"/>
-            <rect x="106" y="20" width="108" height="200" rx="12" fill="#161412"/>
-            <rect x="146" y="24" width="28" height="6" rx="3" fill="#0a0908"/>
-            <!-- Profile -->
-            <circle cx="120" cy="48" r="6" fill="#DC2626"/>
-            <rect x="132" y="44" width="46" height="3" rx="1.5" fill="#F5F1EB"/>
-            <rect x="132" y="50" width="30" height="2.5" rx="1" fill="#6B6663"/>
-            <!-- Video thumbnail -->
-            <rect x="106" y="60" width="108" height="132" fill="url(#vidG)"/>
-            <!-- Play button -->
-            <circle cx="160" cy="126" r="22" fill="rgba(220,38,38,0.16)" stroke="#DC2626" stroke-width="1.6"/>
-            <path d="M154 116 L176 126 L154 136 Z" fill="#EF4444"/>
-            <!-- Engagement row -->
-            <g>
-              <path d="M118 202 a4.5 4.5 0 0 1 9 0 a4.5 4.5 0 0 1 -4.5 5.5 a4.5 4.5 0 0 1 -4.5 -5.5z" fill="#DC2626"/>
-              <text x="132" y="208" font-family="Inter, system-ui, sans-serif" font-size="8" font-weight="600" fill="#F5F1EB">12.4K</text>
-              <rect x="154" y="201" width="7" height="6" rx="1.5" fill="#2A2420"/>
-              <text x="166" y="208" font-family="Inter, system-ui, sans-serif" font-size="8" fill="#A8A29E">328</text>
-              <path d="M188 201 l4 3 l-4 3z" fill="#2A2420"/>
-            </g>
-          </svg>
+        <div class="journey-visual journey-visual--photo">
+          <video autoplay muted loop playsinline preload="metadata" poster="assets/journey/content-edit-poster.webp" width="1280" height="720" aria-label="Screen recording of us editing a tattoo artist's content">
+            <source src="assets/journey/content-edit.webm" type="video/webm" />
+            <source src="assets/journey/content-edit.mp4" type="video/mp4" />
+          </video>
         </div>
       </article>
 
