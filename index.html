@@ -608,6 +608,9 @@
     .journey-step.flip .journey-visual { border-left: none; border-right: 1px solid #2A2420; }
   }
   .journey-visual svg { width: 100%; max-width: 320px; height: auto; }
+  .journey-visual--photo { padding: 16px; }
+  @media (min-width: 900px) { .journey-visual--photo { padding: 24px; } }
+  .journey-visual--photo img { width: 100%; height: auto; border-radius: 12px; border: 1px solid #2A2420; display: block; }
   .journey-badges { position: absolute; top: 16px; right: 16px; display: inline-flex; gap: 6px; }
   .journey-badges .brand-badge { position: static; }
 
@@ -1234,44 +1237,8 @@
           <p class="journey-body">Facebook and Instagram ads, aimed at people in your city who want ink. We test new creatives every week and keep what books.</p>
           <span class="journey-watermark">01</span>
         </div>
-        <div class="journey-visual">
-          <div class="journey-badges">
-            <span class="brand-badge" aria-label="Facebook"><img src="assets/brands/facebook.png" alt="Facebook" loading="lazy" /></span>
-            <span class="brand-badge" aria-label="Instagram"><img src="assets/brands/instagram.png" alt="Instagram" loading="lazy" /></span>
-          </div>
-          <svg viewBox="0 0 320 240" aria-hidden="true">
-            <defs>
-              <linearGradient id="brandG" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#DC2626"/><stop offset="100%" stop-color="#450A0A"/>
-              </linearGradient>
-            </defs>
-            <!-- Ad card -->
-            <rect x="14" y="14" width="292" height="212" rx="16" fill="#161412" stroke="#2A2420" stroke-width="1.4"/>
-            <!-- Profile row -->
-            <circle cx="34" cy="38" r="11" fill="url(#brandG)"/>
-            <text x="52" y="36" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" fill="#F5F1EB">Black Iron Tattoo</text>
-            <text x="52" y="48" font-family="Inter, system-ui, sans-serif" font-size="8" fill="#6B6663">Sponsored · Phoenix, AZ</text>
-            <!-- Image area -->
-            <rect x="14" y="62" width="292" height="118" fill="#0F0D0B"/>
-            <g opacity="0.55" stroke="#3A3A3A" fill="none" stroke-width="1.4">
-              <path d="M40 140 C 70 90, 130 90, 160 140 S 250 190, 280 140"/>
-              <path d="M60 120 Q 110 80, 160 120 T 260 120"/>
-              <circle cx="80" cy="110" r="4"/>
-              <circle cx="160" cy="125" r="3"/>
-              <circle cx="240" cy="115" r="4"/>
-            </g>
-            <!-- Bottom row: copy + CTA -->
-            <rect x="24" y="194" width="180" height="6" rx="3" fill="#3A3A3A"/>
-            <rect x="24" y="206" width="130" height="5" rx="2.5" fill="#2A2420"/>
-            <rect x="232" y="190" width="62" height="26" rx="7" fill="#DC2626"/>
-            <text x="263" y="207" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="700" fill="#fff" text-anchor="middle">BOOK NOW</text>
-            <!-- Floating metric callout -->
-            <g>
-              <rect x="194" y="74" width="104" height="26" rx="9" fill="#0F0D0B" stroke="#22C55E" stroke-width="1.2"/>
-              <circle cx="208" cy="87" r="4" fill="#22C55E"/>
-              <text x="218" y="91" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" fill="#22C55E">$2.84 / lead</text>
-            </g>
-          </svg>
+        <div class="journey-visual journey-visual--photo">
+          <img src="assets/journey/meta-ads-manager.webp" alt="Meta Ads Manager showing 1,189 campaigns, $15,659 spent and $0.74 cost per click" width="1400" height="721" loading="lazy" decoding="async" />
         </div>
       </article>
 
