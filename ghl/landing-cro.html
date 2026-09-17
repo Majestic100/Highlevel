@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Inkflow by Hero | Book your strategy call</title>
-<meta name="description" content="Fill your tattoo studio's chair with deposit-secured bookings. Book your free strategy call. 30 booked sessions in 30 days, guaranteed." />
+<title>Inkflow | Schedule your free call</title>
+<meta name="description" content="We build your system, run your ads and fill your chair with deposit-paid bookings. 20 new clients in 30 days, guaranteed. Schedule your free call." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,6 +23,7 @@
   .inkflow-root *, .inkflow-root *::before, .inkflow-root *::after { box-sizing: border-box; }
   a { color: inherit; text-decoration: none; }
   h1, h2, h3, h4, p, ul { margin: 0; }
+  h1, h2, h3 { text-wrap: balance; }
   ul { padding-left: 0; list-style: none; }
   img { max-width: 100%; display: block; }
 
@@ -80,12 +81,13 @@
   .trust-text { font-size: 13px; color: #A8A29E; line-height: 1.4; text-align: left; }
   .trust-text strong { color: #F5F1EB; }
   .tp-row { display: flex; justify-content: center; margin-bottom: 22px; }
-  .tp-card { display: inline-flex; align-items: center; gap: 10px; padding: 8px 14px; border: 1px solid #2A2420; border-radius: 10px; background: rgba(22,20,18,0.6); text-decoration: none; transition: border-color 200ms ease, transform 200ms ease; }
+  .tp-card { display: inline-flex; align-items: center; gap: 10px; padding: 8px 14px; max-width: 100%; border: 1px solid #2A2420; border-radius: 10px; background: rgba(22,20,18,0.6); text-decoration: none; transition: border-color 200ms ease, transform 200ms ease; }
   .tp-card:hover { border-color: rgba(0,182,122,0.45); transform: translateY(-1px); }
-  .tp-stars { height: 18px; width: auto; }
-  .tp-meta { font-size: 12px; color: #A8A29E; line-height: 1.3; text-align: left; }
+  .tp-stars { height: 18px; width: auto; flex-shrink: 0; }
+  .tp-meta { font-size: 12px; color: #A8A29E; line-height: 1.3; text-align: left; white-space: nowrap; }
+  @media (max-width: 359px) { .tp-stars { height: 16px; } .tp-meta { font-size: 11px; } }
   .tp-meta strong { color: #F5F1EB; }
-  .tp-brand { display: inline-flex; align-items: center; gap: 3px; color: #00B67A; font-weight: 600; }
+  .tp-brand { display: inline-flex; align-items: center; gap: 3px; color: #00B67A; font-weight: 600; vertical-align: baseline; }
   .tp-brand svg { width: 13px; height: 13px; }
 
   /* BOOKING BAND (full-width, wide calendar) */
@@ -94,10 +96,7 @@
   .booking-card { position: relative; z-index: 2; max-width: 1080px; margin: 0 auto; background: #161412; border: 1px solid #2A2420; border-radius: 16px; padding: 14px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.55); }
   @media (min-width: 768px) { .booking-card { padding: 30px; border-radius: 18px; } }
   .booking-card .bk-head { text-align: center; margin-bottom: 22px; }
-  .booking-card .bk-label { display: inline-flex; align-items: center; gap: 7px; text-transform: uppercase; letter-spacing: 0.14em; font-size: 11px; font-weight: 600; color: #EF4444; margin-bottom: 10px; }
-  .booking-card .bk-label .dot { width: 7px; height: 7px; border-radius: 50%; background: #22C55E; box-shadow: 0 0 0 4px rgba(34,197,94,0.18); }
   .booking-card .bk-title { font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 700; font-size: 26px; color: #F5F1EB; margin-bottom: 6px; letter-spacing: -0.02em; }
-  .booking-card .bk-sub { color: #A8A29E; font-size: 15px; max-width: 560px; margin: 0 auto; }
   .calendar-slot { border-radius: 12px; overflow: hidden; background: #0F0D0B; }
   .calendar-slot iframe { width: 100%; min-height: 640px; border: 0; display: block; }
   .bk-foot { display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 16px; color: #6B6663; font-size: 12.5px; text-align: center; }
@@ -246,9 +245,6 @@
   .anim-ready .reveal { opacity: 0; transform: translateY(22px); transition: opacity 700ms cubic-bezier(.22,1,.36,1), transform 700ms cubic-bezier(.22,1,.36,1); transition-delay: var(--d, 0ms); will-change: opacity, transform; }
   .anim-ready .reveal.in { opacity: 1; transform: none; }
 
-  @keyframes dotpulse { 0%,100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.45); } 50% { box-shadow: 0 0 0 7px rgba(34,197,94,0); } }
-  .booking-card .bk-label .dot { animation: dotpulse 2.2s ease-in-out infinite; }
-
   @keyframes glowdrift { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(24px); } }
   .hero-glow { animation: glowdrift 14s ease-in-out infinite; }
 
@@ -258,7 +254,7 @@
 
   @media (prefers-reduced-motion: reduce) {
     .anim-ready .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
-    .booking-card .bk-label .dot, .hero-glow { animation: none !important; }
+    .hero-glow { animation: none !important; }
     .btn-primary::after { display: none; }
   }
 </style>
@@ -271,7 +267,6 @@
   <div class="nav-inner">
     <a href="#top" class="logo">ink<span class="red">flow</span><span class="red">.</span></a>
     <nav class="nav-links">
-      <a href="#proof">Results</a>
       <a href="#how">How it works</a>
       <a href="#guarantee">Guarantee</a>
       <a href="#faq">FAQ</a>
@@ -286,7 +281,7 @@
   <div class="container">
     <div class="hero-inner">
       <div class="pill-row">
-        <span class="pill"><span class="red">★</span> Preferred marketing partner for US tattoo studios</span>
+        <span class="pill"><span class="red">★</span> Preferred marketing partner for US tattoo artists and studios</span>
         <span class="pill">🏆 Best agency 2026</span>
       </div>
 
@@ -295,15 +290,13 @@
         <span class="italic-accent">We handle the rest.</span>
       </h1>
 
-      <p class="sub">From the first ad to the deposit in your calendar: targeting, creatives, landing pages, DM replies, sales calls, bookings, and follow-ups, all handled by us every single week.</p>
+      <p class="sub">We run your ads, your content, your DMs and your bookings, week after week. You just tattoo.</p>
 
       <!-- Trust signals -->
       <div class="tp-row">
         <a class="tp-card" href="https://dk.trustpilot.com/review/heromedia.dk" target="_blank" rel="noopener">
           <img class="tp-stars" src="https://majestic100.github.io/Highlevel/assets/avatars/stars-5.svg" alt="4.7 out of 5 stars" />
-          <span class="tp-meta"><strong>4.7</strong> from 30+ reviews on
-            <span class="tp-brand"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.95 6.95L22 10l-5.5 4.8L18.18 22 12 18.27 5.82 22l1.68-7.2L2 10l7.05-1.05L12 2z"/></svg>Trustpilot</span>
-          </span>
+          <span class="tp-meta"><strong>4.7</strong> · 30+ reviews on <span class="tp-brand"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.95 6.95L22 10l-5.5 4.8L18.18 22 12 18.27 5.82 22l1.68-7.2L2 10l7.05-1.05L12 2z"/></svg>Trustpilot</span></span>
         </a>
       </div>
 
@@ -314,11 +307,11 @@
         </div>
         <div class="benefit">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span>We handle and reply to every lead</span>
+          <span>We answer and call every lead we send you</span>
         </div>
         <div class="benefit">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span>One studio per market</span>
+          <span>One artist or studio per area</span>
         </div>
       </div>
 
@@ -331,13 +324,11 @@
   <div class="container">
     <div class="booking-card">
       <div class="bk-head">
-        <p class="bk-label"><span class="dot"></span> Free · 30 minutes · no pitch</p>
         <h2 class="bk-title">Pick a time that works for you</h2>
-        <p class="bk-sub">We look at your studio, your market and your numbers, and tell you straight if we can fill your chair.</p>
       </div>
 
       <div class="calendar-slot">
-        <iframe src="https://api.leadconnectorhq.com/widget/booking/76PH7OblZ2v5KWBuYtnR" scrolling="no" id="76PH7OblZ2v5KWBuYtnR_1779385480250" title="Book a strategy call"></iframe>
+        <iframe src="https://api.leadconnectorhq.com/widget/booking/76PH7OblZ2v5KWBuYtnR" scrolling="no" id="76PH7OblZ2v5KWBuYtnR_1779385480250" title="Schedule your free call"></iframe>
       </div>
 
       <div class="bk-foot">
@@ -354,23 +345,23 @@
 <section class="section section-alt" id="how">
   <div class="container">
     <p class="eyebrow">How it works</p>
-    <h2 class="h2">From booked call to <span class="italic-accent">full chair</span></h2>
-    <p class="section-sub">You book the call, we build the machine, and you stay at the chair tattooing while it runs.</p>
+    <h2 class="h2">Here's how we fill <span class="italic-accent">your chair.</span></h2>
+    <p class="section-sub">You book the call, we build your system, and you stay at your chair while it runs.</p>
     <div class="steps">
       <div class="step">
         <span class="step-num">1</span>
         <h3>Book your call</h3>
-        <p>Grab a free 30-minute slot above. We look at your studio, your market and your goals, and tell you honestly if we're a fit.</p>
+        <p>Grab a free 30-minute slot above. We look at your setup and your market, then give you a straight answer.</p>
       </div>
       <div class="step">
         <span class="step-num">2</span>
-        <h3>We build the engine</h3>
-        <p>We launch the Facebook & Instagram ads, the landing pages and the booking flow. We answer the leads and book them with a deposit.</p>
+        <h3>We build your system</h3>
+        <p>Your ads, content, landing page and booking system, live inside a week. We answer every lead we send you, take the deposit and book them into your calendar.</p>
       </div>
       <div class="step">
         <span class="step-num">3</span>
-        <h3>You stay at the chair</h3>
-        <p>Deposit-secured sessions land in your calendar. You do what you do best. We handle the rest, month after month.</p>
+        <h3>You stay at your chair</h3>
+        <p>Deposit-paid bookings land in your calendar. You tattoo, and we keep optimizing every week so each booking costs less.</p>
       </div>
     </div>
   </div>
@@ -382,7 +373,7 @@
     <div class="guarantee">
       <span class="badge">Our risk, not yours</span>
       <h2>20 new clients in 30 days.<br/><span class="accent">Guaranteed.</span></h2>
-      <p class="lead">A minimum of 20 new clients, at an average of $700 per full-day session — and if we miss it, we refund our full fee.</p>
+      <p class="lead">A minimum of 20 new clients at an average of $700 per full-day session. If we miss it, we refund our full fee.</p>
 
       <div class="g-stats">
         <div class="g-stat">
@@ -404,9 +395,9 @@
         <span class="cite"><strong>Sinan</strong> · Founder, Inkflow by Hero</span>
       </div>
 
-      <p class="g-terms">Show up to the consults and follow the pricing we agree on. Ad spend always goes directly to Facebook and is never paid to us — we don't cover ad spend.</p>
+      <p class="g-terms">The guarantee applies with an ad budget of at least $1,000 a month.</p>
 
-      <a href="#book" class="btn-primary lg">Book your strategy call</a>
+      <a href="#book" class="btn-primary lg">Schedule your free call</a>
     </div>
   </div>
 </section>
@@ -425,8 +416,8 @@
       </div>
       <div>
         <p class="nb-eyebrow">No binding contracts</p>
-        <h3 class="nb-headline">You can walk away any month. <span class="accent">Most studios don't.</span></h3>
-        <p class="nb-quote">"There is no binding on our cooperation agreements — yet most of our clients have stayed with us for multiple years. That makes me proud of our team and the way we treat our studios."</p>
+        <h3 class="nb-headline">You can walk away any month. <span class="accent">Most clients don't.</span></h3>
+        <p class="nb-quote">"There is no binding on our agreements, yet most of our clients have stayed with us for years. That makes me proud of our team and the way we treat our artists and studios."</p>
         <span class="nb-cite"><span class="dot"></span><strong>Sinan</strong> · Founder, Inkflow by Hero</span>
       </div>
     </div>
@@ -442,23 +433,23 @@
     <div class="faq" style="margin-top: 40px;">
       <details open>
         <summary>How fast can you start filling my calendar?<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></summary>
-        <div class="faq-a">Once we have access to your accounts and a bit of content, campaigns are usually live within a few days. The 30-day guarantee window starts from launch.</div>
+        <div class="faq-a">You're live inside a week, and your first deposit-paid bookings usually land by day seven. The 30-day guarantee window starts from launch.</div>
       </details>
       <details>
         <summary>Do I need to do the marketing myself?<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></summary>
-        <div class="faq-a">No. We run the ads, write the content, build the landing pages, answer the leads and book them. You show up to the consultations and tattoo.</div>
+        <div class="faq-a">No. We run your ads, your content, your landing page and your bookings, and we answer every lead we send you. You show up to your appointments and tattoo.</div>
       </details>
       <details>
         <summary>What does it cost?<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></summary>
-        <div class="faq-a">You pay a monthly fee for our work, plus your own ad spend directly to Facebook. We go through the exact numbers on the call so there are no surprises.</div>
+        <div class="faq-a">You pay a monthly fee for our work, plus your own ad spend directly to Meta. We go through the exact numbers on the call so there are no surprises.</div>
       </details>
       <details>
         <summary>What if it doesn't work?<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></summary>
-        <div class="faq-a">If we don't hit 30 deposit-secured booked sessions in your first 30 days, we refund our fee and cover your next month's ad spend. As long as you show up to the consults and follow the pricing we agree on, the risk is ours.</div>
+        <div class="faq-a">If we don't hit 20 new clients in your first 30 days, we refund our fee. As long as you spend at least $1,000 a month on ads, show up to your consults and follow the pricing we agree on, the risk is ours.</div>
       </details>
       <details>
-        <summary>Do you work with more than one studio in my city?<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></summary>
-        <div class="faq-a">Never. One studio per market. While you're a client we won't take on a competing studio in your area.</div>
+        <summary>Do you work with more than one artist or studio in my city?<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></summary>
+        <div class="faq-a">Never. One artist or studio per area. While you're a client, we won't take on a competitor in your area.</div>
       </details>
     </div>
   </div>
@@ -469,11 +460,11 @@
   <div class="container">
     <p class="eyebrow">Ready to fill your chair?</p>
     <h2 class="h2">Pick a time <span class="italic-accent">right here.</span></h2>
-    <p class="section-sub">Free 30-minute call. Worst case, you walk away with a clear plan for your studio.</p>
+    <p class="section-sub">Free 30-minute call. Worst case, you walk away with a clear plan for your bookings.</p>
 
     <div class="booking-card" style="margin-top: 8px;">
       <div class="calendar-slot">
-        <iframe src="https://api.leadconnectorhq.com/widget/booking/76PH7OblZ2v5KWBuYtnR" scrolling="no" id="76PH7OblZ2v5KWBuYtnR_bottom" title="Book a strategy call"></iframe>
+        <iframe src="https://api.leadconnectorhq.com/widget/booking/76PH7OblZ2v5KWBuYtnR" scrolling="no" id="76PH7OblZ2v5KWBuYtnR_bottom" title="Schedule your free call"></iframe>
       </div>
       <div class="bk-foot">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -489,7 +480,7 @@
     <div class="footer-grid">
       <div class="footer-col">
         <span class="logo">ink<span class="red">flow</span><span class="red">.</span></span>
-        <p style="margin-top: 12px;">Tattoo studio growth, done-for-you.</p>
+        <p style="margin-top: 12px;">Bookings for tattoo artists and studios, done for you.</p>
         <div class="footer-links">
           <a href="/terms">Terms</a>
           <a href="/privacy">Privacy</a>
@@ -514,10 +505,11 @@
     </div>
     <div class="footer-bottom">
       <span>© <span id="year"></span> Inkflow by Hero. All rights reserved.</span>
-      <span>One studio per market.</span>
+      <span>One artist or studio per area.</span>
     </div>
   </div>
 </footer>
+</div>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
