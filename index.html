@@ -53,6 +53,7 @@
 
 <style>
   html { scroll-behavior: smooth; }
+  h1, h2, h3, .faq-q { text-wrap: balance; }
   body {
     background-color: #060606;
     color: #F5F1EB;
@@ -607,6 +608,52 @@
     .journey-step.flip .journey-visual { border-left: none; border-right: 1px solid #2A2420; }
   }
   .journey-visual svg { width: 100%; max-width: 320px; height: auto; }
+  .journey-visual--photo { padding: 16px; }
+  @media (min-width: 900px) { .journey-visual--photo { padding: 24px; } }
+  .journey-visual--photo img, .journey-visual--photo video { width: 100%; height: auto; border-radius: 12px; border: 1px solid #2A2420; display: block; background: #0F0D0B; }
+  /* iOS Messages (SMS) mock-up in journey step 04 */
+  .journey-visual--sms { padding: 18px; }
+  @media (min-width: 900px) { .journey-visual--sms { padding: 36px; } }
+  .sms {
+    width: 100%; max-width: 300px; background: #000; border: 1px solid #2A2420; border-radius: 20px;
+    padding: 0 10px 11px; font-family: Inter, -apple-system, system-ui, sans-serif; color: #fff;
+    display: flex; flex-direction: column; align-items: flex-start; gap: 3px; box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+  }
+  .sms-head {
+    align-self: stretch; display: flex; align-items: center; justify-content: center; position: relative;
+    margin: 0 -10px 8px; padding: 7px 10px 6px; background: #1C1C1E; border-bottom: 1px solid #2C2C2E; border-radius: 20px 20px 0 0;
+  }
+  .sms-back { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #0A84FF; display: inline-flex; }
+  .journey-visual .sms-back svg { width: 8px; height: 13px; max-width: none; }
+  .journey-visual .sms-name svg { width: 5px; height: 8px; max-width: none; flex-shrink: 0; }
+  .sms-contact { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .sms-avatar {
+    width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(180deg, #A5A5AD, #7C7C84);
+    display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: #fff;
+  }
+  .sms-name { font-size: 10px; font-weight: 500; color: #fff; display: inline-flex; align-items: center; gap: 3px; white-space: nowrap; }
+  .sms-name svg { color: #8E8E93; }
+  .sms-meta { align-self: center; text-align: center; font-size: 9.5px; line-height: 1.3; color: #8E8E93; margin-bottom: 3px; }
+  .sms-msg {
+    position: relative; max-width: 86%; padding: 6px 10px; border-radius: 16px;
+    font-size: 12px; line-height: 1.3; letter-spacing: -0.005em; overflow-wrap: anywhere;
+  }
+  .sms-in { align-self: flex-start; background: #26252A; color: #fff; }
+  .sms-out { align-self: flex-end; background: #34C759; color: #fff; margin-top: 3px; }
+  .sms-in + .sms-in { margin-top: -1px; }
+  .sms-photo { padding: 0; max-width: 42%; border-radius: 14px; overflow: hidden; background: #26252A; }
+  .sms-photo img { display: block; width: 100%; height: auto; }
+  /* bubble tails, iOS style */
+  .sms-tail::before, .sms-tail::after { content: ""; position: absolute; bottom: 0; height: 16px; }
+  .sms-in.sms-tail::before { left: -6px; width: 16px; background: #26252A; border-bottom-right-radius: 14px 12px; }
+  .sms-in.sms-tail::after { left: -10px; width: 10px; background: #000; border-bottom-right-radius: 10px; }
+  .sms-out.sms-tail::before { right: -6px; width: 16px; background: #34C759; border-bottom-left-radius: 14px 12px; }
+  .sms-out.sms-tail::after { right: -10px; width: 10px; background: #000; border-bottom-left-radius: 10px; }
+  .sms-pill {
+    display: block; margin-top: 5px; padding: 4px 8px; border-radius: 999px; background: rgba(255,255,255,0.92);
+    color: #1B7F3B; font-size: 10.5px; font-weight: 600; text-align: center; letter-spacing: 0;
+  }
+  .sms-status { align-self: flex-end; font-size: 9px; color: #8E8E93; margin: 0 4px 0 0; }
   .journey-badges { position: absolute; top: 16px; right: 16px; display: inline-flex; gap: 6px; }
   .journey-badges .brand-badge { position: static; }
 
@@ -1168,43 +1215,35 @@
 <!-- ============================================================ -->
 <!-- ===== HERO ===== -->
 <!-- ============================================================ -->
-<section class="relative overflow-hidden pt-32 md:pt-40 pb-16 md:pb-24 spotlight" id="hero">
+<section class="relative overflow-hidden pt-24 md:pt-32 pb-10 md:pb-24 spotlight" id="hero">
   <div class="hero-glow"><span class="aurora-blob"></span></div>
   <div class="relative max-w-7xl mx-auto px-6 lg:px-12">
 
     <div class="text-center mx-auto max-w-5xl">
 
       <!-- Big editorial headline -->
-      <h1 class="font-serif font-bold text-text-primary mb-10 reveal" style="font-size: clamp(40px, 7vw, 84px); line-height: 1.05; letter-spacing: -0.025em;" data-d="0">
+      <h1 class="font-serif font-bold text-text-primary mb-10 reveal" style="font-size: clamp(34px, 7vw, 84px); line-height: 1.05; letter-spacing: -0.025em;" data-d="0">
         We build the system, run the ads, and fill your chair
         <span class="block italic text-accent">week after week.</span>
       </h1>
 
       <!-- Service tagline -->
       <p class="text-lg md:text-xl text-text-secondary max-w-3xl mx-auto mb-3 reveal" data-d="120">
-        From the first ad to the deposit in your calendar: targeting, creatives, landing pages, DM replies, sales calls, bookings, and follow-ups, all handled by us every single week.
+        We run the ads, the content, the DMs, and the bookings. You just tattoo.
       </p>
 
       <!-- One-liner sub -->
       <p class="text-base md:text-lg text-text-muted max-w-2xl mx-auto mb-12 reveal" data-d="200">
-        The only marketing team a tattoo studio or solo artist will ever need.
+        The only marketing team you'll ever need, studio or solo.
       </p>
 
       <!-- Pill CTA -->
       <div class="flex justify-center reveal" data-d="280">
-        <a href="#book" class="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-accent text-white font-semibold text-base md:text-lg hover:bg-accent-hover transition-all hover:scale-[1.02] shadow-lg shadow-accent/20 group">
-          Schedule Your Free Strategy Call
+        <a href="#book" class="inline-flex items-center gap-3 px-6 sm:px-8 py-4 rounded-full bg-accent text-white font-semibold text-base md:text-lg whitespace-nowrap hover:bg-accent-hover transition-all hover:scale-[1.02] shadow-lg shadow-accent/20 group">
+          Schedule Your Free Call
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="transition-transform group-hover:translate-x-1"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
       </div>
-
-      <!-- Scroll indicator -->
-      <a href="#offer" class="inline-flex flex-col items-center gap-2 text-text-muted hover:text-text-secondary transition mt-16 reveal" data-d="360" aria-label="Scroll to see more">
-        <span class="text-xs uppercase tracking-label">Scroll for the full breakdown</span>
-        <span class="w-6 h-10 rounded-full border border-border-subtle flex items-start justify-center pt-2 overflow-hidden">
-          <span class="block w-1 h-2 rounded-full bg-text-muted scroll-dot"></span>
-        </span>
-      </a>
 
     </div>
 
@@ -1215,16 +1254,16 @@
 <!-- ============================================================ -->
 <!-- ===== THE OFFER (services) ===== -->
 <!-- ============================================================ -->
-<section id="offer" class="py-20 md:py-32 relative overflow-hidden dot-grid">
+<section id="offer" class="py-10 md:py-24 relative overflow-hidden dot-grid">
   <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 50% 30% at 80% 100%, rgba(220,38,38,0.08), transparent 60%);"></div>
   <div class="relative max-w-7xl mx-auto px-6 lg:px-12">
 
     <div class="max-w-3xl mb-12 md:mb-16 reveal">
       <h2 class="display-h2 font-serif text-text-primary mt-4">
         From scroll
-        <span class="italic text-accent">to your chair.</span>
+        <span class="italic text-accent whitespace-nowrap">to your chair.</span>
       </h2>
-      <p class="text-text-secondary mt-5 text-lg max-w-2xl">The exact path we build and run to turn a stranger scrolling on their phone into a client sitting in your chair, deposit already paid. Five moving parts. We handle all of them.</p>
+      <p class="text-text-secondary mt-5 text-lg max-w-2xl">Five steps, and we run all of them for you.</p>
     </div>
 
     <!-- Client journey -->
@@ -1235,50 +1274,14 @@
         <div class="journey-content">
           <div class="journey-eyebrow">
             <span class="journey-step-num">01</span>
-            <span class="journey-stage">They see you · <b>Facebook &amp; Instagram Ads</b></span>
+            <span class="journey-stage">They see you · <b>Ads</b></span>
           </div>
           <h3 class="journey-title">We put your work in front of the right people.</h3>
-          <p class="journey-body">We run ads to people already looking for ink in your city, on the apps they scroll every day. New angles, hooks and creatives every week. We double down on whatever fills the calendar, and kill whatever doesn't.</p>
+          <p class="journey-body">Facebook and Instagram ads, aimed at people in your city who want ink. We test new creatives every week and keep what books.</p>
           <span class="journey-watermark">01</span>
         </div>
-        <div class="journey-visual">
-          <div class="journey-badges">
-            <span class="brand-badge" aria-label="Facebook"><img src="assets/brands/facebook.png" alt="Facebook" loading="lazy" /></span>
-            <span class="brand-badge" aria-label="Instagram"><img src="assets/brands/instagram.png" alt="Instagram" loading="lazy" /></span>
-          </div>
-          <svg viewBox="0 0 320 240" aria-hidden="true">
-            <defs>
-              <linearGradient id="brandG" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#DC2626"/><stop offset="100%" stop-color="#450A0A"/>
-              </linearGradient>
-            </defs>
-            <!-- Ad card -->
-            <rect x="14" y="14" width="292" height="212" rx="16" fill="#161412" stroke="#2A2420" stroke-width="1.4"/>
-            <!-- Profile row -->
-            <circle cx="34" cy="38" r="11" fill="url(#brandG)"/>
-            <text x="52" y="36" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" fill="#F5F1EB">Black Iron Tattoo</text>
-            <text x="52" y="48" font-family="Inter, system-ui, sans-serif" font-size="8" fill="#6B6663">Sponsored · Phoenix, AZ</text>
-            <!-- Image area -->
-            <rect x="14" y="62" width="292" height="118" fill="#0F0D0B"/>
-            <g opacity="0.55" stroke="#3A3A3A" fill="none" stroke-width="1.4">
-              <path d="M40 140 C 70 90, 130 90, 160 140 S 250 190, 280 140"/>
-              <path d="M60 120 Q 110 80, 160 120 T 260 120"/>
-              <circle cx="80" cy="110" r="4"/>
-              <circle cx="160" cy="125" r="3"/>
-              <circle cx="240" cy="115" r="4"/>
-            </g>
-            <!-- Bottom row: copy + CTA -->
-            <rect x="24" y="194" width="180" height="6" rx="3" fill="#3A3A3A"/>
-            <rect x="24" y="206" width="130" height="5" rx="2.5" fill="#2A2420"/>
-            <rect x="232" y="190" width="62" height="26" rx="7" fill="#DC2626"/>
-            <text x="263" y="207" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="700" fill="#fff" text-anchor="middle">BOOK NOW</text>
-            <!-- Floating metric callout -->
-            <g>
-              <rect x="194" y="74" width="104" height="26" rx="9" fill="#0F0D0B" stroke="#22C55E" stroke-width="1.2"/>
-              <circle cx="208" cy="87" r="4" fill="#22C55E"/>
-              <text x="218" y="91" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" fill="#22C55E">$2.84 / lead</text>
-            </g>
-          </svg>
+        <div class="journey-visual journey-visual--photo">
+          <img src="assets/journey/meta-ads-manager.webp" alt="Meta Ads Manager showing 1,189 campaigns, $15,659 spent and $0.74 cost per click" width="1400" height="721" loading="lazy" decoding="async" />
         </div>
       </article>
 
@@ -1289,48 +1292,17 @@
         <div class="journey-content">
           <div class="journey-eyebrow">
             <span class="journey-step-num">02</span>
-            <span class="journey-stage">They trust you · <b>Content &amp; Scripts</b></span>
+            <span class="journey-stage">They trust you · <b>Content</b></span>
           </div>
           <h3 class="journey-title">We make sure your work does the selling.</h3>
-          <p class="journey-body">We hand you simple scripts and tell you exactly what to film. A few clips a week is all it takes. Real artist, real work, scroll-stopping. So by the time someone reaches out, they already want you.</p>
+          <p class="journey-body">We edit your content so it looks better than anyone else's in your city, and people trust you before they reach out.</p>
           <span class="journey-watermark">02</span>
         </div>
-        <div class="journey-visual">
-          <svg viewBox="0 0 320 240" aria-hidden="true">
-            <defs>
-              <linearGradient id="vidG" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#1f1c1a"/><stop offset="100%" stop-color="#0a0908"/>
-              </linearGradient>
-            </defs>
-            <!-- Ambient text hints -->
-            <g opacity="0.4">
-              <rect x="14" y="42" width="68" height="6" rx="3" fill="#2A2420"/>
-              <rect x="14" y="54" width="52" height="4" rx="2" fill="#1A1815"/>
-              <rect x="240" y="178" width="64" height="6" rx="3" fill="#2A2420"/>
-              <rect x="240" y="190" width="50" height="4" rx="2" fill="#1A1815"/>
-            </g>
-            <!-- Phone frame -->
-            <rect x="100" y="14" width="120" height="212" rx="18" fill="#0a0908" stroke="#2A2420" stroke-width="1.5"/>
-            <rect x="106" y="20" width="108" height="200" rx="12" fill="#161412"/>
-            <rect x="146" y="24" width="28" height="6" rx="3" fill="#0a0908"/>
-            <!-- Profile -->
-            <circle cx="120" cy="48" r="6" fill="#DC2626"/>
-            <rect x="132" y="44" width="46" height="3" rx="1.5" fill="#F5F1EB"/>
-            <rect x="132" y="50" width="30" height="2.5" rx="1" fill="#6B6663"/>
-            <!-- Video thumbnail -->
-            <rect x="106" y="60" width="108" height="132" fill="url(#vidG)"/>
-            <!-- Play button -->
-            <circle cx="160" cy="126" r="22" fill="rgba(220,38,38,0.16)" stroke="#DC2626" stroke-width="1.6"/>
-            <path d="M154 116 L176 126 L154 136 Z" fill="#EF4444"/>
-            <!-- Engagement row -->
-            <g>
-              <path d="M118 202 a4.5 4.5 0 0 1 9 0 a4.5 4.5 0 0 1 -4.5 5.5 a4.5 4.5 0 0 1 -4.5 -5.5z" fill="#DC2626"/>
-              <text x="132" y="208" font-family="Inter, system-ui, sans-serif" font-size="8" font-weight="600" fill="#F5F1EB">12.4K</text>
-              <rect x="154" y="201" width="7" height="6" rx="1.5" fill="#2A2420"/>
-              <text x="166" y="208" font-family="Inter, system-ui, sans-serif" font-size="8" fill="#A8A29E">328</text>
-              <path d="M188 201 l4 3 l-4 3z" fill="#2A2420"/>
-            </g>
-          </svg>
+        <div class="journey-visual journey-visual--photo">
+          <video autoplay muted loop playsinline preload="metadata" poster="assets/journey/content-edit-poster.webp" width="1280" height="720" aria-label="Screen recording of us editing a tattoo artist's content">
+            <source src="assets/journey/content-edit.webm" type="video/webm" />
+            <source src="assets/journey/content-edit.mp4" type="video/mp4" />
+          </video>
         </div>
       </article>
 
@@ -1341,57 +1313,17 @@
         <div class="journey-content">
           <div class="journey-eyebrow">
             <span class="journey-step-num">03</span>
-            <span class="journey-stage">They click · <b>Landing pages &amp; funnels</b></span>
+            <span class="journey-stage">They click · <b>Landing page</b></span>
           </div>
           <h3 class="journey-title">Every click hits a page <span class="italic text-accent">built around your work.</span></h3>
-          <p class="journey-body">We build a landing page tailored specifically to you, your style, and your portfolio, no generic template anywhere in sight. Designed mobile-first and around the way tattoo clients actually decide, it does the talking, shows your work, and qualifies every visitor who signs up, so only the ones who genuinely fit your pricing and style ever make it through to you.</p>
+          <p class="journey-body">Your own page, built around your portfolio and your style instead of a template.</p>
           <span class="journey-watermark">03</span>
         </div>
-        <div class="journey-visual">
-          <svg viewBox="0 0 320 240" aria-hidden="true">
-            <!-- Browser frame -->
-            <rect x="12" y="14" width="296" height="212" rx="14" fill="#161412" stroke="#2A2420" stroke-width="1.4"/>
-            <rect x="12" y="14" width="296" height="22" fill="#0F0D0B"/>
-            <circle cx="26" cy="25" r="2.5" fill="#2A2420"/>
-            <circle cx="36" cy="25" r="2.5" fill="#2A2420"/>
-            <circle cx="46" cy="25" r="2.5" fill="#2A2420"/>
-            <rect x="60" y="20" width="180" height="10" rx="5" fill="#1A1815"/>
-            <!-- Hero copy -->
-            <rect x="28" y="58" width="44" height="6" rx="2" fill="#DC2626" opacity="0.85"/>
-            <rect x="28" y="74" width="178" height="12" rx="3" fill="#F5F1EB"/>
-            <rect x="28" y="92" width="148" height="12" rx="3" fill="#F5F1EB"/>
-            <rect x="28" y="110" width="100" height="12" rx="3" fill="#F5F1EB"/>
-            <rect x="28" y="134" width="180" height="5" rx="2" fill="#3A3A3A"/>
-            <rect x="28" y="146" width="160" height="5" rx="2" fill="#2A2420"/>
-            <rect x="28" y="158" width="130" height="5" rx="2" fill="#2A2420"/>
-            <!-- CTA -->
-            <rect x="28" y="184" width="92" height="26" rx="7" fill="#DC2626"/>
-            <text x="74" y="201" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="700" fill="#fff" text-anchor="middle">BOOK NOW</text>
-            <!-- Side calendar mini -->
-            <rect x="226" y="56" width="72" height="156" rx="8" fill="#0F0D0B" stroke="#2A2420" stroke-width="1.2"/>
-            <rect x="226" y="56" width="72" height="18" rx="8" fill="#161412"/>
-            <text x="234" y="70" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="600" fill="#F5F1EB">May</text>
-            <g>
-              <rect x="234" y="84" width="9" height="9" rx="1.5" fill="#2A2420"/>
-              <rect x="248" y="84" width="9" height="9" rx="1.5" fill="#2A2420"/>
-              <rect x="262" y="84" width="9" height="9" rx="1.5" fill="#DC2626"/>
-              <rect x="276" y="84" width="9" height="9" rx="1.5" fill="#2A2420"/>
-              <rect x="234" y="98" width="9" height="9" rx="1.5" fill="#2A2420"/>
-              <rect x="248" y="98" width="9" height="9" rx="1.5" fill="#DC2626"/>
-              <rect x="262" y="98" width="9" height="9" rx="1.5" fill="#2A2420"/>
-              <rect x="276" y="98" width="9" height="9" rx="1.5" fill="#DC2626"/>
-              <rect x="234" y="112" width="9" height="9" rx="1.5" fill="#DC2626"/>
-              <rect x="248" y="112" width="9" height="9" rx="1.5" fill="#2A2420"/>
-              <rect x="262" y="112" width="9" height="9" rx="1.5" fill="#2A2420"/>
-              <rect x="276" y="112" width="9" height="9" rx="1.5" fill="#2A2420"/>
-              <rect x="234" y="126" width="9" height="9" rx="1.5" fill="#2A2420"/>
-              <rect x="248" y="126" width="9" height="9" rx="1.5" fill="#DC2626"/>
-              <rect x="262" y="126" width="9" height="9" rx="1.5" fill="#DC2626"/>
-              <rect x="276" y="126" width="9" height="9" rx="1.5" fill="#2A2420"/>
-            </g>
-            <rect x="234" y="174" width="56" height="22" rx="5" fill="#DC2626"/>
-            <text x="262" y="189" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="700" fill="#fff" text-anchor="middle">PICK A TIME</text>
-          </svg>
+        <div class="journey-visual journey-visual--photo">
+          <video autoplay muted loop playsinline preload="metadata" poster="assets/journey/landing-page-poster.webp" width="1280" height="706" aria-label="Screen recording scrolling through a landing page we built for a tattoo studio">
+            <source src="assets/journey/landing-page.webm" type="video/webm" />
+            <source src="assets/journey/landing-page.mp4" type="video/mp4" />
+          </video>
         </div>
       </article>
 
@@ -1402,44 +1334,26 @@
         <div class="journey-content">
           <div class="journey-eyebrow">
             <span class="journey-step-num">04</span>
-            <span class="journey-stage">They message · <b>Lead handling + sales calls</b></span>
+            <span class="journey-stage">They message · <b>Replies</b></span>
           </div>
-          <h3 class="journey-title">Every lead gets answered, <span class="italic text-accent">and called.</span></h3>
-          <p class="journey-body">Within minutes of an inquiry our team replies in your DMs, and our dedicated sales team picks up the phone to qualify each lead personally. The tire-kickers, the price-hagglers, the ghosters who would waste an evening of your time, all get filtered out before they reach you. Only serious, deposit-ready clients ever land on your calendar.</p>
+          <h3 class="journey-title">Every lead we send you gets answered, <span class="italic text-accent">and called.</span></h3>
+          <p class="journey-body">We handle the leads our ads bring in, not your regular Instagram DMs. Our team replies within minutes, calls each lead to qualify them, collects the deposit and books them straight into your calendar. You never have to handle any of it again.</p>
           <span class="journey-watermark">04</span>
         </div>
-        <div class="journey-visual">
-          <svg viewBox="0 0 320 240" aria-hidden="true">
-            <!-- Chat container -->
-            <rect x="14" y="14" width="292" height="212" rx="14" fill="#161412" stroke="#2A2420" stroke-width="1.4"/>
-            <!-- Header -->
-            <rect x="14" y="14" width="292" height="44" rx="14" fill="#0F0D0B"/>
-            <rect x="14" y="44" width="292" height="14" fill="#0F0D0B"/>
-            <circle cx="40" cy="36" r="12" fill="#DC2626"/>
-            <text x="40" y="40" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="700" fill="#fff" text-anchor="middle">S</text>
-            <text x="60" y="34" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" fill="#F5F1EB">Sarah M.</text>
-            <circle cx="63" cy="46" r="2.5" fill="#22C55E"/>
-            <text x="71" y="49" font-family="Inter, system-ui, sans-serif" font-size="8" fill="#A8A29E">Online · replies in 2 min</text>
-            <!-- Received -->
-            <rect x="28" y="70" width="180" height="22" rx="11" fill="#2A2420"/>
-            <text x="38" y="84" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#F5F1EB">Hi! Saw your ad, half sleeve?</text>
-            <!-- Sent (us) -->
-            <rect x="92" y="100" width="200" height="34" rx="11" fill="#DC2626"/>
-            <text x="102" y="114" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#fff">Hey Sarah! Half sleeves start at $850.</text>
-            <text x="102" y="128" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#fff">Want a consult slot this week?</text>
-            <!-- Received -->
-            <rect x="28" y="142" width="140" height="22" rx="11" fill="#2A2420"/>
-            <text x="38" y="156" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#F5F1EB">Yes! Friday afternoon?</text>
-            <!-- Sent: booking link card -->
-            <rect x="80" y="172" width="212" height="34" rx="11" fill="#DC2626"/>
-            <text x="90" y="186" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#fff">Sent. Deposit secures your slot 👇</text>
-            <rect x="90" y="190" width="120" height="10" rx="5" fill="rgba(255,255,255,0.85)"/>
-            <!-- Typing indicator -->
-            <rect x="28" y="210" width="46" height="14" rx="7" fill="#2A2420"/>
-            <circle cx="40" cy="217" r="2" fill="#6B6663"/>
-            <circle cx="51" cy="217" r="2" fill="#6B6663"/>
-            <circle cx="62" cy="217" r="2" fill="#6B6663"/>
-          </svg>
+        <div class="journey-visual journey-visual--sms">
+          <div class="sms" role="img" aria-label="Text conversation: a client sends a reference photo, we reply within minutes, book a consult and send the deposit link">
+            <div class="sms-head">
+              <span class="sms-back" aria-hidden="true"><svg viewBox="0 0 12 20" width="9" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2 2 10l8 8"/></svg></span>
+              <span class="sms-contact"><span class="sms-avatar" aria-hidden="true">S</span><span class="sms-name">Sarah M.<svg viewBox="0 0 8 12" width="5" height="8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m1.5 1.5 4.5 4.5-4.5 4.5"/></svg></span></span>
+            </div>
+            <div class="sms-meta">Text Message · SMS · Today 9:41 AM</div>
+            <div class="sms-msg sms-in sms-photo"><img src="assets/journey/sms-reference.webp" alt="Client's reference photo: a floral thigh tattoo with a lioness and butterflies" width="600" height="750" loading="lazy" decoding="async" /></div>
+            <div class="sms-msg sms-in sms-tail">Hi! Saw your ad. Could you do something like this?</div>
+            <div class="sms-msg sms-out sms-tail">Hey Sarah! Yes, we can do that. From $850. Free consult this week?</div>
+            <div class="sms-msg sms-in sms-tail">Yes! Friday afternoon?</div>
+            <div class="sms-msg sms-out sms-tail">Friday 2pm is yours. Deposit secures your slot 👇<span class="sms-pill">Pay deposit · $100</span></div>
+            <div class="sms-status">Delivered</div>
+          </div>
         </div>
       </article>
 
@@ -1450,10 +1364,10 @@
         <div class="journey-content">
           <div class="journey-eyebrow">
             <span class="journey-step-num">05</span>
-            <span class="journey-stage">They book · <b>Booking &amp; deposits</b></span>
+            <span class="journey-stage">They book · <b>Deposits</b></span>
           </div>
           <h3 class="journey-title">They land in your calendar, deposit paid up front.</h3>
-          <p class="journey-body">Serious clients book straight into your calendar with a deposit secured before they arrive. Reminders and follow-ups run on autopilot, so no-shows basically disappear and your chair stays full.</p>
+          <p class="journey-body">Clients book straight into your calendar with the deposit paid. Reminders run automatically, so no-shows disappear.</p>
           <span class="journey-watermark">05</span>
         </div>
         <div class="journey-visual">
@@ -1553,16 +1467,16 @@
 <!-- ============================================================ -->
 <!-- ===== COMPARISON ===== -->
 <!-- ============================================================ -->
-<section class="py-20 md:py-32 relative overflow-hidden">
+<section class="py-10 md:py-24 relative overflow-hidden">
   <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 70% 50% at 50% 20%, rgba(220,38,38,0.10), transparent 60%);"></div>
   <div class="relative max-w-7xl mx-auto px-6 lg:px-12">
 
     <div class="max-w-3xl mb-14 md:mb-16 reveal">
       <h2 class="display-h2 font-serif text-text-primary">
-        Other agencies <span class="italic text-accent">vs Inkflow.</span>
+        Other agencies <span class="italic text-accent whitespace-nowrap">vs Inkflow.</span>
       </h2>
       <p class="text-lg text-text-secondary mt-6 max-w-2xl">
-        Same money. Very different outcomes. Here's what changes when you work with a team that only does tattoo artists and studios.
+        Your budget, two very different outcomes.
       </p>
     </div>
 
@@ -1577,13 +1491,7 @@
               <span class="text-accent mt-0.5 flex-shrink-0">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round"/></svg>
               </span>
-              <span>Three weeks just to "research your brand" before they run anything</span>
-            </li>
-            <li class="flex items-start gap-3 text-text-secondary">
-              <span class="text-accent mt-0.5 flex-shrink-0">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round"/></svg>
-              </span>
-              <span>Lists of "interested" people who never end up showing</span>
+              <span>Sends you lists of "interested" people who never show up</span>
             </li>
             <li class="flex items-start gap-3 text-text-secondary">
               <span class="text-accent mt-0.5 flex-shrink-0">
@@ -1595,7 +1503,7 @@
               <span class="text-accent mt-0.5 flex-shrink-0">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round"/></svg>
               </span>
-              <span>Same playbook running for the shop down the street</span>
+              <span>Runs the same playbook for the shop down the street from you</span>
             </li>
             <li class="flex items-start gap-3 text-text-secondary">
               <span class="text-accent mt-0.5 flex-shrink-0">
@@ -1621,37 +1529,19 @@
               <span class="text-[#22C55E] mt-0.5 flex-shrink-0">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </span>
-              <span>Whole system's live in a week, and the first bookings start landing before that week's even out.</span>
+              <span>You're live in a week, with your first bookings before the week is out.</span>
             </li>
             <li class="flex items-start gap-3 text-text-primary font-medium">
               <span class="text-[#22C55E] mt-0.5 flex-shrink-0">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </span>
-              <span>Every booking shows up with the deposit already paid before they walk through the door.</span>
+              <span>Every booking lands in your calendar with the deposit already paid.</span>
             </li>
             <li class="flex items-start gap-3 text-text-primary font-medium">
               <span class="text-[#22C55E] mt-0.5 flex-shrink-0">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </span>
-              <span>Our team is in your DMs around the clock, and our sales team calls every qualified lead, so you're never glued to your phone or stuck haggling with tire-kickers.</span>
-            </li>
-            <li class="flex items-start gap-3 text-text-primary font-medium">
-              <span class="text-[#22C55E] mt-0.5 flex-shrink-0">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-              <span>Only one artist or shop per area, which means the shop down the street can't run the same plays we run for you.</span>
-            </li>
-            <li class="flex items-start gap-3 text-text-primary font-medium">
-              <span class="text-[#22C55E] mt-0.5 flex-shrink-0">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-              <span>Tattoo artists and shops are the only thing we work with, so no dentists, no e-com, and no random side gigs.</span>
-            </li>
-            <li class="flex items-start gap-3 text-text-primary font-medium">
-              <span class="text-[#22C55E] mt-0.5 flex-shrink-0">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-              <span>We run the whole thing for you, from ads and content to bookings and follow-ups, so you just keep tattooing.</span>
+              <span>We answer your DMs and call every lead, so your phone stays in your pocket.</span>
             </li>
           </ul>
         </div>
@@ -1666,14 +1556,14 @@
 <!-- ============================================================ -->
 <!-- ===== HOW IT WORKS ===== -->
 <!-- ============================================================ -->
-<section id="how" class="py-16 md:py-24">
+<section id="how" class="py-10 md:py-24">
   <div class="max-w-7xl mx-auto px-6 lg:px-12">
     <div class="max-w-3xl mb-16 reveal">
       <h2 class="display-h2 font-serif text-text-primary mt-4">
-        From first call
+        From your first call
         <span class="italic">to fully booked.</span>
       </h2>
-      <p class="text-text-secondary mt-5 text-lg">Four steps, no fluff, live inside a week.</p>
+      <p class="text-text-secondary mt-5 text-lg">Four steps, no fluff, and you're live inside a week.</p>
     </div>
 
     <div class="relative">
@@ -1686,19 +1576,19 @@
           <div class="step-num absolute left-0 top-0 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center font-serif text-xl md:text-2xl z-10">01</div>
           <div class="absolute left-12 md:left-16 top-6 md:top-8 w-8 md:w-12 h-px bg-border-subtle"></div>
           <span class="label text-accent">Day 0</span>
-          <h3 class="text-2xl md:text-3xl font-serif mt-2 mb-3">A 30-minute call. For artists and studios ready to grow.</h3>
-          <p class="text-text-secondary text-lg leading-relaxed max-w-2xl">If you're serious about filling your calendar, hop on a call with us. We'll ask about your setup, your style, your average ticket, what's been working and what hasn't. If you're a fit and your market is open, we move forward. If not, we'll tell you straight. Only worth booking if you're ready to make a change.</p>
+          <h3 class="text-xl md:text-3xl font-serif mt-2 mb-3">A 30-minute call to see if we're right for you.</h3>
+          <p class="text-text-secondary text-lg leading-relaxed max-w-2xl">We look at your setup and your market, then give you a straight answer.</p>
         </div>
 
         <div class="relative pl-20 md:pl-28 reveal">
           <div class="step-num absolute left-0 top-0 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center font-serif text-xl md:text-2xl z-10">02</div>
           <div class="absolute left-12 md:left-16 top-6 md:top-8 w-8 md:w-12 h-px bg-border-subtle"></div>
           <span class="label text-accent">Day 1 to 4</span>
-          <h3 class="text-2xl md:text-3xl font-serif mt-2 mb-3">We build everything.</h3>
-          <p class="text-text-secondary text-lg leading-relaxed max-w-2xl">Ads, creatives, content scripts, landing page, booking system, follow-up flows. The whole stack, built around your chair. You film a few videos from our scripts. We handle the rest.</p>
+          <h3 class="text-xl md:text-3xl font-serif mt-2 mb-3">We build everything.</h3>
+          <p class="text-text-secondary text-lg leading-relaxed max-w-2xl">Your ads, content, landing page and booking system, ready in four days.</p>
           <div class="mt-4 flex flex-wrap gap-2">
             <span class="text-xs px-3 py-1 rounded-full border border-border-subtle text-text-secondary">Facebook & Instagram ads</span>
-            <span class="text-xs px-3 py-1 rounded-full border border-border-subtle text-text-secondary">Content scripts</span>
+            <span class="text-xs px-3 py-1 rounded-full border border-border-subtle text-text-secondary">Content</span>
             <span class="text-xs px-3 py-1 rounded-full border border-border-subtle text-text-secondary">Landing page</span>
             <span class="text-xs px-3 py-1 rounded-full border border-border-subtle text-text-secondary">Booking flow</span>
             <span class="text-xs px-3 py-1 rounded-full border border-border-subtle text-text-secondary">SMS automations</span>
@@ -1709,16 +1599,16 @@
           <div class="step-num absolute left-0 top-0 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center font-serif text-xl md:text-2xl z-10">03</div>
           <div class="absolute left-12 md:left-16 top-6 md:top-8 w-8 md:w-12 h-px bg-border-subtle"></div>
           <span class="label text-accent">Day 4 to 7</span>
-          <h3 class="text-2xl md:text-3xl font-serif mt-2 mb-3">Live, and the first clients land in your calendar.</h3>
-          <p class="text-text-secondary text-lg leading-relaxed max-w-2xl">Ads go live and the first inquiries start hitting within hours. Our team replies within minutes, and our sales team picks up the phone to qualify each lead personally, so the tire-kickers, ghosters, and price-hagglers get filtered out before they ever reach you. The first deposit-ready clients usually land in your calendar between day four and day seven, all booked by us, ready for you to tattoo.</p>
+          <h3 class="text-xl md:text-3xl font-serif mt-2 mb-3">Live, and the first clients land in your calendar.</h3>
+          <p class="text-text-secondary text-lg leading-relaxed max-w-2xl">Your ads go live, and your first deposit-paid bookings usually land by day seven.</p>
         </div>
 
         <div class="relative pl-20 md:pl-28 reveal">
           <div class="step-num absolute left-0 top-0 w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center font-serif text-xl md:text-2xl z-10">04</div>
           <div class="absolute left-12 md:left-16 top-6 md:top-8 w-8 md:w-12 h-px bg-border-subtle"></div>
           <span class="label text-accent">Ongoing</span>
-          <h3 class="text-2xl md:text-3xl font-serif mt-2 mb-3">Deposits paid. Booked direct.</h3>
-          <p class="text-text-secondary text-lg leading-relaxed max-w-2xl">Every confirmed booking comes with a deposit secured up front and lands straight in your calendar, so you wake up, check the schedule, and tattoo. We keep optimizing the system every week so the cost per booking keeps dropping.</p>
+          <h3 class="text-xl md:text-3xl font-serif mt-2 mb-3">Your chair stays booked, deposits paid.</h3>
+          <p class="text-text-secondary text-lg leading-relaxed max-w-2xl">You check the calendar and tattoo. We keep optimizing every week so each booking costs less.</p>
         </div>
 
       </div>
@@ -1729,7 +1619,7 @@
 <!-- ============================================================ -->
 <!-- ===== ABOUT SINAN ===== -->
 <!-- ============================================================ -->
-<section id="about" class="bg-bg-secondary py-16 md:py-24 border-y border-border-subtle">
+<section id="about" class="bg-bg-secondary py-10 md:py-24 border-y border-border-subtle">
   <div class="max-w-7xl mx-auto px-6 lg:px-12">
     <div class="reveal mb-10 lg:mb-14">
       <h2 class="display-h2 font-serif text-text-primary mt-4">Hi, I'm Sinan.</h2>
@@ -1760,7 +1650,7 @@
         <!-- Body paragraphs, smaller, in two columns on large screens -->
         <div class="mt-10 lg:mt-12 grid sm:grid-cols-2 gap-6 lg:gap-10 text-text-secondary leading-relaxed">
           <p>I started Inkflow because I watched too many talented artists make less than they should while their booking calendars sat half-empty. Not because they weren't great. Because nobody was running their marketing like a business.</p>
-          <p>So I built the whole machine for them. Ads, content scripts, booking system, every DM answered. The artists tattoo. The calendar fills. That's the deal.</p>
+          <p>So I built the whole machine for them. Ads, content, booking system, every DM answered. The artists tattoo. The calendar fills. That's the deal.</p>
         </div>
 
         <!-- Signature line -->
@@ -1779,7 +1669,7 @@
 <!-- ============================================================ -->
 <!-- ===== FINAL CTA ===== -->
 <!-- ============================================================ -->
-<section id="book" class="py-16 md:py-24 relative overflow-hidden">
+<section id="book" class="py-10 md:py-24 relative overflow-hidden">
   <!-- Atmospheric red halo background -->
   <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 70% 60% at 50% 30%, rgba(220,38,38,0.22), transparent 60%);"></div>
   <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 50% 40% at 50% 80%, rgba(220,38,38,0.10), transparent 60%);"></div>
@@ -1790,57 +1680,56 @@
 
       <!-- Left: pitch + bullets -->
       <div class="lg:col-span-5 reveal">
-        <h2 class="font-serif text-4xl md:text-5xl lg:text-5xl text-text-primary leading-[1.1] mb-7">
-          Apply for a free
+        <h2 class="font-serif text-3xl md:text-5xl lg:text-5xl text-text-primary leading-[1.1] mb-7">
+          Apply for your free
           <span class="italic text-accent">growth review</span>
-          by
-          <span class="inline-flex items-center gap-2 align-middle whitespace-nowrap">
+          <span class="whitespace-nowrap">by <span class="inline-flex items-center gap-2 align-middle">
             <img src="assets/about/sinan.jpg" alt="" class="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover border border-border-subtle inline-block" />
             <span>Sinan</span>
-          </span>
+          </span></span>
         </h2>
 
         <p class="text-text-secondary text-lg leading-relaxed mb-8 max-w-2xl">
-          Pick a slot on the right and we'll dig into your current setup. We'll show you exactly where your <strong class="text-text-primary">bookings are leaking</strong> and walk you through what it would take to <strong class="text-text-primary">fill your chair with deposit-paid clients</strong>. No template advice, no fluff.
+          Pick a slot. We'll show you where your <strong class="text-text-primary">bookings are leaking</strong> and what it takes to fix it.
         </p>
 
         <ul class="space-y-4 mb-8 max-w-2xl">
           <li class="flex items-start gap-3 text-text-secondary">
             <span class="text-accent mt-0.5 flex-shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span>Live audit of how you're bringing in clients today.</span>
+            <span>Live audit of how you get clients today.</span>
           </li>
           <li class="flex items-start gap-3 text-text-secondary">
             <span class="text-accent mt-0.5 flex-shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span>Specific plan to fill your chair with deposit-paid bookings.</span>
+            <span>A specific plan to fill your chair.</span>
           </li>
           <li class="flex items-start gap-3 text-text-secondary">
             <span class="text-accent mt-0.5 flex-shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span>Review of your ads, your content, and how your DMs are handled right now.</span>
+            <span>Review of your ads, content, and DMs.</span>
           </li>
           <li class="flex items-start gap-3 text-text-secondary">
             <span class="text-accent mt-0.5 flex-shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span>Walkthrough of how we'd grow <em class="text-text-primary not-italic font-medium">your</em> bookings specifically. Not a template.</span>
+            <span>How we'd grow <em class="text-text-primary not-italic font-medium">your</em> bookings, not a template.</span>
           </li>
           <li class="flex items-start gap-3 text-text-secondary">
             <span class="text-accent mt-0.5 flex-shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <span><strong class="text-text-primary">Bonus:</strong> quick scan of what other artists and shops in your area are running for ads, so you see what you're up against.</span>
+            <span><strong class="text-text-primary">Bonus:</strong> a quick look at what the artists and shops near you are running in ads.</span>
           </li>
         </ul>
 
         <!-- Highlighted requirement callout -->
         <div class="rounded-lg px-5 py-4 mb-8 max-w-2xl" style="background: rgba(220,38,38,0.08); border: 1px solid rgba(220,38,38,0.30);">
           <p class="text-text-primary text-sm leading-relaxed">
-            We require you to <strong>be a working tattoo artist or run a real shop</strong>, with at least one chair and a portfolio worth showing. This isn't for hobbyists or weekend artists.
+            You need to <strong>be a working tattoo artist or run a shop</strong>, with a chair and a portfolio worth showing. This isn't for hobbyists.
           </p>
         </div>
 
         <p class="text-text-secondary leading-relaxed mb-8 max-w-2xl">
-          Pick a time on the right and we'll take it from there. If it's clearly not a fit after a quick look at your work and setup, we'll cancel before the call so neither of us wastes time.
+          If it's clearly not a fit for you, we'll cancel before the call so neither of us wastes time.
         </p>
 
         <!-- WhatsApp fallback -->
         <div class="flex flex-wrap items-center gap-4">
-          <span class="text-text-muted text-sm">Can't find a suitable time?</span>
+          <span class="text-text-muted text-sm">Can't find a time that works for you?</span>
           <a href="https://wa.me/4524341144" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-white text-sm font-medium hover:opacity-90 transition shadow-lg" style="background: #25D366;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 6.32A7.85 7.85 0 0012.05 4a7.94 7.94 0 00-6.88 11.93L4 20l4.18-1.1a7.93 7.93 0 003.79.97h.01a7.94 7.94 0 005.62-13.55zm-5.55 12.21h-.01a6.6 6.6 0 01-3.36-.92l-.24-.14-2.48.65.66-2.42-.16-.25a6.6 6.6 0 011.05-8.32 6.55 6.55 0 014.66-1.93 6.55 6.55 0 014.65 11.18 6.55 6.55 0 01-4.65 1.93zm3.62-4.94c-.2-.1-1.18-.58-1.36-.65-.18-.07-.31-.1-.45.1s-.51.65-.63.78c-.12.14-.23.16-.43.05a5.46 5.46 0 01-1.6-1c-.59-.52-.99-1.18-1.1-1.37-.12-.2-.01-.3.09-.4.09-.09.2-.23.3-.35.1-.11.13-.2.2-.33.07-.13.04-.25-.02-.35-.05-.1-.45-1.08-.61-1.48-.16-.39-.32-.34-.45-.34l-.38-.01c-.13 0-.34.05-.52.25-.18.2-.69.67-.69 1.65 0 .97.7 1.91.8 2.04.1.13 1.4 2.13 3.38 2.99.47.2.84.32 1.13.42.48.15.91.13 1.25.08.38-.06 1.18-.48 1.34-.94.16-.47.16-.86.12-.95-.05-.08-.18-.13-.38-.23z"/></svg>
             +45 24 34 11 44
@@ -1880,7 +1769,7 @@
 <!-- ============================================================ -->
 <!-- ===== FAQ ===== -->
 <!-- ============================================================ -->
-<section id="faq" class="bg-bg-secondary py-16 md:py-24 border-y border-border-subtle">
+<section id="faq" class="bg-bg-secondary py-10 md:py-24 border-y border-border-subtle">
   <div class="max-w-7xl mx-auto px-6 lg:px-12">
 
     <div class="text-center max-w-2xl mx-auto mb-14 md:mb-16 reveal">
@@ -1925,7 +1814,7 @@
           <span class="faq-q">How much do I actually have to do?</span>
           <span class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></span>
         </summary>
-        <div class="faq-a">Film a handful of short videos a week from the scripts we send you, then show up to your appointments. That's the whole list on your end. We run the ads, build the landing page, set up the booking system, and reply to every message, so you stay at the chair.</div>
+        <div class="faq-a">Very little. You show up to your appointments and tattoo, and we run the ads, the page, the bookings and every message. Anything else we need from you, we cover on the call.</div>
       </details>
 
       <details class="faq-row reveal">
@@ -2016,7 +1905,7 @@
         </div>
         <!-- Meta Business Partner certification -->
         <div class="flex items-center gap-3">
-          <img src="assets/badges/meta-business-partner.webp" alt="Certified Meta Business Partner" class="h-12 w-auto flex-shrink-0" />
+          <img src="assets/badges/meta-business-partner.webp" alt="Meta Business Partner" class="h-12 w-auto flex-shrink-0" />
           <span class="text-[11px] uppercase tracking-label text-text-muted leading-snug">Certified Meta<br/>Business Partner</span>
         </div>
       </div>
