@@ -612,46 +612,48 @@
   @media (min-width: 900px) { .journey-visual--photo { padding: 24px; } }
   .journey-visual--photo img, .journey-visual--photo video { width: 100%; height: auto; border-radius: 12px; border: 1px solid #2A2420; display: block; background: #0F0D0B; }
   /* iOS Messages (SMS) mock-up in journey step 04 */
+  .journey-visual--sms { padding: 18px; }
+  @media (min-width: 900px) { .journey-visual--sms { padding: 36px; } }
   .sms {
-    width: 100%; max-width: 300px; background: #000; border: 1px solid #2A2420; border-radius: 22px;
-    padding: 0 12px 14px; font-family: Inter, -apple-system, system-ui, sans-serif; color: #fff;
-    display: flex; flex-direction: column; align-items: flex-start; gap: 4px; box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+    width: 100%; max-width: 300px; background: #000; border: 1px solid #2A2420; border-radius: 20px;
+    padding: 0 10px 11px; font-family: Inter, -apple-system, system-ui, sans-serif; color: #fff;
+    display: flex; flex-direction: column; align-items: flex-start; gap: 3px; box-shadow: 0 18px 40px rgba(0,0,0,0.45);
   }
   .sms-head {
     align-self: stretch; display: flex; align-items: center; justify-content: center; position: relative;
-    margin: 0 -12px 10px; padding: 10px 12px 8px; background: #1C1C1E; border-bottom: 1px solid #2C2C2E; border-radius: 22px 22px 0 0;
+    margin: 0 -10px 8px; padding: 7px 10px 6px; background: #1C1C1E; border-bottom: 1px solid #2C2C2E; border-radius: 20px 20px 0 0;
   }
-  .sms-back { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #0A84FF; display: inline-flex; }
-  .journey-visual .sms-back svg { width: 9px; height: 15px; max-width: none; }
+  .sms-back { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #0A84FF; display: inline-flex; }
+  .journey-visual .sms-back svg { width: 8px; height: 13px; max-width: none; }
   .journey-visual .sms-name svg { width: 5px; height: 8px; max-width: none; flex-shrink: 0; }
-  .sms-contact { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+  .sms-contact { display: flex; flex-direction: column; align-items: center; gap: 2px; }
   .sms-avatar {
-    width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(180deg, #A5A5AD, #7C7C84);
-    display: inline-flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 600; color: #fff;
+    width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(180deg, #A5A5AD, #7C7C84);
+    display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: #fff;
   }
-  .sms-name { font-size: 10.5px; font-weight: 500; color: #fff; display: inline-flex; align-items: center; gap: 3px; white-space: nowrap; }
+  .sms-name { font-size: 10px; font-weight: 500; color: #fff; display: inline-flex; align-items: center; gap: 3px; white-space: nowrap; }
   .sms-name svg { color: #8E8E93; }
-  .sms-meta { align-self: center; text-align: center; font-size: 10px; line-height: 1.4; color: #8E8E93; margin-bottom: 4px; }
+  .sms-meta { align-self: center; text-align: center; font-size: 9.5px; line-height: 1.3; color: #8E8E93; margin-bottom: 3px; }
   .sms-msg {
-    position: relative; max-width: 78%; padding: 7px 11px; border-radius: 17px;
-    font-size: 12.5px; line-height: 1.35; letter-spacing: -0.005em; overflow-wrap: anywhere;
+    position: relative; max-width: 86%; padding: 6px 10px; border-radius: 16px;
+    font-size: 12px; line-height: 1.3; letter-spacing: -0.005em; overflow-wrap: anywhere;
   }
   .sms-in { align-self: flex-start; background: #26252A; color: #fff; }
-  .sms-out { align-self: flex-end; background: #34C759; color: #fff; margin-top: 4px; }
+  .sms-out { align-self: flex-end; background: #34C759; color: #fff; margin-top: 3px; }
   .sms-in + .sms-in { margin-top: -1px; }
-  .sms-photo { padding: 0; max-width: 56%; border-radius: 16px; overflow: hidden; background: #26252A; }
+  .sms-photo { padding: 0; max-width: 42%; border-radius: 14px; overflow: hidden; background: #26252A; }
   .sms-photo img { display: block; width: 100%; height: auto; }
   /* bubble tails, iOS style */
-  .sms-tail::before, .sms-tail::after { content: ""; position: absolute; bottom: 0; height: 18px; }
-  .sms-in.sms-tail::before { left: -6px; width: 18px; background: #26252A; border-bottom-right-radius: 15px 13px; }
+  .sms-tail::before, .sms-tail::after { content: ""; position: absolute; bottom: 0; height: 16px; }
+  .sms-in.sms-tail::before { left: -6px; width: 16px; background: #26252A; border-bottom-right-radius: 14px 12px; }
   .sms-in.sms-tail::after { left: -10px; width: 10px; background: #000; border-bottom-right-radius: 10px; }
-  .sms-out.sms-tail::before { right: -6px; width: 18px; background: #34C759; border-bottom-left-radius: 15px 13px; }
+  .sms-out.sms-tail::before { right: -6px; width: 16px; background: #34C759; border-bottom-left-radius: 14px 12px; }
   .sms-out.sms-tail::after { right: -10px; width: 10px; background: #000; border-bottom-left-radius: 10px; }
   .sms-pill {
-    display: block; margin-top: 7px; padding: 5px 10px; border-radius: 999px; background: rgba(255,255,255,0.92);
-    color: #1B7F3B; font-size: 11px; font-weight: 600; text-align: center; letter-spacing: 0;
+    display: block; margin-top: 5px; padding: 4px 8px; border-radius: 999px; background: rgba(255,255,255,0.92);
+    color: #1B7F3B; font-size: 10.5px; font-weight: 600; text-align: center; letter-spacing: 0;
   }
-  .sms-status { align-self: flex-end; font-size: 9.5px; color: #8E8E93; margin: 1px 4px 0 0; }
+  .sms-status { align-self: flex-end; font-size: 9px; color: #8E8E93; margin: 0 4px 0 0; }
   .journey-badges { position: absolute; top: 16px; right: 16px; display: inline-flex; gap: 6px; }
   .journey-badges .brand-badge { position: static; }
 
@@ -1338,16 +1340,16 @@
           <p class="journey-body">We handle the leads our ads bring in, not your regular Instagram DMs. Our team replies within minutes, calls each lead to qualify them, collects the deposit and books them straight into your calendar. You never have to handle any of it again.</p>
           <span class="journey-watermark">04</span>
         </div>
-        <div class="journey-visual">
+        <div class="journey-visual journey-visual--sms">
           <div class="sms" role="img" aria-label="Text conversation: a client sends a reference photo, we reply within minutes, book a consult and send the deposit link">
             <div class="sms-head">
               <span class="sms-back" aria-hidden="true"><svg viewBox="0 0 12 20" width="9" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2 2 10l8 8"/></svg></span>
               <span class="sms-contact"><span class="sms-avatar" aria-hidden="true">S</span><span class="sms-name">Sarah M.<svg viewBox="0 0 8 12" width="5" height="8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m1.5 1.5 4.5 4.5-4.5 4.5"/></svg></span></span>
             </div>
-            <div class="sms-meta">Text Message · SMS<br />Today 9:41 AM</div>
-            <div class="sms-msg sms-in sms-photo"><img src="assets/journey/sms-reference.webp" alt="Client's reference photo: a floral thigh tattoo with a lioness and butterflies" width="600" height="800" loading="lazy" decoding="async" /></div>
-            <div class="sms-msg sms-in sms-tail">Hi! Saw your ad. Could you do something like this on my thigh?</div>
-            <div class="sms-msg sms-out sms-tail">Hey Sarah! Yes, we can do that. A piece like this starts at $850. Want a consult slot this week?</div>
+            <div class="sms-meta">Text Message · SMS · Today 9:41 AM</div>
+            <div class="sms-msg sms-in sms-photo"><img src="assets/journey/sms-reference.webp" alt="Client's reference photo: a floral thigh tattoo with a lioness and butterflies" width="600" height="750" loading="lazy" decoding="async" /></div>
+            <div class="sms-msg sms-in sms-tail">Hi! Saw your ad. Could you do something like this?</div>
+            <div class="sms-msg sms-out sms-tail">Hey Sarah! Yes, we can do that. From $850. Free consult this week?</div>
             <div class="sms-msg sms-in sms-tail">Yes! Friday afternoon?</div>
             <div class="sms-msg sms-out sms-tail">Friday 2pm is yours. Deposit secures your slot 👇<span class="sms-pill">Pay deposit · $100</span></div>
             <div class="sms-status">Delivered</div>
