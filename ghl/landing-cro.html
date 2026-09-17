@@ -81,12 +81,13 @@
   .trust-text { font-size: 13px; color: #A8A29E; line-height: 1.4; text-align: left; }
   .trust-text strong { color: #F5F1EB; }
   .tp-row { display: flex; justify-content: center; margin-bottom: 22px; }
-  .tp-card { display: inline-flex; align-items: center; gap: 10px; padding: 8px 14px; border: 1px solid #2A2420; border-radius: 10px; background: rgba(22,20,18,0.6); text-decoration: none; transition: border-color 200ms ease, transform 200ms ease; }
+  .tp-card { display: inline-flex; align-items: center; gap: 10px; padding: 8px 14px; max-width: 100%; border: 1px solid #2A2420; border-radius: 10px; background: rgba(22,20,18,0.6); text-decoration: none; transition: border-color 200ms ease, transform 200ms ease; }
   .tp-card:hover { border-color: rgba(0,182,122,0.45); transform: translateY(-1px); }
-  .tp-stars { height: 18px; width: auto; }
-  .tp-meta { font-size: 12px; color: #A8A29E; line-height: 1.3; text-align: left; }
+  .tp-stars { height: 18px; width: auto; flex-shrink: 0; }
+  .tp-meta { font-size: 12px; color: #A8A29E; line-height: 1.3; text-align: left; white-space: nowrap; }
+  @media (max-width: 359px) { .tp-stars { height: 16px; } .tp-meta { font-size: 11px; } }
   .tp-meta strong { color: #F5F1EB; }
-  .tp-brand { display: inline-flex; align-items: center; gap: 3px; color: #00B67A; font-weight: 600; }
+  .tp-brand { display: inline-flex; align-items: center; gap: 3px; color: #00B67A; font-weight: 600; vertical-align: baseline; }
   .tp-brand svg { width: 13px; height: 13px; }
 
   /* BOOKING BAND (full-width, wide calendar) */
@@ -296,9 +297,7 @@
       <div class="tp-row">
         <a class="tp-card" href="https://dk.trustpilot.com/review/heromedia.dk" target="_blank" rel="noopener">
           <img class="tp-stars" src="https://majestic100.github.io/Highlevel/assets/avatars/stars-5.svg" alt="4.7 out of 5 stars" />
-          <span class="tp-meta"><strong>4.7</strong> from 30+ reviews on
-            <span class="tp-brand"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.95 6.95L22 10l-5.5 4.8L18.18 22 12 18.27 5.82 22l1.68-7.2L2 10l7.05-1.05L12 2z"/></svg>Trustpilot</span>
-          </span>
+          <span class="tp-meta"><strong>4.7</strong> · 30+ reviews on <span class="tp-brand"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.95 6.95L22 10l-5.5 4.8L18.18 22 12 18.27 5.82 22l1.68-7.2L2 10l7.05-1.05L12 2z"/></svg>Trustpilot</span></span>
         </a>
       </div>
 
@@ -348,7 +347,7 @@
 <section class="section section-alt" id="how">
   <div class="container">
     <p class="eyebrow">How it works</p>
-    <h2 class="h2">From your first call to <span class="italic-accent">fully booked.</span></h2>
+    <h2 class="h2">Here's how we fill <span class="italic-accent">your chair.</span></h2>
     <p class="section-sub">You book the call, we build your system, and you stay at your chair while it runs.</p>
     <div class="steps">
       <div class="step">
