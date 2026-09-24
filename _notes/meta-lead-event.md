@@ -14,9 +14,9 @@ page. Without a shared `event_id` every booking would be counted twice.
 | Pixel / dataset ID | Where it is set | Notes |
 |---|---|---|
 | 1334202538610101 | GHL funnel "Inkflow Studios - Pages", native Meta pixel setting; booking calendar 76PH7OblZ2v5KWBuYtnR, pixel setting; CAPI workflow dataset | Keep this one |
-| 847588475907012 | Pasted by hand into the funnel's head tracking code (`globalHeadTrackingCode`) | Only fires PageView. Remove unless ad campaigns optimise on it |
+| 847588475907012 | Was pasted by hand into the funnel's head tracking code (`globalHeadTrackingCode`) | Removed 2026-09-24. Confirmed gone from `/` and `/landing` |
 
-Check in Ads Manager which pixel the campaigns use before removing anything.
+Only 1334202538610101 is to be used from now on.
 
 ## GHL workflow checklist
 
