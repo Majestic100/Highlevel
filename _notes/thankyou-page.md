@@ -33,8 +33,8 @@ placeholders where every video, case study and review screenshot goes. Without
 - `faqVideos`: one short video per question (see the list below). A card
   with a video opens automatically and shows the video above the text answer.
 - `stories`: video case studies. Real client results only, with permission.
-- `proofImages`: screenshots of real reviews or client messages, uploaded to
-  `assets/proof/`. Until stories or images are added, only the Trustpilot card shows.
+- `proofImages`: 7 real Trustpilot reviews are in `assets/proof/` (added 2026-09-24).
+  Add more by uploading a screenshot there and adding it to the list.
 
 ## Questions and what to cover in each video
 
