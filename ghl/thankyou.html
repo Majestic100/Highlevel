@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<title>You're booked in | Inkflow</title>
+<meta name="description" content="Your call is booked. Watch the short video, add the call to your calendar and get your questions answered before we talk." />
+
+<!--
+  INKFLOW BOOKING THANK-YOU PAGE
+  Served from GitHub Pages and shown inside the GHL step /thankyou through an
+  iframe (see _notes/thankyou-page.md for the GHL snippet).
+
+  To change content, edit the CONFIG block at the bottom of this file:
+  - CONFIG.video          the pre-call video (YouTube, Wistia, Loom or Vimeo link)
+  - CONFIG.faqVideos      optional video per question in Step 2
+  - CONFIG.stories        success stories for Step 3 (only real clients)
+  Empty slots are hidden, so the page never shows a broken video.
+-->
+
+<link rel="icon" href="../assets/favicon/favicon.ico" sizes="any" />
+<link rel="icon" type="image/svg+xml" href="../assets/favicon/favicon.svg" />
+<link rel="apple-touch-icon" href="../assets/favicon/apple-touch-icon.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  *,*::before,*::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #060606; }
+  .inkflow-root {
+    background-color: #060606; color: #F5F1EB;
+    font-family: 'Inter', system-ui, sans-serif; font-weight: 400; line-height: 1.65;
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh; position: relative; overflow-x: hidden; width: 100%;
+  }
+  .inkflow-root a { color: inherit; text-decoration: none; }
+  .inkflow-root h1, .inkflow-root h2, .inkflow-root h3, .inkflow-root h4, .inkflow-root p, .inkflow-root ul { margin: 0; }
+  .inkflow-root ul { padding-left: 0; list-style: none; }
+  .inkflow-root img { max-width: 100%; display: block; }
+  .bg-glow { position: fixed; inset: 0; z-index: 0; pointer-events: none; background:
+    radial-gradient(1000px 640px at 50% -12%, rgba(220,38,38,0.20), rgba(220,38,38,0) 60%),
+    radial-gradient(900px 700px at 100% 110%, rgba(220,38,38,0.10), rgba(220,38,38,0) 60%), #060606; }
+
+  /* NAV */
+  .nav { position: relative; z-index: 20; }
+  .nav-inner { max-width: 1180px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: center; }
+  @media (min-width: 768px) { .nav-inner { height: 84px; } }
+  .logo img { height: 22px; width: auto; display: block; }
+  @media (min-width: 768px) { .logo img { height: 32px; } }
+
+  /* LAYOUT */
+  main { position: relative; z-index: 10; padding: 24px 0 72px; }
+  @media (min-width: 768px) { main { padding: 36px 0 96px; } }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+  @media (min-width: 768px) { .wrap { padding: 0 32px; } }
+  .center { text-align: center; }
+  .block { margin-top: 56px; }
+  @media (min-width: 768px) { .block { margin-top: 88px; } }
+
+  /* TYPE */
+  .pill { display: inline-flex; align-items: center; gap: 8px; padding: 7px 15px 7px 11px; border-radius: 999px;
+    background: rgba(34,197,94,0.09); border: 1px solid rgba(34,197,94,0.35); color: #86EFAC;
+    font-size: 13px; font-weight: 600; letter-spacing: 0.02em; margin-bottom: 20px; }
+  .pill svg { width: 16px; height: 16px; color: #22C55E; }
+  h1.h1 { font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; letter-spacing: -0.025em;
+    line-height: 1.04; font-size: clamp(34px, 8.4vw, 62px); color: #F5F1EB; text-wrap: balance; }
+  .accent { font-style: italic; color: #DC2626; }
+  .inkflow-root .lead { color: #A8A29E; font-size: 17px; line-height: 1.6; max-width: 46ch; margin: 16px auto 0; }
+  @media (min-width: 768px) { .inkflow-root .lead { font-size: 19px; } }
+  .step-tag { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px;
+    background: #DC2626; color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 14px; }
+  h2.h2 { font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; letter-spacing: -0.02em;
+    line-height: 1.1; font-size: clamp(26px, 5.6vw, 40px); color: #F5F1EB; text-wrap: balance; }
+  h3.h3 { font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 700; font-size: 21px; line-height: 1.25; color: #F5F1EB; }
+  .muted { color: #A8A29E; }
+
+  /* VIDEO */
+  .video-card { position: relative; margin-top: 22px; border-radius: 16px; overflow: hidden; border: 1px solid #2A2420; background: #0F0D0B;
+    box-shadow: 0 30px 60px -20px rgba(0,0,0,0.75); }
+  .video-card::before { content: ''; position: absolute; inset: -1px; border-radius: 16px; padding: 1px; pointer-events: none; z-index: 2;
+    background: linear-gradient(160deg, rgba(220,38,38,0.55), rgba(220,38,38,0) 45%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
+  .video-wrap { position: relative; width: 100%; padding-top: 56.25%; background: #060606; }
+  .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+  /* WARNING */
+  .warn { margin: 26px auto 0; max-width: 640px; padding: 16px 18px; border-radius: 12px; text-align: left;
+    background: rgba(220,38,38,0.08); border: 1px solid rgba(220,38,38,0.35); color: #F5F1EB; font-size: 15px; line-height: 1.55;
+    display: flex; gap: 12px; align-items: flex-start; }
+  .warn svg { width: 20px; height: 20px; color: #EF4444; flex-shrink: 0; margin-top: 1px; }
+  .warn strong { color: #EF4444; }
+
+  /* ADD TO CALENDAR */
+  .cal { margin-top: 40px; }
+  .cal-when { display: inline-flex; align-items: flex-start; gap: 10px; background: rgba(220,38,38,0.07); border: 1px solid rgba(220,38,38,0.22);
+    color: #F5F1EB; padding: 11px 18px; border-radius: 12px; font-size: 15px; font-weight: 500; line-height: 1.45; margin: 16px 0 0; text-align: left; }
+  .cal-when svg { width: 17px; height: 17px; color: #EF4444; flex-shrink: 0; margin-top: 2px; }
+  .cal-wrap { position: relative; display: inline-block; margin-top: 16px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 12px; background: #DC2626; color: #fff;
+    font-weight: 600; font-size: 16px; padding: 16px 28px; border-radius: 10px; border: 0; cursor: pointer; font-family: inherit;
+    box-shadow: 0 14px 34px -10px rgba(220,38,38,0.55); transition: background 200ms ease, transform 200ms ease; }
+  .btn:hover { background: #EF4444; transform: translateY(-1px); }
+  .btn svg { width: 19px; height: 19px; }
+  .btn .chev { transition: transform 220ms ease; }
+  .cal-wrap.open .btn .chev { transform: rotate(180deg); }
+  .cal-menu { position: absolute; top: calc(100% + 10px); left: 50%; transform: translate(-50%, -8px); min-width: 256px;
+    background: #161412; border: 1px solid #2A2420; border-radius: 12px; padding: 6px; box-shadow: 0 24px 48px -14px rgba(0,0,0,0.7);
+    z-index: 40; text-align: left; opacity: 0; visibility: hidden; transition: opacity 180ms ease, transform 180ms ease; }
+  .cal-wrap.open .cal-menu { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+  .cal-menu a { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 8px; color: #F5F1EB; font-size: 14px; }
+  .cal-menu a:hover { background: rgba(255,255,255,0.05); }
+  .cal-menu svg { width: 18px; height: 18px; color: #A8A29E; flex-shrink: 0; }
+  .inkflow-root .cal-fallback { color: #A8A29E; font-size: 15px; line-height: 1.6; max-width: 44ch; margin: 14px auto 0; }
+  @media (max-width: 599px) { .cal-wrap, .btn, .cal-when { width: 100%; } }
+
+  /* EMAIL MOCK */
+  .or { display: flex; align-items: center; gap: 14px; color: #6B6663; font-size: 13px; text-transform: uppercase; letter-spacing: 0.15em; margin: 40px auto 18px; max-width: 520px; }
+  .or::before, .or::after { content: ''; flex: 1; height: 1px; background: #2A2420; }
+  .mail { max-width: 520px; margin: 18px auto 0; border-radius: 12px; overflow: hidden; background: #F5F1EB; color: #1C1917; text-align: left;
+    box-shadow: 0 20px 40px -18px rgba(0,0,0,0.7); }
+  .mail-top { display: flex; gap: 6px; padding: 10px 14px; background: #E7E2DA; }
+  .mail-top span { width: 10px; height: 10px; border-radius: 50%; background: #CFC8BD; }
+  .mail-row { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-bottom: 1px solid #E7E2DA; }
+  .mail-row:last-child { border-bottom: 0; }
+  .mail-av { width: 34px; height: 34px; border-radius: 50%; background: #0A0A0A; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .mail-av img { width: 16px; height: auto; }
+  .mail-from { font-weight: 700; font-size: 14px; }
+  .mail-sub { font-size: 13px; color: #57534E; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .mail-meta { min-width: 0; flex: 1; }
+  .mail-tip { display: flex; gap: 10px; align-items: flex-start; background: #FEF3C7; color: #78350F; font-size: 13.5px; line-height: 1.5; padding: 12px 16px; }
+  .mail-tip strong { color: #451A03; }
+
+  /* STEP 2: QUESTIONS */
+  .qgrid { display: grid; gap: 14px; grid-template-columns: 1fr; margin-top: 26px; text-align: left; }
+  @media (min-width: 700px) { .qgrid { grid-template-columns: 1fr 1fr; gap: 18px; } }
+  .qcard { border: 1px solid #2A2420; border-radius: 14px; background: linear-gradient(180deg, rgba(28,28,28,0.65), rgba(18,18,18,0.65)); overflow: hidden; }
+  .qcard .video-wrap { border-bottom: 1px solid #2A2420; }
+  .qcard { align-self: start; }
+  .qbody { position: relative; display: block; padding: 18px 52px 18px 20px; cursor: pointer; list-style: none; }
+  .qbody::-webkit-details-marker { display: none; }
+  .qplus { position: absolute; right: 18px; top: 50%; width: 22px; height: 22px; margin-top: -11px; border-radius: 50%; border: 1px solid #3A322C; }
+  .qplus::before, .qplus::after { content: ''; position: absolute; left: 50%; top: 50%; width: 10px; height: 1.6px; background: #EF4444; transform: translate(-50%, -50%); transition: transform 200ms ease; }
+  .qplus::after { transform: translate(-50%, -50%) rotate(90deg); }
+  .qcard[open] .qplus::after { transform: translate(-50%, -50%) rotate(0deg); }
+  .qcard[open] { border-color: rgba(220,38,38,0.35); }
+  .inkflow-root .qans { padding: 0 20px 20px; font-size: 15px; color: #A8A29E; line-height: 1.6; }
+  .qnum { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.15em; color: #EF4444; text-transform: uppercase; margin-bottom: 8px; }
+  .qbody h3 { font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.3; color: #F5F1EB; }
+
+  /* STEP 3: STORIES */
+  .stories { display: grid; gap: 22px; margin-top: 26px; text-align: left; }
+  .story { border: 1px solid #2A2420; border-radius: 16px; overflow: hidden; background: #0F0D0B; }
+  .story-title { font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: clamp(22px, 5vw, 30px); color: #F5F1EB; letter-spacing: -0.02em; }
+  .story-body { padding: 20px 22px 24px; }
+  .inkflow-root .story-name { color: #EF4444; font-weight: 600; font-size: 14px; margin-top: 4px; }
+  .inkflow-root .story-quote { color: #A8A29E; font-size: 15.5px; line-height: 1.6; margin-top: 10px; font-style: italic; }
+  .proof { display: grid; gap: 12px; grid-template-columns: 1fr; margin-top: 26px; }
+  @media (min-width: 600px) { .proof { grid-template-columns: 1fr 1fr; gap: 16px; } }
+  .proof img { width: 100%; height: auto; border-radius: 12px; border: 1px solid #2A2420; background: #F5F1EB; }
+  .tp { display: inline-flex; align-items: center; gap: 12px; margin-top: 26px; padding: 14px 20px; border: 1px solid #2A2420; border-radius: 12px;
+    background: rgba(22,20,18,0.7); transition: border-color 200ms ease, transform 200ms ease; }
+  .tp:hover { border-color: rgba(0,182,122,0.5); transform: translateY(-1px); }
+  .tp img { height: 20px; width: auto; }
+  .tp span { font-size: 14px; color: #A8A29E; text-align: left; }
+  .tp strong { color: #F5F1EB; }
+  .tp .tp-brand { color: #00B67A; font-weight: 600; }
+
+  /* SEE YOU */
+  .seeyou { margin-top: 56px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .seeyou p { color: #A8A29E; font-size: 16px; max-width: 40ch; }
+  .seeyou strong { color: #F5F1EB; }
+
+  /* FOOTER */
+  footer { position: relative; z-index: 10; background: #0F0D0B; border-top: 1px solid #2A2420; padding: 40px 0; }
+  .foot { max-width: 1180px; margin: 0 auto; padding: 0 24px; display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
+  .foot img.flogo { height: 26px; width: auto; }
+  .foot-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; font-size: 13px; color: #6B6663; }
+  .foot-links a:hover { color: #DC2626; }
+  .foot small { font-size: 12px; color: #6B6663; }
+
+  /* REVEAL */
+  .anim .reveal { opacity: 0; transform: translateY(18px); transition: opacity 650ms cubic-bezier(.22,1,.36,1), transform 650ms cubic-bezier(.22,1,.36,1); }
+  .anim .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .anim .reveal { opacity: 1 !important; transform: none !important; transition: none !important; } }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="inkflow-root">
+<div class="bg-glow" aria-hidden="true"></div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="https://inkflowstudios.com/" target="_top"><img src="../assets/logo/inkflow-logo-for-dark-bg.svg" alt="inkflow." /></a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap center">
+
+    <!-- HERO -->
+    <section class="reveal">
+      <span class="pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Booking confirmed
+      </span>
+      <h1 class="h1">Congrats, your call<br /><span class="accent">is booked.</span></h1>
+      <p class="lead">Do the steps below before we talk. It takes five minutes, and we get to spend the whole call on filling your chair.</p>
+    </section>
+
+    <!-- STEP 1: PRE-CALL VIDEO, SHOW WARNING, CONFIRM THE CALL -->
+    <section class="block reveal" id="step-1" data-step>
+      <span class="step-tag">Step <span class="step-n">1</span></span>
+      <h2 class="h2" id="step1-title">Watch this <span class="accent">before the call</span></h2>
+      <div class="video-card" id="video-card">
+        <div class="video-wrap"><iframe id="main-video" title="Watch this before the call" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+      </div>
+
+      <div class="warn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01" stroke-linecap="round"/><path d="M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z" stroke-linejoin="round"/></svg>
+        <span><strong>Important:</strong> this time is reserved just for you. If something comes up, reschedule from your confirmation email so the slot can go to another artist.</span>
+      </div>
+
+      <div class="cal" id="cal">
+        <h3 class="h3">Add the call to your calendar</h3>
+        <div id="cal-when" class="cal-when" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke-linecap="round"/></svg>
+          <span id="cal-when-text"></span>
+        </div>
+        <div><div id="cal-wrap" class="cal-wrap" hidden>
+          <button type="button" id="cal-btn" class="btn" aria-haspopup="true" aria-expanded="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v4M10 16h4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Add to your calendar</span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="cal-menu" id="cal-menu" role="menu">
+            <a id="cal-google" href="#" target="_blank" rel="noopener" role="menuitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke-linecap="round"/></svg>Google Calendar</a>
+            <a id="cal-apple" href="#" download="inkflow-call.ics" role="menuitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke-linecap="round"/></svg>Apple Calendar</a>
+            <a id="cal-outlook" href="#" target="_blank" rel="noopener" role="menuitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke-linecap="round"/></svg>Outlook.com</a>
+            <a id="cal-office" href="#" target="_blank" rel="noopener" role="menuitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke-linecap="round"/></svg>Office 365</a>
+          </div>
+        </div></div>
+        <p id="cal-fallback" class="cal-fallback" hidden>Your calendar invite is in your inbox. Open it and add the call in one tap.</p>
+      </div>
+
+      <div class="or">Or</div>
+      <h3 class="h3">Find our email and move it to your inbox</h3>
+      <p class="muted" style="margin-top:8px;">Your confirmation and the call link are on their way. Mark us as safe so the reminders reach you.</p>
+      <div class="mail" aria-hidden="true">
+        <div class="mail-top"><span></span><span></span><span></span></div>
+        <div class="mail-row">
+          <div class="mail-av"><img src="../assets/logo/inkflow-icon-for-dark-bg.svg" alt="" /></div>
+          <div class="mail-meta">
+            <div class="mail-from">Inkflow</div>
+            <div class="mail-sub">Your call is confirmed. Here's your link</div>
+          </div>
+        </div>
+        <div class="mail-tip">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="flex-shrink:0;margin-top:1px"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01" stroke-linecap="round"/></svg>
+          <span>Not in your inbox? Check <strong>Spam</strong> or <strong>Promotions</strong>, then mark it <strong>"Not spam"</strong> or drag it to <strong>Primary</strong>.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 2: OBJECTION VIDEOS / FAQ -->
+    <section class="block reveal" id="step-faq" data-step>
+      <span class="step-tag">Step <span class="step-n">2</span></span>
+      <h2 class="h2">Get your questions <span class="accent">answered before the call</span></h2>
+      <div class="qgrid" id="qgrid">
+        <details class="qcard" data-q="clients">
+          <summary class="qbody"><span class="qnum">Question 01</span><h3>How many new clients will I get?</h3><span class="qplus" aria-hidden="true"></span></summary>
+          <p class="qans">Most artists and studios get 10 to 30 new bookings in their first month, and we guarantee 20 in your first 30 days. On the call we run the numbers for your shop: your average session price, your budget and what that adds up to each month.</p>
+        </details>
+        <details class="qcard" data-q="qualify">
+          <summary class="qbody"><span class="qnum">Question 02</span><h3>How do you make sure the leads are serious?</h3><span class="qplus" aria-hidden="true"></span></summary>
+          <p class="qans">The ads and your page are built to show your work and your prices, so people who are just browsing drop off early. We then answer and call every lead ourselves, and a client only lands in your calendar once they've paid a deposit.</p>
+        </details>
+        <details class="qcard" data-q="noshow">
+          <summary class="qbody"><span class="qnum">Question 03</span><h3>What if people don't show up?</h3><span class="qplus" aria-hidden="true"></span></summary>
+          <p class="qans">Every booking is secured with a deposit before it reaches your calendar. People who have paid show up, and if they don't, the deposit covers your time.</p>
+        </details>
+        <details class="qcard" data-q="closing">
+          <summary class="qbody"><span class="qnum">Question 04</span><h3>Do I have to sell anything?</h3><span class="qplus" aria-hidden="true"></span></summary>
+          <p class="qans">No. We handle the conversation from the first message until the deposit is paid. When the client walks in, the sale is already done. You just tattoo.</p>
+        </details>
+        <details class="qcard" data-q="promo">
+          <summary class="qbody"><span class="qnum">Question 05</span><h3>Is this just a cheap promotion?</h3><span class="qplus" aria-hidden="true"></span></summary>
+          <p class="qans">No. We don't run discount deals that attract bargain hunters. Your ads show your work and your style, so the people who book want you, at your prices.</p>
+        </details>
+        <details class="qcard" data-q="contract">
+          <summary class="qbody"><span class="qnum">Question 06</span><h3>Can I cancel anytime?</h3><span class="qplus" aria-hidden="true"></span></summary>
+          <p class="qans">Yes. It's month-to-month, and you can cancel anytime with no fees and no fine print. We earn your business every month, or you walk.</p>
+        </details>
+        <details class="qcard" data-q="guarantee">
+          <summary class="qbody"><span class="qnum">Question 07</span><h3>What if it doesn't work?</h3><span class="qplus" aria-hidden="true"></span></summary>
+          <p class="qans">If we miss 20 new clients in your first 30 days, you pay us nothing until we deliver them. The guarantee applies with at least $1,000 a month in ad spend. We can promise it because we only take on artists and studios we know we can fill.</p>
+        </details>
+        <details class="qcard" data-q="timeline">
+          <summary class="qbody"><span class="qnum">Question 08</span><h3>How fast will I see results?</h3><span class="qplus" aria-hidden="true"></span></summary>
+          <p class="qans">Most artists and studios get their first deposit-paid booking within 7 days of launch. Inside 30 days you have 20 new clients or more. That's our guarantee, not a hope.</p>
+        </details>
+        <details class="qcard" data-q="different">
+          <summary class="qbody"><span class="qnum">Question 09</span><h3>What makes you different from other agencies?</h3><span class="qplus" aria-hidden="true"></span></summary>
+          <p class="qans">We only work with tattoo artists and studios, so the playbook is dialed in. We measure real bookings with paid deposits, not lists of curious people. And we take one artist or studio per area, so we never run ads against you.</p>
+        </details>
+        <details class="qcard" data-q="budget">
+          <summary class="qbody"><span class="qnum">Question 10</span><h3>What's the minimum ad spend?</h3><span class="qplus" aria-hidden="true"></span></summary>
+          <p class="qans">The guarantee applies from $1,000 a month in ad spend. Most artists and studios run between $1,500 and $5,000 a month, depending on their market and how fast they want to grow. Ad spend goes straight to Meta, not to us.</p>
+        </details>
+      </div>
+      <p class="muted" style="margin-top:22px;font-size:15px;">Anything else? Bring it to the call and we'll answer it straight.</p>
+    </section>
+
+    <!-- STEP 3: VIDEO CASE STUDIES + IMAGE SOCIAL PROOF -->
+    <section class="block reveal" id="step-proof" data-step>
+      <span class="step-tag">Step <span class="step-n">3</span></span>
+      <h2 class="h2">See what our <span class="accent">clients say</span></h2>
+      <div class="stories" id="stories" hidden></div>
+      <div class="proof" id="proof" hidden></div>
+      <a class="tp" href="https://dk.trustpilot.com/review/heromedia.dk" target="_blank" rel="noopener">
+        <img src="../assets/avatars/stars-5.svg" alt="4.7 out of 5 stars" />
+        <span><strong>4.7</strong> from 30+ reviews on <span class="tp-brand">Trustpilot</span>. Read them</span>
+      </a>
+    </section>
+
+    <!-- SEE YOU -->
+    <section class="seeyou reveal">
+      <p><strong>See you on the call.</strong><br />Sinan, founder of Inkflow</p>
+      <a class="btn" href="#cal" style="margin-top:6px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v4M10 16h4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Add the call to your calendar
+      </a>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="foot">
+    <img class="flogo" src="../assets/logo/inkflow-by-hero-media-for-dark-bg.svg" alt="Inkflow by Hero Media" />
+    <div class="foot-links">
+      <a href="https://inkflowstudios.com/terms" target="_top">Terms</a>
+      <a href="https://inkflowstudios.com/privacy" target="_top">Privacy</a>
+      <a href="mailto:sinan@heromedia.dk">sinan@heromedia.dk</a>
+      <a href="https://wa.me/4524341144" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+    <small>&copy; <span id="year"></span> Inkflow by Hero. All rights reserved.</small>
+  </div>
+</footer>
+
+<script>
+  /* ───────────── CONFIG: edit content here ───────────── */
+  var CONFIG = {
+    /* Pre-call video. Paste a YouTube, Wistia, Loom or Vimeo link.
+       Leave empty to hide the video step. */
+    video: "",
+
+    /* Optional short video per question in the questions step.
+       Keys: clients, qualify, noshow, closing, promo, contract, guarantee, timeline, different, budget. */
+    faqVideos: {
+      clients: "", qualify: "", noshow: "", closing: "", promo: "",
+      contract: "", guarantee: "", timeline: "", different: "", budget: ""
+    },
+
+    /* Success stories. Only real clients, with their permission.
+       Example:
+       { title: "From 4 to 26 bookings a month", name: "Name, Studio, City",
+         quote: "What they said, in their words.", video: "https://youtu.be/..." } */
+    stories: [],
+
+    /* Image social proof: screenshots of real reviews or client messages,
+       uploaded to assets/proof/ in this repo. Example: "../assets/proof/review-01.png" */
+    proofImages: [],
+
+    /* Add-to-calendar event */
+    title: "Intro call with Inkflow",
+    location: "Online video call (link in your confirmation email)",
+    details: "Your intro call with Inkflow. We'll look at how you get clients today and map out how to fill your chair with deposit-paid bookings.\n\nNeed to reschedule? Use the link in your confirmation email.",
+    durationMinutes: 60
+  };
+  /* ─────────────────────────────────────────────────────── */
+
+  (function () {
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function embedUrl(u) {
+      u = (u || '').trim();
+      if (!u) return '';
+      var m;
+      if ((m = u.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([\w-]{6,})/))) return 'https://www.youtube.com/embed/' + m[1] + '?rel=0&modestbranding=1';
+      if ((m = u.match(/wistia\.(?:com|net)\/(?:medias|embed\/iframe)\/([\w]+)/))) return 'https://fast.wistia.net/embed/iframe/' + m[1] + '?videoFoam=true';
+      if ((m = u.match(/loom\.com\/(?:share|embed)\/([\w]+)/))) return 'https://www.loom.com/embed/' + m[1];
+      if ((m = u.match(/vimeo\.com\/(?:video\/)?(\d+)/))) return 'https://player.vimeo.com/video/' + m[1];
+      return u;
+    }
+    function videoBlock(url, title) {
+      var w = document.createElement('div'); w.className = 'video-wrap';
+      var f = document.createElement('iframe');
+      f.src = url; f.title = title || 'Video'; f.loading = 'lazy';
+      f.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture'); f.setAttribute('allowfullscreen', '');
+      w.appendChild(f); return w;
+    }
+
+    /* Main video: hide the step if no video is set */
+    var mainUrl = embedUrl(CONFIG.video);
+    if (mainUrl) document.getElementById('main-video').src = mainUrl;
+    else {
+      document.getElementById('video-card').hidden = true;
+      document.getElementById('step1-title').innerHTML = 'Lock the call <span class="accent">into your calendar</span>';
+    }
+
+    /* Question videos */
+    document.querySelectorAll('.qcard').forEach(function (card) {
+      var url = embedUrl((CONFIG.faqVideos || {})[card.getAttribute('data-q')]);
+      if (url) { card.insertBefore(videoBlock(url, card.querySelector('h3').textContent), card.querySelector('.qans')); card.open = true; }
+    });
+
+    /* Stories */
+    var box = document.getElementById('stories');
+    (CONFIG.stories || []).forEach(function (s) {
+      var el = document.createElement('article'); el.className = 'story';
+      var url = embedUrl(s.video);
+      if (url) el.appendChild(videoBlock(url, s.title));
+      var b = document.createElement('div'); b.className = 'story-body';
+      var t = document.createElement('p'); t.className = 'story-title'; t.textContent = s.title || ''; b.appendChild(t);
+      if (s.name) { var n = document.createElement('p'); n.className = 'story-name'; n.textContent = s.name; b.appendChild(n); }
+      if (s.quote) { var q = document.createElement('p'); q.className = 'story-quote'; q.textContent = '"' + s.quote + '"'; b.appendChild(q); }
+      el.appendChild(b); box.appendChild(el);
+    });
+    if (box.children.length) box.hidden = false;
+
+    /* Image social proof */
+    var proof = document.getElementById('proof');
+    (CONFIG.proofImages || []).forEach(function (src) {
+      var img = document.createElement('img'); img.src = src; img.alt = 'Client review'; img.loading = 'lazy';
+      proof.appendChild(img);
+    });
+    if (proof.children.length) proof.hidden = false;
+
+    /* Number the visible steps 1, 2, 3 ... */
+    var n = 0;
+    document.querySelectorAll('[data-step]').forEach(function (s) {
+      if (!s.hidden) s.querySelector('.step-n').textContent = ++n;
+    });
+
+    /* Reveal on scroll */
+    var root = document.querySelector('.inkflow-root');
+    if ('IntersectionObserver' in window) {
+      root.classList.add('anim');
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+      }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+      root.querySelectorAll('.reveal').forEach(function (el) { obs.observe(el); });
+    }
+
+    /* ───── Add to calendar ───── */
+    var enc = encodeURIComponent;
+    function clean(v) { v = (v == null ? '' : '' + v).trim(); return (v === '' || v.indexOf('{{') !== -1) ? '' : v; }
+    function parseDate(v) {
+      v = clean(v); if (!v) return null;
+      var d = new Date(v); if (!isNaN(d.getTime())) return d;
+      d = new Date(v.replace(' ', 'T')); return isNaN(d.getTime()) ? null : d;
+    }
+    function pad(x) { return (x < 10 ? '0' : '') + x; }
+    function toUTC(d) { return d.getUTCFullYear() + pad(d.getUTCMonth() + 1) + pad(d.getUTCDate()) + 'T' + pad(d.getUTCHours()) + pad(d.getUTCMinutes()) + pad(d.getUTCSeconds()) + 'Z'; }
+    function icsEsc(s) { return ('' + s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n'); }
+
+    /* The GHL page passes the booked time as ?start=...&end=... */
+    var qs = new URLSearchParams(window.location.search);
+    var start = parseDate(qs.get('start'));
+    var end = parseDate(qs.get('end'));
+    if (start && (!end || end <= start)) end = new Date(start.getTime() + CONFIG.durationMinutes * 60000);
+
+    var wrap = document.getElementById('cal-wrap');
+    if (!start) { document.getElementById('cal-fallback').hidden = false; return; }
+
+    var fmtOpts = { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZoneName: 'short' };
+    [navigator.language, 'en-US'].some(function (lang) {
+      try {
+        document.getElementById('cal-when-text').textContent = new Intl.DateTimeFormat(lang, fmtOpts).format(start);
+        document.getElementById('cal-when').hidden = false;
+        return true;
+      } catch (e) { return false; }
+    });
+
+    var title = CONFIG.title, loc = CONFIG.location, details = CONFIG.details;
+    document.getElementById('cal-google').href = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + enc(title) +
+      '&dates=' + toUTC(start) + '/' + toUTC(end) + '&details=' + enc(details) + '&location=' + enc(loc);
+    function outlook(host) {
+      return 'https://' + host + '/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&subject=' + enc(title) +
+        '&body=' + enc(details) + '&location=' + enc(loc) + '&startdt=' + start.toISOString() + '&enddt=' + end.toISOString();
+    }
+    document.getElementById('cal-outlook').href = outlook('outlook.live.com');
+    document.getElementById('cal-office').href = outlook('outlook.office.com');
+    var ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Inkflow//Booking//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
+      'BEGIN:VEVENT', 'UID:' + Date.now() + '@inkflowstudios.com', 'DTSTAMP:' + toUTC(new Date()),
+      'DTSTART:' + toUTC(start), 'DTEND:' + toUTC(end), 'SUMMARY:' + icsEsc(title), 'DESCRIPTION:' + icsEsc(details),
+      'LOCATION:' + icsEsc(loc), 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+    document.getElementById('cal-apple').href = 'data:text/calendar;charset=utf8,' + enc(ics);
+    wrap.hidden = false;
+
+    var btn = document.getElementById('cal-btn');
+    function close() { wrap.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); }
+    btn.addEventListener('click', function (e) { e.stopPropagation(); btn.setAttribute('aria-expanded', wrap.classList.toggle('open') ? 'true' : 'false'); });
+    document.addEventListener('click', function (e) { if (!wrap.contains(e.target)) close(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+    document.getElementById('cal-menu').addEventListener('click', function () { setTimeout(close, 80); });
+  })();
+</script>
+</div>
+</body>
+</html>
