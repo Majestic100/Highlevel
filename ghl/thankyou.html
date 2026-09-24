@@ -55,11 +55,11 @@
   /* LAYOUT */
   main { position: relative; z-index: 10; padding: 24px 0 72px; }
   @media (min-width: 768px) { main { padding: 36px 0 96px; } }
-  .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 0 20px; }
   @media (min-width: 768px) { .wrap { padding: 0 32px; } }
   .center { text-align: center; }
-  .block { margin-top: 56px; }
-  @media (min-width: 768px) { .block { margin-top: 88px; } }
+  .block { margin-top: 52px; }
+  @media (min-width: 768px) { .block { margin-top: 72px; } }
 
   /* TYPE */
   .pill { display: inline-flex; align-items: center; gap: 8px; padding: 7px 15px 7px 11px; border-radius: 999px;
@@ -136,7 +136,7 @@
 
   /* STEP 2: QUESTIONS */
   .qgrid { display: grid; gap: 14px; grid-template-columns: 1fr; margin-top: 26px; text-align: left; }
-  @media (min-width: 700px) { .qgrid { grid-template-columns: 1fr 1fr; gap: 18px; } }
+  @media (min-width: 560px) { .qgrid { grid-template-columns: 1fr 1fr; gap: 16px; } }
   .qcard { border: 1px solid #2A2420; border-radius: 14px; background: linear-gradient(180deg, rgba(28,28,28,0.65), rgba(18,18,18,0.65)); overflow: hidden; }
   .qcard .video-wrap { border-bottom: 1px solid #2A2420; }
   .qcard { align-self: start; }
@@ -156,6 +156,8 @@
   .story { border: 1px solid #2A2420; border-radius: 16px; overflow: hidden; background: #0F0D0B; }
   .story-title { font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; font-size: clamp(22px, 5vw, 30px); color: #F5F1EB; letter-spacing: -0.02em; }
   .story-body { padding: 20px 22px 24px; }
+  .inkflow-root .story-line { color: #D6D3D1; font-size: 15.5px; line-height: 1.6; }
+  .story-line b { color: #F5F1EB; }
   .inkflow-root .story-name { color: #EF4444; font-weight: 600; font-size: 14px; margin-top: 4px; }
   .inkflow-root .story-quote { color: #A8A29E; font-size: 15.5px; line-height: 1.6; margin-top: 10px; font-style: italic; }
   .proof { display: grid; gap: 12px; grid-template-columns: 1fr; margin-top: 26px; }
@@ -186,6 +188,75 @@
   .anim .reveal { opacity: 0; transform: translateY(18px); transition: opacity 650ms cubic-bezier(.22,1,.36,1), transform 650ms cubic-bezier(.22,1,.36,1); }
   .anim .reveal.in { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) { .anim .reveal { opacity: 1 !important; transform: none !important; transition: none !important; } }
+  /* VIDEO SLOT INSIDE A QUESTION CARD */
+  .qmedia { margin: -18px -52px 16px -20px; }
+  .qcard.with-media .qplus { top: auto; bottom: 20px; margin-top: 0; }
+
+  /* PREVIEW PLACEHOLDERS (only with ?preview=1) */
+  .ph { position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; background: #120F0D; }
+  .ph-bg { position: absolute; inset: 0; background-size: cover; background-position: center 30%; filter: saturate(0.9); }
+  .ph-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(6,6,6,0.15) 0%, rgba(6,6,6,0.55) 55%, rgba(6,6,6,0.92) 100%); }
+  .ph-grad { position: absolute; inset: 0; background:
+    radial-gradient(120% 90% at 20% 0%, rgba(220,38,38,0.30), rgba(220,38,38,0) 60%),
+    repeating-linear-gradient(135deg, rgba(255,255,255,0.025) 0 14px, rgba(255,255,255,0) 14px 28px), #151210; }
+  .ph-play { position: absolute; left: 50%; top: 44%; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%;
+    background: #DC2626; box-shadow: 0 12px 30px -8px rgba(220,38,38,0.7); display: flex; align-items: center; justify-content: center; }
+  .ph-play svg { width: 26px; height: 26px; color: #fff; margin-left: 4px; }
+  .ph-cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 14px 16px; text-align: center; }
+  .ph-cap b { display: block; font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; text-transform: uppercase;
+    letter-spacing: -0.01em; line-height: 1.05; color: #fff; font-size: clamp(16px, 4.6vw, 22px); text-shadow: 0 2px 12px rgba(0,0,0,0.6); }
+  .ph-cap b em { font-style: normal; color: #EF4444; }
+  .ph-tag { position: absolute; top: 10px; left: 10px; padding: 3px 8px; border-radius: 6px; background: rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.15); color: #E7E5E4; font-size: 10.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+  .ph-time { position: absolute; top: 10px; right: 10px; padding: 2px 6px; border-radius: 4px; background: rgba(0,0,0,0.7); color: #fff; font-size: 11px; font-weight: 600; }
+  .qcard .ph-play { width: 48px; height: 48px; margin: -24px 0 0 -24px; top: 40%; }
+  .qcard .ph-play svg { width: 20px; height: 20px; }
+  .story .ph-cap b { font-size: clamp(24px, 7vw, 40px); }
+  .rv { background: #fff; color: #1C1917; border-radius: 12px; padding: 14px 16px; text-align: left; border: 1px solid #2A2420; }
+  .rv-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .rv-av { width: 30px; height: 30px; border-radius: 50%; background: #E7E5E4; flex-shrink: 0; }
+  .rv-name { height: 9px; width: 90px; border-radius: 4px; background: #D6D3D1; }
+  .rv-stars { display: flex; gap: 2px; margin: 6px 0 10px; }
+  .rv-stars i { width: 16px; height: 16px; background: #00B67A; display: block; }
+  .rv-line { height: 8px; border-radius: 4px; background: #E7E5E4; margin-top: 7px; }
+  .rv-tag { font-size: 10.5px; color: #A8A29E; margin-top: 10px; text-transform: uppercase; letter-spacing: 0.08em; }
+  .preview-bar { position: sticky; top: 0; z-index: 60; background: #FDE68A; color: #451A03; text-align: center; font-size: 13px; font-weight: 600; padding: 8px 12px; }
+  .top-title { font-size: clamp(24px, 6.4vw, 40px); margin-bottom: 22px; }
+  .step-bar { display: flex; align-items: center; justify-content: center; gap: 8px; background: #DC2626; color: #fff;
+    font-weight: 700; font-size: 15px; letter-spacing: 0.01em; padding: 10px 14px; border-radius: 14px 14px 0 0; }
+  .step-bar svg { width: 16px; height: 16px; }
+  .video-card.attached { margin-top: 0; border-radius: 0 0 16px 16px; }
+  .video-card.attached::before { border-radius: 0 0 16px 16px; }
+  .inkflow-root .warn-line { margin: 18px auto 0; max-width: 680px; font-size: 14.5px; line-height: 1.55; color: #E7E5E4; }
+  .warn-line strong { color: #EF4444; letter-spacing: 0.04em; }
+  .cal { margin-top: 30px; }
+  .cal-h { font-size: clamp(20px, 5vw, 26px); }
+  .hl { background: #FDE047; color: #1C1917; padding: 0 6px; border-radius: 4px; font-style: normal; }
+  .mail-warnrow { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 16px; background: #FFFBEB;
+    border-bottom: 1px solid #E7E2DA; font-size: 12.5px; color: #78350F; }
+  .mail-safe { flex-shrink: 0; padding: 5px 12px; border-radius: 999px; border: 1px solid #1D4ED8; color: #1D4ED8; font-weight: 600;
+    box-shadow: 0 0 0 4px #FDE047; background: #fff; }
+  .step-h { font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 800; letter-spacing: -0.02em; line-height: 1.15;
+    font-size: clamp(22px, 5.4vw, 34px); color: #F5F1EB; text-wrap: balance; }
+  .step-no { color: #EF4444; text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 5px; }
+  .cta-mid { margin-top: 26px; }
+  /* When the questions carry videos: two columns everywhere, like the reference */
+  .qgrid.has-media { grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (min-width: 560px) { .qgrid.has-media { gap: 16px; } }
+  @media (max-width: 559px) {
+    .qgrid.has-media .qnum { display: none; }
+    .qgrid.has-media .qbody { padding: 12px 36px 12px 12px; }
+    .qgrid.has-media .qmedia { margin: -12px -36px 10px -12px; }
+    .qgrid.has-media .qbody h3 { font-size: 13.5px; line-height: 1.3; }
+    .qgrid.has-media .qplus { right: 10px; bottom: 12px; width: 18px; height: 18px; }
+    .qgrid.has-media .inkflow-root .qans, .qgrid.has-media .qans { padding: 0 12px 12px; font-size: 13.5px; }
+    .qgrid.has-media .ph-cap b { font-size: 11.5px; }
+    .qgrid.has-media .ph-tag, .qgrid.has-media .ph-time { display: none; }
+    .qgrid.has-media .ph-play { width: 30px; height: 30px; margin: -15px 0 0 -15px; top: 26%; }
+    .qgrid.has-media .ph-play svg { width: 14px; height: 14px; margin-left: 2px; }
+    .qgrid.has-media .ph-cap { padding: 8px; }
+    .proof { grid-template-columns: 1fr 1fr; gap: 10px; }
+  }
   [hidden] { display: none !important; }
 </style>
 </head>
@@ -202,31 +273,23 @@
 <main>
   <div class="wrap center">
 
-    <!-- HERO -->
-    <section class="reveal">
-      <span class="pill">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Booking confirmed
-      </span>
-      <h1 class="h1">Congrats, your call<br /><span class="accent">is booked.</span></h1>
-      <p class="lead">Do the steps below before we talk. It takes five minutes, and we get to spend the whole call on filling your chair.</p>
-    </section>
+    <!-- TITLE -->
+    <h1 class="h1 top-title reveal">Congrats on booking your <span class="accent">Inkflow intro call!</span></h1>
 
     <!-- STEP 1: PRE-CALL VIDEO, SHOW WARNING, CONFIRM THE CALL -->
-    <section class="block reveal" id="step-1" data-step>
-      <span class="step-tag">Step <span class="step-n">1</span></span>
-      <h2 class="h2" id="step1-title">Watch this <span class="accent">before the call</span></h2>
-      <div class="video-card" id="video-card">
+    <section class="reveal" id="step-1" data-step>
+      <div class="step-bar">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        <span>Step <span class="step-n">1</span>: <span id="step1-title">Watch this first</span></span>
+      </div>
+      <div class="video-card attached" id="video-card">
         <div class="video-wrap"><iframe id="main-video" title="Watch this before the call" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
       </div>
 
-      <div class="warn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01" stroke-linecap="round"/><path d="M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z" stroke-linejoin="round"/></svg>
-        <span><strong>Important:</strong> this time is reserved just for you. If something comes up, reschedule from your confirmation email so the slot can go to another artist.</span>
-      </div>
+      <p class="warn-line"><strong>WARNING:</strong> This time is reserved just for you, and every slot we open is one another artist can't take. If you can't make it, reschedule from your confirmation email instead of not showing up.</p>
 
       <div class="cal" id="cal">
-        <h3 class="h3">Add the call to your calendar</h3>
+        <h3 class="h3 cal-h">Add the call to your calendar by clicking below</h3>
         <div id="cal-when" class="cal-when" hidden>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke-linecap="round"/></svg>
           <span id="cal-when-text"></span>
@@ -248,8 +311,7 @@
       </div>
 
       <div class="or">Or</div>
-      <h3 class="h3">Find our email and move it to your inbox</h3>
-      <p class="muted" style="margin-top:8px;">Your confirmation and the call link are on their way. Mark us as safe so the reminders reach you.</p>
+      <h3 class="h3">Check your email and click <span class="hl">"Looks safe"</span> so you don't miss our call</h3>
       <div class="mail" aria-hidden="true">
         <div class="mail-top"><span></span><span></span><span></span></div>
         <div class="mail-row">
@@ -259,17 +321,20 @@
             <div class="mail-sub">Your call is confirmed. Here's your link</div>
           </div>
         </div>
+        <div class="mail-warnrow">
+          <span>Be careful with this message</span>
+          <span class="mail-safe">Looks safe</span>
+        </div>
         <div class="mail-tip">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="flex-shrink:0;margin-top:1px"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01" stroke-linecap="round"/></svg>
-          <span>Not in your inbox? Check <strong>Spam</strong> or <strong>Promotions</strong>, then mark it <strong>"Not spam"</strong> or drag it to <strong>Primary</strong>.</span>
+          <span>Not in your inbox? Check <strong>Spam</strong> or <strong>Promotions</strong>, then click <strong>"Looks safe"</strong> or <strong>"Not spam"</strong>, or drag it to <strong>Primary</strong>.</span>
         </div>
       </div>
     </section>
 
     <!-- STEP 2: OBJECTION VIDEOS / FAQ -->
     <section class="block reveal" id="step-faq" data-step>
-      <span class="step-tag">Step <span class="step-n">2</span></span>
-      <h2 class="h2">Get your questions <span class="accent">answered before the call</span></h2>
+      <h2 class="step-h"><span class="step-no">Step #<span class="step-n">2</span>:</span> Get your questions answered before the call!</h2>
       <div class="qgrid" id="qgrid">
         <details class="qcard" data-q="clients">
           <summary class="qbody"><span class="qnum">Question 01</span><h3>How many new clients will I get?</h3><span class="qplus" aria-hidden="true"></span></summary>
@@ -312,27 +377,20 @@
           <p class="qans">The guarantee applies from $1,000 a month in ad spend. Most artists and studios run between $1,500 and $5,000 a month, depending on their market and how fast they want to grow. Ad spend goes straight to Meta, not to us.</p>
         </details>
       </div>
-      <p class="muted" style="margin-top:22px;font-size:15px;">Anything else? Bring it to the call and we'll answer it straight.</p>
     </section>
 
     <!-- STEP 3: VIDEO CASE STUDIES + IMAGE SOCIAL PROOF -->
     <section class="block reveal" id="step-proof" data-step>
-      <span class="step-tag">Step <span class="step-n">3</span></span>
-      <h2 class="h2">See what our <span class="accent">clients say</span></h2>
+      <h2 class="step-h"><span class="step-no">Step #<span class="step-n">3</span>:</span> Check out our success stories</h2>
       <div class="stories" id="stories" hidden></div>
+      <a class="btn cta-mid" href="#cal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v4M10 16h4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Add the call to your calendar
+      </a>
       <div class="proof" id="proof" hidden></div>
       <a class="tp" href="https://dk.trustpilot.com/review/heromedia.dk" target="_blank" rel="noopener">
         <img src="../assets/avatars/stars-5.svg" alt="4.7 out of 5 stars" />
         <span><strong>4.7</strong> from 30+ reviews on <span class="tp-brand">Trustpilot</span>. Read them</span>
-      </a>
-    </section>
-
-    <!-- SEE YOU -->
-    <section class="seeyou reveal">
-      <p><strong>See you on the call.</strong><br />Sinan, founder of Inkflow</p>
-      <a class="btn" href="#cal" style="margin-top:6px;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v4M10 16h4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Add the call to your calendar
       </a>
     </section>
 
@@ -405,32 +463,74 @@
       w.appendChild(f); return w;
     }
 
-    /* Main video: hide the step if no video is set */
+    /* Preview mode: ?preview=1 shows placeholders where videos and reviews go */
+    var PREVIEW = /[?&]preview=1\b/.test(window.location.search);
+    var PLAY = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+    function esc(t) { var d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+    function placeholder(caption, tag, bg, time) {
+      var w = document.createElement('div'); w.className = 'ph';
+      w.innerHTML = (bg ? '<div class="ph-bg" style="background-image:url(' + bg + ')"></div>' : '<div class="ph-grad"></div>') +
+        '<div class="ph-play">' + PLAY + '</div>' +
+        (tag ? '<span class="ph-tag">' + esc(tag) + '</span>' : '') +
+        (time ? '<span class="ph-time">' + esc(time) + '</span>' : '') +
+        '<div class="ph-cap"><b>' + caption + '</b></div>';
+      return w;
+    }
+    if (PREVIEW) {
+      var bar = document.createElement('div'); bar.className = 'preview-bar';
+      bar.textContent = 'Preview: the boxes show where your videos and reviews will go. Visitors never see them.';
+      document.querySelector('.inkflow-root').insertBefore(bar, document.querySelector('.nav'));
+    }
+
+    /* Main video: hide it if no video is set (placeholder in preview) */
     var mainUrl = embedUrl(CONFIG.video);
     if (mainUrl) document.getElementById('main-video').src = mainUrl;
-    else {
+    else if (PREVIEW) {
+      var vw = document.querySelector('#video-card .video-wrap');
+      vw.parentNode.replaceChild(placeholder('Watch this <em>before</em> we talk', 'Pre-call video', '../assets/about/sinan.jpg', '4:30'), vw);
+    } else {
       document.getElementById('video-card').hidden = true;
-      document.getElementById('step1-title').innerHTML = 'Lock the call <span class="accent">into your calendar</span>';
+      document.getElementById('step1-title').textContent = 'Confirm your call';
     }
 
     /* Question videos */
     document.querySelectorAll('.qcard').forEach(function (card) {
+      var q = card.querySelector('h3').textContent;
       var url = embedUrl((CONFIG.faqVideos || {})[card.getAttribute('data-q')]);
-      if (url) { card.insertBefore(videoBlock(url, card.querySelector('h3').textContent), card.querySelector('.qans')); card.open = true; }
+      var media = url ? videoBlock(url, q) : (PREVIEW ? placeholder(esc(q), 'Video', '', '1:30') : null);
+      if (!media) return;
+      var slot = document.createElement('div'); slot.className = 'qmedia'; slot.appendChild(media);
+      var sum = card.querySelector('summary'); sum.insertBefore(slot, sum.firstChild);
+      card.classList.add('with-media');
+      document.getElementById('qgrid').classList.add('has-media');
     });
 
     /* Stories */
     var box = document.getElementById('stories');
+    function storyBody(title, name, quote) {
+      var b = document.createElement('div'); b.className = 'story-body';
+      var line = document.createElement('p'); line.className = 'story-line';
+      if (title) { var t = document.createElement('b'); t.textContent = title + ': '; line.appendChild(t); }
+      if (quote) line.appendChild(document.createTextNode('"' + quote + '"'));
+      b.appendChild(line);
+      if (name) { var n = document.createElement('p'); n.className = 'story-name'; n.textContent = name; b.appendChild(n); }
+      return b;
+    }
     (CONFIG.stories || []).forEach(function (s) {
       var el = document.createElement('article'); el.className = 'story';
       var url = embedUrl(s.video);
       if (url) el.appendChild(videoBlock(url, s.title));
-      var b = document.createElement('div'); b.className = 'story-body';
-      var t = document.createElement('p'); t.className = 'story-title'; t.textContent = s.title || ''; b.appendChild(t);
-      if (s.name) { var n = document.createElement('p'); n.className = 'story-name'; n.textContent = s.name; b.appendChild(n); }
-      if (s.quote) { var q = document.createElement('p'); q.className = 'story-quote'; q.textContent = '"' + s.quote + '"'; b.appendChild(q); }
-      el.appendChild(b); box.appendChild(el);
+      el.appendChild(storyBody(s.title, s.name, s.quote));
+      box.appendChild(el);
     });
+    if (!box.children.length && PREVIEW) {
+      [['From <em>X</em> to <em>Y</em> bookings', 'Case study 1'], ['<em>+Z</em> new clients in 30 days', 'Case study 2'], ['Fully booked in <em>N</em> weeks', 'Case study 3']].forEach(function (c) {
+        var el = document.createElement('article'); el.className = 'story';
+        el.appendChild(placeholder(c[0], c[1], '', '2:45'));
+        el.appendChild(storyBody("Client name's journey to [result]", 'Client name, Studio, City', 'Their own words about what changed after working with you.'));
+        box.appendChild(el);
+      });
+    }
     if (box.children.length) box.hidden = false;
 
     /* Image social proof */
@@ -439,6 +539,13 @@
       var img = document.createElement('img'); img.src = src; img.alt = 'Client review'; img.loading = 'lazy';
       proof.appendChild(img);
     });
+    if (!proof.children.length && PREVIEW) {
+      for (var r = 0; r < 4; r++) {
+        proof.insertAdjacentHTML('beforeend', '<div class="rv"><div class="rv-head"><span class="rv-av"></span><span class="rv-name"></span></div>' +
+          '<div class="rv-stars"><i></i><i></i><i></i><i></i><i></i></div><div class="rv-line" style="width:92%"></div><div class="rv-line" style="width:100%"></div>' +
+          '<div class="rv-line" style="width:78%"></div><div class="rv-line" style="width:60%"></div><div class="rv-tag">Review screenshot</div></div>');
+      }
+    }
     if (proof.children.length) proof.hidden = false;
 
     /* Number the visible steps 1, 2, 3 ... */
