@@ -47,13 +47,13 @@
 
   /* NAV */
   .nav { position: relative; z-index: 20; }
-  .nav-inner { max-width: 1180px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: center; }
+  .nav-inner { max-width: 1180px; margin: 0 auto; padding: 0 24px; height: 56px; display: flex; align-items: center; justify-content: center; }
   @media (min-width: 768px) { .nav-inner { height: 84px; } }
   .logo img { height: 22px; width: auto; display: block; }
   @media (min-width: 768px) { .logo img { height: 32px; } }
 
   /* LAYOUT */
-  main { position: relative; z-index: 10; padding: 24px 0 72px; }
+  main { position: relative; z-index: 10; padding: 8px 0 64px; }
   @media (min-width: 768px) { main { padding: 36px 0 96px; } }
   .wrap { max-width: 780px; margin: 0 auto; padding: 0 20px; }
   @media (min-width: 768px) { .wrap { padding: 0 32px; } }
@@ -221,13 +221,13 @@
   .rv-line { height: 8px; border-radius: 4px; background: #E7E5E4; margin-top: 7px; }
   .rv-tag { font-size: 10.5px; color: #A8A29E; margin-top: 10px; text-transform: uppercase; letter-spacing: 0.08em; }
   .preview-bar { position: sticky; top: 0; z-index: 60; background: #FDE68A; color: #451A03; text-align: center; font-size: 13px; font-weight: 600; padding: 8px 12px; }
-  .top-title { font-size: clamp(24px, 6.4vw, 40px); margin-bottom: 22px; }
+  .inkflow-root .top-title { font-size: clamp(24px, 6.4vw, 40px); margin: 4px auto 24px; max-width: 18ch; }
   .step-bar { display: flex; align-items: center; justify-content: center; gap: 8px; background: #DC2626; color: #fff;
     font-weight: 700; font-size: 15px; letter-spacing: 0.01em; padding: 10px 14px; border-radius: 14px 14px 0 0; }
   .step-bar svg { width: 16px; height: 16px; }
   .video-card.attached { margin-top: 0; border-radius: 0 0 16px 16px; }
   .video-card.attached::before { border-radius: 0 0 16px 16px; }
-  .inkflow-root .warn-line { margin: 18px auto 0; max-width: 680px; font-size: 14.5px; line-height: 1.55; color: #E7E5E4; }
+  .inkflow-root .warn-line { margin: 16px auto 0; max-width: 560px; font-size: 14.5px; line-height: 1.55; color: #E7E5E4; }
   .warn-line strong { color: #EF4444; letter-spacing: 0.04em; }
   .cal { margin-top: 30px; }
   .cal-h { font-size: clamp(20px, 5vw, 26px); }
@@ -286,7 +286,7 @@
         <div class="video-wrap"><iframe id="main-video" title="Watch this before the call" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
       </div>
 
-      <p class="warn-line"><strong>WARNING:</strong> This time is reserved just for you, and every slot we open is one another artist can't take. If you can't make it, reschedule from your confirmation email instead of not showing up.</p>
+      <p class="warn-line"><strong>WARNING:</strong> This slot is reserved just for you. Can't make it? Reschedule from your confirmation email instead of not showing up.</p>
 
       <div class="cal" id="cal">
         <h3 class="h3 cal-h" id="cal-h">Add the call to your calendar by clicking below</h3>
