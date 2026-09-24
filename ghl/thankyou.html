@@ -139,10 +139,17 @@
   @media (min-width: 700px) { .qgrid { grid-template-columns: 1fr 1fr; gap: 18px; } }
   .qcard { border: 1px solid #2A2420; border-radius: 14px; background: linear-gradient(180deg, rgba(28,28,28,0.65), rgba(18,18,18,0.65)); overflow: hidden; }
   .qcard .video-wrap { border-bottom: 1px solid #2A2420; }
-  .qbody { padding: 20px 20px 22px; }
-  .qnum { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.15em; color: #EF4444; text-transform: uppercase; margin-bottom: 8px; }
-  .qbody h3 { font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 19px; font-weight: 700; line-height: 1.25; color: #F5F1EB; margin-bottom: 8px; }
-  .qbody p { font-size: 15px; color: #A8A29E; line-height: 1.6; }
+  .qcard { align-self: start; }
+  .qbody { position: relative; display: block; padding: 18px 52px 18px 20px; cursor: pointer; list-style: none; }
+  .qbody::-webkit-details-marker { display: none; }
+  .qplus { position: absolute; right: 18px; top: 50%; width: 22px; height: 22px; margin-top: -11px; border-radius: 50%; border: 1px solid #3A322C; }
+  .qplus::before, .qplus::after { content: ''; position: absolute; left: 50%; top: 50%; width: 10px; height: 1.6px; background: #EF4444; transform: translate(-50%, -50%); transition: transform 200ms ease; }
+  .qplus::after { transform: translate(-50%, -50%) rotate(90deg); }
+  .qcard[open] .qplus::after { transform: translate(-50%, -50%) rotate(0deg); }
+  .qcard[open] { border-color: rgba(220,38,38,0.35); }
+  .inkflow-root .qans { padding: 0 20px 20px; font-size: 15px; color: #A8A29E; line-height: 1.6; }
+  .qnum { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.15em; color: #EF4444; text-transform: uppercase; margin-bottom: 8px; }
+  .qbody h3 { font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 18px; font-weight: 700; line-height: 1.3; color: #F5F1EB; }
 
   /* STEP 3: STORIES */
   .stories { display: grid; gap: 22px; margin-top: 26px; text-align: left; }
@@ -151,6 +158,9 @@
   .story-body { padding: 20px 22px 24px; }
   .inkflow-root .story-name { color: #EF4444; font-weight: 600; font-size: 14px; margin-top: 4px; }
   .inkflow-root .story-quote { color: #A8A29E; font-size: 15.5px; line-height: 1.6; margin-top: 10px; font-style: italic; }
+  .proof { display: grid; gap: 12px; grid-template-columns: 1fr; margin-top: 26px; }
+  @media (min-width: 600px) { .proof { grid-template-columns: 1fr 1fr; gap: 16px; } }
+  .proof img { width: 100%; height: auto; border-radius: 12px; border: 1px solid #2A2420; background: #F5F1EB; }
   .tp { display: inline-flex; align-items: center; gap: 12px; margin-top: 26px; padding: 14px 20px; border: 1px solid #2A2420; border-radius: 12px;
     background: rgba(22,20,18,0.7); transition: border-color 200ms ease, transform 200ms ease; }
   .tp:hover { border-color: rgba(0,182,122,0.5); transform: translateY(-1px); }
@@ -202,19 +212,13 @@
       <p class="lead">Do the steps below before we talk. It takes five minutes, and we get to spend the whole call on filling your chair.</p>
     </section>
 
-    <!-- STEP: VIDEO -->
-    <section class="block reveal" id="step-video" data-step>
+    <!-- STEP 1: PRE-CALL VIDEO, SHOW WARNING, CONFIRM THE CALL -->
+    <section class="block reveal" id="step-1" data-step>
       <span class="step-tag">Step <span class="step-n">1</span></span>
-      <h2 class="h2">Watch this <span class="accent">before the call</span></h2>
-      <div class="video-card">
+      <h2 class="h2" id="step1-title">Watch this <span class="accent">before the call</span></h2>
+      <div class="video-card" id="video-card">
         <div class="video-wrap"><iframe id="main-video" title="Watch this before the call" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
       </div>
-    </section>
-
-    <!-- STEP: CALENDAR + EMAIL -->
-    <section class="block reveal" id="step-cal" data-step>
-      <span class="step-tag">Step <span class="step-n">2</span></span>
-      <h2 class="h2">Lock the call <span class="accent">into your calendar</span></h2>
 
       <div class="warn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01" stroke-linecap="round"/><path d="M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z" stroke-linejoin="round"/></svg>
@@ -222,6 +226,7 @@
       </div>
 
       <div class="cal" id="cal">
+        <h3 class="h3">Add the call to your calendar</h3>
         <div id="cal-when" class="cal-when" hidden>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke-linecap="round"/></svg>
           <span id="cal-when-text"></span>
@@ -242,7 +247,7 @@
         <p id="cal-fallback" class="cal-fallback" hidden>Your calendar invite is in your inbox. Open it and add the call in one tap.</p>
       </div>
 
-      <div class="or">Then</div>
+      <div class="or">Or</div>
       <h3 class="h3">Find our email and move it to your inbox</h3>
       <p class="muted" style="margin-top:8px;">Your confirmation and the call link are on their way. Mark us as safe so the reminders reach you.</p>
       <div class="mail" aria-hidden="true">
@@ -261,44 +266,61 @@
       </div>
     </section>
 
-    <!-- STEP: QUESTIONS -->
+    <!-- STEP 2: OBJECTION VIDEOS / FAQ -->
     <section class="block reveal" id="step-faq" data-step>
-      <span class="step-tag">Step <span class="step-n">3</span></span>
+      <span class="step-tag">Step <span class="step-n">2</span></span>
       <h2 class="h2">Get your questions <span class="accent">answered before the call</span></h2>
       <div class="qgrid" id="qgrid">
-        <article class="qcard" data-q="different">
-          <div class="qbody"><span class="qnum">Question 01</span><h3>How is this different from other agencies?</h3>
-          <p>We only work with tattoo artists and studios, so the playbook is dialed in. We measure real bookings with paid deposits, not lists of curious people. And we take one artist or studio per area, so we never run ads against you.</p></div>
-        </article>
-        <article class="qcard" data-q="how">
-          <div class="qbody"><span class="qnum">Question 02</span><h3>How does it actually work?</h3>
-          <p>We build your page and booking system, run your Facebook and Instagram ads, and answer your DMs and every lead until they've paid a deposit. You show up and tattoo.</p></div>
-        </article>
-        <article class="qcard" data-q="guarantee">
-          <div class="qbody"><span class="qnum">Question 03</span><h3>What if it doesn't work?</h3>
-          <p>If we miss 20 new clients in your first 30 days, you pay us nothing until we deliver them. We can promise that because we only take on artists and studios we know we can fill.</p></div>
-        </article>
-        <article class="qcard" data-q="time">
-          <div class="qbody"><span class="qnum">Question 04</span><h3>How much do I have to do?</h3>
-          <p>Very little. You show up to your appointments and tattoo. We run your ads, your page, your bookings and every message.</p></div>
-        </article>
-        <article class="qcard" data-q="budget">
-          <div class="qbody"><span class="qnum">Question 05</span><h3>What ad budget do I need?</h3>
-          <p>The guarantee applies with at least $1,000 a month in ad spend. The right number for you depends on your market and how fast you want to grow. Ad spend goes straight to Meta, not to us.</p></div>
-        </article>
-        <article class="qcard" data-q="solo">
-          <div class="qbody"><span class="qnum">Question 06</span><h3>Does this work for solo artists?</h3>
-          <p>Yes. If you've got a chair, a portfolio worth showing and you can take deposits, we can fill your calendar. It works for solo artists and full studios.</p></div>
-        </article>
+        <details class="qcard" data-q="clients">
+          <summary class="qbody"><span class="qnum">Question 01</span><h3>How many new clients will I get?</h3><span class="qplus" aria-hidden="true"></span></summary>
+          <p class="qans">Most artists and studios get 10 to 30 new bookings in their first month, and we guarantee 20 in your first 30 days. On the call we run the numbers for your shop: your average session price, your budget and what that adds up to each month.</p>
+        </details>
+        <details class="qcard" data-q="qualify">
+          <summary class="qbody"><span class="qnum">Question 02</span><h3>How do you make sure the leads are serious?</h3><span class="qplus" aria-hidden="true"></span></summary>
+          <p class="qans">The ads and your page are built to show your work and your prices, so people who are just browsing drop off early. We then answer and call every lead ourselves, and a client only lands in your calendar once they've paid a deposit.</p>
+        </details>
+        <details class="qcard" data-q="noshow">
+          <summary class="qbody"><span class="qnum">Question 03</span><h3>What if people don't show up?</h3><span class="qplus" aria-hidden="true"></span></summary>
+          <p class="qans">Every booking is secured with a deposit before it reaches your calendar. People who have paid show up, and if they don't, the deposit covers your time.</p>
+        </details>
+        <details class="qcard" data-q="closing">
+          <summary class="qbody"><span class="qnum">Question 04</span><h3>Do I have to sell anything?</h3><span class="qplus" aria-hidden="true"></span></summary>
+          <p class="qans">No. We handle the conversation from the first message until the deposit is paid. When the client walks in, the sale is already done. You just tattoo.</p>
+        </details>
+        <details class="qcard" data-q="promo">
+          <summary class="qbody"><span class="qnum">Question 05</span><h3>Is this just a cheap promotion?</h3><span class="qplus" aria-hidden="true"></span></summary>
+          <p class="qans">No. We don't run discount deals that attract bargain hunters. Your ads show your work and your style, so the people who book want you, at your prices.</p>
+        </details>
+        <details class="qcard" data-q="contract">
+          <summary class="qbody"><span class="qnum">Question 06</span><h3>Can I cancel anytime?</h3><span class="qplus" aria-hidden="true"></span></summary>
+          <p class="qans">Yes. It's month-to-month, and you can cancel anytime with no fees and no fine print. We earn your business every month, or you walk.</p>
+        </details>
+        <details class="qcard" data-q="guarantee">
+          <summary class="qbody"><span class="qnum">Question 07</span><h3>What if it doesn't work?</h3><span class="qplus" aria-hidden="true"></span></summary>
+          <p class="qans">If we miss 20 new clients in your first 30 days, you pay us nothing until we deliver them. The guarantee applies with at least $1,000 a month in ad spend. We can promise it because we only take on artists and studios we know we can fill.</p>
+        </details>
+        <details class="qcard" data-q="timeline">
+          <summary class="qbody"><span class="qnum">Question 08</span><h3>How fast will I see results?</h3><span class="qplus" aria-hidden="true"></span></summary>
+          <p class="qans">Most artists and studios get their first deposit-paid booking within 7 days of launch. Inside 30 days you have 20 new clients or more. That's our guarantee, not a hope.</p>
+        </details>
+        <details class="qcard" data-q="different">
+          <summary class="qbody"><span class="qnum">Question 09</span><h3>What makes you different from other agencies?</h3><span class="qplus" aria-hidden="true"></span></summary>
+          <p class="qans">We only work with tattoo artists and studios, so the playbook is dialed in. We measure real bookings with paid deposits, not lists of curious people. And we take one artist or studio per area, so we never run ads against you.</p>
+        </details>
+        <details class="qcard" data-q="budget">
+          <summary class="qbody"><span class="qnum">Question 10</span><h3>What's the minimum ad spend?</h3><span class="qplus" aria-hidden="true"></span></summary>
+          <p class="qans">The guarantee applies from $1,000 a month in ad spend. Most artists and studios run between $1,500 and $5,000 a month, depending on their market and how fast they want to grow. Ad spend goes straight to Meta, not to us.</p>
+        </details>
       </div>
       <p class="muted" style="margin-top:22px;font-size:15px;">Anything else? Bring it to the call and we'll answer it straight.</p>
     </section>
 
-    <!-- STEP: PROOF -->
+    <!-- STEP 3: VIDEO CASE STUDIES + IMAGE SOCIAL PROOF -->
     <section class="block reveal" id="step-proof" data-step>
-      <span class="step-tag">Step <span class="step-n">4</span></span>
+      <span class="step-tag">Step <span class="step-n">3</span></span>
       <h2 class="h2">See what our <span class="accent">clients say</span></h2>
       <div class="stories" id="stories" hidden></div>
+      <div class="proof" id="proof" hidden></div>
       <a class="tp" href="https://dk.trustpilot.com/review/heromedia.dk" target="_blank" rel="noopener">
         <img src="../assets/avatars/stars-5.svg" alt="4.7 out of 5 stars" />
         <span><strong>4.7</strong> from 30+ reviews on <span class="tp-brand">Trustpilot</span>. Read them</span>
@@ -338,9 +360,10 @@
     video: "",
 
     /* Optional short video per question in the questions step.
-       Keys: different, how, guarantee, time, budget, solo. */
+       Keys: clients, qualify, noshow, closing, promo, contract, guarantee, timeline, different, budget. */
     faqVideos: {
-      different: "", how: "", guarantee: "", time: "", budget: "", solo: ""
+      clients: "", qualify: "", noshow: "", closing: "", promo: "",
+      contract: "", guarantee: "", timeline: "", different: "", budget: ""
     },
 
     /* Success stories. Only real clients, with their permission.
@@ -348,6 +371,10 @@
        { title: "From 4 to 26 bookings a month", name: "Name, Studio, City",
          quote: "What they said, in their words.", video: "https://youtu.be/..." } */
     stories: [],
+
+    /* Image social proof: screenshots of real reviews or client messages,
+       uploaded to assets/proof/ in this repo. Example: "../assets/proof/review-01.png" */
+    proofImages: [],
 
     /* Add-to-calendar event */
     title: "Intro call with Inkflow",
@@ -381,12 +408,15 @@
     /* Main video: hide the step if no video is set */
     var mainUrl = embedUrl(CONFIG.video);
     if (mainUrl) document.getElementById('main-video').src = mainUrl;
-    else document.getElementById('step-video').hidden = true;
+    else {
+      document.getElementById('video-card').hidden = true;
+      document.getElementById('step1-title').innerHTML = 'Lock the call <span class="accent">into your calendar</span>';
+    }
 
     /* Question videos */
     document.querySelectorAll('.qcard').forEach(function (card) {
       var url = embedUrl((CONFIG.faqVideos || {})[card.getAttribute('data-q')]);
-      if (url) card.insertBefore(videoBlock(url, card.querySelector('h3').textContent), card.firstChild);
+      if (url) { card.insertBefore(videoBlock(url, card.querySelector('h3').textContent), card.querySelector('.qans')); card.open = true; }
     });
 
     /* Stories */
@@ -402,6 +432,14 @@
       el.appendChild(b); box.appendChild(el);
     });
     if (box.children.length) box.hidden = false;
+
+    /* Image social proof */
+    var proof = document.getElementById('proof');
+    (CONFIG.proofImages || []).forEach(function (src) {
+      var img = document.createElement('img'); img.src = src; img.alt = 'Client review'; img.loading = 'lazy';
+      proof.appendChild(img);
+    });
+    if (proof.children.length) proof.hidden = false;
 
     /* Number the visible steps 1, 2, 3 ... */
     var n = 0;
