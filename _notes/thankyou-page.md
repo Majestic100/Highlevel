@@ -21,6 +21,12 @@ If GHL fills in the merge fields, the page shows the booked time and an
 "Add to your calendar" button. If it does not (for example after a plain
 "Redirect to URL"), the page tells the visitor to use the invite in their email.
 
+## Preview
+
+Open https://majestic100.github.io/Highlevel/ghl/thankyou.html?preview=1 to see
+placeholders where every video, case study and review screenshot goes. Without
+`?preview=1` (what visitors get) empty slots stay hidden.
+
 ## Content still needed (edit CONFIG at the bottom of ghl/thankyou.html)
 
 - `video`: the pre-call video. Until it is set, the video step is hidden.
