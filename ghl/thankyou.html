@@ -47,13 +47,13 @@
 
   /* NAV */
   .nav { position: relative; z-index: 20; }
-  .nav-inner { max-width: 1180px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: center; }
+  .nav-inner { max-width: 1180px; margin: 0 auto; padding: 0 24px; height: 56px; display: flex; align-items: center; justify-content: center; }
   @media (min-width: 768px) { .nav-inner { height: 84px; } }
   .logo img { height: 22px; width: auto; display: block; }
   @media (min-width: 768px) { .logo img { height: 32px; } }
 
   /* LAYOUT */
-  main { position: relative; z-index: 10; padding: 24px 0 72px; }
+  main { position: relative; z-index: 10; padding: 8px 0 64px; }
   @media (min-width: 768px) { main { padding: 36px 0 96px; } }
   .wrap { max-width: 780px; margin: 0 auto; padding: 0 20px; }
   @media (min-width: 768px) { .wrap { padding: 0 32px; } }
@@ -221,13 +221,13 @@
   .rv-line { height: 8px; border-radius: 4px; background: #E7E5E4; margin-top: 7px; }
   .rv-tag { font-size: 10.5px; color: #A8A29E; margin-top: 10px; text-transform: uppercase; letter-spacing: 0.08em; }
   .preview-bar { position: sticky; top: 0; z-index: 60; background: #FDE68A; color: #451A03; text-align: center; font-size: 13px; font-weight: 600; padding: 8px 12px; }
-  .top-title { font-size: clamp(24px, 6.4vw, 40px); margin-bottom: 22px; }
+  .inkflow-root .top-title { font-size: clamp(24px, 6.4vw, 40px); margin: 4px auto 24px; max-width: 18ch; }
   .step-bar { display: flex; align-items: center; justify-content: center; gap: 8px; background: #DC2626; color: #fff;
     font-weight: 700; font-size: 15px; letter-spacing: 0.01em; padding: 10px 14px; border-radius: 14px 14px 0 0; }
   .step-bar svg { width: 16px; height: 16px; }
   .video-card.attached { margin-top: 0; border-radius: 0 0 16px 16px; }
   .video-card.attached::before { border-radius: 0 0 16px 16px; }
-  .inkflow-root .warn-line { margin: 18px auto 0; max-width: 680px; font-size: 14.5px; line-height: 1.55; color: #E7E5E4; }
+  .inkflow-root .warn-line { margin: 16px auto 0; max-width: 560px; font-size: 14.5px; line-height: 1.55; color: #E7E5E4; }
   .warn-line strong { color: #EF4444; letter-spacing: 0.04em; }
   .cal { margin-top: 30px; }
   .cal-h { font-size: clamp(20px, 5vw, 26px); }
@@ -286,10 +286,10 @@
         <div class="video-wrap"><iframe id="main-video" title="Watch this before the call" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
       </div>
 
-      <p class="warn-line"><strong>WARNING:</strong> This time is reserved just for you, and every slot we open is one another artist can't take. If you can't make it, reschedule from your confirmation email instead of not showing up.</p>
+      <p class="warn-line"><strong>WARNING:</strong> This slot is reserved just for you. Can't make it? Reschedule from your confirmation email instead of not showing up.</p>
 
       <div class="cal" id="cal">
-        <h3 class="h3 cal-h">Add the call to your calendar by clicking below</h3>
+        <h3 class="h3 cal-h" id="cal-h">Add the call to your calendar by clicking below</h3>
         <div id="cal-when" class="cal-when" hidden>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke-linecap="round"/></svg>
           <span id="cal-when-text"></span>
@@ -297,7 +297,7 @@
         <div><div id="cal-wrap" class="cal-wrap" hidden>
           <button type="button" id="cal-btn" class="btn" aria-haspopup="true" aria-expanded="false">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v4M10 16h4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span>Add to your calendar</span>
+            <span id="cal-btn-label">Add to your calendar</span>
             <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
           <div class="cal-menu" id="cal-menu" role="menu">
@@ -583,7 +583,36 @@
     if (start && (!end || end <= start)) end = new Date(start.getTime() + CONFIG.durationMinutes * 60000);
 
     var wrap = document.getElementById('cal-wrap');
-    if (!start) { document.getElementById('cal-fallback').hidden = false; return; }
+    var btn = document.getElementById('cal-btn');
+    function close() { wrap.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); }
+    btn.addEventListener('click', function (e) { e.stopPropagation(); btn.setAttribute('aria-expanded', wrap.classList.toggle('open') ? 'true' : 'false'); });
+    document.addEventListener('click', function (e) { if (!wrap.contains(e.target)) close(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+    document.getElementById('cal-menu').addEventListener('click', function () { setTimeout(close, 80); });
+
+    /* No booked time from GHL: the button opens the visitor's inbox instead,
+       where the confirmation email holds the calendar invite. */
+    if (!start) {
+      document.getElementById('cal-h').textContent = 'Add the call to your calendar from your inbox';
+      document.getElementById('cal-btn-label').textContent = 'Open your inbox';
+      var menu = document.getElementById('cal-menu');
+      menu.innerHTML = '';
+      [['Gmail', 'https://mail.google.com/mail/u/0/#search/Inkflow'],
+       ['Outlook', 'https://outlook.live.com/mail/0/'],
+       ['iCloud Mail', 'https://www.icloud.com/mail/'],
+       ['Yahoo Mail', 'https://mail.yahoo.com/']].forEach(function (m) {
+        var a = document.createElement('a');
+        a.href = m[1]; a.target = '_blank'; a.rel = 'noopener'; a.setAttribute('role', 'menuitem');
+        a.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        a.appendChild(document.createTextNode(m[0]));
+        menu.appendChild(a);
+      });
+      var fb = document.getElementById('cal-fallback');
+      fb.textContent = 'Open the confirmation email from Inkflow and tap "Add to calendar" in the invite.';
+      fb.hidden = false;
+      wrap.hidden = false;
+      return;
+    }
 
     var fmtOpts = { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZoneName: 'short' };
     [navigator.language, 'en-US'].some(function (lang) {
@@ -610,12 +639,6 @@
     document.getElementById('cal-apple').href = 'data:text/calendar;charset=utf8,' + enc(ics);
     wrap.hidden = false;
 
-    var btn = document.getElementById('cal-btn');
-    function close() { wrap.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); }
-    btn.addEventListener('click', function (e) { e.stopPropagation(); btn.setAttribute('aria-expanded', wrap.classList.toggle('open') ? 'true' : 'false'); });
-    document.addEventListener('click', function (e) { if (!wrap.contains(e.target)) close(); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
-    document.getElementById('cal-menu').addEventListener('click', function () { setTimeout(close, 80); });
   })();
 </script>
 </div>
