@@ -162,9 +162,10 @@
   .inkflow-root .story-quote { color: #A8A29E; font-size: 15.5px; line-height: 1.6; margin-top: 10px; font-style: italic; }
   .proof { display: grid; gap: 12px; grid-template-columns: 1fr; margin-top: 26px; }
   @media (min-width: 600px) { .proof { grid-template-columns: 1fr 1fr; gap: 16px; } }
-  .proof.masonry { display: block; column-count: 1; column-gap: 16px; }
-  @media (min-width: 700px) { .proof.masonry { column-count: 2; } }
-  .proof-item { display: block; break-inside: avoid; margin: 0 0 16px; border-radius: 12px; overflow: hidden; border: 1px solid #2A2420; background: #fff;
+  /* Real review screenshots: rows of two with equal-height cards, one column on phones */
+  .proof.masonry { display: grid; grid-template-columns: 1fr; gap: 14px; align-items: stretch; }
+  @media (min-width: 700px) { .proof.masonry { grid-template-columns: 1fr 1fr; gap: 16px; } }
+  .proof-item { display: flex; flex-direction: column; justify-content: center; margin: 0; border-radius: 12px; overflow: hidden; border: 1px solid #2A2420; background: #fff;
     transition: transform 200ms ease, border-color 200ms ease; }
   .proof-item:hover { transform: translateY(-2px); border-color: rgba(0,182,122,0.5); }
   .proof-item img { width: 100%; height: auto; display: block; }
@@ -445,12 +446,13 @@
        uploaded to assets/proof/ in this repo. Example: "../assets/proof/review-01.png" */
     proofImages: [
       { src: "../assets/proof/bali-andras.webp", alt: "Trustpilot review from Bali Andras" },
-      { src: "../assets/proof/ahmed-kassem.webp", alt: "Trustpilot review from Ahmed Kassem" },
-      { src: "../assets/proof/fahad-yousaf.webp", alt: "Trustpilot review from Fahad Yousaf" },
       { src: "../assets/proof/rasmus-kallestrup.webp", alt: "Trustpilot review from Rasmus Kallestrup" },
+      { src: "../assets/proof/fahad-yousaf.webp", alt: "Trustpilot review from Fahad Yousaf" },
+      { src: "../assets/proof/alisha.webp", alt: "Trustpilot review from Alisha" },
       { src: "../assets/proof/salima-juul.webp", alt: "Trustpilot review from Salima Juul" },
-      { src: "../assets/proof/asbjorn-winther.webp", alt: "Trustpilot review from Asbjorn Winther" },
-      { src: "../assets/proof/alisha.webp", alt: "Trustpilot review from Alisha" }
+      { src: "../assets/proof/assad-mohammed.webp", alt: "Trustpilot review from Assad Mohammed" },
+      { src: "../assets/proof/ahmed-kassem.webp", alt: "Trustpilot review from Ahmed Kassem" },
+      { src: "../assets/proof/asbjorn-winther.webp", alt: "Trustpilot review from Asbjorn Winther" }
     ],
 
     /* Add-to-calendar event */
