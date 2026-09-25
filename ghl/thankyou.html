@@ -269,6 +269,18 @@
   .stories, .proof { max-width: 960px; margin-left: auto; margin-right: auto; }
   .inkflow-root .step-h { max-width: 820px; margin-left: auto; margin-right: auto; }
   @media (min-width: 1024px) { .qgrid { gap: 24px; } }
+  /* WHAT HAPPENS ON THE CALL */
+  .expect { display: grid; gap: 14px; grid-template-columns: 1fr; max-width: 960px; margin: 22px auto 0; text-align: left; }
+  @media (min-width: 760px) { .expect { grid-template-columns: 1.25fr 1fr; gap: 16px; } }
+  .expect-card { border: 1px solid #2A2420; border-radius: 14px; padding: 20px 20px 18px; background: linear-gradient(180deg, rgba(28,28,28,0.65), rgba(18,18,18,0.65)); }
+  .inkflow-root .expect-card h3 { font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-weight: 700; font-size: 18px; color: #F5F1EB; margin-bottom: 12px; }
+  .inkflow-root .expect-card ol, .inkflow-root .expect-card ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+  .expect-card li { position: relative; padding-left: 30px; font-size: 15px; line-height: 1.55; color: #A8A29E; }
+  .expect-card li b { color: #F5F1EB; font-weight: 600; }
+  .expect-card ol { counter-reset: ex; }
+  .expect-card ol li::before { counter-increment: ex; content: counter(ex); position: absolute; left: 0; top: 1px; width: 21px; height: 21px; border-radius: 6px;
+    background: rgba(220,38,38,0.12); border: 1px solid rgba(220,38,38,0.35); color: #EF4444; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .expect-card ul li::before { content: ''; position: absolute; left: 4px; top: 7px; width: 12px; height: 7px; border-left: 2px solid #22C55E; border-bottom: 2px solid #22C55E; transform: rotate(-45deg); }
   [hidden] { display: none !important; }
 </style>
 </head>
@@ -296,6 +308,26 @@
       </div>
       <div class="video-card attached" id="video-card">
         <div class="video-wrap"><iframe id="main-video" title="Watch this before the call" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+      </div>
+
+      <div class="expect">
+        <div class="expect-card">
+          <h3>What happens on the call</h3>
+          <ol>
+            <li><b>We look at where you are.</b> How you get clients today, your prices and how full your calendar is.</li>
+            <li><b>We run your numbers.</b> How many new clients your area can give you, what ad budget that takes and what you can expect back.</li>
+            <li><b>You get a straight answer.</b> If we're not the right fit, we tell you. You leave with a clear next step either way.</li>
+          </ol>
+        </div>
+        <div class="expect-card">
+          <h3>Have this ready</h3>
+          <ul>
+            <li>Your average price per session</li>
+            <li>Roughly how many new clients you book a month today</li>
+            <li>Your Instagram or portfolio link</li>
+            <li>A quiet spot for the full call</li>
+          </ul>
+        </div>
       </div>
 
       <p class="warn-line"><strong>WARNING:</strong> This slot is reserved just for you. Can't make it? Reschedule from your confirmation email instead of not showing up.</p>
