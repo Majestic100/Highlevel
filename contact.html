@@ -175,29 +175,46 @@
   .consent-row label a { color: #DC2626; }
   .consent-row label a:hover { color: #EF4444; }
 </style>
+
+<link rel="canonical" href="https://inkflowstudios.com/contact" />
+<!-- Meta Pixel: the one and only install. Runs only as the top page on inkflowstudios.com,
+     never inside an iframe and never on majestic100.github.io. -->
+<script>
+(function () {
+  var host = location.hostname.replace(/^www\./, '');
+  if (host !== 'inkflowstudios.com' || window.top !== window.self) return;
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1334202538610101');
+  fbq('track', 'PageView');
+})();
+</script>
 </head>
 <body class="grain">
 
 <!-- ===== NAV ===== -->
 <header id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
   <div class="max-w-7xl mx-auto px-6 lg:px-12 h-16 md:h-20 flex items-center justify-between">
-    <a href="index.html" class="flex items-center gap-2 group">
+    <a href="./" class="flex items-center gap-2 group">
       <img src="assets/logo/inkflow-logo-for-dark-bg.svg" alt="inkflow." class="block h-[22px] md:h-8 w-auto" />
     </a>
     <nav class="hidden md:flex items-center gap-8 text-sm text-text-secondary">
-      <a href="index.html#results" class="hover:text-text-primary transition">Results</a>
-      <a href="index.html#how" class="hover:text-text-primary transition">How it works</a>
-      <a href="index.html#about" class="hover:text-text-primary transition">About</a>
-      <a href="index.html#faq" class="hover:text-text-primary transition">FAQ</a>
+      <a href="./#results" class="hover:text-text-primary transition">Results</a>
+      <a href="./#how" class="hover:text-text-primary transition">How it works</a>
+      <a href="./#about" class="hover:text-text-primary transition">About</a>
+      <a href="./#faq" class="hover:text-text-primary transition">FAQ</a>
     </nav>
-    <a href="index.html#book" class="btn-primary !py-2.5 !px-5 text-sm">Book a Call</a>
+    <a href="./#book" class="btn-primary !py-2.5 !px-5 text-sm">Book a Call</a>
   </div>
 </header>
 
 <main class="relative z-10 pt-28 md:pt-32 pb-20 md:pb-32">
   <div class="max-w-[1200px] mx-auto px-6 lg:px-12">
 
-    <a href="index.html" class="back-link mb-8">
+    <a href="./" class="back-link mb-8">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Back to home
     </a>
@@ -239,7 +256,7 @@
           <h3>Strategy call</h3>
           <p>30 minutes, no pitch deck. We look at your numbers and tell you straight.</p>
         </div>
-        <a href="index.html#book" class="value">Book a slot →</a>
+        <a href="./#book" class="value">Book a slot →</a>
       </div>
 
     </div>
@@ -273,9 +290,9 @@
         <img src="assets/logo/inkflow-by-hero-media-for-dark-bg.svg" alt="Inkflow by Hero Media" class="h-[26px] w-auto" />
         <p class="text-text-secondary mt-3 text-sm">Tattoo studio growth, done-for-you.</p>
         <div class="flex flex-wrap gap-x-4 gap-y-2 mt-5 text-xs text-text-muted">
-          <a href="terms.html" class="hover:text-accent">Terms</a>
-          <a href="privacy.html" class="hover:text-accent">Privacy</a>
-          <a href="contact.html" class="hover:text-accent">Contact</a>
+          <a href="tos" class="hover:text-accent">Terms</a>
+          <a href="privacy-terms" class="hover:text-accent">Privacy</a>
+          <a href="contact" class="hover:text-accent">Contact</a>
         </div>
       </div>
       <div class="text-sm text-text-secondary">
