@@ -1195,6 +1195,18 @@
   @media (min-width: 1024px) {
     .lg\:text-5xl { font-size: 3rem; line-height: 1; }
   }
+
+  /* Reviews: swipe row on mobile, masonry columns from md */
+  .reviews { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; margin: 0 -24px; padding-left: 24px; padding-right: 24px; scrollbar-width: none; }
+  .reviews::-webkit-scrollbar { display: none; }
+  .review-item { flex: 0 0 84%; scroll-snap-align: center; display: block; border-radius: 12px; overflow: hidden; border: 1px solid #2A2420; background: #fff; align-self: flex-start; transition: transform 250ms ease, border-color 250ms ease; }
+  .review-item img { display: block; width: 100%; height: auto; }
+  .review-item:hover { transform: translateY(-2px); border-color: rgba(0,182,122,0.5); }
+  @media (min-width: 768px) {
+    .reviews { display: block; columns: 2; column-gap: 16px; overflow: visible; margin: 0; padding: 0; }
+    .review-item { break-inside: avoid; margin-bottom: 16px; }
+  }
+  @media (min-width: 1024px) { .reviews { columns: 3; } }
 </style>
 
 <link rel="canonical" href="https://inkflowstudios.com/" />
@@ -1248,6 +1260,7 @@
     <nav class="hidden md:flex items-center gap-8 text-sm text-text-secondary">
       <a href="#offer" class="hover:text-text-primary transition">What you get</a>
       <a href="#how" class="hover:text-text-primary transition">How it works</a>
+      <a href="#reviews" class="hover:text-text-primary transition">Reviews</a>
       <a href="#about" class="hover:text-text-primary transition">About</a>
       <a href="#faq" class="hover:text-text-primary transition">FAQ</a>
     </nav>
@@ -1767,6 +1780,44 @@
   </div>
 </section>
 
+
+<!-- ============================================================ -->
+<!-- ===== REVIEWS ===== -->
+<!-- ============================================================ -->
+<section id="reviews" class="py-10 md:py-24 relative overflow-hidden">
+  <div class="relative max-w-7xl mx-auto px-6 lg:px-12">
+
+    <div class="max-w-3xl mb-10 md:mb-14 reveal">
+      <p class="text-xs uppercase tracking-label text-text-muted mb-4">Real reviews on Trustpilot</p>
+      <h2 class="display-h2 font-serif text-text-primary">
+        4.7 stars from <span class="italic text-accent whitespace-nowrap">30+ clients.</span>
+      </h2>
+      <p class="text-text-secondary mt-5 text-lg max-w-2xl">Inkflow is run by Hero Media. These are real reviews from our clients on Trustpilot.</p>
+    </div>
+
+    <div class="reveal">
+      <div class="reviews">
+        <a class="review-item" href="https://dk.trustpilot.com/review/heromedia.dk" target="_blank" rel="noopener"><img src="assets/proof/bali-andras.webp" alt="Trustpilot review from Bali Andras" width="569" height="471" loading="lazy" decoding="async" /></a>
+        <a class="review-item" href="https://dk.trustpilot.com/review/heromedia.dk" target="_blank" rel="noopener"><img src="assets/proof/rasmus-kallestrup.webp" alt="Trustpilot review from Rasmus Kallestrup" width="1000" height="916" loading="lazy" decoding="async" /></a>
+        <a class="review-item" href="https://dk.trustpilot.com/review/heromedia.dk" target="_blank" rel="noopener"><img src="assets/proof/fahad-yousaf.webp" alt="Trustpilot review from Fahad Yousaf" width="1000" height="710" loading="lazy" decoding="async" /></a>
+        <a class="review-item" href="https://dk.trustpilot.com/review/heromedia.dk" target="_blank" rel="noopener"><img src="assets/proof/alisha.webp" alt="Trustpilot review from Alisha" width="1000" height="778" loading="lazy" decoding="async" /></a>
+        <a class="review-item" href="https://dk.trustpilot.com/review/heromedia.dk" target="_blank" rel="noopener"><img src="assets/proof/salima-juul.webp" alt="Trustpilot review from Salima Juul" width="1000" height="711" loading="lazy" decoding="async" /></a>
+        <a class="review-item" href="https://dk.trustpilot.com/review/heromedia.dk" target="_blank" rel="noopener"><img src="assets/proof/assad-mohammed.webp" alt="Trustpilot review from Assad Mohammed" width="1000" height="607" loading="lazy" decoding="async" /></a>
+        <a class="review-item" href="https://dk.trustpilot.com/review/heromedia.dk" target="_blank" rel="noopener"><img src="assets/proof/ahmed-kassem.webp" alt="Trustpilot review from Ahmed Kassem" width="1000" height="595" loading="lazy" decoding="async" /></a>
+        <a class="review-item" href="https://dk.trustpilot.com/review/heromedia.dk" target="_blank" rel="noopener"><img src="assets/proof/asbjorn-winther.webp" alt="Trustpilot review from Asbjorn Winther" width="581" height="311" loading="lazy" decoding="async" /></a>
+      </div>
+    </div>
+
+    <div class="mt-8 flex justify-center reveal">
+      <a class="trustpilot-card" href="https://dk.trustpilot.com/review/heromedia.dk" target="_blank" rel="noopener">
+        <img class="trustpilot-stars-img" src="assets/avatars/stars-5.svg" alt="4.7 out of 5 stars" />
+        <p class="trustpilot-text"><strong>4.7</strong> from 30+ reviews on <span class="tp-brand">Trustpilot</span>. Read them all</p>
+      </a>
+    </div>
+
+
+  </div>
+</section>
 
 <!-- ============================================================ -->
 <!-- ===== FINAL CTA ===== -->
